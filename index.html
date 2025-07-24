@@ -3,138 +3,144 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BrainHustle™ – Smarter Ways to Get Paid</title>
-  <meta name="description" content="BrainHustle™ teaches you how to make money using AI, side hustles, and passive income systems that actually work.">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1Q02WKMG75"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-1Q02WKMG75');
-  </script>
-
+  <title>BrainHustle™ – Smarter Side Hustles</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #0e0e0e;
-      color: white;
-      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      color: #111;
+      line-height: 1.6;
     }
+
     header {
-      padding: 50px 20px 20px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    .logo {
-      font-size: 2.5em;
-      font-weight: 800;
-      color: #00ff99;
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1em 2em;
+      max-width: 1000px;
+      margin: auto;
     }
-    .tagline {
-      font-size: 1.2em;
-      color: #ccc;
-      margin-top: 10px;
-      margin-bottom: 30px;
-    }
-    .cta {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 15px 30px;
-      background: #00ff99;
-      color: black;
-      font-weight: bold;
-      border: none;
-      border-radius: 5px;
-      font-size: 1.1em;
-      cursor: pointer;
+
+    nav a {
+      margin: 0 10px;
       text-decoration: none;
+      color: #222;
+      font-weight: 500;
     }
+
+    nav a:hover {
+      color: #00aa66;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 4em 1em;
+      background: #ffffff;
+    }
+
+    .hero h1 {
+      font-size: 2.5em;
+      color: #00aa66;
+      margin-bottom: 0.3em;
+    }
+
+    .hero p {
+      font-size: 1.1em;
+      color: #444;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .hero button {
+      margin-top: 1.5em;
+      padding: 0.75em 1.5em;
+      background-color: #00aa66;
+      color: white;
+      border: none;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .hero button:hover {
+      background-color: #008855;
+    }
+
     .section {
-      padding: 40px 20px;
+      padding: 3em 1em;
       max-width: 800px;
       margin: auto;
     }
-    h2 {
-      color: #00ff99;
+
+    .section h2 {
+      color: #00aa66;
+      margin-bottom: 0.5em;
     }
-    .menu {
-      position: fixed;
-      top: 0;
-      left: 0;
-      background: #1a1a1a;
-      width: 100%;
-      padding: 15px 20px;
-      text-align: left;
-      z-index: 999;
+
+    .section p {
+      color: #333;
     }
-    .menu a {
-      color: #00ff99;
-      margin-right: 20px;
-      text-decoration: none;
-      font-weight: 600;
-    }
+
     footer {
-      margin-top: 60px;
+      text-align: center;
+      padding: 2em 1em;
       font-size: 0.9em;
-      color: #666;
-      padding-bottom: 50px;
-    }
-    input[type="email"] {
-      padding: 10px;
-      font-size: 1em;
-      border-radius: 5px;
-      border: none;
-      width: 60%;
-      max-width: 300px;
+      color: #777;
+      background: #eee;
     }
   </style>
 </head>
 <body>
 
-  <div class="menu">
-    <a href="#">Home</a>
-    <a href="#hustles">Side Hustles</a>
-    <a href="#tools">AI Tools</a>
-    <a href="#premium">Premium Guides</a>
-    <a href="#freebie">Free Gift</a>
-  </div>
+<header>
+  <nav>
+    <div><strong>BrainHustle™</strong></div>
+    <div>
+      <a href="#">Home</a>
+      <a href="#">Side Hustles</a>
+      <a href="#">AI Tools</a>
+      <a href="#">Premium Guides</a>
+      <a href="#">Contact</a>
+    </div>
+  </nav>
+</header>
 
-  <header>
-    <div class="logo">BrainHustle™</div>
-    <div class="tagline">Smarter Ways to Get Paid. Use AI. Outsmart the system. Win Big.</div>
-    <a class="cta" href="#premium">Start Your First AI Side Hustle →</a>
-  </header>
+<section class="hero">
+  <h1>Smarter Ways to Get Paid</h1>
+  <p>Use AI tools, proven side hustles, and digital strategies that work. No fluff. No scams. Just systems that pay.</p>
+  <button onclick="location.href='#'">Start Your First AI Side Hustle</button>
+</section>
 
-  <div class="section" id="hustles">
-    <h2>🔥 Side Hustles That Actually Work</h2>
-    <p>We test and break down real ways to make money — from AI-generated content to viral templates, affiliate marketing, digital flipping, and more. No BS. No scams. Just hustles that pay.</p>
-  </div>
+<section class="section">
+  <h2>🔥 Side Hustles That Actually Work</h2>
+  <p>We break down real ways to earn online using modern tools. From AI content to affiliate marketing, flipping, templates, and more — everything here is tested and vetted. If it doesn’t work, we don’t post it.</p>
+</section>
 
-  <div class="section" id="tools">
-    <h2>🧠 AI Tools to Make You Money</h2>
-    <p>Discover the smartest free and paid tools to automate content, write emails, run businesses, and turn knowledge into cash. Our favorite: ChatGPT (of course), plus 10 others you'll wish you knew sooner.</p>
-  </div>
+<section class="section">
+  <h2>🧠 AI Tools That Make You Money</h2>
+  <p>Learn how to use ChatGPT and other AI tools to start businesses, automate tasks, create content, and scale income. Our free and premium guides walk you through it all step-by-step.</p>
+</section>
 
-  <div class="section" id="premium">
-    <h2>📘 Premium Guides</h2>
-    <p>Want the shortcut? Download our $9.99 cheat sheets and full systems. Get the step-by-step breakdown of what works right now. Tools, scripts, prompts, and funnels — done for you.</p>
-    <a class="cta" href="https://cash.app/$crapsedge" target="_blank">Get the Guide</a>
-  </div>
+<section class="section">
+  <h2>🎁 Your Free Gift</h2>
+  <p>Want a head start? Get our “Top 5 AI Side Hustles” PDF totally free — just for visiting. No email required.</p>
+</section>
 
-  <div class="section" id="freebie">
-    <h2>🎁 Free Gift: 7 AI Tools That Make You Money</h2>
-    <p>Enter your email to instantly get our private PDF with 7 tools we used to make money using AI. No fluff — just systems.</p>
-    <form action="https://formspree.io/f/yourformid" method="POST">
-      <input type="email" name="email" placeholder="you@example.com" required>
-      <button class="cta" style="margin-top: 10px;">Send It →</button>
-    </form>
-  </div>
-
-  <footer>
-    BrainHustle™ © 2025. Built for hustlers, by hustlers.
-  </footer>
+<footer>
+  © 2025 BrainHustle™. All rights reserved. | Not financial advice. <br/>
+  <a href="#" style="color:#00aa66;">Terms</a> | 
+  <a href="#" style="color:#00aa66;">Privacy</a>
+</footer>
 
 </body>
 </html>
