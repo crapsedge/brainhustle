@@ -6,6 +6,8 @@
   <title>BrainHustle™ – Smarter Ways to Get Paid</title>
   <meta name="description" content="BrainHustle™ teaches you how to make money using AI, side hustles, and passive income systems that actually work.">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
+
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1Q02WKMG75"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -13,6 +15,7 @@
     gtag('js', new Date());
     gtag('config', 'G-1Q02WKMG75');
   </script>
+
   <style>
     body {
       margin: 0;
@@ -76,6 +79,15 @@
       margin-top: 60px;
       font-size: 0.9em;
       color: #666;
+      padding-bottom: 50px;
+    }
+    input[type="email"] {
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: none;
+      width: 60%;
+      max-width: 300px;
     }
   </style>
 </head>
@@ -86,7 +98,7 @@
     <a href="#hustles">Side Hustles</a>
     <a href="#tools">AI Tools</a>
     <a href="#premium">Premium Guides</a>
-    <a href="#contact">Contact</a>
+    <a href="#freebie">Free Gift</a>
   </div>
 
   <header>
@@ -111,12 +123,12 @@
     <a class="cta" href="https://cash.app/$crapsedge" target="_blank">Get the Guide</a>
   </div>
 
-  <div class="section" id="contact">
-    <h2>📩 Get on the List</h2>
-    <p>Be first to get new tools, weekly AI money hacks, and subscriber-only drops.</p>
-    <form action="#" method="POST">
-      <input type="email" placeholder="Enter your email" required style="padding: 10px; font-size: 1em; border-radius: 5px; border: none; width: 60%; max-width: 300px;">
-      <button class="cta" style="margin-top: 10px;">Subscribe</button>
+  <div class="section" id="freebie">
+    <h2>🎁 Free Gift: 7 AI Tools That Make You Money</h2>
+    <p>Enter your email to instantly get our private PDF with 7 tools we used to make money using AI. No fluff — just systems.</p>
+    <form action="https://formspree.io/f/yourformid" method="POST">
+      <input type="email" name="email" placeholder="you@example.com" required>
+      <button class="cta" style="margin-top: 10px;">Send It →</button>
     </form>
   </div>
 
