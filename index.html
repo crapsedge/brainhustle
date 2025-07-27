@@ -3,141 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BrainHustle™ – Smarter Online Tools</title>
+  <title>BrainHustle™ – Real Tools. Real Hustle.</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #ffffff;
-      color: #111;
+      background: black;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
     }
 
     header {
-      background-color: #ffffff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      padding: 1.2em 2em;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background: linear-gradient(to right, #00ff99, #00ccff);
+      padding: 2em;
+      text-align: center;
     }
 
-    nav a {
-      margin: 0 12px;
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
+    header h1 {
+      margin: 0;
+      font-size: 3em;
+      color: black;
     }
 
-    nav a:hover {
-      color: #007f5f;
+    header p {
+      color: #111;
+      font-weight: bold;
     }
 
-    .section {
+    section {
+      padding: 2em;
       max-width: 800px;
       margin: auto;
-      padding: 3em 1.5em;
     }
 
-    h1 {
-      font-size: 2.4em;
-      color: #007f5f;
-      text-align: center;
-      margin-bottom: 0.2em;
+    .highlight {
+      color: #00ff99;
+      font-weight: bold;
     }
 
-    .subtitle {
-      text-align: center;
-      color: #555;
-      font-size: 1.1em;
+    .product {
+      background-color: #111;
       margin-bottom: 2em;
-    }
-
-    .box {
-      background: #f9f9f9;
+      padding: 1.5em;
+      border: 1px solid #00ff99;
       border-radius: 8px;
-      padding: 2em;
-      margin-bottom: 2em;
     }
 
-    .box h2 {
-      color: #007f5f;
-      margin-top: 0;
+    .product h2 {
+      color: #00ffcc;
     }
 
-    .links a {
-      display: block;
-      margin: 0.75em 0;
+    .product p {
+      margin-bottom: 1em;
+    }
+
+    .buy-button {
+      background: #00ff99;
+      color: black;
+      font-weight: bold;
+      padding: 0.8em 1.5em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
       text-decoration: none;
-      color: #007f5f;
-      font-weight: 500;
-    }
-
-    .links a:hover {
-      text-decoration: underline;
+      display: inline-block;
     }
 
     footer {
+      background: #111;
       text-align: center;
-      padding: 2em 1em;
+      padding: 2em;
+      color: gray;
       font-size: 0.9em;
-      color: #777;
-      background: #f9f9f9;
     }
 
-    footer a {
-      color: #007f5f;
-      text-decoration: none;
-      margin: 0 8px;
+    .animated-glow {
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        box-shadow: 0 0 5px #00ff99;
+      }
+      to {
+        box-shadow: 0 0 20px #00ff99;
+      }
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>BrainHustle™</h1>
+    <p>This site wasn’t built by a team. It was built by someone who needed a way out — and found it.</p>
+  </header>
 
-<header>
-  <div><strong>BrainHustle™</strong></div>
-  <nav>
-    <a href="#">Home</a>
-    <a href="ai-tools.html">AI Tools</a>
-    <a href="side-hustles.html">Side Hustles</a>
-    <a href="#">Guides</a>
-    <a href="#">Login</a>
-  </nav>
-</header>
+  <section>
+    <h2 class="highlight">🔥 Done-For-You Hustle Tools</h2>
+    <p>No fluff. No hype. Just tools that work.</p>
 
-<section class="section">
-  <h1>Smarter Online Tools. Real Ways to Earn.</h1>
-  <p class="subtitle">No hype. No fluff. Just useful ideas, tested tools, and systems that actually work.</p>
-
-  <div class="box">
-    <h2>What is BrainHustle™?</h2>
-    <p>It’s not a course. It’s not a funnel. It’s just a site — built by someone who got tired of chasing fake online income strategies.</p>
-    <p>Everything here is designed to help you earn online without wasting time. If a tool or hustle doesn’t work, I don’t list it.</p>
-    <p>That’s it.</p>
-  </div>
-
-  <div class="box">
-    <h2>Start with These:</h2>
-    <div class="links">
-      <a href="ai-tools.html">Top AI Tools That Save Time & Make Money</a>
-      <a href="side-hustles.html">Simple Side Hustles Worth Trying</a>
-      <a href="#">Download a Free Idea Pack (Coming Soon)</a>
+    <div class="product">
+      <h2>💡 Instant Ebook Blueprint</h2>
+      <p>Get a full outline + chapter prompts for a sellable ebook in seconds. Built by AI, tested by hustlers.</p>
+      <a href="https://buy.stripe.com/test1" class="buy-button animated-glow">Buy Now – $9</a>
     </div>
-  </div>
 
-  <div class="box">
-    <h2>Why This Site Exists</h2>
-    <p>No sales tricks. No get-rich claims.</p>
-    <p>Just a place to share what’s working online — so you can skip the trial and error.</p>
-  </div>
-</section>
+    <div class="product">
+      <h2>🌐 Starter Website Kit</h2>
+      <p>Need a site that looks like money? Get a full one-page site layout + copy that sells for you.</p>
+      <a href="https://buy.stripe.com/test2" class="buy-button animated-glow">Buy Now – $29</a>
+    </div>
 
-<footer>
-  © 2025 BrainHustle™. All rights reserved.<br/>
-  Not financial advice. Just ideas. | 
-  <a href="#">Terms</a> | 
-  <a href="#">Privacy</a>
-</footer>
+    <div class="product">
+      <h2>📚 Blog Post Pack (x10)</h2>
+      <p>10 SEO-rich blog posts (any topic) written to drive traffic and clicks. Just plug in and earn.</p>
+      <a href="https://buy.stripe.com/test3" class="buy-button animated-glow">Buy Now – $19</a>
+    </div>
+  </section>
 
+  <footer>
+    <p>Everything here was built from scratch. No hype. Just hustle. Every word is here to help you win.</p>
+    <p>&copy; 2025 BrainHustle™</p>
+  </footer>
 </body>
 </html>
