@@ -1,0 +1,65 @@
+<!-- nav.html -->
+<style>
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 240px;
+    background-color: #111;
+    color: #fff;
+    padding-top: 3em;
+    box-shadow: 2px 0 8px rgba(255, 122, 0, 0.4);
+    z-index: 1000;
+  }
+
+  .side-menu h2 {
+    color: #FF7A00;
+    text-align: center;
+    margin-bottom: 1.5em;
+    font-size: 1.4em;
+  }
+
+  .side-menu a {
+    display: block;
+    padding: 1em 1.5em;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 1em;
+    border-left: 4px solid transparent;
+    transition: 0.2s ease;
+  }
+
+  .side-menu a:hover {
+    color: #fff;
+    background-color: #222;
+    border-left: 4px solid #FF1F1F;
+  }
+
+  body {
+    margin-left: 240px; /* offset body content */
+  }
+
+  @media (max-width: 768px) {
+    .side-menu {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    body {
+      margin-left: 0;
+    }
+  }
+</style>
+
+<div class="side-menu">
+  <h2>BrainHustle™</h2>
+  <a href="index.html">🏠 Home</a>
+  <a href="dashboard.html">📂 Dashboard</a>
+  <a href="downloads.html">📦 Downloads</a>
+  <a href="affiliate.html">🤝 Affiliate Toolkit</a>
+  <a href="traffic.html">🚦 Promo Tools</a>
+  <a href="login.html">🔐 Login</a>
+  <a href="support.html">📩 Support</a>
+  <a href="terms.html">⚖️ Terms</a>
+</div>
