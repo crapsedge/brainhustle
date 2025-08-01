@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BrainHustle™ Product Dashboard</title>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --primary: #005CFF;
+      --highlight: #FF7A00;
+      --cta: #FF1F1F;
+      --accent: #00e676;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: #fff;
+    }
+    header {
+      background-color: var(--primary);
+      padding: 2em;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.4em;
+    }
+    .section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2em;
+    }
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2em;
+      margin-top: 2em;
+    }
+    .product {
+      flex: 1 1 280px;
+      background: #1c1c1c;
+      border: 2px solid var(--highlight);
+      border-radius: 10px;
+      padding: 1.5em;
+      text-align: center;
+    }
+    .product h3 {
+      color: var(--cta);
+    }
+    .product p {
+      font-size: 0.95em;
+      margin-bottom: 1em;
+    }
+    .product a {
+      display: inline-block;
+      margin-top: 1em;
+      padding: 0.8em 1.5em;
+      background: var(--highlight);
+      color: #000;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    footer {
+      background: #000;
+      color: #aaa;
+      text-align: center;
+      padding: 2em;
+      margin-top: 3em;
+    }
+    a.back-link {
+      display: inline-block;
+      margin-bottom: 2em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>BrainHustle™ Dashboard</h1>
+  <p>Access all your ready-to-sell products and business kits</p>
+</header>
+
+<div class="section">
+  <a href="index.html" class="back-link">← Back to Home</a>
+
+  <div class="product-grid">
+    <div class="product">
+      <h3>🚀 Instant Blog Pack</h3>
+      <p>200+ SEO-optimized blog posts for traffic, engagement, and ads.</p>
+      <a href="#">Download</a>
+    </div>
+    <div class="product">
+      <h3>💰 Affiliate Funnel Kit</h3>
+      <p>Plug-and-play sales funnel to promote ANY affiliate offer.</p>
+      <a href="#">Access Now</a>
+    </div>
+    <div class="product">
+      <h3>📘 eBook + Cover Templates</h3>
+      <p>Editable eBooks + pro-level covers to brand & sell.</p>
+      <a href="#">Open Template</a>
+    </div>
+    <div class="product">
+      <h3>🎯 Tracker + Goal Sheets</h3>
+      <p>Printable and digital tools to help you stay focused & scale.</p>
+      <a href="#">Download Pack</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 BrainHustle™. All rights reserved.
+</footer>
+
+</body>
+</html>
