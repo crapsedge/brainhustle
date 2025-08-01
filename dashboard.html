@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BrainHustle™ Product Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard – BrainHustle™</title>
   <style>
     :root {
       --bg: #0a0a0a;
+      --card: #111;
       --primary: #005CFF;
-      --highlight: #FF7A00;
       --cta: #FF1F1F;
-      --accent: #00e676;
+      --accent: #FF7A00;
     }
     body {
       margin: 0;
@@ -25,92 +25,75 @@
     }
     header h1 {
       margin: 0;
-      font-size: 2.4em;
+      font-size: 2em;
     }
     .section {
-      max-width: 1000px;
-      margin: auto;
       padding: 2em;
+      max-width: 1100px;
+      margin: auto;
     }
-    .product-grid {
+    .cards {
       display: flex;
       flex-wrap: wrap;
-      gap: 2em;
-      margin-top: 2em;
+      gap: 1.5em;
+      margin-top: 1.5em;
     }
-    .product {
+    .card {
       flex: 1 1 280px;
-      background: #1c1c1c;
-      border: 2px solid var(--highlight);
-      border-radius: 10px;
+      background-color: var(--card);
       padding: 1.5em;
-      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 122, 0, 0.2);
     }
-    .product h3 {
-      color: var(--cta);
+    .card h3 {
+      color: var(--accent);
+      margin-top: 0;
     }
-    .product p {
+    .card p {
       font-size: 0.95em;
-      margin-bottom: 1em;
     }
-    .product a {
+    .cta-link {
       display: inline-block;
       margin-top: 1em;
-      padding: 0.8em 1.5em;
-      background: var(--highlight);
-      color: #000;
-      text-decoration: none;
-      border-radius: 6px;
+      color: var(--cta);
       font-weight: bold;
+      text-decoration: none;
     }
     footer {
-      background: #000;
-      color: #aaa;
       text-align: center;
+      color: #aaa;
+      font-size: 0.8em;
       padding: 2em;
-      margin-top: 3em;
-    }
-    a.back-link {
-      display: inline-block;
-      margin-bottom: 2em;
-      color: var(--accent);
-      text-decoration: none;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>BrainHustle™ Dashboard</h1>
-  <p>Access all your ready-to-sell products and business kits</p>
+  <h1>BrainHustle™ Member Dashboard</h1>
+  <p>Welcome back, Hustler. Let’s get to work.</p>
 </header>
 
-<div class="section">
-  <a href="index.html" class="back-link">← Back to Home</a>
-
-  <div class="product-grid">
-    <div class="product">
-      <h3>🚀 Instant Blog Pack</h3>
-      <p>200+ SEO-optimized blog posts for traffic, engagement, and ads.</p>
-      <a href="#">Download</a>
+<section class="section">
+  <h2>📦 Your Tools & Resources</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>📘 Premium Guides</h3>
+      <p>Access all downloadable strategy guides and system playbooks.</p>
+      <a href="downloads.html" class="cta-link">View Guides →</a>
     </div>
-    <div class="product">
-      <h3>💰 Affiliate Funnel Kit</h3>
-      <p>Plug-and-play sales funnel to promote ANY affiliate offer.</p>
-      <a href="#">Access Now</a>
+    <div class="card">
+      <h3>🎯 Traffic & Promotion</h3>
+      <p>Launch tools, ad templates, Reddit promos, and fast-start traffic systems.</p>
+      <a href="#" class="cta-link">Promo Tools →</a>
     </div>
-    <div class="product">
-      <h3>📘 eBook + Cover Templates</h3>
-      <p>Editable eBooks + pro-level covers to brand & sell.</p>
-      <a href="#">Open Template</a>
-    </div>
-    <div class="product">
-      <h3>🎯 Tracker + Goal Sheets</h3>
-      <p>Printable and digital tools to help you stay focused & scale.</p>
-      <a href="#">Download Pack</a>
+    <div class="card">
+      <h3>🤝 Affiliate Toolkit</h3>
+      <p>Grab your referral links, banners, and payout dashboard.</p>
+      <a href="affiliate.html" class="cta-link">Affiliate Dashboard →</a>
     </div>
   </div>
-</div>
+</section>
 
 <footer>
   &copy; 2025 BrainHustle™. All rights reserved.
