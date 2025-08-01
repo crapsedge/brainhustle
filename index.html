@@ -2,56 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BrainHustle™ – AI Profit Tools & Kits</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BrainHustle™ – Profit Systems That Work</title>
   <style>
     :root {
-      --bg: #060606;
-      --blue: #005CFF;
-      --orange: #FF7A00;
-      --red: #FF2E2E;
-      --green: #00D084;
-      --light: #eee;
-      --dark: #111;
+      --bg: #0a0a0a;
+      --primary: #005CFF;
+      --highlight: #FF7A00;
+      --cta: #FF1F1F;
+      --accent: #00e676;
     }
-
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--light);
+      background-color: var(--bg);
+      color: #fff;
+    }
+    .menu-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: var(--highlight);
+      color: black;
+      border: none;
+      font-size: 1.2em;
+      padding: 10px 14px;
+      cursor: pointer;
+      z-index: 1000;
+      border-radius: 5px;
+    }
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background-color: #111;
+      padding: 2em 1em;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.8);
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+    .side-menu a {
+      display: block;
+      margin: 1em 0;
+      color: var(--highlight);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .side-menu.open {
+      left: 0;
     }
 
     header {
-      background: linear-gradient(135deg, var(--blue), var(--green));
-      padding: 3em 2em;
+      background: linear-gradient(120deg, var(--primary), var(--accent));
       text-align: center;
+      padding: 5em 2em 4em;
     }
-
     header h1 {
-      font-size: 3em;
+      font-size: 2.8em;
       margin: 0;
-      color: white;
     }
-
     header p {
-      font-size: 1.2em;
-      color: #fff;
+      margin-top: 1em;
+      font-size: 1.1em;
+      color: var(--highlight);
     }
-
     .cta-button {
-      display: inline-block;
-      margin-top: 1.2em;
+      margin-top: 1.5em;
+      background-color: var(--cta);
+      color: #fff;
       padding: 1em 2em;
-      background: var(--red);
-      color: white;
+      font-size: 1.1em;
       text-decoration: none;
-      font-weight: bold;
+      display: inline-block;
       border-radius: 6px;
     }
 
     .section {
-      padding: 3em 1.5em;
+      padding: 3em 2em;
       max-width: 1000px;
       margin: auto;
     }
@@ -59,151 +88,91 @@
     .features {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.5em;
+      gap: 2em;
       margin-top: 2em;
     }
-
     .feature {
-      background: var(--dark);
-      padding: 1.5em;
-      border-left: 5px solid var(--orange);
-      border-radius: 6px;
       flex: 1 1 280px;
-    }
-
-    .feature h3 {
-      color: var(--red);
-      margin: 0 0 0.5em;
-    }
-
-    .testimonial {
-      margin-top: 2em;
       background: #1b1b1b;
-      border-left: 4px solid var(--blue);
-      padding: 1.2em;
+      border-left: 5px solid var(--highlight);
+      padding: 1.5em;
+      border-radius: 8px;
+    }
+    .feature h3 {
+      color: var(--cta);
+      margin-top: 0;
+    }
+    .testimonial {
+      background: #1a1a1a;
+      border-left: 4px solid var(--primary);
+      padding: 1.5em;
       font-style: italic;
+      margin: 2em 0;
     }
-
     footer {
-      background: #000;
-      color: #888;
+      background-color: #000;
+      color: #aaa;
       text-align: center;
-      padding: 2em 1em;
+      padding: 2em;
+      font-size: 0.9em;
     }
-
     footer a {
-      color: var(--orange);
+      color: var(--highlight);
       margin: 0 10px;
       text-decoration: none;
-    }
-
-    /* Side Menu */
-    .menu-button {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-      background: var(--green);
-      color: black;
-      font-weight: bold;
-      border: none;
-      padding: 0.7em 1em;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .side-menu {
-      position: fixed;
-      top: 0;
-      left: -260px;
-      width: 240px;
-      height: 100%;
-      background-color: #111;
-      padding-top: 60px;
-      transition: 0.3s ease-in-out;
-      z-index: 999;
-    }
-
-    .side-menu a {
-      display: block;
-      padding: 14px 20px;
-      color: white;
-      text-decoration: none;
-      border-bottom: 1px solid #222;
-    }
-
-    .side-menu a:hover {
-      background: var(--blue);
-    }
-
-    .side-menu.open {
-      left: 0;
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2em;
-      }
     }
   </style>
 </head>
 <body>
 
-<!-- SIDE MENU BUTTON -->
 <button class="menu-button" onclick="toggleMenu()">☰ Menu</button>
-
-<!-- SIDE MENU -->
 <div class="side-menu" id="sideMenu">
   <a href="index.html">🏠 Home</a>
   <a href="dashboard.html">📦 Product Dashboard</a>
   <a href="affiliate.html">💼 Affiliate Toolkit</a>
-  <a href="login.html">🔐 Members Login</a>
-  <a href="#">📞 Contact</a>
+  <a href="login.html">🔐 Member Login</a>
+  <a href="#">📣 Testimonials</a>
+  <a href="#">📚 Learn More</a>
 </div>
 
 <header>
   <h1>BrainHustle™</h1>
-  <p>Launch AI-powered profit systems that actually sell</p>
-  <a href="https://gumroad.com/l/your-link" class="cta-button">Start for $7</a>
+  <p>AI-Enhanced Business Systems for Real-World Hustlers</p>
+  <a href="https://gumroad.com/l/your-link" class="cta-button">Start Now</a>
 </header>
 
 <section class="section">
-  <h2>🚀 What You Get</h2>
+  <h2 style="color: var(--accent); text-align: center;">🚀 What You’ll Get</h2>
   <div class="features">
     <div class="feature">
-      <h3>📦 Profit Kits</h3>
-      <p>Plug-and-play kits that include ready-to-sell products + monetization strategies.</p>
+      <h3>🛠️ Plug & Play Kits</h3>
+      <p>Launch-ready websites, templates, scripts, and strategies — ready to activate now.</p>
     </div>
     <div class="feature">
-      <h3>🧠 Built-in AI</h3>
-      <p>Each system includes AI-generated content, email copy, funnels, and templates.</p>
+      <h3>💰 Smart Monetization</h3>
+      <p>Each kit includes monetization options: affiliate tools, upsells, guides & more.</p>
     </div>
     <div class="feature">
-      <h3>💰 Revenue Ready</h3>
-      <p>All kits come with working income methods: affiliate links, upsells, bonus tools, and more.</p>
+      <h3>⚡ Instant Results</h3>
+      <p>No tech skills needed. Designed to help you earn on day 1.</p>
     </div>
   </div>
 </section>
 
 <section class="section">
-  <h2>📈 Real Testimonials</h2>
-  <div class="testimonial">“I used BrainHustle™ and got 3 buyers within 48 hours. That’s faster than anything I’ve tried before.”</div>
-  <div class="testimonial">“All I had to do was launch. The site, product, and promo were already done.”</div>
-</section>
-
-<section class="section">
-  <h2>👊 Built for Hustlers</h2>
-  <p>BrainHustle™ isn’t a theory. It’s a real system built to help you launch, earn, and scale fast. No coding, no fluff. Just results.</p>
+  <h2 style="text-align:center;color:var(--accent);">📈 Testimonials</h2>
+  <div class="testimonial">“I’ve tried 10 online tools. BrainHustle™ was the only one that actually made me money.”</div>
+  <div class="testimonial">“It felt like everything just clicked. I had something to sell within hours.”</div>
+  <div class="testimonial">“This isn’t a course. It’s a machine for building income fast.”</div>
 </section>
 
 <footer>
-  &copy; 2025 BrainHustle™. All rights reserved.<br/>
-  <a href="#">Terms</a> | <a href="#">Privacy</a> | <a href="#">Support</a>
+  &copy; 2025 BrainHustle™ | <a href="#">Terms</a> | <a href="#">Privacy</a>
 </footer>
 
 <script>
   function toggleMenu() {
-    document.getElementById("sideMenu").classList.toggle("open");
+    document.getElementById('sideMenu').classList.toggle('open');
   }
 </script>
 
