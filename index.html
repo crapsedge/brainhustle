@@ -1,59 +1,203 @@
-<!-- New BrainHustle™ Premium Template -->
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>BrainHustle™ – Scale Your Hustle With AI Profit Kits</title>
-<style>
-:root { --bg: #070707; --accent1: #0056FF; --accent2: #00D084; --cta: #FF3D3D; }
-body { background: var(--bg); color: #EEE; margin:0; font-family:Poppins,sans-serif; line-height:1.5; }
-header{background:linear-gradient(135deg,var(--accent1),var(--accent2));padding:5em 2em;text-align:center;}
-header h1{font-size:3em;color:#FFF;margin:0;} header p{font-size:1.2em;margin-top:.5em;color:#FFF;}
-.cta{margin-top:1.5em;padding:1em 2em;background:var(--cta);color:#FFF;border-radius:5px;text-decoration:none;font-size:1.2em;font-weight:bold;}
-.section{max-width:1000px;margin:4em auto;padding:0 1em;}
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2em;}
-.feature{background:#1a1a1a;padding:2em;border-radius:8px;text-align:center;}
-.feature h3{color:var(--cta);margin:0 0 .5em;}
-.offer{background:#111;padding:3em;border-radius:8px;text-align:center;}
-.offer h2{color:var(--accent2);margin:0;font-size:2em;}
-.offer p{margin:1em 0;font-size:1.1em;}
-.testimonial{background:#1a1a1a;padding:2em;border-radius:5px;margin:1em 0;font-style:italic;}
-footer{background:#000;color:#555;text-align:center;padding:2em;font-size:.9em;}
-footer a{color:var(--accent1);margin:0 .5em;text-decoration:none;}
-@media(max-width:600px){header h1{font-size:2em;} .cta{font-size:1em;}}
-</style></head><body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BrainHustle™ – AI Business Kits for Hustlers</title>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --accent1: #0056FF;
+      --accent2: #FF3D3D;
+      --accent3: #00D084;
+      --text: #fff;
+      --muted: #ccc;
+    }
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, var(--accent1), var(--accent3));
+      padding: 4em 2em;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 3em;
+    }
+    header p {
+      font-size: 1.2em;
+      color: #eee;
+    }
+    .cta {
+      background: var(--accent2);
+      color: #fff;
+      padding: 1em 2em;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 1em;
+    }
 
+    nav {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background-color: #111;
+      padding-top: 60px;
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+    nav a {
+      padding: 14px 20px;
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px solid #333;
+    }
+    .menu-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background-color: var(--accent3);
+      color: black;
+      padding: 10px 15px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      border: none;
+    }
+
+    .section {
+      padding: 3em 2em;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .section h2 {
+      color: var(--accent3);
+      text-align: center;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2em;
+      margin-top: 2em;
+    }
+    .feature, .testimonial, .offer {
+      background-color: #1a1a1a;
+      padding: 2em;
+      border-radius: 8px;
+    }
+    .feature h3, .offer h3 {
+      color: var(--accent2);
+      margin-top: 0;
+    }
+    .testimonial {
+      border-left: 5px solid var(--accent1);
+      font-style: italic;
+    }
+    footer {
+      background-color: #000;
+      color: var(--muted);
+      text-align: center;
+      padding: 2em;
+      font-size: 0.9em;
+    }
+    footer a {
+      color: var(--accent1);
+      margin: 0 10px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Side Menu -->
+<button class="menu-button" onclick="toggleMenu()">☰ Menu</button>
+<nav id="sideMenu">
+  <a href="#">Home</a>
+  <a href="#">Product Kits</a>
+  <a href="#">Affiliate Tools</a>
+  <a href="#">Testimonials</a>
+  <a href="#">FAQs & Support</a>
+  <a href="#">Terms & Legal</a>
+</nav>
+
+<!-- Header -->
 <header>
   <h1>BrainHustle™</h1>
-  <p>Build AI‑powered income systems with <span style="font-weight:bold">nearly no effort</span></p>
-  <a href="https://gumroad.com/l/your-link" class="cta">Launch Now</a>
+  <p>AI-Powered Hustle Kits to Launch Your Online Business Fast</p>
+  <a href="https://gumroad.com/l/your-link" class="cta">Get Started Now</a>
 </header>
 
+<!-- Features -->
 <section class="section">
-  <h2 style="color:var(--accent2);text-align:center;">🚀 What You Get</h2>
+  <h2>🚀 What You’ll Get</h2>
   <div class="features">
-    <div class="feature"><h3>Instant Product Packs</h3><p>Prebuilt templates, content scripts, and funnels ready in minutes.</p></div>
-    <div class="feature"><h3>Revenue Integrations</h3><p>Affiliate offers, digital checkouts, ads & tools integrated smartly.</p></div>
-    <div class="feature"><h3>AI Content Drag‑and‑Drop</h3><p>Auto-generate marketing content, titles, prompts included.</p></div>
+    <div class="feature">
+      <h3>Done-for-You Hustle Kits</h3>
+      <p>Launch-ready websites, content, and tools delivered instantly.</p>
+    </div>
+    <div class="feature">
+      <h3>Monetization Built-In</h3>
+      <p>Affiliate systems, checkout integrations, and ad tools ready to plug in.</p>
+    </div>
+    <div class="feature">
+      <h3>Zero Tech Required</h3>
+      <p>No coding, no confusion — all kits are plug-and-profit ready.</p>
+    </div>
   </div>
 </section>
 
+<!-- Offer Section -->
 <section class="section offer">
-  <h2>$7 Launch Kit</h2>
-  <p>Includes 3 profit-ready tools + bonus promo plan — designed to get you paid fast.</p>
-  <a href="https://gumroad.com/l/your-link" class="cta">Buy Now</a>
+  <h2 style="text-align:center;">🔥 Premium AI Starter Bundle – Only $7</h2>
+  <p style="text-align:center;">Includes 3 products + custom promo system to get you your first sale fast.</p>
+  <div style="text-align:center;">
+    <a href="https://gumroad.com/l/your-link" class="cta">Claim Your Bundle</a>
+  </div>
 </section>
 
+<!-- Testimonials -->
 <section class="section">
-  <h2 style="color:var(--accent2);text-align:center;">📈 Early Results</h2>
-  <div class="testimonial">“Launched my first offer in one evening… made $300 in 24 hours.”</div>
-  <div class="testimonial">“Simple, fast, and it actually works — this is real hustle building.”</div>
+  <h2>💬 Real Testimonials</h2>
+  <div class="testimonial">“BrainHustle™ gave me my first real win. $200 in 48 hours from a template!”</div>
+  <div class="testimonial">“Everything was done for me — landing page, offer, even the promo copy. It worked fast.”</div>
+  <div class="testimonial">“The affiliate tools helped me double my revenue. Game changer.”</div>
 </section>
 
+<!-- Brand Message -->
 <section class="section">
-  <p style="text-align:center;">BrainHustle™ isn’t theory—it’s built for hustle-first action takers. No fluff. Just profit tools.</p>
+  <h2>👊 Built for Action-Takers</h2>
+  <p style="text-align:center;">BrainHustle™ isn’t fluff. It’s smart, ready-to-launch gear for anyone tired of just dreaming.</p>
 </section>
 
+<!-- Footer -->
 <footer>
-  &copy; 2025 BrainHustle™ | <a href="#">Terms</a> | <a href="#">Privacy</a>
+  &copy; 2025 BrainHustle™<br>
+  <a href="#">FAQs & Support</a> |
+  <a href="#">Terms</a> |
+  <a href="#">Privacy</a>
 </footer>
 
-</body></html>
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('sideMenu');
+    if (menu.style.left === "0px") {
+      menu.style.left = "-250px";
+    } else {
+      menu.style.left = "0px";
+    }
+  }
+</script>
+
+</body>
+</html>
