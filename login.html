@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login – BrainHustle™ Members</title>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --card: #111;
+      --primary: #005CFF;
+      --cta: #FF1F1F;
+      --accent: #FF7A00;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-card {
+      background-color: var(--card);
+      padding: 3em;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 92, 255, 0.3);
+      width: 100%;
+      max-width: 400px;
+    }
+    h2 {
+      text-align: center;
+      color: var(--accent);
+    }
+    input {
+      width: 100%;
+      padding: 1em;
+      margin: 1em 0;
+      border: none;
+      border-radius: 6px;
+      background: #1a1a1a;
+      color: #fff;
+    }
+    button {
+      width: 100%;
+      padding: 1em;
+      background-color: var(--cta);
+      border: none;
+      color: #fff;
+      font-size: 1.1em;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 1.5em;
+      color: var(--primary);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-card">
+  <h2>Member Login</h2>
+  <form action="#" method="POST">
+    <input type="email" placeholder="Email" required />
+    <input type="password" placeholder="Password" required />
+    <button type="submit">Log In</button>
+  </form>
+  <a href="index.html" class="back-link">← Back to Home</a>
+</div>
+
+</body>
+</html>
