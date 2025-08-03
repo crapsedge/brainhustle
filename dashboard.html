@@ -10,94 +10,74 @@
       font-family: Arial, sans-serif;
       background: #0a0a0a;
       color: white;
+      display: flex;
+      min-height: 100vh;
     }
-    header {
-      background: linear-gradient(90deg, #0066ff, #00ccff);
-      padding: 20px;
-      text-align: center;
-    }
-    header h1 {
-      color: white;
-      font-size: 28px;
-    }
-    .content {
-      padding: 30px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-    .section {
+    .sidebar {
+      width: 220px;
       background: #111;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      border-left: 5px solid #00cc66;
+      padding-top: 20px;
+      flex-shrink: 0;
     }
-    .section h2 {
+    .sidebar h2 {
       color: #00cc66;
-      margin-top: 0;
+      text-align: center;
+      margin-bottom: 20px;
     }
-    .button {
+    .sidebar a {
+      display: block;
+      color: white;
+      padding: 12px 20px;
+      text-decoration: none;
+      border-bottom: 1px solid #222;
+    }
+    .sidebar a:hover {
       background: #00cc66;
       color: black;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 4px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
     }
-    .button:hover {
-      background: #00e676;
+    .content {
+      flex-grow: 1;
+      padding: 30px 20px;
+    }
+    .content h1 {
+      color: gold;
+      font-size: 28px;
     }
     .logout-btn {
       background: red;
       color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
       margin-top: 30px;
     }
-    .footer {
-      text-align: center;
-      color: gray;
-      padding: 20px;
-      font-size: 14px;
+    .logout-btn:hover {
+      background: darkred;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Welcome to BrainHustle™ Members Dashboard</h1>
-    <p id="userEmail" style="font-size:16px; margin-top:10px;"></p>
-  </header>
+  <div class="sidebar">
+    <h2>BrainHustle™</h2>
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="tools.html">🧰 Tools</a>
+    <a href="premium.html">🎓 Premium Content</a>
+    <a href="support.html">📞 Support</a>
+    <a href="#" onclick="logout()">🚪 Logout</a>
+  </div>
 
   <div class="content">
+    <h1>Welcome to Your Dashboard</h1>
+    <p>You are logged in. Access everything using the menu on the left.</p>
+    <p id="userEmail" style="margin-top: 20px;"></p>
 
-    <div class="section">
-      <h2>🚀 Download Your Tools</h2>
-      <p>Access premium kits, templates, and systems to launch your business.</p>
-      <button class="button" onclick="window.location.href='tools.html'">Access Tools</button>
-    </div>
-
-    <div class="section">
-      <h2>🎓 Premium Content</h2>
-      <p>Watch tutorials, strategy guides, and advanced training videos.</p>
-      <button class="button" onclick="window.location.href='premium.html'">View Content</button>
-    </div>
-
-    <div class="section">
-      <h2>📞 Member Support</h2>
-      <p>Need help? Contact support for 1-on-1 assistance or guidance.</p>
-      <button class="button" onclick="window.location.href='support.html'">Contact Support</button>
-    </div>
-
-    <button class="button logout-btn" onclick="logout()">Logout</button>
-
+    <button class="logout-btn" onclick="logout()">Logout</button>
   </div>
 
-  <div class="footer">
-    BrainHustle™ © 2025 | All Rights Reserved
-  </div>
-
-  <!-- Firebase Auth Script -->
+  <!-- Firebase Auth -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 
