@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>BrainHustle™ Dashboard</title>
+  <title>BrainHustle™ Member Dashboard</title>
 
-  <!-- Firebase v12 Setup -->
+  <!-- Firebase v12 -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, sendEmailVerification, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
@@ -24,14 +24,16 @@
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const button = document.getElementById("resendBtn");
-        button.addEventListener("click", () => {
+        document.getElementById("welcome").textContent = `Welcome, ${user.email}`;
+        document.getElementById("resendBtn").addEventListener("click", () => {
           sendEmailVerification(user).then(() => {
             alert("Verification email sent again!");
           }).catch((error) => {
             alert("Error: " + error.message);
           });
         });
+      } else {
+        window.location.href = "login.html"; // force login if not signed in
       }
     });
   </script>
@@ -44,6 +46,9 @@
       margin: 0;
       padding: 20px;
     }
+    h1 {
+      color: #00ff99;
+    }
     button {
       background: #FF6600;
       color: white;
@@ -51,14 +56,31 @@
       border: none;
       border-radius: 4px;
       font-size: 16px;
+      margin-top: 10px;
+    }
+    .card {
+      background: #111;
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 15px;
+      border-left: 4px solid #00ff99;
     }
   </style>
 </head>
 <body>
 
-  <h1>Welcome to BrainHustle™</h1>
-  <p>Click below to resend your verification email.</p>
+  <h1 id="welcome">Welcome</h1>
   <button id="resendBtn">Resend Verification Email</button>
+
+  <div class="card">
+    <h2>💻 Exclusive Tools</h2>
+    <p>Access business kits, templates, and monetization tools only for members.</p>
+  </div>
+
+  <div class="card">
+    <h2>📈 Hustler Resources</h2>
+    <p>Guides, scripts, and systems to help you start making real money online.</p>
+  </div>
 
 </body>
 </html>
