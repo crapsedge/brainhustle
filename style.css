@@ -3,6 +3,7 @@ body {
   font-family: Arial, sans-serif;
   background: #0a0a0a;
   color: white;
+  overflow-x: hidden; /* Fix for side menu poking out */
 }
 
 .navbar {
@@ -33,7 +34,7 @@ body {
 #sideMenu {
   position: fixed;
   top: 0;
-  right: -250px; /* Hidden off-screen */
+  right: -250px; /* start fully off screen */
   width: 250px;
   height: 100%;
   background-color: #111;
@@ -43,7 +44,7 @@ body {
   box-shadow: -2px 0 5px rgba(0,0,0,0.5);
 }
 
-/* Side Menu Visible */
+/* Side Menu When Open */
 #sideMenu.open {
   right: 0;
 }
