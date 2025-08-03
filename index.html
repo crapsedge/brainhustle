@@ -21,7 +21,7 @@
     .menu-button {
       position: fixed;
       top: 20px;
-      left: 20px;
+      right: 20px; /* moved to right */
       background-color: var(--highlight);
       color: black;
       border: none;
@@ -34,17 +34,17 @@
     .side-menu {
       position: fixed;
       top: 0;
-      left: -260px;
+      right: -260px; /* hide to right initially */
       width: 260px;
       height: 100%;
       background-color: #111;
-      padding: 2em 1em;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.8);
-      transition: left 0.3s ease;
+      padding: 6em 1em 2em; /* push content down */
+      box-shadow: -2px 0 10px rgba(0,0,0,0.8);
+      transition: right 0.3s ease;
       z-index: 1000;
     }
     .side-menu.open {
-      left: 0;
+      right: 0; /* slide in */
     }
     .side-menu a {
       display: block;
