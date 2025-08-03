@@ -3,107 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard – BrainHustle™</title>
+  <title>Dashboard – BrainHustle™ Members</title>
   <style>
-    :root {
-      --bg: #0a0a0a;
-      --card: #111;
-      --primary: #005CFF;
-      --cta: #FF1F1F;
-      --accent: #FF7A00;
-    }
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg);
-      color: #fff;
-    }
-    header {
-      background-color: var(--primary);
-      padding: 2em;
+      background: #0a0a0a;
+      color: white;
+      font-family: Arial, sans-serif;
       text-align: center;
+      padding: 40px 20px;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2em;
+    h1 {
+      color: #00cc66;
     }
-    .section {
-      padding: 2em;
-      max-width: 1100px;
-      margin: auto;
-    }
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5em;
-      margin-top: 1.5em;
-    }
-    .card {
-      flex: 1 1 280px;
-      background-color: var(--card);
-      padding: 1.5em;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255, 122, 0, 0.2);
-    }
-    .card h3 {
-      color: var(--accent);
-      margin-top: 0;
-    }
-    .card p {
-      font-size: 0.95em;
-    }
-    .cta-link {
-      display: inline-block;
-      margin-top: 1em;
-      color: var(--cta);
+    button {
+      padding: 10px 20px;
+      background: red;
+      border: none;
+      color: white;
       font-weight: bold;
-      text-decoration: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 20px;
     }
-    footer {
-      text-align: center;
-      color: #aaa;
-      font-size: 0.8em;
-      padding: 2em;
+    button:hover {
+      background: darkred;
     }
   </style>
 </head>
 <body>
 
-<!-- LOCK CODE - REDIRECT TO LOGIN -->
-<script>
-  alert("Members only. Please login to access.");
-  window.location.href = "login.html";
-</script>
+  <h1>Welcome to BrainHustle™ Members Area</h1>
+  <p>You are successfully logged in.</p>
 
-<header>
-  <h1>BrainHustle™ Member Dashboard</h1>
-  <p>Welcome back, Hustler. Let’s get to work.</p>
-</header>
+  <button onclick="logout()">Logout</button>
 
-<section class="section">
-  <h2>📦 Your Tools & Resources</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>📘 Premium Guides</h3>
-      <p>Access all downloadable strategy guides and system playbooks.</p>
-      <a href="downloads.html" class="cta-link">View Guides →</a>
-    </div>
-    <div class="card">
-      <h3>🎯 Traffic & Promotion</h3>
-      <p>Launch tools, ad templates, Reddit promos, and fast-start traffic systems.</p>
-      <a href="#" class="cta-link">Promo Tools →</a>
-    </div>
-    <div class="card">
-      <h3>🤝 Affiliate Toolkit</h3>
-      <p>Grab your referral links, banners, and payout dashboard.</p>
-      <a href="affiliate.html" class="cta-link">Affiliate Dashboard →</a>
-    </div>
-  </div>
-</section>
+  <script type="module">
+    // Firebase Config
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
-<footer>
-  &copy; 2025 BrainHustle™. All rights reserved.
-</footer>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
+      authDomain: "brainhustle-92a40.firebaseapp.com",
+      projectId: "brainhustle-92a40",
+      storageBucket: "brainhustle-92a40.firebasestorage.app",
+      messagingSenderId: "547592914180",
+      appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
+      measurementId: "G-3M5PKR5S27"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Check if user is logged in
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        alert("You must be logged in to access this page.");
+        window.location.href = "login.html";
+      }
+    });
+
+    function logout() {
+      signOut(auth).then(() => {
+        alert("Logged out.");
+        window.location.href = "login.html";
+      });
+    }
+  </script>
 
 </body>
 </html>
