@@ -2,207 +2,167 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BrainHustle™ – Profit Systems That Work</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BrainHustle™</title>
   <style>
-    :root {
-      --bg: #0a0a0a;
-      --primary: #005CFF;
-      --highlight: #FF7A00;
-      --cta: #FF1F1F;
-      --accent: #00e676;
-    }
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg);
-      color: #fff;
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: white;
+      overflow-x: hidden;
     }
-    .menu-button {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: var(--highlight);
-      color: black;
-      border: none;
-      font-size: 1.2em;
-      padding: 10px 14px;
-      cursor: pointer;
+
+    .navbar {
+      background-color: #111;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      position: relative;
       z-index: 1001;
-      border-radius: 5px;
     }
+
+    .navbar a {
+      color: orange;
+      text-decoration: none;
+      padding: 10px 16px;
+      display: block;
+    }
+
+    .navbar a:hover {
+      background-color: #222;
+      border-radius: 4px;
+    }
+
+    .menu-button {
+      background-color: orange;
+      color: black;
+      padding: 10px 14px;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 4px;
+      z-index: 1001;
+    }
+
     .side-menu {
       position: fixed;
       top: 0;
-      right: -260px;
-      width: 260px;
+      right: -240px; /* Start hidden */
+      width: 240px;
       height: 100%;
       background-color: #111;
-      padding: 6em 1em 2em;
-      box-shadow: -2px 0 10px rgba(0,0,0,0.8);
-      transition: right 0.3s ease;
+      box-shadow: -4px 0 8px rgba(0,0,0,0.5);
+      transition: right 0.3s ease-in-out;
       z-index: 1000;
+      padding-top: 60px;
     }
+
     .side-menu.open {
       right: 0;
     }
+
     .side-menu a {
       display: block;
-      margin: 1em 0;
-      color: var(--highlight);
+      padding: 12px 20px;
+      color: white;
       text-decoration: none;
-      font-weight: bold;
-    }
-    .menu-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-    }
-    .menu-overlay.show {
-      display: block;
+      border-bottom: 1px solid #222;
     }
 
-    header {
-      background: linear-gradient(120deg, var(--primary), var(--accent));
+    .side-menu a:hover {
+      background-color: #222;
+    }
+
+    .hero {
+      padding: 80px 20px;
       text-align: center;
-      padding: 5em 2em 4em;
+      background: linear-gradient(to right, #0077ff, #00ffaa);
     }
-    header h1 {
-      font-size: 2.8em;
-      margin: 0;
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
     }
-    header p {
-      margin-top: 1em;
-      font-size: 1.1em;
-      color: var(--highlight);
+
+    .hero p {
+      font-size: 18px;
+      color: orange;
     }
-    .cta-button {
-      margin-top: 1.5em;
-      background-color: var(--cta);
-      color: #fff;
-      padding: 1em 2em;
-      font-size: 1.1em;
-      text-decoration: none;
-      display: inline-block;
-      border-radius: 6px;
+
+    .hero button {
+      margin-top: 20px;
+      background-color: red;
+      color: white;
+      padding: 12px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
 
     .section {
-      padding: 3em 2em;
-      max-width: 1000px;
-      margin: auto;
+      padding: 40px 20px;
     }
 
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2em;
-      margin-top: 2em;
+    .section h2 {
+      color: #00ff99;
     }
-    .feature {
-      flex: 1 1 280px;
-      background: #1b1b1b;
-      border-left: 5px solid var(--highlight);
-      padding: 1.5em;
-      border-radius: 8px;
+
+    .feature-box {
+      background-color: #111;
+      border-left: 4px solid orange;
+      padding: 20px;
+      margin-bottom: 20px;
     }
-    .feature h3 {
-      color: var(--cta);
-      margin-top: 0;
-    }
-    .testimonial {
-      background: #1a1a1a;
-      border-left: 4px solid var(--primary);
-      padding: 1.5em;
-      font-style: italic;
-      margin: 2em 0;
-    }
-    footer {
-      background-color: #000;
-      color: #aaa;
-      text-align: center;
-      padding: 2em;
-      font-size: 0.9em;
-    }
-    footer a {
-      color: var(--highlight);
-      margin: 0 10px;
-      text-decoration: none;
+
+    .feature-box h3 {
+      color: red;
     }
   </style>
 </head>
 <body>
+  <div class="navbar">
+    <div class="logo"><strong>BrainHustle™</strong></div>
+    <button class="menu-button">☰ Menu</button>
+  </div>
 
-<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+  <div class="side-menu" id="sideMenu">
+    <a href="#">🏠 Home</a>
+    <a href="#">📦 Plug & Play Kits</a>
+    <a href="#">💰 Smart Monetization</a>
+    <a href="#">📈 Business Tools</a>
+    <a href="#">🎯 Member Access</a>
+  </div>
 
-<button class="menu-button" onclick="toggleMenu()">☰ Menu</button>
+  <div class="hero">
+    <h1>BrainHustle™</h1>
+    <p>AI-Enhanced Business Systems for Real-World Hustlers</p>
+    <button>Start Now</button>
+  </div>
 
-<div class="side-menu" id="sideMenu">
-  <a href="index.html">🏠 Home</a>
-  <a href="dashboard.html">📦 Product Dashboard</a>
-  <a href="affiliate.html">💼 Affiliate Toolkit</a>
-  <a href="login.html">🔐 Member Login</a>
-  <a href="testimonials.html">📣 Testimonials</a>
-  <a href="learnmore.html">📚 Learn More</a>
-</div>
+  <div class="section">
+    <h2>🚀 What You’ll Get</h2>
 
-<header>
-  <h1>BrainHustle™</h1>
-  <p>AI-Enhanced Business Systems for Real-World Hustlers</p>
-  <a href="https://gumroad.com/l/your-link" class="cta-button">Start Now</a>
-</header>
-
-<section class="section">
-  <h2 style="color: var(--accent); text-align: center;">🚀 What You’ll Get</h2>
-  <div class="features">
-    <div class="feature">
-      <h3>🛠️ Plug & Play Kits</h3>
+    <div class="feature-box">
+      <h3>🛠 Plug & Play Kits</h3>
       <p>Launch-ready websites, templates, scripts, and strategies — ready to activate now.</p>
     </div>
-    <div class="feature">
-      <h3>💰 Smart Monetization</h3>
-      <p>Each kit includes monetization options: affiliate tools, upsells, guides & more.</p>
-    </div>
-    <div class="feature">
-      <h3>⚡ Instant Results</h3>
-      <p>No tech skills needed. Designed to help you earn on day 1.</p>
+
+    <div class="feature-box">
+      <h3>💲 Smart Monetization</h3>
+      <p>Proven systems to help you earn online — ads, affiliate offers, sales funnels, and more.</p>
     </div>
   </div>
-</section>
 
-<section class="section">
-  <h2 style="text-align:center;color:var(--accent);">📈 Testimonials</h2>
-  <div class="testimonial">“I’ve tried 10 online tools. BrainHustle™ was the only one that actually made me money.”</div>
-  <div class="testimonial">“It felt like everything just clicked. I had something to sell within hours.”</div>
-  <div class="testimonial">“This isn’t a course. It’s a machine for building income fast.”</div>
-</section>
+  <script>
+    const menuButton = document.querySelector('.menu-button');
+    const sideMenu = document.querySelector('.side-menu');
 
-<footer>
-  &copy; 2025 BrainHustle™ | <a href="#">Terms</a> | <a href="#">Privacy</a>
-</footer>
-
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById('sideMenu');
-    const overlay = document.getElementById('menuOverlay');
-    menu.classList.toggle('open');
-    overlay.classList.toggle('show');
-  }
-
-  // Auto-close menu when any menu link is clicked
-  document.querySelectorAll('.side-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById('sideMenu').classList.remove('open');
-      document.getElementById('menuOverlay').classList.remove('show');
+    menuButton.addEventListener('click', () => {
+      sideMenu.classList.toggle('open');
     });
-  });
-</script>
-
+  </script>
 </body>
 </html>
