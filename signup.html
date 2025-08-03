@@ -50,15 +50,16 @@
   <h1>Create Your BrainHustle™ Account</h1>
   <input type="email" id="email" placeholder="Email" /><br>
   <input type="password" id="password" placeholder="Password" /><br>
-  <button onclick="signup()">Sign Up</button>
+  <button id="signupBtn">Sign Up</button>
 
   <p>Already have an account? <a href="login.html">Login</a></p>
 
-  <script type="module">
-    // Firebase Config
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 
+  <script>
+    // Firebase Config
     const firebaseConfig = {
       apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
       authDomain: "brainhustle-92a40.firebaseapp.com",
@@ -69,14 +70,14 @@
       measurementId: "G-3M5PKR5S27"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-    function signup() {
+    document.getElementById("signupBtn").addEventListener("click", function() {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      createUserWithEmailAndPassword(auth, email, password)
+      auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
           alert("Signup successful!");
           window.location.href = "dashboard.html";
@@ -84,7 +85,7 @@
         .catch((error) => {
           alert("Signup failed: " + error.message);
         });
-    }
+    });
   </script>
 
 </body>
