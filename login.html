@@ -3,96 +3,82 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BrainHustle™ – Profit Systems That Work</title>
+  <title>Login – BrainHustle™</title>
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
       background: #0a0a0a;
       color: white;
-    }
-    header {
-      background: linear-gradient(90deg, #0066ff, #00ffcc);
+      font-family: Arial, sans-serif;
       text-align: center;
       padding: 40px 20px;
     }
-    header h1 {
-      color: gold;
-      font-size: 28px;
+    h1 {
+      color: #00cc66;
     }
-    .start-button {
-      background: red;
-      color: white;
-      padding: 12px 24px;
+    input {
+      padding: 10px;
+      margin: 10px 0;
+      width: 80%;
+      max-width: 300px;
       border: none;
       border-radius: 4px;
-      font-size: 18px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #00cc66;
+      border: none;
+      color: black;
+      font-weight: bold;
+      border-radius: 4px;
       cursor: pointer;
-      margin-top: 20px;
+      margin-top: 10px;
     }
-    section {
-      padding: 30px 20px;
-    }
-    .feature-box {
-      background: #111;
-      border-left: 4px solid orange;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 6px;
-    }
-    .feature-box h2 {
-      color: red;
-    }
-    footer {
-      background: #000;
-      color: gray;
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-    }
-    a {
-      color: #00cc66;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
+    button:hover {
+      background: #00e676;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>AI-Enhanced Business Systems for Real-World Hustlers</h1>
-    <button class="start-button" onclick="window.location.href='join.html'">Start Now</button>
-  </header>
+  <h1>Login to BrainHustle™</h1>
+  <input type="email" id="email" placeholder="Email" /><br>
+  <input type="password" id="password" placeholder="Password" /><br>
+  <button onclick="login()">Login</button>
 
-  <section>
-    <h2 style="color:lime;">🚀 What You’ll Get</h2>
+  <p>Don't have an account? <a href="signup.html" style="color:#00cc66;">Sign up</a></p>
 
-    <div class="feature-box">
-      <h2>🛠️ Plug & Play Kits</h2>
-      <p>Launch-ready websites, templates, scripts, and strategies — ready to activate now.</p>
-    </div>
+  <script type="module">
+    // Firebase Config
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
-    <div class="feature-box">
-      <h2>💲 Smart Monetization</h2>
-      <p>Proven systems to help you earn online — ads, affiliate offers, sales funnels, and more.</p>
-    </div>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
+      authDomain: "brainhustle-92a40.firebaseapp.com",
+      projectId: "brainhustle-92a40",
+      storageBucket: "brainhustle-92a40.firebasestorage.app",
+      messagingSenderId: "547592914180",
+      appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
+      measurementId: "G-3M5PKR5S27"
+    };
 
-    <div class="feature-box">
-      <h2>⚙️ Automation Tools</h2>
-      <p>Use AI and automation to streamline tasks, save time, and boost your profits effortlessly.</p>
-    </div>
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-    <div class="feature-box">
-      <h2>📈 Real Results</h2>
-      <p>Strategies designed to actually work — no fluff, no hype. Just systems built for hustlers.</p>
-    </div>
-  </section>
+    function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
 
-  <footer>
-    BrainHustle™ &copy; 2025. All Rights Reserved. | <a href="join.html">Join Now</a>
-  </footer>
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          alert("Login successful!");
+          window.location.href = "dashboard.html"; // Redirect after login
+        })
+        .catch((error) => {
+          alert("Login failed: " + error.message);
+        });
+    }
+  </script>
 
 </body>
 </html>
