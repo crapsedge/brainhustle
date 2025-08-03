@@ -21,7 +21,7 @@
     .menu-button {
       position: fixed;
       top: 20px;
-      right: 20px; /* moved to right */
+      right: 20px;
       background-color: var(--highlight);
       color: black;
       border: none;
@@ -34,17 +34,17 @@
     .side-menu {
       position: fixed;
       top: 0;
-      right: -260px; /* hide to right initially */
+      right: -260px;
       width: 260px;
       height: 100%;
       background-color: #111;
-      padding: 6em 1em 2em; /* push content down */
+      padding: 6em 1em 2em;
       box-shadow: -2px 0 10px rgba(0,0,0,0.8);
       transition: right 0.3s ease;
       z-index: 1000;
     }
     .side-menu.open {
-      right: 0; /* slide in */
+      right: 0;
     }
     .side-menu a {
       display: block;
@@ -147,8 +147,8 @@
   <a href="dashboard.html">📦 Product Dashboard</a>
   <a href="affiliate.html">💼 Affiliate Toolkit</a>
   <a href="login.html">🔐 Member Login</a>
-  <a href="#">📣 Testimonials</a>
-  <a href="#">📚 Learn More</a>
+  <a href="testimonials.html">📣 Testimonials</a>
+  <a href="learnmore.html">📚 Learn More</a>
 </div>
 
 <header>
@@ -193,6 +193,14 @@
     menu.classList.toggle('open');
     overlay.classList.toggle('show');
   }
+
+  // Auto-close menu when any menu link is clicked
+  document.querySelectorAll('.side-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('sideMenu').classList.remove('open');
+      document.getElementById('menuOverlay').classList.remove('show');
+    });
+  });
 </script>
 
 </body>
