@@ -2,75 +2,83 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join BrainHustle™</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up – BrainHustle™</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0a0a0a;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-    .container {
-      background-color: #111;
-      padding: 2em;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(255, 122, 0, 0.3);
-      width: 90%;
-      max-width: 400px;
+      background: #0a0a0a;
+      color: white;
+      font-family: Arial, sans-serif;
       text-align: center;
+      padding: 40px 20px;
     }
     h1 {
-      color: #FF7A00;
-      margin-bottom: 0.5em;
-    }
-    p {
-      color: #aaa;
-      font-size: 0.95em;
-      margin-bottom: 2em;
+      color: #00cc66;
     }
     input {
-      width: 100%;
-      padding: 0.9em;
-      margin-bottom: 1em;
+      padding: 10px;
+      margin: 10px 0;
+      width: 80%;
+      max-width: 300px;
       border: none;
-      border-radius: 6px;
-      font-size: 1em;
+      border-radius: 4px;
     }
     button {
-      width: 100%;
-      padding: 1em;
-      background-color: #FF1F1F;
-      color: white;
+      padding: 10px 20px;
+      background: #00cc66;
       border: none;
-      border-radius: 6px;
+      color: black;
       font-weight: bold;
-      font-size: 1em;
+      border-radius: 4px;
       cursor: pointer;
+      margin-top: 10px;
     }
-    a {
-      color: #00e676;
-      font-size: 0.9em;
-      text-decoration: none;
-      display: block;
-      margin-top: 1em;
+    button:hover {
+      background: #00e676;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Create Your Account</h1>
-    <p>Join BrainHustle™ and unlock access to premium business tools.</p>
-    <input type="text" placeholder="Full Name" />
-    <input type="email" placeholder="Email Address" />
-    <input type="password" placeholder="Create Password" />
-    <button onclick="location.href='members.html'">Create Account</button>
-    <a href="login.html">Already have an account? Log in</a>
-  </div>
+
+  <h1>Create Your BrainHustle™ Account</h1>
+  <input type="email" id="email" placeholder="Email" /><br>
+  <input type="password" id="password" placeholder="Password" /><br>
+  <button onclick="signup()">Sign Up</button>
+
+  <p>Already have an account? <a href="login.html" style="color:#00cc66;">Login</a></p>
+
+  <script type="module">
+    // Firebase Config
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
+      authDomain: "brainhustle-92a40.firebaseapp.com",
+      projectId: "brainhustle-92a40",
+      storageBucket: "brainhustle-92a40.firebasestorage.app",
+      messagingSenderId: "547592914180",
+      appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
+      measurementId: "G-3M5PKR5S27"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    function signup() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          alert("Signup successful!");
+          window.location.href = "dashboard.html"; // Redirect after signup
+        })
+        .catch((error) => {
+          alert("Signup failed: " + error.message);
+        });
+    }
+  </script>
+
 </body>
 </html>
