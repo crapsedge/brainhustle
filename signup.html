@@ -36,6 +36,13 @@
     button:hover {
       background: #00e676;
     }
+    a {
+      color: #00cc66;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -45,7 +52,7 @@
   <input type="password" id="password" placeholder="Password" /><br>
   <button onclick="signup()">Sign Up</button>
 
-  <p>Already have an account? <a href="login.html" style="color:#00cc66;">Login</a></p>
+  <p>Already have an account? <a href="login.html">Login</a></p>
 
   <script type="module">
     // Firebase Config
@@ -72,7 +79,7 @@
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           alert("Signup successful!");
-          window.location.href = "dashboard.html"; // Redirect after signup
+          window.location.href = "dashboard.html";
         })
         .catch((error) => {
           alert("Signup failed: " + error.message);
