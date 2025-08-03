@@ -1,0 +1,117 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0a0a0a;
+  color: white;
+}
+
+.navbar {
+  background-color: #111;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 22px;
+  color: #00ff99;
+}
+
+.menu-button {
+  background-color: orange;
+  border: none;
+  color: black;
+  font-size: 18px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Side Menu Hidden by Default */
+#sideMenu {
+  position: fixed;
+  top: 0;
+  right: -250px; /* Hidden off-screen */
+  width: 250px;
+  height: 100%;
+  background-color: #111;
+  transition: right 0.3s ease;
+  z-index: 999;
+  padding: 20px;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+}
+
+/* Side Menu Visible */
+#sideMenu.open {
+  right: 0;
+}
+
+#sideMenu a {
+  display: block;
+  padding: 10px 0;
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid #333;
+}
+
+#sideMenu a:hover {
+  background-color: #222;
+}
+
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #005CFF, #00e676);
+}
+
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.hero p {
+  font-size: 18px;
+  color: orange;
+}
+
+.hero button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  font-size: 18px;
+  background-color: red;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.section {
+  padding: 40px 20px;
+  background-color: #000;
+}
+
+.section h2 {
+  text-align: center;
+  color: #00ff99;
+  margin-bottom: 20px;
+}
+
+.card {
+  background-color: #111;
+  border-left: 5px solid orange;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.card h3 {
+  color: red;
+  margin-top: 0;
+}
+
+.card p {
+  margin: 10px 0 0 0;
+}
