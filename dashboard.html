@@ -3,45 +3,105 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard – BrainHustle™ Members</title>
+  <title>BrainHustle™ Members Dashboard</title>
   <style>
     body {
+      margin: 0;
+      font-family: Arial, sans-serif;
       background: #0a0a0a;
       color: white;
-      font-family: Arial, sans-serif;
+    }
+    header {
+      background: linear-gradient(90deg, #0066ff, #00ccff);
+      padding: 20px;
       text-align: center;
-      padding: 40px 20px;
     }
-    h1 {
-      color: #00cc66;
-    }
-    button {
-      padding: 10px 20px;
-      background: red;
-      border: none;
+    header h1 {
       color: white;
-      font-weight: bold;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 20px;
+      font-size: 28px;
     }
-    button:hover {
-      background: darkred;
+    .content {
+      padding: 30px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .section {
+      background: #111;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border-left: 5px solid #00cc66;
+    }
+    .section h2 {
+      color: #00cc66;
+      margin-top: 0;
+    }
+    .button {
+      background: #00cc66;
+      color: black;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .button:hover {
+      background: #00e676;
+    }
+    .logout-btn {
+      background: red;
+      color: white;
+      margin-top: 30px;
+    }
+    .footer {
+      text-align: center;
+      color: gray;
+      padding: 20px;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
 
-  <h1>Welcome to BrainHustle™ Members Area</h1>
-  <p>You are successfully logged in.</p>
+  <header>
+    <h1>Welcome to BrainHustle™ Members Dashboard</h1>
+    <p id="userEmail" style="font-size:16px; margin-top:10px;"></p>
+  </header>
 
-  <button onclick="logout()">Logout</button>
+  <div class="content">
 
-  <script type="module">
-    // Firebase Config
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+    <div class="section">
+      <h2>🚀 Download Your Tools</h2>
+      <p>Access premium kits, templates, and systems to launch your business.</p>
+      <button class="button" onclick="window.location.href='tools.html'">Access Tools</button>
+    </div>
 
+    <div class="section">
+      <h2>🎓 Premium Content</h2>
+      <p>Watch tutorials, strategy guides, and advanced training videos.</p>
+      <button class="button" onclick="window.location.href='premium.html'">View Content</button>
+    </div>
+
+    <div class="section">
+      <h2>📞 Member Support</h2>
+      <p>Need help? Contact support for 1-on-1 assistance or guidance.</p>
+      <button class="button" onclick="window.location.href='support.html'">Contact Support</button>
+    </div>
+
+    <button class="button logout-btn" onclick="logout()">Logout</button>
+
+  </div>
+
+  <div class="footer">
+    BrainHustle™ © 2025 | All Rights Reserved
+  </div>
+
+  <!-- Firebase Auth Script -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
       authDomain: "brainhustle-92a40.firebaseapp.com",
@@ -52,19 +112,20 @@
       measurementId: "G-3M5PKR5S27"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-    // Check if user is logged in
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        alert("You must be logged in to access this page.");
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        document.getElementById("userEmail").innerText = "Logged in as: " + user.email;
+      } else {
+        alert("You must be logged in to view this page.");
         window.location.href = "login.html";
       }
     });
 
     function logout() {
-      signOut(auth).then(() => {
+      auth.signOut().then(() => {
         alert("Logged out.");
         window.location.href = "login.html";
       });
