@@ -10,25 +10,46 @@
       font-family: Arial, sans-serif;
       background: #0a0a0a;
       color: white;
+    }
+
+    .navbar {
+      background-color: #111;
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+
+    .navbar img {
+      height: 192px;
+    }
+
+    .menu-button {
+      font-size: 20px;
+      background: #00e676;
+      color: black;
+      padding: 8px 12px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
     }
 
     /* Sidebar */
     .sidebar {
-      height: 100vh;
-      width: 250px;
+      height: 100%;
+      width: 0;
       position: fixed;
       top: 0;
       left: 0;
       background-color: #111;
-      padding-top: 20px;
+      overflow-x: hidden;
       transition: 0.3s;
-      overflow-y: auto;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+      padding-top: 60px;
+      z-index: 1000;
     }
 
     .sidebar a {
-      padding: 12px 20px;
+      padding: 10px 20px;
       text-decoration: none;
       font-size: 18px;
       color: #00e676;
@@ -39,23 +60,17 @@
       background-color: #222;
     }
 
-    /* Main Content */
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
+
     .main-content {
-      margin-left: 250px;
       padding: 20px;
-      flex: 1;
-    }
-
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #111;
-      padding: 10px 20px;
-    }
-
-    .navbar img {
-      height: 192px;
     }
 
     h1 {
@@ -105,8 +120,9 @@
 </head>
 <body>
 
-  <!-- Sidebar Menu -->
-  <div class="sidebar">
+  <!-- Sidebar -->
+  <div id="sideMenu" class="sidebar">
+    <span class="close-btn" onclick="closeMenu()">&times;</span>
     <a href="#kits">🧰 Hustle Kits</a>
     <a href="#ideas">💡 Money Ideas</a>
     <a href="#passive">📈 Passive Income</a>
@@ -116,56 +132,51 @@
     <a href="login.html" onclick="logout()">🔒 Logout</a>
   </div>
 
-  <!-- Main Content Area -->
+  <!-- Navbar -->
+  <div class="navbar">
+    <button class="menu-button" onclick="openMenu()">☰ Menu</button>
+    <img src="brainhustle-logo.png" alt="BrainHustle Logo">
+  </div>
+
   <div class="main-content">
-    <div class="navbar">
-      <img src="brainhustle-logo.png" alt="BrainHustle Logo">
-    </div>
-
     <h1>BrainHustle™ Dashboard</h1>
-    <p style="text-align:center;">Your hub for tools, ideas, and systems that make money.</p>
+    <p style="text-align:center;">All your tools and systems for making money online — real, legal, actionable.</p>
 
-    <!-- Sections -->
+    <!-- Unique Sections Below -->
     <div class="section" id="kits">
       <h2>🧰 Hustle Kits</h2>
-      <a href="#" class="tool-link">📥 Digital Product Template Kit</a><br>
-      <a href="#" class="tool-link">📥 Business Tracker Spreadsheet</a><br>
-      <a href="#" class="tool-link">📥 Email Funnel Starter Pack</a>
+      <a href="#" class="tool-link">📥 Product Template Kit</a><br>
+      <a href="#" class="tool-link">📥 Income Tracker Sheet</a>
     </div>
 
     <div class="section" id="ideas">
       <h2>💡 Money Ideas</h2>
-      <a href="#" class="tool-link">🔗 Affiliate Marketing Guide</a><br>
-      <a href="#" class="tool-link">🔗 Top 5 Hustles</a><br>
-      <a href="#" class="tool-link">🔗 AI Business Ideas</a>
+      <a href="#" class="tool-link">🔗 Affiliate Hustles</a><br>
+      <a href="#" class="tool-link">🔗 No-Cost Startup Ideas</a>
     </div>
 
     <div class="section" id="passive">
       <h2>📈 Passive Income</h2>
-      <a href="#" class="tool-link">🔗 Gumroad Store Setup</a><br>
-      <a href="#" class="tool-link">🔗 Auto Blog System</a><br>
-      <a href="#" class="tool-link">🔗 Passive AI Income</a>
+      <a href="#" class="tool-link">🔗 Gumroad System</a><br>
+      <a href="#" class="tool-link">🔗 Blog Autopilot</a>
     </div>
 
     <div class="section" id="ai">
       <h2>📝 AI Tools</h2>
-      <a href="#" class="tool-link">🔗 AI Post Generator</a><br>
-      <a href="#" class="tool-link">🔗 Product Writer</a><br>
-      <a href="#" class="tool-link">🔗 Email Templates</a>
+      <a href="#" class="tool-link">🔗 AI Content Generator</a><br>
+      <a href="#" class="tool-link">🔗 AI Email Writer</a>
     </div>
 
     <div class="section" id="monetization">
       <h2>💸 Monetization</h2>
       <a href="#" class="tool-link">🔗 Sales Funnel Guide</a><br>
-      <a href="#" class="tool-link">🔗 Reddit Blueprint</a><br>
       <a href="#" class="tool-link">🔗 Paywall Setup</a>
     </div>
 
     <div class="section" id="trackers">
       <h2>📊 Trackers</h2>
-      <a href="#" class="tool-link">🔗 Hustle Journal</a><br>
-      <a href="#" class="tool-link">🔗 Profit Tracker</a><br>
-      <a href="#" class="tool-link">🔗 Goal Planner PDF</a>
+      <a href="#" class="tool-link">🔗 Daily Hustle Log</a><br>
+      <a href="#" class="tool-link">🔗 Weekly Profit Sheet</a>
     </div>
 
     <div style="text-align:center; margin-top:30px;">
@@ -176,6 +187,17 @@
       All Rights Reserved © BrainHustle™ 2025
     </div>
   </div>
+
+  <!-- Sidebar Script -->
+  <script>
+    function openMenu() {
+      document.getElementById("sideMenu").style.width = "250px";
+    }
+
+    function closeMenu() {
+      document.getElementById("sideMenu").style.width = "0";
+    }
+  </script>
 
   <!-- Firebase Logout Script -->
   <script type="module">
