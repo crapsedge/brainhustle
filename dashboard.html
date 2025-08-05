@@ -1,19 +1,179 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>BrainHustle™ Member Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BrainHustle™ Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: white;
+    }
 
-  <!-- Firebase v12 -->
+    .navbar {
+      background-color: #111;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+    }
+
+    .navbar img {
+      height: 192px; /* 2-inch logo */
+    }
+
+    .nav-links a {
+      color: orange;
+      text-decoration: none;
+      padding: 10px 16px;
+      display: block;
+    }
+
+    .main {
+      padding: 20px;
+    }
+
+    h1 {
+      color: #00e676;
+      text-align: center;
+    }
+
+    .section {
+      background: #1a1a1a;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 900px;
+      box-shadow: 0 0 10px #00e676;
+    }
+
+    .section h2 {
+      color: #00e676;
+      margin-bottom: 10px;
+    }
+
+    .section p {
+      margin-bottom: 10px;
+    }
+
+    .button {
+      display: inline-block;
+      margin: 10px 0;
+      padding: 12px 20px;
+      background: #FF1F1F;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    .button:hover {
+      background: #cc0000;
+    }
+
+    .footer {
+      text-align: center;
+      color: gray;
+      font-size: 12px;
+      padding: 20px;
+    }
+
+    .tool-link {
+      color: #00e676;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar with Logo and Logout -->
+  <div class="navbar">
+    <a href="index.html">
+      <img src="brainhustle-logo.png" alt="BrainHustle Logo" style="height:192px;">
+    </a>
+    <div class="nav-links">
+      <a href="login.html" onclick="logout()">Logout</a>
+    </div>
+  </div>
+
+  <div class="main">
+    <h1>Welcome to BrainHustle™</h1>
+    <p style="text-align:center;">Your dashboard for real tools, real ideas, and real income systems. Everything here is built for you to take action.</p>
+
+    <!-- Hustle Kits -->
+    <div class="section">
+      <h2>🧰 Hustle Kits</h2>
+      <p>Get templates and ready-to-go tools for real side hustles.</p>
+      <a href="#" class="tool-link">📥 Digital Product Template Kit</a><br>
+      <a href="#" class="tool-link">📥 Business Tracker Spreadsheet</a><br>
+      <a href="#" class="tool-link">📥 Email Funnel Starter Pack</a>
+    </div>
+
+    <!-- Money-Making Ideas -->
+    <div class="section">
+      <h2>💡 Money Ideas</h2>
+      <p>Learn high-potential ways to make money fast and legally.</p>
+      <a href="#" class="tool-link">🔗 Affiliate Marketing Guide</a><br>
+      <a href="#" class="tool-link">🔗 Top 5 Side Hustles You Can Start Now</a><br>
+      <a href="#" class="tool-link">🔗 AI Tools That Make You Money</a>
+    </div>
+
+    <!-- Passive Income Tools -->
+    <div class="section">
+      <h2>📈 Passive Income Systems</h2>
+      <p>Automate your hustle. Set up systems that earn while you sleep.</p>
+      <a href="#" class="tool-link">🔗 Set Up Gumroad Store in 10 Minutes</a><br>
+      <a href="#" class="tool-link">🔗 Create an Automated Blog</a><br>
+      <a href="#" class="tool-link">🔗 Passive Income Using AI</a>
+    </div>
+
+    <!-- Content Creation Tools -->
+    <div class="section">
+      <h2>📝 AI Content Tools</h2>
+      <p>Generate posts, product ideas, and emails using AI.</p>
+      <a href="#" class="tool-link">🔗 AI Post Generator (Coming Soon)</a><br>
+      <a href="#" class="tool-link">🔗 Product Description Writer</a><br>
+      <a href="#" class="tool-link">🔗 AI Email Templates</a>
+    </div>
+
+    <!-- Monetization Strategies -->
+    <div class="section">
+      <h2>💸 Monetization Systems</h2>
+      <p>Step-by-step methods to turn traffic into income.</p>
+      <a href="#" class="tool-link">🔗 Sales Funnel Setup</a><br>
+      <a href="#" class="tool-link">🔗 Reddit Marketing Blueprint</a><br>
+      <a href="#" class="tool-link">🔗 Quick Paywall Guide</a>
+    </div>
+
+    <!-- Trackers -->
+    <div class="section">
+      <h2>📊 Trackers & Logs</h2>
+      <p>Measure your growth. Stay on top of your progress.</p>
+      <a href="#" class="tool-link">🔗 Daily Hustle Journal</a><br>
+      <a href="#" class="tool-link">🔗 Weekly Profit Tracker</a><br>
+      <a href="#" class="tool-link">🔗 Goal Planner (PDF)</a>
+    </div>
+
+    <div style="text-align:center; margin-top:30px;">
+      <a href="login.html" class="button" onclick="logout()">Logout</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    All Rights Reserved © BrainHustle™ 2025
+  </div>
+
+  <!-- Firebase Logout Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-    import { getAuth, sendEmailVerification, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
       authDomain: "brainhustle-92a40.firebaseapp.com",
       projectId: "brainhustle-92a40",
-      storageBucket: "brainhustle-92a40.firebasestorage.app",
+      storageBucket: "brainhustle-92a40.appspot.com",
       messagingSenderId: "547592914180",
       appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
       measurementId: "G-3M5PKR5S27"
@@ -22,65 +182,18 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
+    window.logout = function() {
+      signOut(auth).then(() => {
+        window.location.href = "login.html";
+      });
+    };
+
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-        document.getElementById("welcome").textContent = `Welcome, ${user.email}`;
-        document.getElementById("resendBtn").addEventListener("click", () => {
-          sendEmailVerification(user).then(() => {
-            alert("Verification email sent again!");
-          }).catch((error) => {
-            alert("Error: " + error.message);
-          });
-        });
-      } else {
-        window.location.href = "login.html"; // force login if not signed in
+      if (!user) {
+        window.location.href = "login.html";
       }
     });
   </script>
-
-  <style>
-    body {
-      background: #0a0a0a;
-      color: white;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      color: #00ff99;
-    }
-    button {
-      background: #FF6600;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      margin-top: 10px;
-    }
-    .card {
-      background: #111;
-      padding: 15px;
-      border-radius: 6px;
-      margin-top: 15px;
-      border-left: 4px solid #00ff99;
-    }
-  </style>
-</head>
-<body>
-
-  <h1 id="welcome">Welcome</h1>
-  <button id="resendBtn">Resend Verification Email</button>
-
-  <div class="card">
-    <h2>💻 Exclusive Tools</h2>
-    <p>Access business kits, templates, and monetization tools only for members.</p>
-  </div>
-
-  <div class="card">
-    <h2>📈 Hustler Resources</h2>
-    <p>Guides, scripts, and systems to help you start making real money online.</p>
-  </div>
 
 </body>
 </html>
