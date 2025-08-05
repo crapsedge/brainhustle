@@ -13,25 +13,22 @@
       text-align: center;
     }
 
-    /* Top Menu */
-    .topbar {
-      background-color: #111;
-      padding: 12px 0;
-    }
-
-    .topbar a {
-      color: #00e676;
-      margin: 0 12px;
-      text-decoration: none;
-      font-size: 16px;
-    }
-
-    .topbar a:hover {
-      text-decoration: underline;
+    .menu-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #00e676;
+      color: black;
+      font-size: 18px;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      z-index: 1000;
     }
 
     .logo-container {
-      margin: 20px 0;
+      margin-top: 80px;
     }
 
     .logo-container img {
@@ -40,52 +37,24 @@
 
     h1 {
       color: #00e676;
-      margin-bottom: 10px;
+      margin-top: 20px;
     }
 
-    p.subtitle {
-      color: #ccc;
-      margin-bottom: 30px;
-    }
-
-    .summary-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
+    .content {
+      max-width: 800px;
+      margin: 30px auto;
       padding: 0 20px;
+      text-align: left;
     }
 
-    .card {
-      background: #1a1a1a;
-      border-radius: 8px;
-      padding: 20px;
-      width: 260px;
-      box-shadow: 0 0 10px #00e676;
-    }
-
-    .card h3 {
+    .content h2 {
       color: #00e676;
       margin-bottom: 10px;
     }
 
-    .card p {
-      font-size: 14px;
-      color: #ccc;
-      margin-bottom: 15px;
-    }
-
-    .card a {
-      background: #FF1F1F;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 4px;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .card a:hover {
-      background: #cc0000;
+    .content p {
+      margin-bottom: 20px;
+      line-height: 1.6;
     }
 
     .footer {
@@ -94,12 +63,48 @@
       color: gray;
       padding: 20px;
     }
+
+    /* Sidebar */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      z-index: 1001;
+    }
+
+    .sidebar a {
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #00e676;
+      display: block;
+    }
+
+    .sidebar a:hover {
+      background-color: #222;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation -->
-  <div class="topbar">
+  <!-- Side Menu -->
+  <div id="sideMenu" class="sidebar">
+    <span class="close-btn" onclick="closeMenu()">&times;</span>
     <a href="dashboard.html">Dashboard</a>
     <a href="kits.html">Hustle Kits</a>
     <a href="ideas.html">Money Ideas</a>
@@ -110,58 +115,50 @@
     <a href="login.html" onclick="logout()">Logout</a>
   </div>
 
+  <!-- Menu Button -->
+  <button class="menu-button" onclick="openMenu()">☰ Menu</button>
+
   <!-- Logo -->
   <div class="logo-container">
     <img src="brainhustle-logo.png" alt="BrainHustle Logo">
   </div>
 
-  <h1>BrainHustle™ Dashboard</h1>
-  <p class="subtitle">Explore proven systems, tools, and real money-making strategies — all in one place.</p>
+  <h1>Welcome to BrainHustle™</h1>
 
-  <!-- Summary Cards -->
-  <div class="summary-grid">
-    <div class="card">
-      <h3>🧰 Hustle Kits</h3>
-      <p>Download templates, trackers, and starter kits to launch real side hustles.</p>
-      <a href="kits.html">Open Kits</a>
-    </div>
+  <div class="content">
+    <h2>What is BrainHustle™?</h2>
+    <p>BrainHustle™ is a real solution for people who want to make legal, smart, and real money online — without scams, fluff, or wasted time. We give you systems that work, tools you can actually use, and ideas that help you build income your way.</p>
 
-    <div class="card">
-      <h3>💡 Money Ideas</h3>
-      <p>Discover legit ways to make money fast — with step-by-step guides.</p>
-      <a href="ideas.html">Explore Ideas</a>
-    </div>
+    <h2>Why You Made a Smart Choice</h2>
+    <p>You didn’t just join another “hustle site” — you joined a movement focused on brainpower, strategy, and real value. Here you get everything from startup templates to AI automation and passive income guides. Every tool inside is hand-picked to help you win.</p>
 
-    <div class="card">
-      <h3>📈 Passive Income</h3>
-      <p>Set up automated systems that earn 24/7. Build once, earn forever.</p>
-      <a href="passive.html">Start Now</a>
-    </div>
+    <h2>What’s Inside</h2>
+    <p>→ Hustle Kits for launching ideas fast  
+       → Tools for monetization, sales, and content  
+       → Passive income systems with real steps  
+       → AI tools to boost productivity  
+       → Daily and weekly profit trackers  
+       → No B.S. — just working systems for real money</p>
 
-    <div class="card">
-      <h3>📝 AI Tools</h3>
-      <p>Use AI to generate content, automate posts, and create products.</p>
-      <a href="ai.html">Use Tools</a>
-    </div>
-
-    <div class="card">
-      <h3>💸 Monetization</h3>
-      <p>Turn traffic into profit. Sales funnels, paywalls, and fast cash systems.</p>
-      <a href="monetization.html">View Systems</a>
-    </div>
-
-    <div class="card">
-      <h3>📊 Trackers</h3>
-      <p>Log your hustle, track income, and stay focused on daily actions.</p>
-      <a href="trackers.html">Track Progress</a>
-    </div>
+    <p>Explore the menu to get started. Your hustle begins now.</p>
   </div>
 
   <div class="footer">
     All Rights Reserved © BrainHustle™ 2025
   </div>
 
-  <!-- Firebase Logout -->
+  <!-- Sidebar Script -->
+  <script>
+    function openMenu() {
+      document.getElementById("sideMenu").style.width = "250px";
+    }
+
+    function closeMenu() {
+      document.getElementById("sideMenu").style.width = "0";
+    }
+  </script>
+
+  <!-- Firebase Logout Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
