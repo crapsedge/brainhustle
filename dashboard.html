@@ -3,36 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BrainHustle™ Dashboard</title>
+  <title>Dashboard – BrainHustle™</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #0a0a0a;
       color: white;
-    }
-
-    .navbar {
-      background-color: #111;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      height: 100vh;
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      padding-top: 20px;
+      transition: 0.3s;
+      overflow-y: auto;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+    }
+
+    .sidebar a {
       padding: 12px 20px;
-    }
-
-    .navbar img {
-      height: 192px; /* 2-inch logo */
-    }
-
-    .nav-links a {
-      color: orange;
       text-decoration: none;
-      padding: 10px 16px;
+      font-size: 18px;
+      color: #00e676;
       display: block;
     }
 
-    .main {
+    .sidebar a:hover {
+      background-color: #222;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 250px;
       padding: 20px;
+      flex: 1;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #111;
+      padding: 10px 20px;
+    }
+
+    .navbar img {
+      height: 192px;
     }
 
     h1 {
@@ -51,11 +74,11 @@
 
     .section h2 {
       color: #00e676;
-      margin-bottom: 10px;
     }
 
-    .section p {
-      margin-bottom: 10px;
+    .tool-link {
+      color: #00e676;
+      text-decoration: underline;
     }
 
     .button {
@@ -78,90 +101,80 @@
       font-size: 12px;
       padding: 20px;
     }
-
-    .tool-link {
-      color: #00e676;
-      text-decoration: underline;
-    }
   </style>
 </head>
 <body>
 
-  <!-- Navbar with Logo and Logout -->
-  <div class="navbar">
-    <a href="index.html">
-      <img src="brainhustle-logo.png" alt="BrainHustle Logo" style="height:192px;">
-    </a>
-    <div class="nav-links">
-      <a href="login.html" onclick="logout()">Logout</a>
-    </div>
+  <!-- Sidebar Menu -->
+  <div class="sidebar">
+    <a href="#kits">🧰 Hustle Kits</a>
+    <a href="#ideas">💡 Money Ideas</a>
+    <a href="#passive">📈 Passive Income</a>
+    <a href="#ai">📝 AI Tools</a>
+    <a href="#monetization">💸 Monetization</a>
+    <a href="#trackers">📊 Trackers</a>
+    <a href="login.html" onclick="logout()">🔒 Logout</a>
   </div>
 
-  <div class="main">
-    <h1>Welcome to BrainHustle™</h1>
-    <p style="text-align:center;">Your dashboard for real tools, real ideas, and real income systems. Everything here is built for you to take action.</p>
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <div class="navbar">
+      <img src="brainhustle-logo.png" alt="BrainHustle Logo">
+    </div>
 
-    <!-- Hustle Kits -->
-    <div class="section">
+    <h1>BrainHustle™ Dashboard</h1>
+    <p style="text-align:center;">Your hub for tools, ideas, and systems that make money.</p>
+
+    <!-- Sections -->
+    <div class="section" id="kits">
       <h2>🧰 Hustle Kits</h2>
-      <p>Get templates and ready-to-go tools for real side hustles.</p>
       <a href="#" class="tool-link">📥 Digital Product Template Kit</a><br>
       <a href="#" class="tool-link">📥 Business Tracker Spreadsheet</a><br>
       <a href="#" class="tool-link">📥 Email Funnel Starter Pack</a>
     </div>
 
-    <!-- Money-Making Ideas -->
-    <div class="section">
+    <div class="section" id="ideas">
       <h2>💡 Money Ideas</h2>
-      <p>Learn high-potential ways to make money fast and legally.</p>
       <a href="#" class="tool-link">🔗 Affiliate Marketing Guide</a><br>
-      <a href="#" class="tool-link">🔗 Top 5 Side Hustles You Can Start Now</a><br>
-      <a href="#" class="tool-link">🔗 AI Tools That Make You Money</a>
+      <a href="#" class="tool-link">🔗 Top 5 Hustles</a><br>
+      <a href="#" class="tool-link">🔗 AI Business Ideas</a>
     </div>
 
-    <!-- Passive Income Tools -->
-    <div class="section">
-      <h2>📈 Passive Income Systems</h2>
-      <p>Automate your hustle. Set up systems that earn while you sleep.</p>
-      <a href="#" class="tool-link">🔗 Set Up Gumroad Store in 10 Minutes</a><br>
-      <a href="#" class="tool-link">🔗 Create an Automated Blog</a><br>
-      <a href="#" class="tool-link">🔗 Passive Income Using AI</a>
+    <div class="section" id="passive">
+      <h2>📈 Passive Income</h2>
+      <a href="#" class="tool-link">🔗 Gumroad Store Setup</a><br>
+      <a href="#" class="tool-link">🔗 Auto Blog System</a><br>
+      <a href="#" class="tool-link">🔗 Passive AI Income</a>
     </div>
 
-    <!-- Content Creation Tools -->
-    <div class="section">
-      <h2>📝 AI Content Tools</h2>
-      <p>Generate posts, product ideas, and emails using AI.</p>
-      <a href="#" class="tool-link">🔗 AI Post Generator (Coming Soon)</a><br>
-      <a href="#" class="tool-link">🔗 Product Description Writer</a><br>
-      <a href="#" class="tool-link">🔗 AI Email Templates</a>
+    <div class="section" id="ai">
+      <h2>📝 AI Tools</h2>
+      <a href="#" class="tool-link">🔗 AI Post Generator</a><br>
+      <a href="#" class="tool-link">🔗 Product Writer</a><br>
+      <a href="#" class="tool-link">🔗 Email Templates</a>
     </div>
 
-    <!-- Monetization Strategies -->
-    <div class="section">
-      <h2>💸 Monetization Systems</h2>
-      <p>Step-by-step methods to turn traffic into income.</p>
-      <a href="#" class="tool-link">🔗 Sales Funnel Setup</a><br>
-      <a href="#" class="tool-link">🔗 Reddit Marketing Blueprint</a><br>
-      <a href="#" class="tool-link">🔗 Quick Paywall Guide</a>
+    <div class="section" id="monetization">
+      <h2>💸 Monetization</h2>
+      <a href="#" class="tool-link">🔗 Sales Funnel Guide</a><br>
+      <a href="#" class="tool-link">🔗 Reddit Blueprint</a><br>
+      <a href="#" class="tool-link">🔗 Paywall Setup</a>
     </div>
 
-    <!-- Trackers -->
-    <div class="section">
-      <h2>📊 Trackers & Logs</h2>
-      <p>Measure your growth. Stay on top of your progress.</p>
-      <a href="#" class="tool-link">🔗 Daily Hustle Journal</a><br>
-      <a href="#" class="tool-link">🔗 Weekly Profit Tracker</a><br>
-      <a href="#" class="tool-link">🔗 Goal Planner (PDF)</a>
+    <div class="section" id="trackers">
+      <h2>📊 Trackers</h2>
+      <a href="#" class="tool-link">🔗 Hustle Journal</a><br>
+      <a href="#" class="tool-link">🔗 Profit Tracker</a><br>
+      <a href="#" class="tool-link">🔗 Goal Planner PDF</a>
     </div>
 
     <div style="text-align:center; margin-top:30px;">
       <a href="login.html" class="button" onclick="logout()">Logout</a>
     </div>
-  </div>
 
-  <div class="footer">
-    All Rights Reserved © BrainHustle™ 2025
+    <div class="footer">
+      All Rights Reserved © BrainHustle™ 2025
+    </div>
   </div>
 
   <!-- Firebase Logout Script -->
