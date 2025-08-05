@@ -3,102 +3,111 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard – BrainHustle™</title>
+  <title>BrainHustle™ Dashboard</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #0a0a0a;
       color: white;
+      text-align: center;
     }
 
-    /* Top Menu Bar */
+    /* Top Menu */
     .topbar {
       background-color: #111;
-      overflow: hidden;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 10px 0;
+      padding: 12px 0;
     }
 
     .topbar a {
       color: #00e676;
-      padding: 10px 16px;
+      margin: 0 12px;
       text-decoration: none;
       font-size: 16px;
     }
 
     .topbar a:hover {
-      background-color: #222;
-      border-radius: 4px;
+      text-decoration: underline;
     }
 
     .logo-container {
-      text-align: center;
-      padding: 20px;
+      margin: 20px 0;
     }
 
     .logo-container img {
-      height: 192px; /* 2 inches */
+      height: 192px;
     }
 
     h1 {
       color: #00e676;
-      text-align: center;
+      margin-bottom: 10px;
     }
 
-    .section {
+    p.subtitle {
+      color: #ccc;
+      margin-bottom: 30px;
+    }
+
+    .summary-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 0 20px;
+    }
+
+    .card {
       background: #1a1a1a;
-      margin: 20px auto;
-      padding: 20px;
       border-radius: 8px;
-      max-width: 900px;
+      padding: 20px;
+      width: 260px;
       box-shadow: 0 0 10px #00e676;
     }
 
-    .section h2 {
+    .card h3 {
       color: #00e676;
+      margin-bottom: 10px;
     }
 
-    .tool-link {
-      color: #00e676;
-      text-decoration: underline;
+    .card p {
+      font-size: 14px;
+      color: #ccc;
+      margin-bottom: 15px;
     }
 
-    .button {
-      display: inline-block;
-      margin: 10px 0;
-      padding: 12px 20px;
+    .card a {
       background: #FF1F1F;
       color: white;
-      text-decoration: none;
+      padding: 10px 16px;
       border-radius: 4px;
+      text-decoration: none;
+      display: inline-block;
     }
 
-    .button:hover {
+    .card a:hover {
       background: #cc0000;
     }
 
     .footer {
-      text-align: center;
-      color: gray;
+      margin-top: 40px;
       font-size: 12px;
+      color: gray;
       padding: 20px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation Tabs -->
+  <!-- Top Navigation -->
   <div class="topbar">
-    <a href="#kits">🧰 Hustle Kits</a>
-    <a href="#ideas">💡 Money Ideas</a>
-    <a href="#passive">📈 Passive Income</a>
-    <a href="#ai">📝 AI Tools</a>
-    <a href="#monetization">💸 Monetization</a>
-    <a href="#trackers">📊 Trackers</a>
-    <a href="login.html" onclick="logout()">🔒 Logout</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="kits.html">Hustle Kits</a>
+    <a href="ideas.html">Money Ideas</a>
+    <a href="passive.html">Passive Income</a>
+    <a href="ai.html">AI Tools</a>
+    <a href="monetization.html">Monetization</a>
+    <a href="trackers.html">Trackers</a>
+    <a href="login.html" onclick="logout()">Logout</a>
   </div>
 
   <!-- Logo -->
@@ -107,54 +116,52 @@
   </div>
 
   <h1>BrainHustle™ Dashboard</h1>
-  <p style="text-align:center;">Your tools, ideas, and real systems for making money online — fast, safe, and real.</p>
+  <p class="subtitle">Explore proven systems, tools, and real money-making strategies — all in one place.</p>
 
-  <!-- Dashboard Sections -->
-  <div class="section" id="kits">
-    <h2>🧰 Hustle Kits</h2>
-    <a href="#" class="tool-link">📥 Product Template Kit</a><br>
-    <a href="#" class="tool-link">📥 Business Tracker</a>
-  </div>
+  <!-- Summary Cards -->
+  <div class="summary-grid">
+    <div class="card">
+      <h3>🧰 Hustle Kits</h3>
+      <p>Download templates, trackers, and starter kits to launch real side hustles.</p>
+      <a href="kits.html">Open Kits</a>
+    </div>
 
-  <div class="section" id="ideas">
-    <h2>💡 Money Ideas</h2>
-    <a href="#" class="tool-link">🔗 Affiliate Hustles</a><br>
-    <a href="#" class="tool-link">🔗 Startup Ideas</a>
-  </div>
+    <div class="card">
+      <h3>💡 Money Ideas</h3>
+      <p>Discover legit ways to make money fast — with step-by-step guides.</p>
+      <a href="ideas.html">Explore Ideas</a>
+    </div>
 
-  <div class="section" id="passive">
-    <h2>📈 Passive Income</h2>
-    <a href="#" class="tool-link">🔗 Gumroad Store</a><br>
-    <a href="#" class="tool-link">🔗 Blog System</a>
-  </div>
+    <div class="card">
+      <h3>📈 Passive Income</h3>
+      <p>Set up automated systems that earn 24/7. Build once, earn forever.</p>
+      <a href="passive.html">Start Now</a>
+    </div>
 
-  <div class="section" id="ai">
-    <h2>📝 AI Tools</h2>
-    <a href="#" class="tool-link">🔗 AI Generator</a><br>
-    <a href="#" class="tool-link">🔗 Email Writer</a>
-  </div>
+    <div class="card">
+      <h3>📝 AI Tools</h3>
+      <p>Use AI to generate content, automate posts, and create products.</p>
+      <a href="ai.html">Use Tools</a>
+    </div>
 
-  <div class="section" id="monetization">
-    <h2>💸 Monetization</h2>
-    <a href="#" class="tool-link">🔗 Funnel Guide</a><br>
-    <a href="#" class="tool-link">🔗 Paywall Setup</a>
-  </div>
+    <div class="card">
+      <h3>💸 Monetization</h3>
+      <p>Turn traffic into profit. Sales funnels, paywalls, and fast cash systems.</p>
+      <a href="monetization.html">View Systems</a>
+    </div>
 
-  <div class="section" id="trackers">
-    <h2>📊 Trackers</h2>
-    <a href="#" class="tool-link">🔗 Daily Log</a><br>
-    <a href="#" class="tool-link">🔗 Weekly Tracker</a>
-  </div>
-
-  <div style="text-align:center; margin-top:30px;">
-    <a href="login.html" class="button" onclick="logout()">Logout</a>
+    <div class="card">
+      <h3>📊 Trackers</h3>
+      <p>Log your hustle, track income, and stay focused on daily actions.</p>
+      <a href="trackers.html">Track Progress</a>
+    </div>
   </div>
 
   <div class="footer">
     All Rights Reserved © BrainHustle™ 2025
   </div>
 
-  <!-- Firebase Logout Script -->
+  <!-- Firebase Logout -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
