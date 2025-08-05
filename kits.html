@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hustle Kits – BrainHustle™</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: white;
+      text-align: center;
+    }
+
+    .menu-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #00e676;
+      color: black;
+      font-size: 18px;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .logo-container {
+      margin-top: 80px;
+    }
+
+    .logo-container img {
+      height: 192px;
+    }
+
+    h1 {
+      color: #00e676;
+      margin-top: 20px;
+    }
+
+    .content {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+      text-align: left;
+    }
+
+    .kit-box {
+      background: #1a1a1a;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px #00e676;
+    }
+
+    .kit-box h2 {
+      color: #00e676;
+      margin-bottom: 10px;
+    }
+
+    .kit-box p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .kit-box a {
+      background: #FF1F1F;
+      color: white;
+      padding: 10px 16px;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    .kit-box a:hover {
+      background: #cc0000;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: gray;
+      padding: 20px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      z-index: 1001;
+    }
+
+    .sidebar a {
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #00e676;
+      display: block;
+    }
+
+    .sidebar a:hover {
+      background-color: #222;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Side Menu -->
+  <div id="sideMenu" class="sidebar">
+    <span class="close-btn" onclick="closeMenu()">&times;</span>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="kits.html">Hustle Kits</a>
+    <a href="ideas.html">Money Ideas</a>
+    <a href="passive.html">Passive Income</a>
+    <a href="ai.html">AI Tools</a>
+    <a href="monetization.html">Monetization</a>
+    <a href="trackers.html">Trackers</a>
+    <a href="about.html">What is BrainHustle™?</a>
+    <a href="login.html" onclick="logout()">Logout</a>
+  </div>
+
+  <!-- Menu Button -->
+  <button class="menu-button" onclick="openMenu()">☰ Menu</button>
+
+  <!-- Logo -->
+  <div class="logo-container">
+    <img src="brainhustle-logo.png" alt="BrainHustle Logo">
+  </div>
+
+  <h1>Hustle Kits</h1>
+
+  <div class="content">
+    <div class="kit-box">
+      <h2>📥 Digital Product Template Kit</h2>
+      <p>Quick-start templates to help you create digital products like eBooks, guides, and checklists — ready to upload and sell.</p>
+      <a href="#">Download Kit</a>
+    </div>
+
+    <div class="kit-box">
+      <h2>📥 Business Tracker Spreadsheet</h2>
+      <p>Track your hustle, revenue, and goals in one place. Stay focused, measure growth, and scale smarter with this Excel/Google Sheets tool.</p>
+      <a href="#">Download Tracker</a>
+    </div>
+
+    <div class="kit-box">
+      <h2>📥 Email Funnel Starter Pack</h2>
+      <p>Get pre-written email sequences and funnel templates to help you capture leads and generate automated sales.</p>
+      <a href="#">Download Pack</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    All Rights Reserved © BrainHustle™ 2025
+  </div>
+
+  <!-- Sidebar Script -->
+  <script>
+    function openMenu() {
+      document.getElementById("sideMenu").style.width = "250px";
+    }
+
+    function closeMenu() {
+      document.getElementById("sideMenu").style.width = "0";
+    }
+  </script>
+
+  <!-- Firebase Logout Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
+      authDomain: "brainhustle-92a40.firebaseapp.com",
+      projectId: "brainhustle-92a40",
+      storageBucket: "brainhustle-92a40.appspot.com",
+      messagingSenderId: "547592914180",
+      appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
+      measurementId: "G-3M5PKR5S27"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.logout = function() {
+      signOut(auth).then(() => {
+        window.location.href = "login.html";
+      });
+    };
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+      }
+    });
+  </script>
+
+</body>
+</html>
