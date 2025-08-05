@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upgrade – BrainHustle™</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: white;
+      text-align: center;
+    }
+
+    .menu-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #00e676;
+      color: black;
+      font-size: 18px;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .logo-container {
+      margin-top: 80px;
+    }
+
+    .logo-container img {
+      height: 192px;
+    }
+
+    h1 {
+      color: #00e676;
+      margin-top: 20px;
+    }
+
+    .content {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+      text-align: left;
+    }
+
+    .content h2 {
+      color: #00e676;
+      margin-bottom: 10px;
+    }
+
+    .plan-box {
+      background: #1a1a1a;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px auto;
+      box-shadow: 0 0 10px #00e676;
+      max-width: 500px;
+    }
+
+    .plan-box h3 {
+      color: #00e676;
+    }
+
+    .plan-box p {
+      margin-bottom: 15px;
+    }
+
+    .plan-box a {
+      background: #FF1F1F;
+      color: white;
+      padding: 10px 16px;
+      text-decoration: none;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .plan-box a:hover {
+      background: #cc0000;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: gray;
+      padding: 20px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      z-index: 1001;
+    }
+
+    .sidebar a {
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #00e676;
+      display: block;
+    }
+
+    .sidebar a:hover {
+      background-color: #222;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Side Menu -->
+  <div id="sideMenu" class="sidebar">
+    <span class="close-btn" onclick="closeMenu()">&times;</span>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="kits.html">Hustle Kits</a>
+    <a href="ideas.html">Money Ideas</a>
+    <a href="passive.html">Passive Income</a>
+    <a href="ai.html">AI Tools</a>
+    <a href="monetization.html">Monetization</a>
+    <a href="trackers.html">Trackers</a>
+    <a href="about.html">What is BrainHustle™?</a>
+    <a href="upgrade.html">Upgrade Access</a>
+    <a href="login.html" onclick="logout()">Logout</a>
+  </div>
+
+  <!-- Menu Button -->
+  <button class="menu-button" onclick="openMenu()">☰ Menu</button>
+
+  <!-- Logo -->
+  <div class="logo-container">
+    <img src="brainhustle-logo.png" alt="BrainHustle Logo">
+  </div>
+
+  <h1>Upgrade Your BrainHustle™ Access</h1>
+
+  <div class="content">
+    <p>You’ve unlocked the starter kit. Now get full access to every tool, system, and strategy BrainHustle™ has to offer.</p>
+
+    <div class="plan-box">
+      <h3>🔥 One-Time Full Access – $19.99</h3>
+      <p>• Unlock all Hustle Kits, AI tools, income systems, trackers, and guides — forever.</p>
+      <a href="#">Upgrade Now – $19.99</a>
+    </div>
+
+    <div class="plan-box">
+      <h3>💼 Monthly Access – $9/month</h3>
+      <p>• Same full access. Stay current with new tools added monthly. Cancel anytime.</p>
+      <a href="#">Subscribe – $9/month</a>
+    </div>
+
+    <p style="margin-top:30px;">Upgrade now and build your income the smart way.</p>
+  </div>
+
+  <div class="footer">
+    All Rights Reserved © BrainHustle™ 2025
+  </div>
+
+  <!-- Sidebar Script -->
+  <script>
+    function openMenu() {
+      document.getElementById("sideMenu").style.width = "250px";
+    }
+
+    function closeMenu() {
+      document.getElementById("sideMenu").style.width = "0";
+    }
+  </script>
+
+  <!-- Firebase Logout Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
+      authDomain: "brainhustle-92a40.firebaseapp.com",
+      projectId: "brainhustle-92a40",
+      storageBucket: "brainhustle-92a40.appspot.com",
+      messagingSenderId: "547592914180",
+      appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
+      measurementId: "G-3M5PKR5S27"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.logout = function() {
+      signOut(auth).then(() => {
+        window.location.href = "login.html";
+      });
+    };
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+      }
+    });
+  </script>
+
+</body>
+</html>
