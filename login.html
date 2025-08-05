@@ -10,75 +10,128 @@
       font-family: Arial, sans-serif;
       background: #0a0a0a;
       color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .login-container {
-      background-color: #111;
-      padding: 30px 40px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px #00ff99;
-      width: 100%;
-      max-width: 400px;
       text-align: center;
     }
 
+    .navbar {
+      background-color: #111;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+    }
+
+    .navbar img {
+      height: 60px;
+    }
+
+    .nav-links a {
+      color: orange;
+      text-decoration: none;
+      padding: 10px 16px;
+      display: block;
+    }
+
+    .main {
+      padding: 40px 20px;
+    }
+
     h1 {
-      margin-bottom: 20px;
-      color: #00ff99;
+      color: #00e676;
     }
 
     input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
+      padding: 10px;
+      margin: 10px;
+      width: 80%;
+      max-width: 300px;
       border: none;
       border-radius: 4px;
     }
 
     button {
-      width: 100%;
-      padding: 12px;
-      background-color: #FF1F1F;
+      padding: 12px 20px;
+      background: red;
       color: white;
-      font-size: 16px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
     }
 
     button:hover {
-      background-color: #e60000;
+      background: #cc0000;
     }
 
-    .links {
-      margin-top: 15px;
-      font-size: 14px;
+    p {
+      margin-top: 20px;
     }
 
-    .links a {
+    a {
       color: #00e676;
       text-decoration: none;
     }
 
-    .links a:hover {
+    a:hover {
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <h1>Member Login</h1>
-    <input type="email" placeholder="Email" />
-    <input type="password" placeholder="Password" />
-    <button>Login</button>
-    <div class="links">
-      <p>Don't have an account? <a href="#">Join Now</a></p>
-      <p><a href="#">Forgot Password?</a></p>
+
+  <!-- Navbar with Logo -->
+  <div class="navbar">
+    <a href="index.html">
+      <img src="brainhustle-logo.png" alt="BrainHustle Logo">
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
     </div>
   </div>
+
+  <div class="main">
+    <h1>Member Login</h1>
+    <input type="email" id="email" placeholder="Email" required /><br>
+    <input type="password" id="password" placeholder="Password" required /><br>
+    <button onclick="login()">Login</button>
+
+    <p>Don't have an account? 
+      <a href="https://crapsedge.gumroad.com/l/fppvj" target="_blank">Join Now</a>
+    </p>
+    <p>
+      <a href="reset.html">Forgot Password?</a>
+    </p>
+  </div>
+
+  <!-- Firebase Login Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
+      authDomain: "brainhustle-92a40.firebaseapp.com",
+      projectId: "brainhustle-92a40",
+      storageBucket: "brainhustle-92a40.appspot.com",
+      messagingSenderId: "547592914180",
+      appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
+      measurementId: "G-3M5PKR5S27"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.login = function() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          window.location.href = "dashboard.html";
+        })
+        .catch((error) => {
+          alert("Login failed: " + error.message);
+        });
+    }
+  </script>
 </body>
 </html>
