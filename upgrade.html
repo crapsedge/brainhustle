@@ -2,218 +2,216 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Upgrade – BrainHustle™</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0a0a0a;
+      background-color: #0a0a0a;
       color: white;
-      text-align: center;
+      font-family: Arial, sans-serif;
     }
-
     .menu-button {
       position: fixed;
       top: 20px;
       left: 20px;
-      background-color: #00e676;
-      color: black;
-      font-size: 18px;
-      padding: 10px 14px;
+      background-color: #00cc66;
       border: none;
-      border-radius: 4px;
+      color: black;
+      font-size: 22px;
+      padding: 8px 12px;
       cursor: pointer;
       z-index: 1000;
     }
-
-    .logo-container {
-      margin-top: 80px;
-    }
-
-    .logo-container img {
-      height: 192px;
-    }
-
-    h1 {
-      color: #00e676;
-      margin-top: 20px;
-    }
-
-    .content {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 0 20px;
-      text-align: left;
-    }
-
-    .content h2 {
-      color: #00e676;
-      margin-bottom: 10px;
-    }
-
-    .plan-box {
-      background: #1a1a1a;
-      border-radius: 8px;
-      padding: 20px;
-      margin: 20px auto;
-      box-shadow: 0 0 10px #00e676;
-      max-width: 500px;
-    }
-
-    .plan-box h3 {
-      color: #00e676;
-    }
-
-    .plan-box p {
-      margin-bottom: 15px;
-    }
-
-    .plan-box a {
-      background: #FF1F1F;
-      color: white;
-      padding: 10px 16px;
-      text-decoration: none;
-      border-radius: 4px;
-      display: inline-block;
-    }
-
-    .plan-box a:hover {
-      background: #cc0000;
-    }
-
-    .footer {
-      margin-top: 40px;
-      font-size: 12px;
-      color: gray;
-      padding: 20px;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      height: 100%;
-      width: 0;
+    .side-menu {
       position: fixed;
       top: 0;
-      left: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
       background-color: #111;
-      overflow-x: hidden;
-      transition: 0.3s;
-      padding-top: 60px;
-      z-index: 1001;
+      overflow-y: auto;
+      transition: left 0.3s;
+      padding-top: 100px;
+      z-index: 999;
     }
-
-    .sidebar a {
-      padding: 10px 20px;
-      text-decoration: none;
-      font-size: 18px;
-      color: #00e676;
+    .side-menu a {
       display: block;
-    }
-
-    .sidebar a:hover {
-      background-color: #222;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 24px;
       color: white;
+      padding: 12px 20px;
+      text-decoration: none;
+      border-bottom: 1px solid #333;
+    }
+    .side-menu a:hover {
+      background-color: #00cc66;
+      color: black;
+    }
+    .show-menu {
+      left: 0;
+    }
+    .container {
+      padding: 60px 20px 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #00cc66;
+    }
+    .upgrade-box {
+      border: 2px solid #00cc66;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 500px;
+      background-color: #111;
+      box-shadow: 0 0 10px #00cc66;
+    }
+    .upgrade-box h2 {
+      color: #00ff99;
+    }
+    .upgrade-btn {
+      background-color: red;
+      color: white;
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
       cursor: pointer;
+      margin-top: 10px;
+      text-decoration: none;
+      display: inline-block;
+    }
+    table {
+      width: 90%;
+      margin: 30px auto;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #333;
+      text-align: center;
+    }
+    th {
+      background-color: #111;
+      color: #00cc66;
+    }
+    .footer {
+      font-size: 0.8em;
+      color: gray;
+      margin-top: 40px;
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #333;
+    }
+    .bonus {
+      color: #ff1f1f;
+      font-weight: bold;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Side Menu -->
-  <div id="sideMenu" class="sidebar">
-    <span class="close-btn" onclick="closeMenu()">&times;</span>
+  <button class="menu-button" onclick="toggleMenu()" id="menuButton">☰ Menu</button>
+
+  <div id="sideMenu" class="side-menu">
     <a href="dashboard.html">Dashboard</a>
     <a href="kits.html">Hustle Kits</a>
     <a href="ideas.html">Money Ideas</a>
     <a href="passive.html">Passive Income</a>
-    <a href="ai.html">AI Tools</a>
-    <a href="monetization.html">Monetization</a>
+    <a href="ai-tools.html">AI Tools</a>
+    <a href="monetize.html">Monetization</a>
     <a href="trackers.html">Trackers</a>
     <a href="about.html">What is BrainHustle™?</a>
     <a href="upgrade.html">Upgrade Access</a>
-    <a href="login.html" onclick="logout()">Logout</a>
+    <a href="#" onclick="logout()">Logout</a>
   </div>
 
-  <!-- Menu Button -->
-  <button class="menu-button" onclick="openMenu()">☰ Menu</button>
-
-  <!-- Logo -->
-  <div class="logo-container">
-    <img src="brainhustle-logo.png" alt="BrainHustle Logo">
-  </div>
-
-  <h1>Upgrade Your BrainHustle™ Access</h1>
-
-  <div class="content">
+  <div class="container">
+    <h1>Upgrade Your BrainHustle™ Access</h1>
     <p>You’ve unlocked the starter kit. Now get full access to every tool, system, and strategy BrainHustle™ has to offer.</p>
 
-    <div class="plan-box">
-      <h3>🔥 One-Time Full Access – $19.99</h3>
-      <p>• Unlock all Hustle Kits, AI tools, income systems, trackers, and guides — forever.</p>
-      <a href="#">Upgrade Now – $19.99</a>
+    <div class="upgrade-box">
+      <h2>🔥 One-Time Full Access – $19.99</h2>
+      <p>• Unlock all Hustle Kits, AI tools, income systems, trackers, and guides — <b>forever</b>.</p>
+      <a href="#" class="upgrade-btn">Upgrade Now – $19.99</a>
     </div>
 
-    <div class="plan-box">
-      <h3>💼 Monthly Access – $9/month</h3>
+    <div class="upgrade-box">
+      <h2>💼 Monthly Access – $9/month</h2>
       <p>• Same full access. Stay current with new tools added monthly. Cancel anytime.</p>
-      <a href="#">Subscribe – $9/month</a>
+      <a href="#" class="upgrade-btn">Subscribe – $9/month</a>
     </div>
 
-    <p style="margin-top:30px;">Upgrade now and build your income the smart way.</p>
+    <p class="bonus">⚡ BONUS: Upgrade this week and get 2 exclusive tools free!</p>
+
+    <h2 style="margin-top:40px;">Compare Access Levels</h2>
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>$5 Starter</th>
+        <th>Upgraded Access</th>
+      </tr>
+      <tr>
+        <td>Dashboard access</td>
+        <td>✔ Yes</td>
+        <td>✔ Yes</td>
+      </tr>
+      <tr>
+        <td>Hustle Kits</td>
+        <td>✔ Basic only</td>
+        <td>✔ Full access</td>
+      </tr>
+      <tr>
+        <td>Money Ideas</td>
+        <td>✔ Limited</td>
+        <td>✔ Full access</td>
+      </tr>
+      <tr>
+        <td>Passive Income</td>
+        <td>✔ 1 idea only</td>
+        <td>✔ All systems</td>
+      </tr>
+      <tr>
+        <td>AI Tools</td>
+        <td>✘ No</td>
+        <td>✔ Yes</td>
+      </tr>
+      <tr>
+        <td>Monetization</td>
+        <td>✘ No</td>
+        <td>✔ Yes</td>
+      </tr>
+      <tr>
+        <td>Trackers</td>
+        <td>✘ No</td>
+        <td>✔ Yes</td>
+      </tr>
+      <tr>
+        <td>Premium Downloads</td>
+        <td>✘ No</td>
+        <td>✔ Yes</td>
+      </tr>
+      <tr>
+        <td>Updates + New Tools</td>
+        <td>✘ No</td>
+        <td>✔ Yes</td>
+      </tr>
+    </table>
   </div>
 
   <div class="footer">
-    All Rights Reserved © BrainHustle™ 2025
+    <p>BrainHustle™ © 2025. All rights reserved.</p>
+    <p>Disclaimer: BrainHustle™ systems offer no guarantee of success or income. Results may vary. Use at your own risk.</p>
   </div>
 
-  <!-- Sidebar Script -->
   <script>
-    function openMenu() {
-      document.getElementById("sideMenu").style.width = "250px";
+    function toggleMenu() {
+      const menu = document.getElementById('sideMenu');
+      menu.classList.toggle('show-menu');
     }
-
-    function closeMenu() {
-      document.getElementById("sideMenu").style.width = "0";
+    function logout() {
+      alert("Logging out...");
     }
-  </script>
-
-  <!-- Firebase Logout Script -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
-      authDomain: "brainhustle-92a40.firebaseapp.com",
-      projectId: "brainhustle-92a40",
-      storageBucket: "brainhustle-92a40.appspot.com",
-      messagingSenderId: "547592914180",
-      appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
-      measurementId: "G-3M5PKR5S27"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    window.logout = function() {
-      signOut(auth).then(() => {
-        window.location.href = "login.html";
-      });
-    };
-
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = "login.html";
-      }
-    });
   </script>
 
 </body>
