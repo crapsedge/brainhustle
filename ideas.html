@@ -65,6 +65,16 @@
       padding: 20px;
       margin: 20px 0;
     }
+    .upgrade-btn {
+      background-color: red;
+      color: white;
+      padding: 10px 16px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
     .footer {
       font-size: 0.8em;
       color: gray;
@@ -92,26 +102,9 @@
     <a href="#" onclick="logout()">Logout</a>
   </div>
 
-  <div class="content">
+  <div class="content" id="contentArea">
     <h1>💸 Money Ideas</h1>
-    <p>Real ways to start making money. These ideas are beginner-friendly, affordable, and proven to work — if you take action.</p>
-
-    <div class="idea-box">
-      <h3>1. Sell Digital Products on Gumroad</h3>
-      <p>Create simple eBooks, guides, or tools and sell them on Gumroad. No inventory needed. Just value and marketing.</p>
-    </div>
-
-    <div class="idea-box">
-      <h3>2. Flip Items on eBay or Facebook Marketplace</h3>
-      <p>Start with free or low-cost local items. Resell for profit. Learn the system, scale up with better products.</p>
-    </div>
-
-    <div class="idea-box">
-      <h3>3. Offer Services on Fiverr or Upwork</h3>
-      <p>Write, design, edit, or even use AI tools for clients. Get paid for skills you already have — or can learn fast.</p>
-    </div>
-
-    <p style="text-align:center; margin-top:40px;">⚡ More money ideas unlocking soon — upgrade for full access.</p>
+    <p>Loading your access level...</p>
   </div>
 
   <div class="footer">
@@ -119,10 +112,11 @@
     <p>Disclaimer: These ideas require action. No guaranteed income. Use at your own risk.</p>
   </div>
 
-  <!-- Firebase Auth Protection -->
+  <!-- Firebase Auth + Firestore Membership Check -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
@@ -136,10 +130,63 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getFirestore(app);
 
-    onAuthStateChanged(auth, (user) => {
+    const contentArea = document.getElementById('contentArea');
+
+    onAuthStateChanged(auth, async (user) => {
       if (!user) {
         window.location.href = "login.html";
+        return;
+      }
+
+      const userDoc = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userDoc);
+
+      if (userSnap.exists()) {
+        const data = userSnap.data();
+        const membership = data.membership;
+
+        if (membership === "upgraded") {
+          contentArea.innerHTML = `
+            <h1>💸 Money Ideas</h1>
+            <div class="idea-box">
+              <h3>1. Sell Digital Products on Gumroad</h3>
+              <p>Create simple eBooks, guides, or tools and sell them on Gumroad. No inventory needed. Just value and marketing.</p>
+            </div>
+            <div class="idea-box">
+              <h3>2. Flip Items on eBay or Facebook Marketplace</h3>
+              <p>Start with free or low-cost local items. Resell for profit. Learn the system, scale up with better products.</p>
+            </div>
+            <div class="idea-box">
+              <h3>3. Offer Services on Fiverr or Upwork</h3>
+              <p>Write, design, edit, or use AI tools for clients. Get paid for skills you already have — or can learn fast.</p>
+            </div>
+            <div class="idea-box">
+              <h3>4. Run Affiliate Offers</h3>
+              <p>Promote other people’s products and get paid for every sale. No product, no shipping — just commissions.</p>
+            </div>
+            <div class="idea-box">
+              <h3>5. Create Content with ChatGPT</h3>
+              <p>Use AI to write blog posts, social content, or YouTube scripts — monetize with ads or affiliate links.</p>
+            </div>
+          `;
+        } else {
+          // Starter preview
+          contentArea.innerHTML = `
+            <h1>💸 Money Ideas (Preview)</h1>
+            <div class="idea-box">
+              <h3>1. Sell Digital Products on Gumroad</h3>
+              <p>Create eBooks, guides, or tools and sell them online. No inventory needed.</p>
+            </div>
+            <p style="text-align:center;">🔒 Upgrade to unlock all 5 ideas and future updates.</p>
+            <div style="text-align:center;">
+              <a href="upgrade.html" class="upgrade-btn">Upgrade Now</a>
+            </div>
+          `;
+        }
+      } else {
+        contentArea.innerHTML = "<p>Error loading your access. Contact support.</p>";
       }
     });
 
