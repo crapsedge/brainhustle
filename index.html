@@ -2,94 +2,145 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BrainHustle™ – Real Profit Systems</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BrainHustle™</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: black;
+      background-color: #0a0a0a;
       color: white;
     }
-    header {
+    /* Top Nav */
+    .navbar {
+      background-color: #111;
+      padding: 10px 20px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 15px 20px;
-      background-color: black;
+      justify-content: space-between;
     }
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-      color: #00ff99;
+    .navbar img {
+      height: 40px;
     }
-    nav a {
+    .menu-button {
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+    /* Side Menu */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background: #111;
+      overflow-y: auto;
+      transition: 0.3s;
+      padding-top: 60px;
+      z-index: 1000;
+    }
+    .side-menu a {
+      display: block;
+      padding: 12px 20px;
       color: white;
       text-decoration: none;
-      margin-left: 20px;
+    }
+    .side-menu a:hover {
+      background-color: #333;
+    }
+    /* Main Content */
+    .content {
+      text-align: center;
+      padding: 30px 20px;
+    }
+    .content h1 {
+      color: #00ff66;
+    }
+    .content p {
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .content ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      display: inline-block;
+    }
+    .content ul li {
+      margin: 10px 0;
       font-size: 16px;
     }
-    nav a:hover {
-      color: #00ff99;
+    .content ul li::before {
+      content: "✅ ";
+      color: #00ff66;
     }
-    .hero {
-      text-align: center;
-      padding: 60px 20px;
-    }
-    .hero h1 {
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
-    .hero p {
-      font-size: 18px;
-      max-width: 600px;
-      margin: 0 auto 30px;
-      line-height: 1.6;
-    }
-    .cta {
+    .btn {
       display: inline-block;
-      background: #00ff99;
-      color: black;
-      padding: 12px 24px;
-      font-size: 18px;
+      padding: 12px 20px;
+      margin-top: 20px;
+      background-color: red;
+      color: white;
       text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
+      font-size: 16px;
+      border-radius: 5px;
     }
-    .cta:hover {
-      background: #00cc7a;
+    .btn:hover {
+      background-color: darkred;
     }
+    /* Footer */
     footer {
-      text-align: center;
-      padding: 15px;
-      background: black;
-      font-size: 14px;
-      color: #888;
       margin-top: 40px;
+      font-size: 12px;
+      color: gray;
+      text-align: center;
+      padding: 20px;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">BrainHustle™</div>
-    <nav>
-      <a href="about.html">About</a>
-      <a href="kits.html">Hustle Kits</a>
-      <a href="ideas.html">Ideas</a>
-      <a href="login.html">Log In</a>
-    </nav>
-  </header>
+  <!-- Navbar -->
+  <div class="navbar">
+    <button class="menu-button" onclick="toggleMenu()">☰</button>
+    <img src="brainhustle-logo.png" alt="BrainHustle™ Logo">
+  </div>
 
-  <section class="hero">
-    <h1>Real Tools. Clear Steps. Better Money Moves.</h1>
-    <p>BrainHustle™ gives you practical, step-by-step systems to launch small income streams and scale what works. We keep it simple, realistic, and focused on execution. Join to access members-only tools, kits, and walkthroughs.</p>
-    <a href="join.html" class="cta">Get Starter Access</a>
-  </section>
+  <!-- Side Menu -->
+  <div id="sideMenu" class="side-menu">
+    <a href="#">About</a>
+    <a href="#">Hustle Kits</a>
+    <a href="#">Ideas</a>
+    <a href="#">Log In</a>
+  </div>
 
+  <!-- Main Content -->
+  <div class="content">
+    <h1>Unlock Real Profit Systems That Actually Work</h1>
+    <p>Join BrainHustle™ to access proven strategies, step-by-step guides, and tools designed to help you make money online — legally and safely. No hype. No scams. Just real systems that work.</p>
+    <ul>
+      <li>Easy-to-follow systems you can start today</li>
+      <li>Member-only tools, guides, and support</li>
+      <li>100% legal and scam-free strategies</li>
+    </ul>
+    <a href="#" class="btn">Become a Member</a>
+  </div>
+
+  <!-- Footer -->
   <footer>
-    &copy; 2025 BrainHustle™. All rights reserved.
+    Disclaimer: BrainHustle™ is for educational purposes only. We do not guarantee financial success. All results vary by individual effort. This is not legal, financial, or investment advice.
   </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("sideMenu");
+      menu.style.left = menu.style.left === "0px" ? "-250px" : "0px";
+    }
+  </script>
 
 </body>
 </html>
