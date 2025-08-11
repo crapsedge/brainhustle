@@ -20,8 +20,14 @@
       justify-content: space-between;
     }
 
+    /* Force logo to sit 2 inches from left */
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      margin-left: 2in;
+    }
+
     .logo {
-      margin-left: 2in; /* EXACT 2 inches from left */
       height: 60px;
     }
 
@@ -32,6 +38,7 @@
       padding: 10px 20px;
       border-radius: 4px;
       font-weight: bold;
+      font-size: 16px;
     }
 
     main {
@@ -85,7 +92,9 @@
 <body>
 
   <header>
-    <img src="brainhustle-logo.png" alt="BrainHustle Logo" class="logo">
+    <div class="logo-wrapper">
+      <img src="brainhustle-logo.png" alt="BrainHustle Logo" class="logo">
+    </div>
     <a href="login.html" class="login-btn">Log In</a>
   </header>
 
