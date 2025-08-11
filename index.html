@@ -3,120 +3,119 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Upgrade – BrainHustle™</title>
+  <title>BrainHustle™ – Smarter Money Systems</title>
+
+  <!-- SEO -->
+  <meta name="description" content="BrainHustle™ delivers real, practical money-making systems, tools, and step-by-step guides. Members-only content. No fluff. No guarantees."/>
+  <link rel="canonical" href="https://brainhustle.store/"/>
+  <meta name="robots" content="index,follow"/>
+
+  <!-- (Optional) Google Site Verification you used before -->
+  <meta name="google-site-verification" content="Z3aOcoAI7VmclxmREcpDULpVfO2_ntGgGH6hlerb7u8" />
+
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #000;
-      color: white;
+    :root{
+      --bg:#0a0a0a; --panel:#111; --text:#f8f8f8; --muted:#bdbdbd;
+      --brand:#00cc66; --accent:#00e676; --link:#8dc8ff; --border:#1e1e1e;
+      --danger:#ff3b3b;
     }
-
-    .navbar {
-      background-color: #111;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 20px;
-    }
-
-    .navbar img {
-      height: 192px; /* ✅ Big logo */
-    }
-
-    .navbar a {
-      color: orange;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 18px;
-      margin-left: 15px;
-    }
-
-    .content {
-      padding: 20px;
-      text-align: center;
-    }
-
-    h1 {
-      color: #00ff66;
-    }
-
-    p {
-      color: #ccc;
-      font-size: 16px;
-    }
-
-    .plan {
-      background: #111;
-      border: 2px solid #00ff66;
-      border-radius: 10px;
-      margin: 20px auto;
-      padding: 20px;
-      max-width: 500px;
-      box-shadow: 0 0 15px #00ff66;
-    }
-
-    .plan h2 {
-      color: white;
-      font-size: 22px;
-    }
-
-    .plan p {
-      font-size: 14px;
-      color: #ccc;
-    }
-
-    .cta-button {
-      display: inline-block;
-      background-color: red;
-      color: white;
-      padding: 14px 20px;
-      margin-top: 10px;
-      border-radius: 6px;
-      font-size: 18px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 12px;
-      color: #888;
-      padding: 20px;
-    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+    a{color:var(--link);text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:18px}
+    /* Navbar */
+    .navbar{position:sticky;top:0;z-index:10;background:#0b0b0b;border-bottom:1px solid var(--border)}
+    .nav-row{display:flex;align-items:center;gap:14px;padding:12px 16px}
+    .logo{width:40px;height:40px;border-radius:10px;background:radial-gradient(circle at 35% 35%, #00ff99 0 40%, transparent 42%),radial-gradient(circle at 65% 65%, #ff3131 0 40%, transparent 42%),#000;box-shadow:0 0 18px rgba(0,204,102,.35)}
+    .brand{font-weight:800;letter-spacing:.5px}
+    .spacer{flex:1}
+    .nav a{padding:8px 10px;border-radius:8px}
+    .nav a:hover{background:#151515}
+    .btn{display:inline-block;background:var(--brand);color:~#000;padding:10px 14px;border-radius:10px;font-weight:700}
+    .btn-outline{background:transparent;color:#fff;border:1px solid var(--border)}
+    /* Hero */
+    .hero{padding:42px 16px 10px}
+    .hero h1{font-size:34px;margin:10px 0 8px}
+    .hero p{color:var(--muted);max-width:760px}
+    .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+    /* Panels */
+    .grid{display:grid;grid-template-columns:1fr;gap:16px;margin:22px 0}
+    @media(min-width:900px){.grid{grid-template-columns:1.3fr .7fr}}
+    .panel{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px}
+    .panel h3{margin:8px 0}
+    .list{padding-left:18px;margin:8px 0}
+    .tag{display:inline-block;background:#0f1b14;border:1px solid #214a34;color:#aef8cf;border-radius:999px;padding:6px 10px;font-size:12px;margin-right:6px}
+    /* Footer */
+    footer{border-top:1px solid var(--border);padding:16px;color:var(--muted);font-size:13px}
+    .legal a{color:var(--link);border-bottom:1px dotted #355}
   </style>
 </head>
 <body>
-
+  <!-- NAVBAR -->
   <div class="navbar">
-    <img src="logo.png" alt="BrainHustle™ Logo">
-    <div>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="login.html">Login</a>
+    <div class="wrap nav-row">
+      <div class="logo" aria-hidden="true"></div>
+      <div class="brand">BrainHustle™</div>
+      <div class="spacer"></div>
+      <nav class="nav" aria-label="Main">
+        <a href="/about.html">About</a>
+        <a href="/kits.html">Hustle Kits</a>
+        <a href="/ideas.html">Ideas</a>
+        <a href="/upgrade.html" class="btn">Join Now</a>
+        <a href="/login.html" class="btn btn-outline">Log In</a>
+      </nav>
     </div>
   </div>
 
-  <div class="content">
-    <h1>Upgrade Your BrainHustle™ Access</h1>
-    <p>You’ve unlocked the starter kit. Now get full access to every tool, system, and strategy BrainHustle™ has to offer.</p>
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <span class="tag">Members-Only Systems</span> <span class="tag">Action-Focused</span> <span class="tag">No Fluff</span>
+      <h1>Real Tools. Clear Steps. Better Money Moves.</h1>
+      <p>
+        BrainHustle™ gives you practical, step-by-step systems to launch small income streams and scale what works. 
+        We keep it simple, realistic, and focused on execution. Join to access members-only tools, kits, and walkthroughs.
+      </p>
+      <div class="cta">
+        <a class="btn" href="/upgrade.html">Get Starter Access</a>
+        <a class="btn btn-outline" href="/about.html">What is BrainHustle™?</a>
+      </div>
+    </section>
 
-    <div class="plan">
-      <h2>🔥 One-Time Full Access – $19.99</h2>
-      <p>Unlock all Hustle Kits, AI tools, income systems, trackers, and guides — forever.</p>
-      <a href="YOUR_PAYMENT_LINK_ONE_TIME" class="cta-button">Upgrade Now – $19.99</a>
-    </div>
+    <!-- CONTENT -->
+    <section class="grid">
+      <div class="panel">
+        <h3>What You Get Inside</h3>
+        <ul class="list">
+          <li>Hustle Kits with copy-paste templates and checklists.</li>
+          <li>Step-by-step guides with screenshots — beginner friendly.</li>
+          <li>Idea library: what to launch this week + how to monetize.</li>
+          <li>Fast-start SOPs: 60-minute setup flows you can repeat.</li>
+          <li>Member upgrades unlock pro tools and deeper tutorials.</li>
+        </ul>
+        <div class="cta">
+          <a class="btn" href="/upgrade.html">See Upgrade Options</a>
+          <a class="btn btn-outline" href="/login.html">Already a member? Log in</a>
+        </div>
+      </div>
 
-    <div class="plan">
-      <h2>💼 Monthly Access – $9/month</h2>
-      <p>Same full access. Stay current with new tools added monthly. Cancel anytime.</p>
-      <a href="YOUR_PAYMENT_LINK_MONTHLY" class="cta-button">Subscribe – $9/month</a>
-    </div>
-  </div>
+      <aside class="panel">
+        <h3>Important</h3>
+        <p style="color:#eaeaea;margin-top:4px">Signup links are only sent after payment. Public signup is hidden to reduce fraud and spam.</p>
+        <p class="legal" style="font-size:13px;color:var(--muted)">
+          Educational content only. No earnings guarantees. Results depend on your effort, timing, and market conditions. 
+          By using this website you agree to our <a href="/terms.html">Terms</a> and <a href="/privacy.html">Privacy Policy</a>.
+        </p>
+      </aside>
+    </section>
+  </main>
 
-  <footer>
-    Disclaimer: BrainHustle™ is for educational purposes only. Results vary. This is not legal, financial, or investment advice.<br>
-    © 2025 BrainHustle™ — <a href="about.html">About</a> · <a href="dashboard.html">Dashboard</a>
+  <footer class="wrap">
+    © <span id="y"></span> BrainHustle™. All rights reserved. Educational content only — no guarantees.
   </footer>
 
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
