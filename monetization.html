@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Monetization – BrainHustle™</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body { margin:0; background:#0a0a0a; color:#fff; font-family:Arial, sans-serif; }
+    .menu-button { position:fixed; top:20px; left:20px; background:#00cc66; border:none; color:#000; font-size:22px; padding:8px 12px; cursor:pointer; z-index:1000; }
+    .side-menu { position:fixed; top:0; left:-250px; width:250px; height:100%; background:#111; overflow-y:auto; transition:left .3s; padding-top:100px; z-index:999; }
+    .side-menu a { display:block; color:#fff; padding:12px 20px; text-decoration:none; border-bottom:1px solid #333; }
+    .side-menu a:hover { background:#00cc66; color:#000; }
+    .show-menu { left:0; }
+    .content { padding:60px 20px; max-width:800px; margin:auto; }
+    h1 { color:#00cc66; text-align:center; }
+    .card { background:#111; border:1px solid #00cc66; border-radius:8px; padding:20px; margin:20px 0; }
+    .btn { display:inline-block; padding:10px 16px; border-radius:6px; text-decoration:none; background:#00cc66; color:#000; font-weight:bold; }
+    .upgrade-btn { background:red; color:#fff; padding:10px 16px; font-size:16px; border:none; border-radius:5px; cursor:pointer; text-decoration:none; }
+    .footer { font-size:.8em; color:gray; margin-top:40px; text-align:center; padding:20px; border-top:1px solid #333; }
+  </style>
+</head>
+<body>
+
+  <button class="menu-button" onclick="toggleMenu()">☰ Menu</button>
+
+  <div id="sideMenu" class="side-menu">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="kits.html">Hustle Kits</a>
+    <a href="ideas.html">Money Ideas</a>
+    <a href="passive.html">Passive Income</a>
+    <a href="ai-tools.html">AI Tools</a>
+    <a href="monetization.html">Monetization</a>
+    <a href="trackers.html">Trackers</a>
+    <a href="about.html">What is BrainHustle™?</a>
+    <a href="upgrade.html">Upgrade Access</a>
+    <a href="#" onclick="logout()">Logout</a>
+  </div>
+
+  <div class="content" id="contentArea">
+    <h1>💵 Monetization</h1>
+    <p>Loading your access level...</p>
+  </div>
+
+  <div class="footer">
+    <p>BrainHustle™ © 2025. All rights reserved.</p>
+    <p>Disclaimer: These ideas require action. No guaranteed income. Use at your own risk.</p>
+  </div>
+
+  <!-- Firebase Auth + Firestore -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
+      authDomain: "brainhustle-92a40.firebaseapp.com",
+      projectId: "brainhustle-92a40",
+      storageBucket: "brainhustle-92a40.appspot.com",
+      messagingSenderId: "547592914180",
+      appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
+      measurementId: "G-3M5PKR5S27"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const contentArea = document.getElementById('contentArea');
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { window.location.href = "login.html"; return; }
+
+      const ref = doc(db, "users", user.uid);
+      const snap = await getDoc(ref);
+
+      let membership = "starter";
+      if (!snap.exists()) {
+        await setDoc(ref, { membership: "starter", email: user.email || "", createdAt: new Date() }, { merge: true });
+      } else {
+        membership = (snap.data().membership || "starter").toLowerCase();
+      }
+
+      if (membership === "upgraded") {
+        contentArea.innerHTML = `
+          <h1>💵 Monetization</h1>
+          <div class="card">
+            <h3>1) Ads (when your traffic is ready)</h3>
+            <p>Apply for Google AdSense or Ezoic and place ads on pages with steady traffic. Start with 1–2 ad units, don’t flood.</p>
+          </div>
+          <div class="card">
+            <h3>2) Affiliate Programs</h3>
+            <p>Join a few programs that match your content (Amazon Associates, Impact, CJ, PartnerStack). Add links inside relevant posts/pages.</p>
+          </div>
+          <div class="card">
+            <h3>3) Digital Products</h3>
+            <p>Sell guides/tools (like your Stop Gambling Guide or BrainHustle kits) via Gumroad/Stripe. Offer bundles and order bumps.</p>
+          </div>
+          <div class="card">
+            <h3>4) Email List + Upsells</h3>
+            <p>Collect emails with a simple lead magnet. Send 3-email sequence → pitch your best offer on day 3.</p>
+          </div>
+          <div class="card">
+            <h3>5) Services (fastest cash)</h3>
+            <p>Offer a simple done-for-you setup (resume upgrade, landing page, profile clean-up) and upsell a monthly plan.</p>
+          </div>
+          <div class="card">
+            <a class="btn" href="kits.html">Open Hustle Kits</a>
+          </div>
+        `;
+      } else {
+        contentArea.innerHTML = `
+          <h1>💵 Monetization (Preview)</h1>
+          <div class="card">
+            <h3>Starter Preview</h3>
+            <p>We’ll show you how to add 1 affiliate program and 1 digital product to start making money.</p>
+          </div>
+          <div style="text-align:center;"><a href="upgrade.html" class="upgrade-btn">Upgrade Now</a></div>
+        `;
+      }
+    });
+
+    window.logout = function(){ signOut(auth).then(()=>{ window.location.href="login.html"; }); };
+  </script>
+
+  <script>
+    function toggleMenu(){ document.getElementById('sideMenu').classList.toggle('show-menu'); }
+  </script>
+
+</body>
+</html>
