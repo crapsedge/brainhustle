@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Passive Income – BrainHustle™</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body { margin:0; background:#0a0a0a; color:#fff; font-family:Arial, sans-serif; }
+    .menu-button { position:fixed; top:20px; left:20px; background:#00cc66; border:none; color:#000; font-size:22px; padding:8px 12px; cursor:pointer; z-index:1000; }
+    .side-menu { position:fixed; top:0; left:-250px; width:250px; height:100%; background:#111; overflow-y:auto; transition:left .3s; padding-top:100px; z-index:999; }
+    .side-menu a { display:block; color:#fff; padding:12px 20px; text-decoration:none; border-bottom:1px solid #333; }
+    .side-menu a:hover { background:#00cc66; color:#000; }
+    .show-menu { left:0; }
+    .content { padding:60px 20px; max-width:800px; margin:auto; }
+    h1 { color:#00cc66; text-align:center; }
+    .idea-box { background:#111; border:1px solid #00cc66; border-radius:8px; padding:20px; margin:20px 0; }
+    .upgrade-btn { background:red; color:#fff; padding:10px 16px; font-size:16px; border:none; border-radius:5px; cursor:pointer; text-decoration:none; }
+    .footer { font-size:.8em; color:gray; margin-top:40px; text-align:center; padding:20px; border-top:1px solid #333; }
+  </style>
+</head>
+<body>
+
+  <button class="menu-button" onclick="toggleMenu()">☰ Menu</button>
+
+  <div id="sideMenu" class="side-menu">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="kits.html">Hustle Kits</a>
+    <a href="ideas.html">Money Ideas</a>
+    <a href="passive.html">Passive Income</a>
+    <a href="ai-tools.html">AI Tools</a>
+    <a href="monetize.html">Monetization</a>
+    <a href="trackers.html">Trackers</a>
+    <a href="about.html">What is BrainHustle™?</a>
+    <a href="upgrade.html">Upgrade Access</a>
+    <a href="#" onclick="logout()">Logout</a>
+  </div>
+
+  <div class="content" id="contentArea">
+    <h1>💰 Passive Income</h1>
+    <p>Loading your access level...</p>
+  </div>
+
+  <div class="footer">
+    <p>BrainHustle™ © 2025. All rights reserved.</p>
+    <p>Disclaimer: These ideas require action. No guaranteed income. Use at your own risk.</p>
+  </div>
+
+  <!-- Firebase Auth + Firestore -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
+      authDomain: "brainhustle-92a40.firebaseapp.com",
+      projectId: "brainhustle-92a40",
+      storageBucket: "brainhustle-92a40.appspot.com",
+      messagingSenderId: "547592914180",
+      appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
+      measurementId: "G-3M5PKR5S27"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const contentArea = document.getElementById('contentArea');
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { window.location.href = "login.html"; return; }
+
+      const ref = doc(db, "users", user.uid);
+      const snap = await getDoc(ref);
+
+      let membership = "starter";
+      if (!snap.exists()) {
+        await setDoc(ref, { membership: "starter", email: user.email || "", createdAt: new Date() }, { merge: true });
+      } else {
+        membership = (snap.data().membership || "starter").toLowerCase();
+      }
+
+      if (membership === "upgraded") {
+        contentArea.innerHTML = `
+          <h1>💰 Passive Income</h1>
+          <div class="idea-box"><h3>1. Dividend Stock Portfolio</h3><p>Build a portfolio of dividend-paying stocks to earn regular payouts.</p></div>
+          <div class="idea-box"><h3>2. Affiliate Niche Website</h3><p>Create a niche site with affiliate links that earn commission 24/7.</p></div>
+          <div class="idea-box"><h3>3. Print-on-Demand Store</h3><p>Sell designs on merch without handling inventory or shipping.</p></div>
+          <div class="idea-box"><h3>4. YouTube Automation</h3><p>Create faceless channels and earn from ads & affiliate deals.</p></div>
+          <div class="idea-box"><h3>5. E-book Royalties</h3><p>Write and publish e-books on Amazon for ongoing royalty income.</p></div>
+        `;
+      } else {
+        contentArea.innerHTML = `
+          <h1>💰 Passive Income (Preview)</h1>
+          <div class="idea-box"><h3>1. Dividend Stock Portfolio</h3><p>Build a portfolio of dividend-paying stocks to earn regular payouts.</p></div>
+          <p style="text-align:center;">🔒 Upgrade to unlock all 5 strategies and step-by-step guides.</p>
+          <div style="text-align:center;"><a href="upgrade.html" class="upgrade-btn">Upgrade Now</a></div>
+        `;
+      }
+    });
+
+    window.logout = function(){ signOut(auth).then(()=>{ window.location.href="login.html"; }); };
+  </script>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('sideMenu').classList.toggle('show-menu');
+    }
+  </script>
+
+</body>
+</html>
