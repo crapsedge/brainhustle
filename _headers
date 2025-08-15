@@ -10,6 +10,7 @@
 
   <!-- Sitemap & Robots -->
   <link rel="sitemap" type="application/xml" title="Sitemap" href="https://brainhustle.store/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Sitemap Index" href="https://brainhustle.store/sitemap-index.xml">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
