@@ -2,15 +2,14 @@
   <meta charset="UTF-8">
   <title>BrainHustle™ – Real Profit Systems</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- SEO Meta -->
   <meta name="description" content="BrainHustle™ gives you real money-making systems, proven tools, and ideas that actually work. Learn, apply, and profit with our exclusive members-only platform.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://brainhustle.store/">
 
-  <!-- Sitemap & Robots -->
+  <!-- Sitemap -->
   <link rel="sitemap" type="application/xml" title="Sitemap" href="https://brainhustle.store/sitemap.xml">
-  <link rel="sitemap" type="application/xml" title="Sitemap Index" href="https://brainhustle.store/sitemap-index.xml">
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
