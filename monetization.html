@@ -38,7 +38,7 @@
 
   <div class="content" id="contentArea">
     <h1>💵 Monetization</h1>
-    <p>Loading your access level...</p>
+    <p id="status">Loading your access level...</p>
   </div>
 
   <div class="footer">
@@ -66,49 +66,94 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    // make logout work for the menu link
+    window.logout = function(){ signOut(auth).then(()=>{ window.location.href="login.html"; }); };
+
     const contentArea = document.getElementById('contentArea');
+    const statusEl = document.getElementById('status');
+
+    // -------- Anti-stuck fallback (1.5s) --------
+    let resolved = false;
+    const fallback = setTimeout(() => {
+      if (resolved) return;
+      resolved = true;
+      statusEl.textContent = 'Preview mode — log in to unlock more.';
+      contentArea.innerHTML = `
+        <h1>💵 Monetization (Preview)</h1>
+        <div class="card">
+          <h3>Starter Preview</h3>
+          <p>We’ll show you how to add 1 affiliate program and 1 digital product to start making money.</p>
+        </div>
+        <div style="text-align:center;"><a href="upgrade.html" class="upgrade-btn">Upgrade Now</a></div>
+      `;
+    }, 1500);
+    // --------------------------------------------
 
     onAuthStateChanged(auth, async (user) => {
-      if (!user) { window.location.href = "login.html"; return; }
+      if (resolved) return;
+      clearTimeout(fallback);
 
-      const ref = doc(db, "users", user.uid);
-      const snap = await getDoc(ref);
-
-      let membership = "starter";
-      if (!snap.exists()) {
-        await setDoc(ref, { membership: "starter", email: user.email || "", createdAt: new Date() }, { merge: true });
-      } else {
-        membership = (snap.data().membership || "starter").toLowerCase();
+      if (!user) {
+        resolved = true;
+        window.location.href = "login.html";
+        return;
       }
 
-      if (membership === "upgraded") {
-        contentArea.innerHTML = `
-          <h1>💵 Monetization</h1>
-          <div class="card">
-            <h3>1) Ads (when your traffic is ready)</h3>
-            <p>Apply for Google AdSense or Ezoic and place ads on pages with steady traffic. Start with 1–2 ad units, don’t flood.</p>
-          </div>
-          <div class="card">
-            <h3>2) Affiliate Programs</h3>
-            <p>Join a few programs that match your content (Amazon Associates, Impact, CJ, PartnerStack). Add links inside relevant posts/pages.</p>
-          </div>
-          <div class="card">
-            <h3>3) Digital Products</h3>
-            <p>Sell guides/tools (like your Stop Gambling Guide or BrainHustle kits) via Gumroad/Stripe. Offer bundles and order bumps.</p>
-          </div>
-          <div class="card">
-            <h3>4) Email List + Upsells</h3>
-            <p>Collect emails with a simple lead magnet. Send 3-email sequence → pitch your best offer on day 3.</p>
-          </div>
-          <div class="card">
-            <h3>5) Services (fastest cash)</h3>
-            <p>Offer a simple done-for-you setup (resume upgrade, landing page, profile clean-up) and upsell a monthly plan.</p>
-          </div>
-          <div class="card">
-            <a class="btn" href="kits.html">Open Hustle Kits</a>
-          </div>
-        `;
-      } else {
+      statusEl.textContent = 'Checking membership…';
+      try {
+        const ref = doc(db, "users", user.uid);
+        const snap = await getDoc(ref);
+
+        let membership = "starter";
+        if (!snap.exists()) {
+          await setDoc(ref, { membership: "starter", email: user.email || "", createdAt: new Date() }, { merge: true });
+        } else {
+          membership = (snap.data().membership || "starter").toLowerCase();
+        }
+
+        resolved = true;
+
+        if (membership === "upgraded") {
+          contentArea.innerHTML = `
+            <h1>💵 Monetization</h1>
+            <div class="card">
+              <h3>1) Ads (when your traffic is ready)</h3>
+              <p>Apply for Google AdSense or Ezoic and place ads on pages with steady traffic. Start with 1–2 ad units, don’t flood.</p>
+            </div>
+            <div class="card">
+              <h3>2) Affiliate Programs</h3>
+              <p>Join a few programs that match your content (Amazon Associates, Impact, CJ, PartnerStack). Add links inside relevant posts/pages.</p>
+            </div>
+            <div class="card">
+              <h3>3) Digital Products</h3>
+              <p>Sell guides/tools (like your Stop Gambling Guide or BrainHustle kits) via Gumroad/Stripe. Offer bundles and order bumps.</p>
+            </div>
+            <div class="card">
+              <h3>4) Email List + Upsells</h3>
+              <p>Collect emails with a simple lead magnet. Send 3-email sequence → pitch your best offer on day 3.</p>
+            </div>
+            <div class="card">
+              <h3>5) Services (fastest cash)</h3>
+              <p>Offer a simple done-for-you setup (resume upgrade, landing page, profile clean-up) and upsell a monthly plan.</p>
+            </div>
+            <div class="card" style="text-align:center;">
+              <a class="btn" href="kits.html">Open Hustle Kits</a>
+            </div>
+          `;
+        } else {
+          contentArea.innerHTML = `
+            <h1>💵 Monetization (Preview)</h1>
+            <div class="card">
+              <h3>Starter Preview</h3>
+              <p>We’ll show you how to add 1 affiliate program and 1 digital product to start making money.</p>
+            </div>
+            <div style="text-align:center;"><a href="upgrade.html" class="upgrade-btn">Upgrade Now</a></div>
+          `;
+        }
+      } catch (err) {
+        console.error('[monetization] membership read failed:', err);
+        resolved = true;
+        statusEl.textContent = 'Couldn’t verify membership — showing preview.';
         contentArea.innerHTML = `
           <h1>💵 Monetization (Preview)</h1>
           <div class="card">
@@ -119,8 +164,6 @@
         `;
       }
     });
-
-    window.logout = function(){ signOut(auth).then(()=>{ window.location.href="login.html"; }); };
   </script>
 
   <script>
