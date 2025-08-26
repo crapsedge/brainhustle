@@ -37,7 +37,7 @@
 
   <div class="content" id="contentArea">
     <h1>💰 Passive Income</h1>
-    <p>Loading your access level...</p>
+    <p id="status">Loading your access level...</p>
   </div>
 
   <div class="footer">
@@ -65,31 +65,76 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    // Expose working logout for the menu link
+    window.logout = function () {
+      signOut(auth).then(()=>{ window.location.href = "login.html"; });
+    };
+
     const contentArea = document.getElementById('contentArea');
+    const statusEl = document.getElementById('status');
+
+    // ---------- Anti-stuck fallback (same behavior as ideas.html fix) ----------
+    let resolved = false;
+    const fallback = setTimeout(() => {
+      if (resolved) return;
+      resolved = true;
+      statusEl.textContent = 'Preview mode — log in to unlock more.';
+      contentArea.innerHTML = `
+        <h1>💰 Passive Income (Preview)</h1>
+        <div class="idea-box"><h3>1. Dividend Stock Portfolio</h3><p>Build a portfolio of dividend-paying stocks to earn regular payouts.</p></div>
+        <p style="text-align:center;">🔒 Upgrade to unlock all 5 strategies and step-by-step guides.</p>
+        <div style="text-align:center;"><a href="upgrade.html" class="upgrade-btn">Upgrade Now</a></div>
+      `;
+    }, 1500);
+    // -------------------------------------------------------------------------
 
     onAuthStateChanged(auth, async (user) => {
-      if (!user) { window.location.href = "login.html"; return; }
+      if (resolved) return;
+      clearTimeout(fallback);
 
-      const ref = doc(db, "users", user.uid);
-      const snap = await getDoc(ref);
-
-      let membership = "starter";
-      if (!snap.exists()) {
-        await setDoc(ref, { membership: "starter", email: user.email || "", createdAt: new Date() }, { merge: true });
-      } else {
-        membership = (snap.data().membership || "starter").toLowerCase();
+      if (!user) {
+        resolved = true;
+        // Keep your login gate when Auth actually fires
+        window.location.href = "login.html";
+        return;
       }
 
-      if (membership === "upgraded") {
-        contentArea.innerHTML = `
-          <h1>💰 Passive Income</h1>
-          <div class="idea-box"><h3>1. Dividend Stock Portfolio</h3><p>Build a portfolio of dividend-paying stocks to earn regular payouts.</p></div>
-          <div class="idea-box"><h3>2. Affiliate Niche Website</h3><p>Create a niche site with affiliate links that earn commission 24/7.</p></div>
-          <div class="idea-box"><h3>3. Print-on-Demand Store</h3><p>Sell designs on merch without handling inventory or shipping.</p></div>
-          <div class="idea-box"><h3>4. YouTube Automation</h3><p>Create faceless channels and earn from ads & affiliate deals.</p></div>
-          <div class="idea-box"><h3>5. E-book Royalties</h3><p>Write and publish e-books on Amazon for ongoing royalty income.</p></div>
-        `;
-      } else {
+      statusEl.textContent = 'Checking membership…';
+      try {
+        const ref = doc(db, "users", user.uid);
+        const snap = await getDoc(ref);
+
+        let membership = "starter";
+        if (!snap.exists()) {
+          await setDoc(ref, { membership: "starter", email: user.email || "", createdAt: new Date() }, { merge: true });
+        } else {
+          membership = (snap.data().membership || "starter").toLowerCase();
+        }
+
+        resolved = true;
+
+        if (membership === "upgraded") {
+          contentArea.innerHTML = `
+            <h1>💰 Passive Income</h1>
+            <div class="idea-box"><h3>1. Dividend Stock Portfolio</h3><p>Build a portfolio of dividend-paying stocks to earn regular payouts.</p></div>
+            <div class="idea-box"><h3>2. Affiliate Niche Website</h3><p>Create a niche site with affiliate links that earn commission 24/7.</p></div>
+            <div class="idea-box"><h3>3. Print-on-Demand Store</h3><p>Sell designs on merch without handling inventory or shipping.</p></div>
+            <div class="idea-box"><h3>4. YouTube Automation</h3><p>Create faceless channels and earn from ads & affiliate deals.</p></div>
+            <div class="idea-box"><h3>5. E-book Royalties</h3><p>Write and publish e-books on Amazon for ongoing royalty income.</p></div>
+          `;
+        } else {
+          contentArea.innerHTML = `
+            <h1>💰 Passive Income (Preview)</h1>
+            <div class="idea-box"><h3>1. Dividend Stock Portfolio</h3><p>Build a portfolio of dividend-paying stocks to earn regular payouts.</p></div>
+            <p style="text-align:center;">🔒 Upgrade to unlock all 5 strategies and step-by-step guides.</p>
+            <div style="text-align:center;"><a href="upgrade.html" class="upgrade-btn">Upgrade Now</a></div>
+          `;
+        }
+      } catch (err) {
+        // Never hang on Firestore errors
+        console.error('[passive] membership read failed:', err);
+        resolved = true;
+        statusEl.textContent = 'Couldn’t verify membership — showing preview.';
         contentArea.innerHTML = `
           <h1>💰 Passive Income (Preview)</h1>
           <div class="idea-box"><h3>1. Dividend Stock Portfolio</h3><p>Build a portfolio of dividend-paying stocks to earn regular payouts.</p></div>
@@ -98,8 +143,6 @@
         `;
       }
     });
-
-    window.logout = function(){ signOut(auth).then(()=>{ window.location.href="login.html"; }); };
   </script>
 
   <script>
