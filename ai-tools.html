@@ -4,145 +4,188 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AI Tools – BrainHustle™</title>
+
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #ffffff;
-      color: #111;
-      line-height: 1.6;
-    }
+    body { margin:0; background:#0a0a0a; color:#fff; font-family:Arial, sans-serif; }
+    a { color:#00cc66; text-decoration:none; }
+    .menu-button { position:fixed; top:20px; left:20px; background:#00cc66; border:none; color:#000; font-size:22px; padding:8px 12px; cursor:pointer; z-index:1000; }
+    .side-menu { position:fixed; top:0; left:-250px; width:250px; height:100%; background:#111; overflow-y:auto; transition:left .3s; padding-top:100px; z-index:999; }
+    .side-menu a { display:block; color:#fff; padding:12px 20px; border-bottom:1px solid #333; }
+    .side-menu a:hover { background:#00cc66; color:#000; }
+    .show-menu { left:0; }
 
-    header {
-      background-color: #ffffff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      padding: 1em 2em;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    .content { padding:60px 20px; max-width:900px; margin:auto; }
+    h1 { color:#00cc66; text-align:center; margin:0 0 10px; }
+    p.lead { color:#cfcfcf; text-align:center; max-width:720px; margin:8px auto 24px; }
 
-    nav a {
-      margin: 0 12px;
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-    }
+    .tool-card { background:#111; border:1px solid #1f1f1f; border-radius:10px; padding:18px; margin:14px 0; }
+    .tool-card h2 { margin:0 0 6px; color:#00cc66; font-size:20px; }
+    .tool-card p { margin:0 0 10px; color:#ddd; }
+    .tool-card .btn { display:inline-block; padding:10px 14px; border-radius:8px; background:#00cc66; color:#000; font-weight:700; text-decoration:none; }
 
-    nav a:hover {
-      color: #007f5f;
-    }
-
-    .section {
-      max-width: 900px;
-      margin: auto;
-      padding: 3em 1.5em;
-    }
-
-    .section h1 {
-      color: #007f5f;
-      font-size: 2.2em;
-      text-align: center;
-      margin-bottom: 0.5em;
-    }
-
-    .tool {
-      margin-bottom: 2.5em;
-      background: #f8f8f8;
-      padding: 1.5em;
-      border-radius: 8px;
-    }
-
-    .tool h2 {
-      margin-top: 0;
-      color: #007f5f;
-    }
-
-    .tool p {
-      margin-bottom: 0.5em;
-    }
-
-    .tool a {
-      display: inline-block;
-      margin-top: 0.5em;
-      color: white;
-      background: #007f5f;
-      padding: 0.5em 1em;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-
-    .tool a:hover {
-      background: #005f45;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2em 1em;
-      font-size: 0.9em;
-      color: #777;
-      background: #f9f9f9;
-    }
+    .upgrade-btn { background:red; color:#fff; padding:10px 16px; font-size:16px; border:none; border-radius:6px; cursor:pointer; text-decoration:none; }
+    .footer { font-size:.8em; color:gray; margin-top:40px; text-align:center; padding:20px; border-top:1px solid #333; }
   </style>
 </head>
 <body>
 
-<header>
-  <div><strong>BrainHustle™</strong></div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="side-hustles.html">Side Hustles</a>
+  <button class="menu-button" onclick="toggleMenu()">☰ Menu</button>
+
+  <div id="sideMenu" class="side-menu">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="kits.html">Hustle Kits</a>
+    <a href="ideas.html">Money Ideas</a>
+    <a href="passive.html">Passive Income</a>
     <a href="ai-tools.html">AI Tools</a>
-    <a href="guides.html">Guides</a>
-    <a href="#">Contact</a>
-  </nav>
-</header>
-
-<section class="section">
-  <h1>💻 Recommended AI Tools</h1>
-  <p style="text-align:center; max-width: 700px; margin:auto; color:#444;">
-    These tools have been tested by the BrainHustle™ team. Use them to save time, create content, automate tasks, or build a digital business — fast and with less stress.
-  </p>
-</section>
-
-<section class="section">
-
-  <div class="tool">
-    <h2>ChatGPT (OpenAI)</h2>
-    <p>Create blog posts, business ideas, emails, guides, and even code using ChatGPT. Our favorite for general use and business automation.</p>
-    <a href="https://chat.openai.com/" target="_blank">Try ChatGPT</a>
+    <a href="monetization.html">Monetization</a>
+    <a href="trackers.html">Trackers</a>
+    <a href="about.html">What is BrainHustle™?</a>
+    <a href="upgrade.html">Upgrade Access</a>
+    <a href="#" onclick="logout()">Logout</a>
   </div>
 
-  <div class="tool">
-    <h2>Canva AI</h2>
-    <p>Design graphics, eBooks, social media posts, and even full websites using Canva’s built-in AI tools. Perfect for hustlers with no design skills.</p>
-    <a href="https://www.canva.com/" target="_blank">Use Canva AI</a>
+  <div class="content" id="contentArea">
+    <h1>🧠 Recommended AI Tools</h1>
+    <p id="status" class="lead">Loading your access level...</p>
+
+    <!-- Content will be injected by JS based on membership -->
   </div>
 
-  <div class="tool">
-    <h2>Notion AI</h2>
-    <p>Automate content writing, planning, and product building inside Notion. Great for side hustlers building templates or courses.</p>
-    <a href="https://www.notion.so/product/ai" target="_blank">Explore Notion AI</a>
+  <div class="footer">
+    © 2025 BrainHustle™. All rights reserved.
   </div>
 
-  <div class="tool">
-    <h2>Looka (Logo Maker)</h2>
-    <p>Create a professional logo using AI. Fast, easy, and makes your brand look polished in minutes.</p>
-    <a href="https://looka.com/" target="_blank">Generate a Logo</a>
-  </div>
+  <!-- Firebase + membership gate with anti-stuck fallback -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-  <div class="tool">
-    <h2>Durable AI Website Builder</h2>
-    <p>Build a one-page business website in 30 seconds using AI. Great for quick launches or testing ideas.</p>
-    <a href="https://durable.co/" target="_blank">Try Durable AI</a>
-  </div>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
+      authDomain: "brainhustle-92a40.firebaseapp.com",
+      projectId: "brainhustle-92a40",
+      storageBucket: "brainhustle-92a40.appspot.com",
+      messagingSenderId: "547592914180",
+      appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
+      measurementId: "G-3M5PKR5S27"
+    };
 
-</section>
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-<footer>
-  © 2025 BrainHustle™. All rights reserved. | Not affiliated with any linked tools.<br/>
-  <a href="index.html">Back to Home</a>
-</footer>
+    window.logout = function(){ signOut(auth).then(()=>{ window.location.href="login.html"; }); };
 
+    const content = document.getElementById('contentArea');
+    const statusEl = document.getElementById('status');
+
+    // Anti-stuck fallback (1.5s)
+    let resolved = false;
+    const fallback = setTimeout(() => {
+      if (resolved) return;
+      resolved = true;
+      statusEl.textContent = 'Preview mode — log in to unlock more.';
+      renderStarter(); // at least show a preview
+    }, 1500);
+
+    function renderStarter(){
+      content.innerHTML = `
+        <h1>🧠 Recommended AI Tools (Preview)</h1>
+        <p class="lead">These tools save time, create content, automate tasks, and help you build a digital business.</p>
+
+        <div class="tool-card">
+          <h2>ChatGPT (OpenAI)</h2>
+          <p>Create blog posts, business ideas, emails, guides, and even code. Our favorite for general use and business automation.</p>
+          <a class="btn" href="https://chat.openai.com/" target="_blank" rel="noopener">Try ChatGPT</a>
+        </div>
+
+        <p style="text-align:center;margin-top:14px;">
+          🔒 Upgrade to view the full AI toolkit and recommendations.
+        </p>
+        <div style="text-align:center;">
+          <a href="upgrade.html" class="upgrade-btn">Upgrade Now</a>
+        </div>
+      `;
+    }
+
+    function renderUpgraded(){
+      content.innerHTML = `
+        <h1>🧠 Recommended AI Tools</h1>
+        <p class="lead">These tools have been tested by the BrainHustle™ team. Use them to save time, create content, automate tasks, or build a digital business — fast and with less stress.</p>
+
+        <div class="tool-card">
+          <h2>ChatGPT (OpenAI)</h2>
+          <p>Create blog posts, business ideas, emails, guides, and even code using ChatGPT. Our favorite for general use and business automation.</p>
+          <a class="btn" href="https://chat.openai.com/" target="_blank" rel="noopener">Try ChatGPT</a>
+        </div>
+
+        <div class="tool-card">
+          <h2>Canva AI</h2>
+          <p>Design graphics, eBooks, social posts, and quick websites with Canva’s AI. Great if you don’t have design skills.</p>
+          <a class="btn" href="https://www.canva.com/" target="_blank" rel="noopener">Use Canva AI</a>
+        </div>
+
+        <div class="tool-card">
+          <h2>Notion AI</h2>
+          <p>Write, plan, and ship products faster inside Notion. Excellent for building templates or courses.</p>
+          <a class="btn" href="https://www.notion.so/product/ai" target="_blank" rel="noopener">Explore Notion AI</a>
+        </div>
+
+        <div class="tool-card">
+          <h2>Looka (Logo Maker)</h2>
+          <p>Create a professional logo using AI. Make your brand look polished in minutes.</p>
+          <a class="btn" href="https://looka.com/" target="_blank" rel="noopener">Generate a Logo</a>
+        </div>
+
+        <div class="tool-card">
+          <h2>Durable AI Website Builder</h2>
+          <p>Spin up a one-page business website in ~30 seconds using AI. Great for quick launches or MVPs.</p>
+          <a class="btn" href="https://durable.co/" target="_blank" rel="noopener">Try Durable AI</a>
+        </div>
+      `;
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (resolved) return;
+      clearTimeout(fallback);
+
+      if (!user) {
+        resolved = true;
+        window.location.href = "login.html";
+        return;
+      }
+
+      statusEl.textContent = 'Checking membership…';
+      try {
+        const ref = doc(db, "users", user.uid);
+        const snap = await getDoc(ref);
+
+        let membership = "starter";
+        if (!snap.exists()) {
+          await setDoc(ref, { membership: "starter", email: user.email || "", createdAt: new Date() }, { merge: true });
+        } else {
+          membership = (snap.data().membership || "starter").toLowerCase();
+        }
+
+        resolved = true;
+        if (membership === "upgraded") {
+          statusEl.textContent = 'Upgraded member ✅';
+          renderUpgraded();
+        } else {
+          statusEl.textContent = 'Starter access — upgrade to unlock everything.';
+          renderStarter();
+        }
+      } catch (e) {
+        console.error('[ai-tools] membership read failed:', e);
+        resolved = true;
+        statusEl.textContent = 'Couldn’t verify membership — showing preview.';
+        renderStarter();
+      }
+    });
+
+    function toggleMenu(){ document.getElementById('sideMenu').classList.toggle('show-menu'); }
+    window.toggleMenu = toggleMenu;
+  </script>
 </body>
 </html>
