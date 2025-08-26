@@ -27,18 +27,10 @@
       z-index: 1000;
     }
 
-    .logo-container {
-      margin-top: 80px;
-    }
+    .logo-container { margin-top: 80px; }
+    .logo-container img { height: 192px; }
 
-    .logo-container img {
-      height: 192px;
-    }
-
-    h1 {
-      color: #00e676;
-      margin-top: 20px;
-    }
+    h1 { color: #00e676; margin-top: 20px; }
 
     .content {
       max-width: 800px;
@@ -47,22 +39,10 @@
       text-align: left;
     }
 
-    .content h2 {
-      color: #00e676;
-      margin-bottom: 10px;
-    }
+    .content h2 { color: #00e676; margin-bottom: 10px; }
+    .content p { margin-bottom: 20px; line-height: 1.6; }
 
-    .content p {
-      margin-bottom: 20px;
-      line-height: 1.6;
-    }
-
-    .footer {
-      margin-top: 40px;
-      font-size: 12px;
-      color: gray;
-      padding: 20px;
-    }
+    .footer { margin-top: 40px; font-size: 12px; color: gray; padding: 20px; }
 
     /* Sidebar */
     .sidebar {
@@ -85,22 +65,31 @@
       color: #00e676;
       display: block;
     }
+    .sidebar a:hover { background-color: #222; }
+    .close-btn { position: absolute; top: 10px; right: 20px; font-size: 24px; color: white; cursor: pointer; }
 
-    .sidebar a:hover {
-      background-color: #222;
+    /* Top status banner */
+    .statusbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background:#00e676; color:#000;
+      padding: 10px 14px;
+      font-weight: 700;
+      display: none; /* shown by JS */
+      z-index: 1100;
     }
-
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 24px;
-      color: white;
-      cursor: pointer;
+    .statusbar.error { background:#ff5252; color:#fff; }
+    .status-actions { margin-left:8px; display:inline-block; }
+    .status-actions button {
+      background:#000; color:#00e676; border:1px solid #000;
+      padding:6px 10px; border-radius:6px; cursor:pointer;
     }
   </style>
 </head>
 <body>
+
+  <!-- Top status banner -->
+  <div id="statusbar" class="statusbar"></div>
 
   <!-- Side Menu -->
   <div id="sideMenu" class="sidebar">
@@ -152,20 +141,15 @@
 
   <!-- Sidebar Script -->
   <script>
-    function openMenu() {
-      document.getElementById("sideMenu").style.width = "250px";
-    }
-
-    function closeMenu() {
-      document.getElementById("sideMenu").style.width = "0";
-    }
+    function openMenu() { document.getElementById("sideMenu").style.width = "250px"; }
+    function closeMenu() { document.getElementById("sideMenu").style.width = "0"; }
   </script>
 
-  <!-- Firebase Logout + Auto-Admin -->
+  <!-- Firebase Logout + Auto-Admin with visible status + retry -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
@@ -181,28 +165,62 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    const STATUS = document.getElementById('statusbar');
+    function showStatus(msg, isError=false, withRetry=false, user=null){
+      STATUS.className = 'statusbar' + (isError ? ' error' : '');
+      STATUS.innerHTML = msg + (withRetry ? `<span class="status-actions"><button id="forceBtn">Force Upgrade</button></span>` : '');
+      STATUS.style.display = 'block';
+      if (withRetry && user) {
+        document.getElementById('forceBtn').onclick = () => ensureAdmin(user, true);
+      }
+    }
+
     window.logout = function() {
-      signOut(auth).then(() => {
-        window.location.href = "login.html";
-      });
+      signOut(auth).then(() => { window.location.href = "login.html"; });
     };
 
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) {
-        window.location.href = "login.html";
+    async function ensureAdmin(user, showResult=false){
+      const ADMIN_EMAILS = ["shawn.murrayjr@gmail.com"];
+      if (!ADMIN_EMAILS.includes((user.email || '').toLowerCase())) {
+        if (showResult) showStatus(`Logged in as ${user.email}. (Not in ADMIN_EMAILS)`, true);
         return;
       }
-
-      // ✅ Auto-upgrade admin for your email
-      const ADMIN_EMAILS = ["shawn.murrayjr@gmail.com"];
-      if (ADMIN_EMAILS.includes(user.email)) {
+      try {
         await setDoc(doc(db, "users", user.uid), {
           email: user.email,
           membership: "upgraded",
           role: "admin",
           updatedAt: new Date()
         }, { merge: true });
-        console.log("✅ Admin + Upgraded set for", user.email);
+
+        // Verify and display the current membership
+        const snap = await getDoc(doc(db, "users", user.uid));
+        const data = snap.exists() ? snap.data() : {};
+        const level = (data.membership || 'starter').toLowerCase();
+        showStatus(`✅ ${user.email} is set to ${level.toUpperCase()} (role: ${data.role || 'n/a'}). You’re good to go.`, false);
+      } catch (e) {
+        console.error('Auto-admin error:', e);
+        showStatus(`⚠️ Could not update Firestore (permissions?).`, true, true, user);
+      }
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { window.location.href = "login.html"; return; }
+
+      // Try to set + verify admin on load
+      await ensureAdmin(user);
+
+      // Also show current membership even if not in ADMIN_EMAILS
+      try {
+        const snap = await getDoc(doc(db, "users", user.uid));
+        if (snap.exists()) {
+          const d = snap.data();
+          showStatus(`Logged in: ${user.email} — membership: ${(d.membership || 'starter').toUpperCase()}${d.role ? ' • role: '+d.role : ''}`);
+        } else {
+          showStatus(`Logged in: ${user.email} — no user doc found (will be created on first write).`);
+        }
+      } catch (e) {
+        console.error('Read user doc error:', e);
       }
     });
   </script>
