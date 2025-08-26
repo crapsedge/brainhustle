@@ -46,18 +46,13 @@
       background-color: #00cc66;
       color: black;
     }
-    .show-menu {
-      left: 0;
-    }
+    .show-menu { left: 0; }
     .content {
       padding: 60px 20px;
       max-width: 800px;
       margin: auto;
     }
-    h1 {
-      color: #00cc66;
-      text-align: center;
-    }
+    h1 { color: #00cc66; text-align: center; }
     .idea-box {
       background-color: #111;
       border: 1px solid #00cc66;
@@ -104,7 +99,7 @@
 
   <div class="content" id="contentArea">
     <h1>💸 Money Ideas</h1>
-    <p>Loading your access level...</p>
+    <p id="status">Loading your access level...</p>
   </div>
 
   <div class="footer">
@@ -132,75 +127,124 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    // Expose a working logout to the global scope (fixes onclick="logout()")
+    window.logout = () => {
+      signOut(auth).then(() => {
+        window.location.href = "login.html";
+      }).catch(() => {
+        // stay silent; nothing to hang
+      });
+    };
+
     const contentArea = document.getElementById('contentArea');
+    const statusEl = document.getElementById('status');
+
+    // -------- Anti-stuck fallback --------
+    let resolved = false;
+    const fallback = setTimeout(() => {
+      if (resolved) return;
+      resolved = true;
+      // Show a small preview instead of hanging forever
+      statusEl.textContent = 'Preview mode — log in to unlock more.';
+      contentArea.innerHTML = `
+        <h1>💸 Money Ideas (Preview)</h1>
+        <div class="idea-box">
+          <h3>1. Sell Digital Products on Gumroad</h3>
+          <p>Create eBooks, guides, or tools and sell them online. No inventory needed.</p>
+        </div>
+        <p style="text-align:center;">🔒 Upgrade to unlock all ideas and future updates.</p>
+        <div style="text-align:center;">
+          <a href="upgrade.html" class="upgrade-btn">Upgrade Now</a>
+        </div>
+      `;
+    }, 1500);
+    // -------------------------------------
 
     onAuthStateChanged(auth, async (user) => {
+      if (resolved) return;
+      clearTimeout(fallback);
+
       if (!user) {
+        resolved = true;
+        // Keep your login gate: redirect when Auth actually fires
         window.location.href = "login.html";
         return;
       }
 
-      const userDoc = doc(db, "users", user.uid);
-      const userSnap = await getDoc(userDoc);
+      statusEl.textContent = 'Checking membership…';
+      try {
+        const userRef = doc(db, "users", user.uid);
+        const snap = await getDoc(userRef);
 
-      // ✅ Safe default + auto-create if missing
-      let membership = "starter";
-      if (!userSnap.exists()) {
-        await setDoc(userDoc, {
-          membership: "starter",
-          email: user.email || "",
-          createdAt: new Date()
-        }, { merge: true });
-      } else {
-        const data = userSnap.data();
-        membership = (data.membership || "starter").toLowerCase();
-      }
+        let membership = "starter";
+        if (!snap.exists()) {
+          await setDoc(userRef, {
+            membership: "starter",
+            email: user.email || "",
+            createdAt: new Date()
+          }, { merge: true });
+        } else {
+          const data = snap.data();
+          membership = (data.membership || "starter").toLowerCase();
+        }
 
-      if (membership === "upgraded") {
-        contentArea.innerHTML = `
-          <h1>💸 Money Ideas</h1>
-          <div class="idea-box">
-            <h3>1. Sell Digital Products on Gumroad</h3>
-            <p>Create simple eBooks, guides, or tools and sell them on Gumroad. No inventory needed. Just value and marketing.</p>
-          </div>
-          <div class="idea-box">
-            <h3>2. Flip Items on eBay or Facebook Marketplace</h3>
-            <p>Start with free or low-cost local items. Resell for profit. Learn the system, scale up with better products.</p>
-          </div>
-          <div class="idea-box">
-            <h3>3. Offer Services on Fiverr or Upwork</h3>
-            <p>Write, design, edit, or use AI tools for clients. Get paid for skills you already have — or can learn fast.</p>
-          </div>
-          <div class="idea-box">
-            <h3>4. Run Affiliate Offers</h3>
-            <p>Promote other people’s products and get paid for every sale. No product, no shipping — just commissions.</p>
-          </div>
-          <div class="idea-box">
-            <h3>5. Create Content with ChatGPT</h3>
-            <p>Use AI to write blog posts, social content, or YouTube scripts — monetize with ads or affiliate links.</p>
-          </div>
-        `;
-      } else {
-        // Starter preview
+        resolved = true;
+
+        if (membership === "upgraded") {
+          contentArea.innerHTML = `
+            <h1>💸 Money Ideas</h1>
+            <div class="idea-box">
+              <h3>1. Sell Digital Products on Gumroad</h3>
+              <p>Create simple eBooks, guides, or tools and sell them on Gumroad. No inventory needed. Just value and marketing.</p>
+            </div>
+            <div class="idea-box">
+              <h3>2. Flip Items on eBay or Facebook Marketplace</h3>
+              <p>Start with free or low-cost local items. Resell for profit. Learn the system, scale up with better products.</p>
+            </div>
+            <div class="idea-box">
+              <h3>3. Offer Services on Fiverr or Upwork</h3>
+              <p>Write, design, edit, or use AI tools for clients. Get paid for skills you already have — or can learn fast.</p>
+            </div>
+            <div class="idea-box">
+              <h3>4. Run Affiliate Offers</h3>
+              <p>Promote other people’s products and get paid for every sale. No product, no shipping — just commissions.</p>
+            </div>
+            <div class="idea-box">
+              <h3>5. Create Content with ChatGPT</h3>
+              <p>Use AI to write blog posts, social content, or YouTube scripts — monetize with ads or affiliate links.</p>
+            </div>
+          `;
+        } else {
+          contentArea.innerHTML = `
+            <h1>💸 Money Ideas (Starter)</h1>
+            <div class="idea-box">
+              <h3>1. Sell Digital Products on Gumroad</h3>
+              <p>Create eBooks, guides, or tools and sell them online. No inventory needed.</p>
+            </div>
+            <p style="text-align:center;">🔒 Upgrade to unlock all 5 ideas and future updates.</p>
+            <div style="text-align:center;">
+              <a href="upgrade.html" class="upgrade-btn">Upgrade Now</a>
+            </div>
+          `;
+        }
+      } catch (err) {
+        // Never hang on Firestore errors
+        console.error('[ideas] membership read failed:', err);
+        resolved = true;
+        statusEl.textContent = 'Couldn’t verify membership — showing preview.';
         contentArea.innerHTML = `
           <h1>💸 Money Ideas (Preview)</h1>
           <div class="idea-box">
             <h3>1. Sell Digital Products on Gumroad</h3>
             <p>Create eBooks, guides, or tools and sell them online. No inventory needed.</p>
           </div>
-          <p style="text-align:center;">🔒 Upgrade to unlock all 5 ideas and future updates.</p>
+          <p style="text-align:center;">🔒 Upgrade to unlock all ideas and future updates.</p>
           <div style="text-align:center;">
             <a href="upgrade.html" class="upgrade-btn">Upgrade Now</a>
           </div>
         `;
       }
     });
-
-    function logout() {
-      signOut(auth).then(() => {
-        window.location.href = "login.html";
-      });
-    }
   </script>
 
   <script>
