@@ -4,101 +4,44 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About BrainHustle™</title>
+  <meta name="description" content="BrainHustle™ — education-first systems, tools, and trackers for smarter money moves. Learn about our mission, trust practices, and legal disclaimers."/>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0a0a0a;
-      color: white;
-      text-align: center;
-    }
-
-    .menu-button {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background-color: #00e676;
-      color: black;
-      font-size: 18px;
-      padding: 10px 14px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      z-index: 1000;
-    }
-
-    .logo-container {
-      margin-top: 80px;
-    }
-
-    .logo-container img {
-      height: 192px;
-    }
-
-    h1 {
-      color: #00e676;
-      margin-top: 20px;
-    }
-
-    .content {
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 0 20px;
-      text-align: left;
-    }
-
-    .content h2 {
-      color: #00e676;
-      margin-bottom: 10px;
-    }
-
-    .content p {
-      margin-bottom: 20px;
-      line-height: 1.6;
-    }
-
-    .footer {
-      margin-top: 40px;
-      font-size: 12px;
-      color: gray;
-      padding: 20px;
-    }
-
+    body { margin:0; font-family:Arial, sans-serif; background:#0a0a0a; color:#fff; text-align:center; }
+    .menu-button { position:fixed; top:20px; left:20px; background:#00e676; color:#000; font-size:18px; padding:10px 14px; border:none; border-radius:4px; cursor:pointer; z-index:1000; }
+    .logo-container { margin-top:80px; }
+    .logo-container img { height:192px; }
+    h1 { color:#00e676; margin-top:20px; }
+    .content { max-width:900px; margin:30px auto; padding:0 20px; text-align:left; }
+    .content h2 { color:#00e676; margin:22px 0 8px; }
+    .content p, .content li { line-height:1.65; }
+    .card { background:#121212; border:1px solid #232323; border-radius:12px; padding:16px 18px; margin:16px 0; }
+    .muted { color:#b7b7b7; }
+    .footer { margin-top:40px; font-size:12px; color:gray; padding:20px; }
     /* Sidebar */
-    .sidebar {
-      height: 100%;
-      width: 0;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background-color: #111;
-      overflow-x: hidden;
-      transition: 0.3s;
-      padding-top: 60px;
-      z-index: 1001;
-    }
-
-    .sidebar a {
-      padding: 10px 20px;
-      text-decoration: none;
-      font-size: 18px;
-      color: #00e676;
-      display: block;
-    }
-
-    .sidebar a:hover {
-      background-color: #222;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 24px;
-      color: white;
-      cursor: pointer;
-    }
+    .sidebar { height:100%; width:0; position:fixed; top:0; left:0; background:#111; overflow-x:hidden; transition:0.3s; padding-top:60px; z-index:1001; text-align:left; }
+    .sidebar a { padding:10px 20px; text-decoration:none; font-size:18px; color:#00e676; display:block; }
+    .sidebar a:hover { background:#222; }
+    .close-btn { position:absolute; top:10px; right:20px; font-size:24px; color:#fff; cursor:pointer; }
   </style>
+
+  <!-- Organization markup for trust/SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "BrainHustle",
+    "url": "https://brainhustle.store",
+    "logo": "https://brainhustle.store/brainhustle-logo.png",
+    "sameAs": [],
+    "brand": { "@type": "Brand", "name": "BrainHustle" },
+    "parentOrganization": { "@type": "Organization", "name": "Murray's Empire" },
+    "contactPoint": [{
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": "crapsedge@gmail.com"
+    }]
+  }
+  </script>
 </head>
 <body>
 
@@ -112,6 +55,7 @@
     <a href="ai.html">AI Tools</a>
     <a href="monetization.html">Monetization</a>
     <a href="trackers.html">Trackers</a>
+    <a href="sports-systems.html">🏈 Sports Systems</a> <!-- added -->
     <a href="about.html">What is BrainHustle™?</a>
     <a href="upgrade.html">Upgrade Access</a>
     <a href="login.html" onclick="logout()">Logout</a>
@@ -128,42 +72,96 @@
   <h1>What is BrainHustle™?</h1>
 
   <div class="content">
-    <h2>The Name</h2>
-    <p>BrainHustle™ is all about using your mind — not scams, hype, or fake promises — to create real income. We believe that smart ideas, legal strategies, and real effort beat hype every time. Hustle with brainpower.</p>
 
-    <h2>Our Purpose</h2>
-    <p>To give you everything you need to launch real side hustles, create passive income streams, and build your own path to financial independence — legally, safely, and with tools that actually work.</p>
+    <!-- Your original sections (kept) -->
+    <div class="card">
+      <h2>The Name</h2>
+      <p>BrainHustle™ is all about using your mind — not scams, hype, or fake promises — to create real income. We believe that smart ideas, legal strategies, and real effort beat hype every time. Hustle with brainpower.</p>
+    </div>
 
-    <h2>The Mission</h2>
-    <p>BrainHustle™ exists to help you take action. We offer real systems, clear guidance, and useful resources that help you earn more, work smarter, and avoid scams. Whether you're just starting or scaling up — BrainHustle™ is your edge.</p>
+    <div class="card">
+      <h2>Our Purpose</h2>
+      <p>To give you everything you need to launch real side hustles, create passive income streams, and build your own path to financial independence — legally, safely, and with tools that actually work.</p>
+    </div>
 
-    <h2>Your Advantage</h2>
-    <p>With BrainHustle™, you're not wasting time — you're investing in real growth. Every tool, kit, and system here is made to help you move fast, stay legal, and get real results.</p>
+    <div class="card">
+      <h2>The Mission</h2>
+      <p>BrainHustle™ exists to help you take action. We offer real systems, clear guidance, and useful resources that help you earn more, work smarter, and avoid scams. Whether you're just starting or scaling up — BrainHustle™ is your edge.</p>
+    </div>
 
-    <h2>Disclaimer</h2>
-    <p>BrainHustle™ is for educational purposes only. We do not guarantee earnings or results. All tools, ideas, and systems provided are for informational use and should be used at your own discretion. BrainHustle™ is not financial, legal, or investment advice. Individual success depends on effort, experience, and execution.</p>
+    <div class="card">
+      <h2>Your Advantage</h2>
+      <p>With BrainHustle™, you're not wasting time — you're investing in real growth. Every tool, kit, and system here is made to help you move fast, stay legal, and get real results.</p>
+    </div>
+
+    <!-- Upgraded trust + legal sections -->
+    <div class="card">
+      <h2>Trust & Transparency</h2>
+      <ul>
+        <li>✅ <b>Education-first:</b> BrainHustle™ provides informational tools, logs, and systems. We don’t sell get-rich-quick promises.</li>
+        <li>✅ <b>Clear labeling:</b> When something is opinion, we say so. When something is a tool, we document how to use it responsibly.</li>
+        <li>✅ <b>No hidden catches:</b> Pricing and features are straightforward. Upgraded access is optional and clearly described.</li>
+        <li>✅ <b>Contact:</b> Questions or support? Email <a href="mailto:crapsedge@gmail.com">crapsedge@gmail.com</a>.</li>
+      </ul>
+      <p class="muted">Tip: If you see BrainHustle™ mentioned on third-party sites with “scam” labels, it’s usually automated reputation filters for new domains with limited public content. Publishing clear About/Legal pages like this helps correct that over time.</p>
+    </div>
+
+    <div class="card">
+      <h2>Legal Disclaimers</h2>
+      <p><b>Education Only:</b> All content on BrainHustle™ is for informational and educational purposes. Nothing here is financial, legal, investment, tax, or professional advice. You are responsible for your own decisions.</p>
+      <p><b>No Earnings Guarantee:</b> We do not and cannot guarantee results, revenue, profits, or outcomes. Past performance (including examples or case studies) does not guarantee future results.</p>
+      <p><b>Assumption of Risk:</b> Any business, side hustle, or sports-related activity involves risk. You agree to use our tools and content at your own risk and to comply with all applicable laws in your jurisdiction.</p>
+      <p><b>Limitation of Liability:</b> To the fullest extent permitted by law, BrainHustle™, its creators, and Murray’s Empire™ are not liable for any loss or damages arising from your use or reliance on our site, tools, or materials.</p>
+      <p><b>No Client Relationship:</b> Your use of this site does not create any client, advisory, fiduciary, or professional relationship with us.</p>
+    </div>
+
+    <div class="card">
+      <h2>Responsible Use (Sports Content)</h2>
+      <p><b>Educational Only:</b> Sports betting content, if any, is strictly educational. We do not provide picks or advice. If you choose to wager, do so responsibly and never more than you can afford to lose.</p>
+      <p><b>Age & Legality:</b> You must be of legal age and comply with your local laws. Availability varies by state/country.</p>
+      <p><b>Help Resources:</b> If gambling may be a problem, seek help (e.g., 1-800-GAMBLER in the U.S.).</p>
+    </div>
+
+    <div class="card">
+      <h2>Intellectual Property</h2>
+      <p>BrainHustle™, the BrainHustle logo, and Murray’s Empire™ are trademarks/service marks. All site content and tools are © BrainHustle™ / Murray’s Empire™. Do not copy, redistribute, or resell without permission.</p>
+    </div>
+
+    <div class="card">
+      <h2>Contact & Support</h2>
+      <p>Email: <a href="mailto:crapsedge@gmail.com">crapsedge@gmail.com</a></p>
+      <p>We aim to respond within 2–3 business days.</p>
+    </div>
+
+    <div class="card">
+      <h2>Report Misuse or Abuse</h2>
+      <p>If you see third-party pages misrepresenting BrainHustle™ or impersonation attempts, please report them to us at <a href="mailto:crapsedge@gmail.com">crapsedge@gmail.com</a> and we’ll investigate.</p>
+    </div>
+
+    <div class="card">
+      <h2>Links</h2>
+      <ul>
+        <li><a href="terms.html">Terms</a></li>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="sports-systems.html">Sports Systems (Upgraded)</a></li>
+      </ul>
+    </div>
   </div>
 
   <div class="footer">
-    All Rights Reserved © BrainHustle™ 2025
+    © 2025 BrainHustle™ — Part of Murray’s Empire™. Education only. No guarantees. Use at your own risk.
   </div>
 
   <!-- Sidebar Script -->
   <script>
-    function openMenu() {
-      document.getElementById("sideMenu").style.width = "250px";
-    }
-
-    function closeMenu() {
-      document.getElementById("sideMenu").style.width = "0";
-    }
+    function openMenu(){ document.getElementById("sideMenu").style.width = "250px"; }
+    function closeMenu(){ document.getElementById("sideMenu").style.width = "0"; }
   </script>
 
   <!-- Firebase Logout Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-
     const firebaseConfig = {
       apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
       authDomain: "brainhustle-92a40.firebaseapp.com",
@@ -173,22 +171,10 @@
       appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
       measurementId: "G-3M5PKR5S27"
     };
-
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-
-    window.logout = function() {
-      signOut(auth).then(() => {
-        window.location.href = "login.html";
-      });
-    };
-
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = "login.html";
-      }
-    });
+    window.logout = function(){ signOut(auth).then(()=>{ window.location.href="login.html"; }); };
+    onAuthStateChanged(auth, (user)=>{ if(!user){ window.location.href="login.html"; } });
   </script>
-
 </body>
 </html>
