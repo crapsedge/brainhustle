@@ -56,6 +56,7 @@
       transition: 0.3s;
       padding-top: 60px;
       z-index: 1001;
+      text-align: left; /* ADDED: keeps badge aligned nicely */
     }
 
     .sidebar a {
@@ -102,7 +103,18 @@
     <a href="monetization.html">Monetization</a>
     <a href="trackers.html">Trackers</a>
     <a href="about.html">What is BrainHustle™?</a>
-    <a href="upgrade.html">Upgrade Access</a>
+
+    <!-- ADDED: direct link to your Sports Systems page -->
+    <a href="sports-systems.html">🏈 Sports Systems</a>
+
+    <!-- ADDED: green badge (hidden by default) -->
+    <div id="memberStatus" style="padding:10px 20px;color:#00e676;font-size:14px;display:none">
+      Status: Upgraded ✅
+    </div>
+
+    <!-- ADDED: upgrade link (we’ll hide this if you’re upgraded) -->
+    <a id="upgradeLink" href="upgrade.html">⬆️ Upgrade Access</a>
+
     <a href="login.html" onclick="logout()">Logout</a>
   </div>
 
@@ -145,11 +157,13 @@
     function closeMenu() { document.getElementById("sideMenu").style.width = "0"; }
   </script>
 
-  <!-- Firebase Logout + Auto-Admin with visible status + retry -->
+  <!-- Firebase Logout + Auto-Admin with visible status + retry (kept as-is) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
     import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+    /* ADDED: Realtime Database imports (free plan status check) */
+    import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
@@ -158,12 +172,16 @@
       storageBucket: "brainhustle-92a40.appspot.com",
       messagingSenderId: "547592914180",
       appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
-      measurementId: "G-3M5PKR5S27"
+      measurementId: "G-3M5PKR5S27",
+      /* ADDED: include your RTDB URL */
+      databaseURL: "https://brainhustle-92a40-default-rtdb.firebaseio.com"
     };
 
-    const app = initializeApp(firebaseConfig);
+    const app  = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const db = getFirestore(app);
+    const db   = getFirestore(app);
+    /* ADDED: RTDB handle */
+    const rtdb = getDatabase(app);
 
     const STATUS = document.getElementById('statusbar');
     function showStatus(msg, isError=false, withRetry=false, user=null){
@@ -186,6 +204,7 @@
         return;
       }
       try {
+        /* keeping your Firestore write (unchanged) */
         await setDoc(doc(db, "users", user.uid), {
           email: user.email,
           membership: "upgraded",
@@ -193,7 +212,6 @@
           updatedAt: new Date()
         }, { merge: true });
 
-        // Verify and display the current membership
         const snap = await getDoc(doc(db, "users", user.uid));
         const data = snap.exists() ? snap.data() : {};
         const level = (data.membership || 'starter').toLowerCase();
@@ -204,13 +222,54 @@
       }
     }
 
+    /* ADDED: RTDB membership check to toggle the menu badge + upgrade link */
+    const memberStatus = document.getElementById("memberStatus");
+    const upgradeLink  = document.getElementById("upgradeLink");
+    const OWNER_UID    = "bMPlkmhEV8a05M0uwsgxVORsFk72";
+    const emailKey     = (e)=> e.toLowerCase().replace(/\./g, ',');
+
+    async function setMenuByLevel(level){
+      if (String(level).toLowerCase() === "upgraded") {
+        if (memberStatus) memberStatus.style.display = "block";
+        if (upgradeLink)  upgradeLink.style.display  = "none";
+      } else {
+        if (memberStatus) memberStatus.style.display = "none";
+        if (upgradeLink)  upgradeLink.style.display  = "block";
+      }
+    }
+
+    async function fetchMembershipFromRTDB(user){
+      try{
+        // owner override
+        if (user.uid === OWNER_UID) return "upgraded";
+
+        // try UID
+        const uidSnap = await get(child(ref(rtdb), `/members/${user.uid}/level`));
+        if (uidSnap.exists()) return uidSnap.val();
+
+        // fallback by email
+        if (user.email) {
+          const eKey = emailKey(user.email);
+          const mailSnap = await get(child(ref(rtdb), `/membersByEmail/${eKey}/level`));
+          if (mailSnap.exists()) return mailSnap.val();
+        }
+      }catch(err){
+        console.error('RTDB read error:', err);
+      }
+      return "starter";
+    }
+
     onAuthStateChanged(auth, async (user) => {
       if (!user) { window.location.href = "login.html"; return; }
 
-      // Try to set + verify admin on load
+      // Keep your existing Firestore behavior:
       await ensureAdmin(user);
 
-      // Also show current membership even if not in ADMIN_EMAILS
+      // NEW: Toggle the menu using RTDB (free)
+      const level = await fetchMembershipFromRTDB(user);
+      await setMenuByLevel(level);
+
+      // Keep your status banner read attempt (Firestore)
       try {
         const snap = await getDoc(doc(db, "users", user.uid));
         if (snap.exists()) {
