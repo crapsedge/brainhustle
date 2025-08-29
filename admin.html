@@ -53,15 +53,15 @@
     <div id="out" class="muted" style="margin-top:10px"></div>
   </div>
 
-  <div class="foot">© BrainHustle™ — Owner-only page. Actions are logged in Firestore.</div>
+  <div class="foot">© BrainHustle™ — Owner-only page. Actions are logged.</div>
 </div>
 
-<!-- Firebase (Compat to keep it simple) -->
+<!-- Firebase (Compat) -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
-  // >>> OWNER SETTINGS (your values filled in)
+  // >>> OWNER SETTINGS
   const OWNER_UID   = "bMPlkmhEV8a05M0uwsgxVORsFk72";
   const OWNER_EMAIL = "shawn.murrayjr@gmail.com"; // optional fallback
 
@@ -72,11 +72,14 @@
     storageBucket: "brainhustle-92a40.firebasestorage.app",
     messagingSenderId: "547592914180",
     appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
-    measurementId: "G-3M5PKR5S27"
+    measurementId: "G-3M5PKR5S27",
+    // ⬇️ confirm this matches your RTDB URL (Realtime Database → Data tab)
+    databaseURL: "https://brainhustle-92a40-default-rtdb.firebaseio.com"
   };
   firebase.initializeApp(firebaseConfig);
+
   const auth = firebase.auth();
-  const db = firebase.firestore();
+  const db   = firebase.database();
 
   const meEl = document.getElementById('me');
   const gateEl = document.getElementById('gate');
@@ -84,52 +87,48 @@
   const outEl = document.getElementById('out');
   const saveBtn = document.getElementById('saveBtn');
 
-  auth.onAuthStateChanged(async (user)=>{
+  const emailKey = (e)=> e.toLowerCase().replace(/\./g, ','); // RTDB keys can't contain '.'
+
+  auth.onAuthStateChanged((user)=>{
     if(!user){
       meEl.innerHTML = 'Not logged in. <a href="login.html" style="color:#00ff66">Login</a>';
       gateEl.style.display = 'block';
       return;
     }
     meEl.innerHTML = `Signed in as <b>${user.email || user.uid}</b> <span class="small">(UID: ${user.uid})</span>`;
-
-    // Allow owner by UID or email
     const isOwnerUid = user.uid === OWNER_UID;
     const isOwnerEmail = user.email && user.email.toLowerCase() === OWNER_EMAIL.toLowerCase();
-
-    if(!isOwnerUid && !isOwnerEmail){
-      gateEl.style.display = 'block';
-      return;
-    }
+    if(!isOwnerUid && !isOwnerEmail){ gateEl.style.display = 'block'; return; }
     toolEl.style.display = 'block';
   });
 
   async function setMemberLevel({uid,email,level}){
-    // writes to both: members/{uid} and membersByEmail/{emailLower} (if provided)
-    const ops = [];
-    const stamp = firebase.firestore.FieldValue.serverTimestamp();
+    const updates = {};
+    const stamp = firebase.database.ServerValue.TIMESTAMP;
+
     if(uid){
-      ops.push(db.collection('members').doc(uid).set({level, updatedAt: stamp}, {merge:true}));
+      updates[`/members/${uid}/level`]      = level;
+      updates[`/members/${uid}/updatedAt`]  = stamp;
     }
     if(email){
-      const e = email.trim().toLowerCase();
-      if(e) ops.push(db.collection('membersByEmail').doc(e).set({level, updatedAt: stamp}, {merge:true}));
+      const k = emailKey(email.trim());
+      if(k){
+        updates[`/membersByEmail/${k}/level`]     = level;
+        updates[`/membersByEmail/${k}/updatedAt`] = stamp;
+      }
     }
-    await Promise.all(ops);
+    // simple audit
+    updates[`/adminLogs/${Date.now()}_${Math.random().toString(36).slice(2)}`] = {
+      at: stamp, action: 'setMemberLevel', byUid: auth.currentUser?.uid || null,
+      targetUid: uid || null, targetEmail: (email||'').toLowerCase(), level
+    };
 
-    // simple audit log
-    await db.collection('adminLogs').add({
-      at: stamp,
-      action: 'setMemberLevel',
-      byUid: auth.currentUser?.uid || null,
-      targetUid: uid || null,
-      targetEmail: (email||'').toLowerCase(),
-      level
-    });
+    await db.ref().update(updates); // atomic multi-path write
   }
 
   saveBtn.onclick = async ()=>{
     outEl.textContent = '';
-    const uid = document.getElementById('uid').value.trim();
+    const uid   = document.getElementById('uid').value.trim();
     const email = document.getElementById('email').value.trim();
     const level = document.getElementById('level').value;
     if(!uid && !email){ outEl.innerHTML = '<span class="bad">Enter a UID or an Email.</span>'; return; }
