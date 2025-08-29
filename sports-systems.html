@@ -40,7 +40,7 @@
     .foot{margin-top:18px;color:#888;font-size:12px}
     /* gating containers */
     #upgradedContent,#starterTeaser{display:none}
-    .center{text-align:center}
+    .center{ text-align:center }
   </style>
 </head>
 <body>
@@ -191,7 +191,6 @@
           <h2>Upgraded Downloads & Copyables</h2>
           <p class="muted">Use the log to track stake %, odds, and CLV. Flat bet 1–2% until you’ve proven edge.</p>
           <div class="downloads">
-            <!-- Replace hrefs after uploading to your repo -->
             <a class="btn" href="/assets/BrainHustle_Sports_Log.xlsx" download>⬇️ Sports Betting Log (.xlsx)</a>
             <a class="btn secondary" href="/assets/BrainHustle_Sports_Log.csv" download>⬇️ CSV Version</a>
           </div>
@@ -239,149 +238,125 @@ Check and follow all local laws; availability varies by state/country. If gambli
         </div>
       </div>
 
-      <div class="foot">© BrainHustle™ — Education only. No guarantees. Play responsibly.</div>
+      <div class="foot">© BrainHustle™ — Education only. Nothing here is financial, legal, or betting advice.</div>
     </div>
   </div>
 
-  <!-- Firebase SDK (Compat) -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
   <script>
-    // --- Side menu toggle ---
     function toggleMenu(){
       const m = document.getElementById('sideMenu');
-      m.style.left = (m.style.left==='0px') ? '-260px' : '0px';
+      m.style.left = (m.style.left === '0px') ? '-260px' : '0px';
     }
+    function copyById(id){
+      const el = document.getElementById(id);
+      navigator.clipboard.writeText(el.textContent.trim());
+    }
+    // ===== Tools (your existing JS) =====
+    const toProb=(price)=> price>0 ? 100/(price+100) : (-price)/(-price+100);
+    const toDec=(price)=> price>0 ? (price/100)+1 : (100/(-price))+1;
+    const fromDec=(d)=> d>=2 ? Math.round((d-1)*100) : Math.round(-100/(d-1));
+    function convertFromAmerican(){
+      const a=Number(document.getElementById('oddsAmerican').value);
+      if(!a) return;
+      document.getElementById('oddsDecimal').value=toDec(a).toFixed(3);
+      document.getElementById('oddsProb').value=(toProb(a)*100).toFixed(2);
+      const frac=a>0?`${a}/100`:`100/${-a}`;
+      document.getElementById('oddsFractional').value=frac;
+    }
+    function convertFromDecimal(){
+      const d=Number(document.getElementById('oddsDecimal').value);
+      if(!d) return;
+      document.getElementById('oddsAmerican').value=fromDec(d);
+      document.getElementById('oddsProb').value=((1/d)*100).toFixed(2);
+      const num=Math.round((d-1)*100), den=100; document.getElementById('oddsFractional').value=`${num}/${den}`;
+    }
+    function convertFromFractional(){
+      const f=document.getElementById('oddsFractional').value.trim();
+      if(!f.includes('/')) return;
+      const [num,den]=f.split('/').map(Number); const d=1+(num/den);
+      document.getElementById('oddsDecimal').value=d.toFixed(3);
+      document.getElementById('oddsAmerican').value=fromDec(d);
+      document.getElementById('oddsProb').value=((1/d)*100).toFixed(2);
+    }
+    function clearOdds(){['oddsAmerican','oddsDecimal','oddsFractional','oddsProb'].forEach(id=>document.getElementById(id).value='');}
 
-    // --- Firebase init (BrainHustle project) ---
+    function calcNoVig(){
+      const a=Number(document.getElementById('nvA').value), b=Number(document.getElementById('nvB').value);
+      if(!a||!b) return;
+      const pA=toProb(a), pB=toProb(b), sum=pA+pB; const fA=(pA/sum)*100, fB=(pB/sum)*100;
+      document.getElementById('nvOut').innerHTML = `Fair A: <b>${fA.toFixed(2)}%</b> • Fair B: <b>${fB.toFixed(2)}%</b>`;
+    }
+    function calcKelly(){
+      const bank=Number(document.getElementById('kellyBank').value);
+      const price=Number(document.getElementById('kellyAmerican').value);
+      const p=Number(document.getElementById('kellyP').value)/100;
+      const frac=Math.max(0, Number(document.getElementById('kellyFrac').value||0.5));
+      if(!bank||!price||!p) return;
+      const b = toDec(price)-1; // decimal payout minus 1
+      const k = (b*p - (1-p)) / b; // Kelly fraction of bankroll
+      const bet = Math.max(0, k*frac*bank);
+      document.getElementById('kellyOut').innerHTML = k<=0
+        ? '<span class="bad">Edge ≤ 0 → No bet.</span>'
+        : `Full Kelly: ${(k*100).toFixed(2)}% • Bet (x${frac}): <b>$${bet.toFixed(2)}</b>`;
+    }
+    function calcCLV(){
+      const yours=Number(document.getElementById('clvYours').value);
+      const close=Number(document.getElementById('clvClose').value);
+      if(!yours||!close) return;
+      const yourDec=toDec(yours), closeDec=toDec(close);
+      const yourImp=1/yourDec, closeImp=1/closeDec;
+      const edge=((closeImp-yourImp)*100).toFixed(2);
+      document.getElementById('clvOut').innerHTML = `Your imp: ${ (yourImp*100).toFixed(2)}% • Close imp: ${(closeImp*100).toFixed(2)}% • <b>Edge vs close: ${edge}%</b>`;
+    }
+  </script>
+
+  <!-- 🔐 Membership gating (Realtime Database | FREE) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+    import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
     const firebaseConfig = {
       apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
       authDomain: "brainhustle-92a40.firebaseapp.com",
       projectId: "brainhustle-92a40",
-      storageBucket: "brainhustle-92a40.firebasestorage.app",
+      storageBucket: "brainhustle-92a40.appspot.com",
       messagingSenderId: "547592914180",
       appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
-      measurementId: "G-3M5PKR5S27"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
-    // --- Gating helpers ---
-    const showUpgraded = () => {
-      document.getElementById('starterTeaser').style.display = 'none';
-      document.getElementById('upgradedContent').style.display = 'block';
-    };
-    const showTeaser = (why) => {
-      document.getElementById('starterTeaser').style.display = 'block';
-      document.getElementById('upgradedContent').style.display = 'none';
-      if(why){ console.log('Teaser reason:', why); }
+      databaseURL: "https://brainhustle-92a40-default-rtdb.firebaseio.com"
     };
 
-    // Check auth + membership (expects Firestore collection 'members' with doc { level: "starter"|"upgraded" })
-    auth.onAuthStateChanged(async (user) => {
-      if(!user){ showTeaser('no-user'); return; }
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const rtdb = getDatabase(app);
+
+    const OWNER_UID = "bMPlkmhEV8a05M0uwsgxVORsFk72"; // you always get access
+    const emailKey = (e)=> e.toLowerCase().replace(/\./g, ',');
+
+    const teaser = document.getElementById('starterTeaser');
+    const premium = document.getElementById('upgradedContent');
+
+    const showTeaser = ()=>{ teaser.style.display='block'; premium.style.display='none'; };
+    const showPro    = ()=>{ teaser.style.display='none'; premium.style.display='block'; };
+
+    async function fetchLevel(user){
       try{
-        const doc = await db.collection('members').doc(user.uid).get();
-        const level = (doc.exists && doc.data().level) ? String(doc.data().level) : 'starter';
-        if(level.toLowerCase() === 'upgraded'){ showUpgraded(); }
-        else{ showTeaser('starter'); }
-      }catch(e){
-        console.error(e); showTeaser('error');
-      }
+        if(user.uid === OWNER_UID) return 'upgraded';
+        const uidSnap = await get(child(ref(rtdb), `/members/${user.uid}/level`));
+        if(uidSnap.exists()) return uidSnap.val();
+        if(user.email){
+          const mailSnap = await get(child(ref(rtdb), `/membersByEmail/${emailKey(user.email)}/level`));
+          if(mailSnap.exists()) return mailSnap.val();
+        }
+      }catch(e){ console.error(e); }
+      return 'starter';
+    }
+
+    onAuthStateChanged(auth, async (user)=>{
+      if(!user){ showTeaser(); return; } // or redirect to login.html if you prefer
+      const level = (await fetchLevel(user)).toLowerCase();
+      level === 'upgraded' ? showPro() : showTeaser();
     });
-
-    // ---------- Utility ----------
-    const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
-    const toPct = x => (x*100).toFixed(2);
-    const fromPct = p => clamp(Number(p)/100, 0.0001, 0.9999);
-
-    // ---------- Odds & Prob helpers ----------
-    function americanToDecimal(A){ A=Number(A); if(isNaN(A)||A===0) return null; return A>0?1+(A/100):1+(100/Math.abs(A)); }
-    function decimalToAmerican(D){ D=Number(D); if(isNaN(D)||D<=1) return null; return D>=2?Math.round((D-1)*100): -Math.round(100/(D-1)); }
-    function americanToProb(A){ A=Number(A); if(isNaN(A)||A===0) return null; return A>0? (100/(A+100)) : (Math.abs(A)/(Math.abs(A)+100)); }
-    function probToAmerican(p){ p=clamp(Number(p),0.0001,0.9999); return p<0.5 ? Math.round(100*(1-p)/p) : -Math.round(100*p/(1-p)); }
-    function fracStr(D){ if(!D) return ""; const num=Math.round((D-1)*100), den=100; const gcd=(a,b)=>b?gcd(b,a%b):a; const g=gcd(num,den); return (num/g)+"/"+(den/g); function gcd(a,b){return b?gcd(b,a%b):a} }
-    function fracToDec(fr){ if(!fr) return null; const parts=fr.replace(/\s/g,'').split('/'); if(parts.length!==2) return null; const a=Number(parts[0]), b=Number(parts[1]); if(!isFinite(a)||!isFinite(b)||b===0) return null; return 1+(a/b); }
-
-    // ---------- Converter ----------
-    function convertFromAmerican(){
-      const A=Number(document.getElementById('oddsAmerican').value);
-      const D=americanToDecimal(A), p=americanToProb(A);
-      if(D){ document.getElementById('oddsDecimal').value=D.toFixed(3); document.getElementById('oddsFractional').value=fracStr(D); }
-      if(p){ document.getElementById('oddsProb').value=(p*100).toFixed(2); }
-    }
-    function convertFromDecimal(){
-      const D=Number(document.getElementById('oddsDecimal').value);
-      const A=decimalToAmerican(D); if(A!==null){ document.getElementById('oddsAmerican').value=A; }
-      const p=(D>1)?(1/D):null; if(p){ document.getElementById('oddsProb').value=(p*100).toFixed(2); }
-      if(D){ document.getElementById('oddsFractional').value=fracStr(D); }
-    }
-    function convertFromFractional(){
-      const fr=document.getElementById('oddsFractional').value;
-      const D=fracToDec(fr); if(D){ document.getElementById('oddsDecimal').value=D.toFixed(3); }
-      const A=D?decimalToAmerican(D):null; if(A!==null){ document.getElementById('oddsAmerican').value=A; }
-      const p=D?(1/D):null; if(p){ document.getElementById('oddsProb').value=(p*100).toFixed(2); }
-    }
-    function clearOdds(){ ['oddsAmerican','oddsDecimal','oddsFractional','oddsProb'].forEach(id=>document.getElementById(id).value=""); }
-
-    // ---------- No-Vig ----------
-    function calcNoVig(){
-      const A=Number(document.getElementById('nvA').value);
-      const B=Number(document.getElementById('nvB').value);
-      const pa=americanToProb(A), pb=americanToProb(B);
-      if(!pa||!pb){ document.getElementById('nvOut').innerHTML='<span class="bad">Enter valid odds.</span>'; return; }
-      const s=pa+pb, fa=pa/s, fb=pb/s;
-      const aFairAmerican=probToAmerican(fa), bFairAmerican=probToAmerican(fb);
-      document.getElementById('nvOut').innerHTML =
-        `<div><b>Implied (with vig):</b> A=${toPct(pa)}% · B=${toPct(pb)}% · Sum=${toPct(s)}%</div>
-         <div><b>Fair (no-vig):</b> A=${toPct(fa)}% (≈ ${aFairAmerican}) · B=${toPct(fb)}% (≈ ${bFairAmerican})</div>`;
-    }
-
-    // ---------- Kelly ----------
-    function calcKelly(){
-      const bank=Number(document.getElementById('kellyBank').value||0);
-      const A=Number(document.getElementById('kellyAmerican').value);
-      const p=fromPct(document.getElementById('kellyP').value||0);
-      const frac=clamp(Number(document.getElementById('kellyFrac').value||0.5),0,1);
-      const D=americanToDecimal(A);
-      if(!bank||!D||!p){ document.getElementById('kellyOut').innerHTML='<span class="bad">Enter bankroll, odds, and your true win %.</span>'; return; }
-      const b=D-1, q=1-p; let f=(b*p - q)/b; if(!isFinite(f)) f=-1;
-      let msg, css='muted';
-      if(f<=0){ msg='No bet (negative edge).'; css='bad'; }
-      else{ const stake=bank*f*frac; msg=`Kelly fraction ${(f*100).toFixed(2)}% · Fractional ${(frac*100).toFixed(0)}% → Stake ≈ $${stake.toFixed(2)}`; css='ok'; }
-      document.getElementById('kellyOut').innerHTML=`<span class="${css}">${msg}</span>`;
-    }
-
-    // ---------- CLV ----------
-    function calcCLV(){
-      const y=Number(document.getElementById('clvYours').value);
-      const c=Number(document.getElementById('clvClose').value);
-      const py=americanToProb(y), pc=americanToProb(c);
-      if(!py||!pc){ document.getElementById('clvOut').innerHTML='<span class="bad">Enter valid American prices.</span>'; return; }
-      const beat=(py<pc);
-      let centsNote='Cents diff: n/a';
-      if((y<0&&c<0)||(y>0&&c>0)){
-        const cy=Math.abs(y), cc=Math.abs(c);
-        const cents = (y<0 ? (cc - cy) : (y - c)); // +cents = you beat it
-        centsNote = `Approx “cents” edge: ${cents>0?'+':''}${cents.toFixed(0)}¢`;
-      }
-      document.getElementById('clvOut').innerHTML =
-        `<div>Implied prob (yours): ${(py*100).toFixed(2)}% · close: ${(pc*100).toFixed(2)}%</div>
-         <div>${centsNote}</div>
-         <div>Status: ${beat?'<span class="ok">You beat the close ✅</span>':'<span class="warn">Worse than close ⚠️</span>'}</div>`;
-    }
-
-    // ---------- Copy helper ----------
-    async function copyById(id){
-      const txt=document.getElementById(id).innerText;
-      try{
-        await navigator.clipboard.writeText(txt);
-        const btn=event?.target; if(btn){ const t=btn.innerText; btn.innerText='Copied!'; setTimeout(()=>btn.innerText='Copy',1100); }
-      }catch(e){ alert('Copy failed. Select and copy manually.'); }
-    }
   </script>
 </body>
 </html>
