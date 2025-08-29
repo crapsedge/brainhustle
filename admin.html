@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>BrainHustle Admin</title>
+<style>
+  body{font-family:Arial,Helvetica,sans-serif;background:#0a0a0a;color:#fff;margin:0}
+  .wrap{max-width:720px;margin:0 auto;padding:28px 18px}
+  h1{margin:0 0 12px;color:#00ff66}
+  .card{background:#121212;border:1px solid #242424;border-radius:12px;padding:16px;margin:14px 0}
+  label{display:block;margin:8px 0 4px}
+  input,select{width:100%;padding:10px;border-radius:8px;border:1px solid #2a2a2a;background:#0f0f0f;color:#fff}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  button{background:#00ff66;color:#000;border:none;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
+  .muted{color:#b7b7b7}
+  .ok{color:#93ff93} .bad{color:#ff8a8a}
+  .foot{margin-top:18px;color:#8a8a8a;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>BrainHustle™ Admin</h1>
+  <div class="card">
+    <div id="me" class="muted">Checking login…</div>
+    <div id="gate" class="bad" style="display:none">Access denied. You must be the owner to use this page.</div>
+  </div>
+
+  <div id="tool" class="card" style="display:none">
+    <h3>Set Member Level</h3>
+    <p class="muted">You can set by <b>UID</b> (preferred) or by <b>Email</b>. If both are present, UID wins.</p>
+    <div class="row">
+      <div>
+        <label>Firebase UID (optional)</label>
+        <input id="uid" placeholder="e.g. abc123UID"/>
+      </div>
+      <div>
+        <label>User Email (optional)</label>
+        <input id="email" placeholder="e.g. user@example.com"/>
+      </div>
+    </div>
+    <div class="row" style="margin-top:10px">
+      <div>
+        <label>Level</label>
+        <select id="level">
+          <option value="upgraded">upgraded</option>
+          <option value="starter">starter</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:end"><button id="saveBtn">Save</button></div>
+    </div>
+    <div id="out" class="muted" style="margin-top:10px"></div>
+  </div>
+
+  <div class="foot">© BrainHustle™ — Owner-only page. Actions are logged in Firestore.</div>
+</div>
+
+<!-- Firebase (Compat to keep it simple) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+  // 1) EDIT THIS: your owner account UID from Firebase Auth
+  const OWNER_UID = "PUT_YOUR_OWNER_UID_HERE";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
+    authDomain: "brainhustle-92a40.firebaseapp.com",
+    projectId: "brainhustle-92a40",
+    storageBucket: "brainhustle-92a40.firebasestorage.app",
+    messagingSenderId: "547592914180",
+    appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
+    measurementId: "G-3M5PKR5S27"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  const meEl = document.getElementById('me');
+  const gateEl = document.getElementById('gate');
+  const toolEl = document.getElementById('tool');
+  const outEl = document.getElementById('out');
+  const saveBtn = document.getElementById('saveBtn');
+
+  auth.onAuthStateChanged(async (user)=>{
+    if(!user){
+      meEl.innerHTML = 'Not logged in. <a href="login.html" style="color:#00ff66">Login</a>';
+      gateEl.style.display = 'block';
+      return;
+    }
+    meEl.textContent = `Signed in as ${user.email || user.uid}`;
+    if(user.uid !== OWNER_UID){
+      gateEl.style.display = 'block';
+      return;
+    }
+    toolEl.style.display = 'block';
+  });
+
+  async function setMemberLevel({uid,email,level}){
+    // writes to both: members/{uid} and membersByEmail/{emailLower} (if provided)
+    let ops = [];
+    if(uid){
+      ops.push(db.collection('members').doc(uid).set({level, updatedAt: firebase.firestore.FieldValue.serverTimestamp()}, {merge:true}));
+    }
+    if(email){
+      const e = email.trim().toLowerCase();
+      if(e) ops.push(db.collection('membersByEmail').doc(e).set({level, updatedAt: firebase.firestore.FieldValue.serverTimestamp()}, {merge:true}));
+    }
+    await Promise.all(ops);
+  }
+
+  saveBtn.onclick = async ()=>{
+    outEl.textContent = '';
+    const uid = document.getElementById('uid').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const level = document.getElementById('level').value;
+    if(!uid && !email){ outEl.innerHTML = '<span class="bad">Enter a UID or an Email.</span>'; return; }
+    try{
+      await setMemberLevel({uid, email, level});
+      outEl.innerHTML = `<span class="ok">Saved: ${level.toUpperCase()} ${uid?('UID '+uid):''} ${email?('Email '+email):''}</span>`;
+    }catch(e){
+      console.error(e);
+      outEl.innerHTML = `<span class="bad">Error: ${e.message}</span>`;
+    }
+  };
+</script>
+</body>
+</html>
