@@ -3,257 +3,62 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>BrainHustle™ — Sports (Simple)</title>
-<meta name="description" content="Ultra simple BrainHustle™ sports tools: odds converter, no-vig, Kelly, CLV, and downloads. Education only."/>
+<title>BrainHustle™ — Sports Systems</title>
 <style>
-  :root{--bg:#0a0a0a;--panel:#151515;--ink:#fff;--muted:#b7b7b7;--accent:#00e676}
-  *{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,Arial,sans-serif}
-  .wrap{max-width:720px;margin:0 auto;padding:20px}
-  h1{font-size:24px;margin:6px 0}
-  h2{font-size:20px;margin:14px 0 8px}
-  .card{background:var(--panel);border:1px solid #222;border-radius:12px;padding:14px;margin:12px 0}
-  .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  label{display:block;font-size:16px;margin:8px 0 4px}
-  input{width:100%;padding:14px;font-size:18px;border-radius:10px;border:1px solid #333;background:#0f0f0f;color:#fff}
-  .btn{width:100%;padding:14px;font-size:18px;font-weight:700;border:none;border-radius:10px;background:var(--accent);color:#000;cursor:pointer;margin-top:8px}
-  .muted{color:var(--muted)}
-  .big{font-size:18px}
-  .pill{display:inline-block;padding:4px 10px;border:1px solid #2a2a2a;border-radius:999px;margin:4px 6px 0 0;color:#ddd;font-size:12px}
-  .result{margin-top:10px;padding:12px;border-radius:10px;background:#0f0f0f;border:1px solid #222;font-size:18px}
-  .ok{color:#7CFC00}.bad{color:#ff6b6b}
-  .teaser,.content{display:none}
-  .top{display:flex;justify-content:space-between;align-items:center}
-  .menu{background:#0f0f0f;border:1px solid #222;border-radius:10px;padding:8px 12px}
-  a{color:var(--accent);text-decoration:none}
-  .downloads a{display:block;margin:6px 0}
-  .foot{color:#9a9a9a;font-size:12px;margin-top:10px}
+  body { background:#0a0a0a; color:#fff; font-family:Arial, sans-serif; margin:0; padding:0; }
+  .wrap { max-width:720px; margin:0 auto; padding:20px; }
+  h1 { color:#00e676; font-size:26px; margin:10px 0; }
+  h2 { font-size:20px; margin:18px 0 10px; color:#00e676; }
+  p { font-size:16px; line-height:1.6; margin-bottom:16px; }
+  .card { background:#151515; border:1px solid #222; border-radius:10px; padding:18px; margin:16px 0; }
+  .btn { display:block; width:100%; text-align:center; background:#00e676; color:#000;
+         font-size:18px; font-weight:bold; padding:14px; margin:10px 0; border:none; border-radius:8px;
+         cursor:pointer; text-decoration:none; }
+  .btn.dark { background:#222; color:#fff; border:1px solid #444; }
+  .foot { margin-top:20px; color:#999; font-size:12px; line-height:1.4; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top">
-    <div>
-      <div style="font-size:18px">🧠 <b>BrainHustle™</b> <span class="muted">Sports</span></div>
-      <div>
-        <span class="pill">1–2% per bet</span>
-        <span class="pill">Line-shopping</span>
-        <span class="pill">No-vig</span>
-        <span class="pill">CLV</span>
-      </div>
-    </div>
-    <a class="menu" href="dashboard.html">☰ Menu</a>
+
+  <h1>🧠 BrainHustle™ Sports Systems</h1>
+
+  <div class="card">
+    <h2>How to Use This Page</h2>
+    <p>We keep it simple. Instead of a messy screen, here’s what you do:</p>
+    <ol>
+      <li>Click the button for the tool or log you want.</li>
+      <li>Follow the step-by-step instructions that open.</li>
+      <li>Come back here any time to grab another tool.</li>
+    </ol>
   </div>
 
-  <div id="starter" class="teaser card">
-    <h2>🔒 Upgraded Members Only</h2>
-    <p class="muted big">Log in with your upgraded account, or <a href="upgrade.html">upgrade here</a>.</p>
+  <div class="card">
+    <h2>Sports Tools</h2>
+    <a class="btn" href="https://your-link-to-calculators.com" target="_blank">📊 Open All Calculators</a>
+    <p class="foot">Includes: Odds Converter, No-Vig Calculator, Kelly Bet Sizing, and CLV Checker.</p>
   </div>
 
-  <div id="pro" class="content">
-
-    <!-- STEP 1: Odds Converter -->
-    <div class="card">
-      <h2>Step 1 — Odds Converter</h2>
-      <p class="muted">Type in just one box. Hit Convert.</p>
-      <div class="row">
-        <div>
-          <label>American</label>
-          <input id="oddsA" placeholder="-110" inputmode="numeric"/>
-        </div>
-        <div>
-          <label>Decimal</label>
-          <input id="oddsD" placeholder="1.909" inputmode="decimal"/>
-        </div>
-      </div>
-      <div class="row">
-        <div>
-          <label>Fractional</label>
-          <input id="oddsF" placeholder="11/10"/>
-        </div>
-        <div>
-          <label>Implied Prob %</label>
-          <input id="oddsP" placeholder="52.38" inputmode="decimal"/>
-        </div>
-      </div>
-      <button class="btn" onclick="convertOdds()">Convert</button>
-      <div class="result muted">Tip: implied probability ignores vig.</div>
-    </div>
-
-    <!-- STEP 2: No-Vig -->
-    <div class="card">
-      <h2>Step 2 — No-Vig (Two Sides)</h2>
-      <div class="row">
-        <div><label>Side A (American)</label><input id="nvA" placeholder="-110" inputmode="numeric"/></div>
-        <div><label>Side B (American)</label><input id="nvB" placeholder="-110" inputmode="numeric"/></div>
-      </div>
-      <button class="btn" onclick="noVig()">Get Fair %</button>
-      <div id="nvOut" class="result">—</div>
-    </div>
-
-    <!-- STEP 3: Kelly -->
-    <div class="card">
-      <h2>Step 3 — Kelly Bet Size</h2>
-      <div class="row">
-        <div><label>Bankroll ($)</label><input id="bank" placeholder="500" inputmode="decimal"/></div>
-        <div><label>Offered Odds (American)</label><input id="kellyOdds" placeholder="-110" inputmode="numeric"/></div>
-      </div>
-      <div class="row">
-        <div><label>Your Win %</label><input id="winP" placeholder="53" inputmode="decimal"/></div>
-        <div><label>Fraction (0.25–1.0)</label><input id="kFrac" value="0.5" inputmode="decimal"/></div>
-      </div>
-      <button class="btn" onclick="kelly()">Calculate</button>
-      <div id="kOut" class="result">—</div>
-    </div>
-
-    <!-- STEP 4: CLV -->
-    <div class="card">
-      <h2>Step 4 — CLV Check</h2>
-      <div class="row">
-        <div><label>Your Price (American)</label><input id="clvYou" placeholder="-110" inputmode="numeric"/></div>
-        <div><label>Closing Price (American)</label><input id="clvClose" placeholder="-120" inputmode="numeric"/></div>
-      </div>
-      <button class="btn" onclick="clv()">Check CLV</button>
-      <div id="clvOut" class="result">—</div>
-    </div>
-
-    <!-- Downloads -->
-    <div class="card">
-      <h2>Downloads</h2>
-      <p class="muted">Track stake %, odds, and CLV. Flat bet 1–2% until you’ve proven edge.</p>
-      <div class="downloads">
-        <a class="btn" href="/assets/BrainHustle_Sports_Log.xlsx" download>⬇️ Sports Betting Log (.xlsx)</a>
-        <a class="btn" style="background:#222;color:#fff;border:1px solid #333" href="/assets/BrainHustle_Sports_Log.csv" download>⬇️ CSV Version</a>
-      </div>
-
-      <h3 style="margin-top:12px">Copy: CSV Header</h3>
-      <button class="btn" onclick="copyText('csvHead')" style="background:#333;color:#fff;border:1px solid #444">Copy</button>
-      <div id="csvHead" class="result" style="font-size:14px;white-space:pre-wrap">
-Date (YYYY-MM-DD),Sport,League,Event / Matchup,Book,Bet Type (ML/Spread/Total/Prop),Side/Selection,American Odds,Decimal Odds,Stake ($),Line (e.g., -3.5 / 47.5),Result (W/L/P),Payout ($),Profit/Loss ($),Bankroll Before ($),Bankroll After ($),Closing Line (Book),Closing Odds (American),CLV (Closing - Your Odds, in cents),Notes
-      </div>
-
-      <h3 style="margin-top:12px">Copy: Responsible-Play Block</h3>
-      <button class="btn" onclick="copyText('legalBlock')" style="background:#333;color:#fff;border:1px solid #444">Copy</button>
-      <div id="legalBlock" class="result" style="font-size:14px;white-space:pre-wrap">
-BrainHustle™ provides educational content only. Nothing here is betting advice or a guarantee of profit.
-Sports betting involves risk. Only bet what you can afford to lose. Must be 21+ (or legal age in your jurisdiction).
-Check and follow all local laws; availability varies by state/country. If gambling is a problem, seek help (e.g., 1-800-GAMBLER in the U.S.). By using this site you accept our Terms, Disclaimers, and Privacy Policy.
-      </div>
-    </div>
-
-    <div class="foot">© BrainHustle™ — Education only. No picks, no promises, not financial or betting advice.</div>
+  <div class="card">
+    <h2>Track Your Bets</h2>
+    <a class="btn" href="/assets/BrainHustle_Sports_Log.xlsx" download>⬇️ Download Sports Betting Log (.xlsx)</a>
+    <a class="btn dark" href="/assets/BrainHustle_Sports_Log.csv" download>⬇️ Download CSV Version</a>
+    <p class="foot">Use these logs to track stake %, odds, CLV, profit/loss, and bankroll. Stick to 1–2% per bet until you’ve proven edge.</p>
   </div>
+
+  <div class="card">
+    <h2>Responsible Play Reminder</h2>
+    <p>⚠️ BrainHustle™ provides <b>educational content only</b>. Nothing here is betting advice or a guarantee of profit.</p>
+    <p>✔️ Only bet what you can afford to lose.<br>
+       ✔️ Must be 21+ (or legal age in your jurisdiction).<br>
+       ✔️ Follow all local laws.<br>
+       ✔️ If gambling is a problem, call <a href="tel:1-800-522-4700" style="color:#00e676">1-800-GAMBLER</a> (U.S.).</p>
+  </div>
+
+  <div class="foot">
+    © BrainHustle™ — Educational use only. By using this site you accept our Terms, Disclaimers, and Privacy Policy.
+  </div>
+
 </div>
-
-<!-- ====== Tiny JS (simple math only) ====== -->
-<script>
-  // helpers
-  const toProb = (price)=> price>0 ? 100/(price+100) : (-price)/(-price+100);
-  const toDec  = (price)=> price>0 ? (price/100)+1 : (100/(-price))+1;
-  const fromDec=(d)=> d>=2 ? Math.round((d-1)*100) : Math.round(-100/(d-1));
-
-  function val(id){ return document.getElementById(id).value.trim(); }
-  function set(id,v){ document.getElementById(id).value = v; }
-  function text(id,v){ document.getElementById(id).innerHTML = v; }
-  function copyText(id){ navigator.clipboard.writeText(document.getElementById(id).textContent.trim()); }
-
-  // Step 1
-  function convertOdds(){
-    const a = val('oddsA'), d = val('oddsD'), f = val('oddsF'), p = val('oddsP');
-    if(a){ 
-      const A=Number(a); set('oddsD', toDec(A).toFixed(3));
-      set('oddsP', (toProb(A)*100).toFixed(2));
-      set('oddsF', A>0?`${A}/100`:`100/${-A}`); return;
-    }
-    if(d){ 
-      const D=Number(d); set('oddsA', fromDec(D));
-      set('oddsP', (100/D).toFixed(2));
-      const num=Math.round((D-1)*100); set('oddsF', `${num}/100`); return;
-    }
-    if(f && f.includes('/')){
-      const [num,den]=f.split('/').map(Number); const D=1+(num/den);
-      set('oddsD', D.toFixed(3)); set('oddsA', fromDec(D)); set('oddsP', (100/D).toFixed(2)); return;
-    }
-    if(p){
-      const P=Number(p)/100; const D=1/P; set('oddsD', D.toFixed(3)); set('oddsA', fromDec(D));
-      const num=Math.round((D-1)*100); set('oddsF', `${num}/100`); return;
-    }
-    // nothing entered
-  }
-
-  // Step 2
-  function noVig(){
-    const a=Number(val('nvA')), b=Number(val('nvB'));
-    if(!a || !b){ text('nvOut','Enter both prices.'); return; }
-    const pA=toProb(a), pB=toProb(b), sum=pA+pB;
-    const fA=(pA/sum)*100, fB=(pB/sum)*100;
-    text('nvOut', `Fair A: <b>${fA.toFixed(2)}%</b> • Fair B: <b>${fB.toFixed(2)}%</b>`);
-  }
-
-  // Step 3
-  function kelly(){
-    const bank=Number(val('bank')), price=Number(val('kellyOdds')), p=Number(val('winP'))/100, frac=Math.max(0, Number(val('kFrac'))||0.5);
-    if(!bank || !price || !p){ text('kOut','Enter bankroll, odds, and win %.'); return; }
-    const b=toDec(price)-1; const k=(b*p-(1-p))/b; const bet=Math.max(0,k*frac*bank);
-    text('kOut', k<=0 ? '<span class="bad">Edge ≤ 0 → No bet.</span>' : `Full Kelly: ${(k*100).toFixed(2)}% • Bet (×${frac}): <b>$${bet.toFixed(2)}</b>`);
-  }
-
-  // Step 4
-  function clv(){
-    const you=Number(val('clvYou')), close=Number(val('clvClose'));
-    if(!you || !close){ text('clvOut','Enter both prices.'); return; }
-    const yourDec=toDec(you), closeDec=toDec(close);
-    const yourImp=1/yourDec, closeImp=1/closeDec;
-    const edge=((closeImp-yourImp)*100).toFixed(2);
-    text('clvOut', `Your imp: ${(yourImp*100).toFixed(2)}% • Close: ${(closeImp*100).toFixed(2)}% • <b>Edge vs close: ${edge}%</b>`);
-  }
-</script>
-
-<!-- ====== FREE plan gating (Realtime Database) ====== -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-  import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
-    authDomain: "brainhustle-92a40.firebaseapp.com",
-    projectId: "brainhustle-92a40",
-    storageBucket: "brainhustle-92a40.appspot.com",
-    messagingSenderId: "547592914180",
-    appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
-    databaseURL: "https://brainhustle-92a40-default-rtdb.firebaseio.com"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const rtdb = getDatabase(app);
-
-  const OWNER_UID = "bMPlkmhEV8a05M0uwsgxVORsFk72"; // you always get access
-  const emailKey = (e)=> e.toLowerCase().replace(/\./g, ',');
-
-  const starter = document.getElementById('starter');
-  const pro     = document.getElementById('pro');
-
-  const showStarter = ()=>{ starter.style.display='block'; pro.style.display='none'; };
-  const showPro     = ()=>{ starter.style.display='none';  pro.style.display='block'; };
-
-  async function levelFor(user){
-    if(user.uid===OWNER_UID) return 'upgraded';
-    const uidSnap = await get(child(ref(rtdb), `/members/${user.uid}/level`));
-    if(uidSnap.exists()) return uidSnap.val();
-    if(user.email){
-      const eKey=emailKey(user.email);
-      const mailSnap = await get(child(ref(rtdb), `/membersByEmail/${eKey}/level`));
-      if(mailSnap.exists()) return mailSnap.val();
-    }
-    return 'starter';
-  }
-
-  onAuthStateChanged(auth, async (user)=>{
-    if(!user){ showStarter(); return; } // or redirect to login.html
-    const level=(await levelFor(user)).toLowerCase();
-    level==='upgraded' ? showPro() : showStarter();
-  });
-</script>
 </body>
 </html>
