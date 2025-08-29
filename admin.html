@@ -16,6 +16,7 @@
   .muted{color:#b7b7b7}
   .ok{color:#93ff93} .bad{color:#ff8a8a}
   .foot{margin-top:18px;color:#8a8a8a;font-size:12px}
+  .small{font-size:12px}
 </style>
 </head>
 <body>
@@ -28,7 +29,7 @@
 
   <div id="tool" class="card" style="display:none">
     <h3>Set Member Level</h3>
-    <p class="muted">You can set by <b>UID</b> (preferred) or by <b>Email</b>. If both are present, UID wins.</p>
+    <p class="muted small">Use <b>UID</b> when possible. If you only have an email, that works too. If both are provided, UID wins.</p>
     <div class="row">
       <div>
         <label>Firebase UID (optional)</label>
@@ -60,8 +61,9 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
-  // 1) EDIT THIS: your owner account UID from Firebase Auth
-  const OWNER_UID = "PUT_YOUR_OWNER_UID_HERE";
+  // >>> OWNER SETTINGS (your values filled in)
+  const OWNER_UID   = "bMPlkmhEV8a05M0uwsgxVORsFk72";
+  const OWNER_EMAIL = "shawn.murrayjr@gmail.com"; // optional fallback
 
   const firebaseConfig = {
     apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
@@ -88,8 +90,13 @@
       gateEl.style.display = 'block';
       return;
     }
-    meEl.textContent = `Signed in as ${user.email || user.uid}`;
-    if(user.uid !== OWNER_UID){
+    meEl.innerHTML = `Signed in as <b>${user.email || user.uid}</b> <span class="small">(UID: ${user.uid})</span>`;
+
+    // Allow owner by UID or email
+    const isOwnerUid = user.uid === OWNER_UID;
+    const isOwnerEmail = user.email && user.email.toLowerCase() === OWNER_EMAIL.toLowerCase();
+
+    if(!isOwnerUid && !isOwnerEmail){
       gateEl.style.display = 'block';
       return;
     }
@@ -98,15 +105,26 @@
 
   async function setMemberLevel({uid,email,level}){
     // writes to both: members/{uid} and membersByEmail/{emailLower} (if provided)
-    let ops = [];
+    const ops = [];
+    const stamp = firebase.firestore.FieldValue.serverTimestamp();
     if(uid){
-      ops.push(db.collection('members').doc(uid).set({level, updatedAt: firebase.firestore.FieldValue.serverTimestamp()}, {merge:true}));
+      ops.push(db.collection('members').doc(uid).set({level, updatedAt: stamp}, {merge:true}));
     }
     if(email){
       const e = email.trim().toLowerCase();
-      if(e) ops.push(db.collection('membersByEmail').doc(e).set({level, updatedAt: firebase.firestore.FieldValue.serverTimestamp()}, {merge:true}));
+      if(e) ops.push(db.collection('membersByEmail').doc(e).set({level, updatedAt: stamp}, {merge:true}));
     }
     await Promise.all(ops);
+
+    // simple audit log
+    await db.collection('adminLogs').add({
+      at: stamp,
+      action: 'setMemberLevel',
+      byUid: auth.currentUser?.uid || null,
+      targetUid: uid || null,
+      targetEmail: (email||'').toLowerCase(),
+      level
+    });
   }
 
   saveBtn.onclick = async ()=>{
@@ -117,7 +135,7 @@
     if(!uid && !email){ outEl.innerHTML = '<span class="bad">Enter a UID or an Email.</span>'; return; }
     try{
       await setMemberLevel({uid, email, level});
-      outEl.innerHTML = `<span class="ok">Saved: ${level.toUpperCase()} ${uid?('UID '+uid):''} ${email?('Email '+email):''}</span>`;
+      outEl.innerHTML = `<span class="ok">Saved: ${level.toUpperCase()} ${uid?('UID '+uid):''} ${email?('Email '+email.toLowerCase()):''}</span>`;
     }catch(e){
       console.error(e);
       outEl.innerHTML = `<span class="bad">Error: ${e.message}</span>`;
