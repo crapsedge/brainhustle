@@ -29,7 +29,7 @@
       background: #0a0a0a;
       color: white;
       overflow-x: hidden;
-      padding-top: var(--top-offset); /* space under top-status bar */
+      /* removed top offset so content sits at the very top */
     }
 
     .navbar {
@@ -61,7 +61,7 @@
     /* Side Menu */
     #sideMenu {
       position: fixed;
-      top: var(--top-offset); /* sits below green bar */
+      top: 0;                 /* sits at top now */
       right: -250px;
       width: 250px;
       height: 100%;
@@ -71,7 +71,6 @@
       padding: 20px;
       box-shadow: -2px 0 5px rgba(0,0,0,0.5);
     }
-
     #sideMenu.open { right: 0; }
 
     #sideMenu a {
@@ -81,7 +80,6 @@
       text-decoration: none;
       border-bottom: 1px solid #333;
     }
-
     #sideMenu a:hover { background-color: #222; }
 
     .hero {
@@ -89,15 +87,8 @@
       padding: 60px 20px;
       background: linear-gradient(135deg, #005CFF, #00e676);
     }
-
-    .hero h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
-      color: white;
-    }
-
-    .hero p { font-size: 18px; color: orange; }
-
+    .hero h1 { font-size: 36px; margin-bottom: 10px; color: white; }
+    .hero p  { font-size: 18px; color: orange; }
     .hero button {
       margin-top: 20px;
       padding: 12px 20px;
@@ -109,16 +100,8 @@
       cursor: pointer;
     }
 
-    .section {
-      padding: 40px 20px;
-      background-color: #000;
-    }
-
-    .section h2 {
-      text-align: center;
-      color: #00ff99;
-      margin-bottom: 20px;
-    }
+    .section { padding: 40px 20px; background-color: #000; }
+    .section h2 { text-align: center; color: #00ff99; margin-bottom: 20px; }
 
     .card {
       background-color: #111;
@@ -127,31 +110,27 @@
       padding: 20px;
       border-radius: 6px;
     }
-
     .card h3 { color: red; margin-top: 0; }
-    .card p { margin: 10px 0 0 0; }
+    .card p  { margin: 10px 0 0 0; }
 
-    /* Top-status + offset handling */
-    :root {
-      --safe-top: env(safe-area-inset-top);
-      --top-offset: 0px;
-    }
+    /* Transparent top status bar (does not block taps) */
     .top-status {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: green;
+      background: rgba(0, 255, 0, 0.35); /* semi-transparent green */
       color: white;
       padding: 6px 12px;
       font-size: 14px;
+      pointer-events: none; /* taps pass through to buttons/menus beneath */
+      /* optional blur to keep text readable over content: */
+      /* backdrop-filter: blur(2px); */
     }
   </style>
 </head>
 <body>
 
-<!-- Green login/membership bar -->
+<!-- Transparent login/membership bar -->
 <div class="top-status">
   Logged in: shawn.murrayjr@gmail.com — Membership: UPGRADED • Role: admin
 </div>
@@ -202,15 +181,6 @@
   function toggleMenu() {
     document.getElementById("sideMenu").classList.toggle("open");
   }
-
-  // Offset for top-status
-  function bhSetTopOffset(){
-    var bar = document.querySelector('.top-status');
-    var h = bar ? bar.getBoundingClientRect().height : 0;
-    document.documentElement.style.setProperty('--top-offset', h + 'px');
-  }
-  window.addEventListener('load', bhSetTopOffset);
-  window.addEventListener('resize', bhSetTopOffset);
 </script>
 
 </body>
