@@ -4,6 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BrainHustle™ Dashboard</title>
+
+  <!-- Google Analytics (pageview tracking) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3M5PKR5S27"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3M5PKR5S27');
+  </script>
+
   <style>
     body {
       margin: 0;
@@ -56,9 +66,8 @@
       transition: 0.3s;
       padding-top: 60px;
       z-index: 1001;
-      text-align: left; /* ADDED: keeps badge aligned nicely */
+      text-align: left; /* keeps badge aligned nicely */
     }
-
     .sidebar a {
       padding: 10px 20px;
       text-decoration: none;
@@ -69,21 +78,26 @@
     .sidebar a:hover { background-color: #222; }
     .close-btn { position: absolute; top: 10px; right: 20px; font-size: 24px; color: white; cursor: pointer; }
 
-    /* Top status banner */
+    /* Top status banner (transparent + does not block taps) */
     .statusbar {
       position: fixed;
       top: 0; left: 0; right: 0;
-      background:#00e676; color:#000;
+      background: rgba(0, 230, 118, 0.35); /* transparent green */
+      color: #000;
       padding: 10px 14px;
       font-weight: 700;
       display: none; /* shown by JS */
       z-index: 1100;
+      pointer-events: none;          /* ✅ lets clicks pass through */
+      /* Optional: keep text readable over busy backgrounds */
+      /* backdrop-filter: blur(2px); */
     }
-    .statusbar.error { background:#ff5252; color:#fff; }
+    .statusbar.error { background: rgba(255, 82, 82, 0.6); color:#fff; }
     .status-actions { margin-left:8px; display:inline-block; }
     .status-actions button {
       background:#000; color:#00e676; border:1px solid #000;
       padding:6px 10px; border-radius:6px; cursor:pointer;
+      pointer-events: auto;          /* allow clicking the retry button */
     }
   </style>
 </head>
@@ -103,16 +117,14 @@
     <a href="monetization.html">Monetization</a>
     <a href="trackers.html">Trackers</a>
     <a href="about.html">What is BrainHustle™?</a>
-
-    <!-- ADDED: direct link to your Sports Systems page -->
     <a href="sports-systems.html">🏈 Sports Systems</a>
 
-    <!-- ADDED: green badge (hidden by default) -->
+    <!-- green badge (hidden by default) -->
     <div id="memberStatus" style="padding:10px 20px;color:#00e676;font-size:14px;display:none">
       Status: Upgraded ✅
     </div>
 
-    <!-- ADDED: upgrade link (we’ll hide this if you’re upgraded) -->
+    <!-- upgrade link (hidden if upgraded) -->
     <a id="upgradeLink" href="upgrade.html">⬆️ Upgrade Access</a>
 
     <a href="login.html" onclick="logout()">Logout</a>
@@ -157,12 +169,11 @@
     function closeMenu() { document.getElementById("sideMenu").style.width = "0"; }
   </script>
 
-  <!-- Firebase Logout + Auto-Admin with visible status + retry (kept as-is) -->
+  <!-- Firebase Logout + Auto-Admin with visible status + retry -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
     import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-    /* ADDED: Realtime Database imports (free plan status check) */
     import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 
     const firebaseConfig = {
@@ -173,14 +184,12 @@
       messagingSenderId: "547592914180",
       appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
       measurementId: "G-3M5PKR5S27",
-      /* ADDED: include your RTDB URL */
       databaseURL: "https://brainhustle-92a40-default-rtdb.firebaseio.com"
     };
 
     const app  = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db   = getFirestore(app);
-    /* ADDED: RTDB handle */
     const rtdb = getDatabase(app);
 
     const STATUS = document.getElementById('statusbar');
@@ -189,7 +198,8 @@
       STATUS.innerHTML = msg + (withRetry ? `<span class="status-actions"><button id="forceBtn">Force Upgrade</button></span>` : '');
       STATUS.style.display = 'block';
       if (withRetry && user) {
-        document.getElementById('forceBtn').onclick = () => ensureAdmin(user, true);
+        const btn = document.getElementById('forceBtn');
+        if (btn) btn.onclick = () => ensureAdmin(user, true);
       }
     }
 
@@ -204,7 +214,6 @@
         return;
       }
       try {
-        /* keeping your Firestore write (unchanged) */
         await setDoc(doc(db, "users", user.uid), {
           email: user.email,
           membership: "upgraded",
@@ -222,7 +231,6 @@
       }
     }
 
-    /* ADDED: RTDB membership check to toggle the menu badge + upgrade link */
     const memberStatus = document.getElementById("memberStatus");
     const upgradeLink  = document.getElementById("upgradeLink");
     const OWNER_UID    = "bMPlkmhEV8a05M0uwsgxVORsFk72";
@@ -240,14 +248,9 @@
 
     async function fetchMembershipFromRTDB(user){
       try{
-        // owner override
-        if (user.uid === OWNER_UID) return "upgraded";
-
-        // try UID
+        if (user.uid === OWNER_UID) return "upgraded"; // owner override
         const uidSnap = await get(child(ref(rtdb), `/members/${user.uid}/level`));
         if (uidSnap.exists()) return uidSnap.val();
-
-        // fallback by email
         if (user.email) {
           const eKey = emailKey(user.email);
           const mailSnap = await get(child(ref(rtdb), `/membersByEmail/${eKey}/level`));
@@ -262,14 +265,11 @@
     onAuthStateChanged(auth, async (user) => {
       if (!user) { window.location.href = "login.html"; return; }
 
-      // Keep your existing Firestore behavior:
       await ensureAdmin(user);
 
-      // NEW: Toggle the menu using RTDB (free)
       const level = await fetchMembershipFromRTDB(user);
       await setMenuByLevel(level);
 
-      // Keep your status banner read attempt (Firestore)
       try {
         const snap = await getDoc(doc(db, "users", user.uid));
         if (snap.exists()) {
