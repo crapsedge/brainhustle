@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support BrainHustle™</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #00c244;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 14px 28px;
+            font-size: 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+        }
+        .cashapp { background-color: #00c244; }
+        .paypal { background-color: #003087; }
+        .venmo { background-color: #3d95ce; }
+        .disclaimer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Support BrainHustle™</h1>
+        <p>
+            BrainHustle™ is a growing brand, and your support helps me keep creating valuable content, tools, and resources for members like you.  
+            Any donation, big or small, goes directly toward building and improving the BrainHustle™ experience.
+        </p>
+        <p>
+            Choose your preferred method to contribute securely:
+        </p>
+        <a href="https://cash.app/$YourCashTag" class="button cashapp" target="_blank">Donate via Cash App</a>
+        <form action="https://www.paypal.com/donate" method="post" target="_blank" style="display:inline-block;">
+            <input type="hidden" name="hosted_button_id" value="YOUR_BUTTON_ID_HERE" />
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="Donate with PayPal" />
+            <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+        </form>
+        <a href="https://venmo.com/YourVenmoUsername" class="button venmo" target="_blank">Donate via Venmo</a>
+
+        <p class="disclaimer">
+            Disclaimer: All donations are voluntary and are intended to support the growth of BrainHustle™. No goods or services are provided in exchange for donations. BrainHustle™ is not responsible for any tax implications of donations. This page is compliant with Nebraska state laws regarding voluntary contributions.
+        </p>
+    </div>
+</body>
+</html>
