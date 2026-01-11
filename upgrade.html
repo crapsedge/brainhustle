@@ -1,117 +1,148 @@
+<div id="full-upgrade-code">
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Upgrade – BrainHustle™</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upgrade Access – BrainHustle™ | Murray's Empire</title>
   <style>
+    :root {
+      --primary: #00ff66;
+      --bg: #000;
+      --card: #121212;
+      --text-muted: #888;
+      --cta: #ff0000;
+      --border: #242424;
+    }
+
     body {
       margin: 0;
-      background-color: #0a0a0a;
+      background-color: var(--bg);
       color: white;
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', Arial, sans-serif;
     }
+
     .menu-button {
       position: fixed;
       top: 20px;
       left: 20px;
-      background-color: #00cc66;
+      background-color: var(--primary);
       border: none;
       color: black;
-      font-size: 22px;
-      padding: 8px 12px;
+      font-size: 18px;
+      padding: 10px 16px;
+      border-radius: 8px;
       cursor: pointer;
       z-index: 1000;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0, 255, 102, 0.3);
     }
+
     .side-menu {
       position: fixed;
       top: 0;
-      left: -250px;
-      width: 250px;
+      left: -280px;
+      width: 280px;
       height: 100%;
-      background-color: #111;
+      background-color: #0c0c0c;
       overflow-y: auto;
       transition: left 0.3s;
-      padding-top: 100px;
+      padding-top: 80px;
       z-index: 999;
+      border-right: 1px solid var(--border);
     }
+
     .side-menu a {
       display: block;
       color: white;
-      padding: 12px 20px;
+      padding: 12px 25px;
       text-decoration: none;
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid var(--border);
+      transition: 0.2s;
     }
+
     .side-menu a:hover {
-      background-color: #00cc66;
+      background-color: var(--primary);
       color: black;
     }
-    .show-menu {
-      left: 0;
-    }
+
+    .show-menu { left: 0; }
+
     .container {
-      padding: 60px 20px 20px;
+      padding: 80px 20px 40px;
       text-align: center;
+      max-width: 900px;
+      margin: auto;
     }
-    h1 {
-      color: #00cc66;
-    }
-    .upgrade-box {
-      border: 2px solid #00cc66;
-      border-radius: 10px;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 500px;
-      background-color: #111;
-      box-shadow: 0 0 10px #00cc66;
-    }
-    .upgrade-box h2 {
-      color: #00ff99;
-    }
-    .upgrade-btn {
-      background-color: red;
-      color: white;
-      padding: 12px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
-      text-decoration: none;
-      display: inline-block;
-    }
-    table {
-      width: 90%;
-      margin: 30px auto;
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 10px;
-      border: 1px solid #333;
-      text-align: center;
-    }
-    th {
-      background-color: #111;
-      color: #00cc66;
-    }
-    .footer {
-      font-size: 0.8em;
-      color: gray;
-      margin-top: 40px;
-      text-align: center;
-      padding: 20px;
-      border-top: 1px solid #333;
-    }
-    .bonus {
-      color: #ff1f1f;
-      font-weight: bold;
-      margin-top: 20px;
-    }
+
     .logo {
-      max-width: 200px;
+      height: 180px;
+      width: auto;
       margin: 0 auto 20px;
       display: block;
     }
+
+    h1 { color: var(--primary); font-size: 2.8em; margin-bottom: 10px; }
+
+    .upgrade-box {
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 30px;
+      margin: 25px auto;
+      max-width: 550px;
+      background-color: var(--card);
+      transition: 0.3s;
+    }
+
+    .upgrade-box:hover { border-color: var(--primary); }
+
+    .upgrade-box h2 { color: var(--primary); font-size: 1.8em; margin-top: 0; }
+
+    .upgrade-btn {
+      background-color: var(--cta);
+      color: white;
+      padding: 14px 28px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 15px;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .upgrade-btn:hover { background-color: #cc0000; transform: translateY(-2px); }
+
+    table {
+      width: 100%;
+      margin: 40px auto;
+      border-collapse: collapse;
+      background: var(--card);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 15px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    th { background-color: #1a1a1a; color: var(--primary); font-size: 1.1em; }
+
+    .footer { 
+      margin-top: 60px; 
+      padding: 40px 20px; 
+      background-color: #000; 
+      color: var(--text-muted); 
+      font-size: 13px; 
+      line-height: 1.6; 
+      border-top: 1px solid var(--border);
+    }
+
+    .bonus { color: #ff1f1f; font-weight: bold; font-size: 1.2em; margin-top: 20px; }
   </style>
 </head>
 <body>
@@ -119,108 +150,74 @@
   <button class="menu-button" onclick="toggleMenu()" id="menuButton">☰ Menu</button>
 
   <div id="sideMenu" class="side-menu">
-    <a href="dashboard.html">Dashboard</a>
-    <a href="kits.html">Hustle Kits</a>
-    <a href="ideas.html">Money Ideas</a>
-    <a href="passive.html">Passive Income</a>
-    <a href="ai-tools.html">AI Tools</a>
-    <a href="monetize.html">Monetization</a>
-    <a href="trackers.html">Trackers</a>
-    <a href="about.html">What is BrainHustle™?</a>
-    <a href="upgrade.html">Upgrade Access</a>
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="kits.html">📦 Hustle Kits</a>
+    <a href="ideas.html">💡 Money Ideas</a>
+    <a href="passive.html">📈 Passive Income</a>
+    <a href="ai-tools.html">🧠 AI Tools</a>
+    <a href="monetize.html">💵 Monetization</a>
+    <a href="trackers.html">📊 Trackers</a>
+    <a href="about.html">❔ What is BrainHustle™?</a>
+    <a href="upgrade.html" style="color: #ff3e3e;">⬆️ Upgrade Access</a>
     <a href="#" onclick="logout()">Logout</a>
   </div>
 
   <div class="container">
-    <!-- ✅ Logo at the top -->
-    <img src="brainhustle-logo.PNG" alt="BrainHustle™ Logo" class="logo">
+    <img src="brainhustle-logo.png" alt="BrainHustle™ Logo" class="logo">
 
-    <h1>Upgrade Your BrainHustle™ Access</h1>
-    <p>You’ve unlocked the starter kit. Now get full access to every tool, system, and strategy BrainHustle™ has to offer.</p>
+    <h1>Elevate to Founder Access</h1>
+    <p style="color:#ccc; font-size: 1.2em;">The starter kit was just the beginning. Secure full operational access to every profit system in the BrainHustle™ ecosystem.</p>
 
     <div class="upgrade-box">
-      <h2>🔥 One-Time Full Access – $19.99</h2>
-      <p>• Unlock all Hustle Kits, AI tools, income systems, trackers, and guides — <b>forever</b>.</p>
-      <a href="https://crapsedge.gumroad.com/l/fppvj" target="_blank" class="upgrade-btn">Upgrade Now – $19.99</a>
+      <h2>🔥 Lifetime Full Access – $19.99</h2>
+      <p style="color:#ddd;">• Permanent access to all kits, AI tools, systems, and trackers. Pay once, own the edge <b>forever</b>.</p>
+      <a href="#" target="_blank" class="upgrade-btn">Upgrade Lifetime Access</a>
     </div>
 
     <div class="upgrade-box">
-      <h2>💼 Monthly Access – $9/month</h2>
-      <p>• Same full access. Stay current with new tools added monthly. Cancel anytime.</p>
-      <a href="https://crapsedge.gumroad.com/l/fppvj" target="_blank" class="upgrade-btn">Subscribe – $9/month</a>
+      <h2>💼 Corporate Membership – $9/mo</h2>
+      <p style="color:#ddd;">• Full Founder access with monthly system updates and priority support. Cancel anytime.</p>
+      <a href="#" target="_blank" class="upgrade-btn">Subscribe Monthly</a>
     </div>
 
-    <p class="bonus">⚡ BONUS: Upgrade this week and get 2 exclusive tools free!</p>
+    <p class="bonus">⚡ LIMITED: Upgrade within 48 hours to secure 2 Bonus Content Blueprints.</p>
 
-    <h2 style="margin-top:40px;">Compare Access Levels</h2>
+    <h2 style="margin-top:50px; color: var(--primary);">Access Comparison</h2>
     <table>
       <tr>
         <th>Feature</th>
-        <th>$5 Starter</th>
-        <th>Upgraded Access</th>
+        <th>$5 Starter Access</th>
+        <th>Founder Tier</th>
       </tr>
-      <tr>
-        <td>Dashboard access</td>
-        <td>✔ Yes</td>
-        <td>✔ Yes</td>
-      </tr>
-      <tr>
-        <td>Hustle Kits</td>
-        <td>✔ Basic only</td>
-        <td>✔ Full access</td>
-      </tr>
-      <tr>
-        <td>Money Ideas</td>
-        <td>✔ Limited</td>
-        <td>✔ Full access</td>
-      </tr>
-      <tr>
-        <td>Passive Income</td>
-        <td>✔ 1 idea only</td>
-        <td>✔ All systems</td>
-      </tr>
-      <tr>
-        <td>AI Tools</td>
-        <td>✘ No</td>
-        <td>✔ Yes</td>
-      </tr>
-      <tr>
-        <td>Monetization</td>
-        <td>✘ No</td>
-        <td>✔ Yes</td>
-      </tr>
-      <tr>
-        <td>Trackers</td>
-        <td>✘ No</td>
-        <td>✔ Yes</td>
-      </tr>
-      <tr>
-        <td>Premium Downloads</td>
-        <td>✘ No</td>
-        <td>✔ Yes</td>
-      </tr>
-      <tr>
-        <td>Updates + New Tools</td>
-        <td>✘ No</td>
-        <td>✔ Yes</td>
-      </tr>
+      <tr><td>Dashboard Command</td><td>✔ Yes</td><td>✔ Yes</td></tr>
+      <tr><td>Hustle Kits</td><td>✔ Basic</td><td>✔ Complete Vault</td></tr>
+      <tr><td>Money Idea Logs</td><td>✔ Limited</td><td>✔ Full Library</td></tr>
+      <tr><td>Passive Income Systems</td><td>✔ 1 Entry</td><td>✔ All Systems</td></tr>
+      <tr><td>AI Automation Suite</td><td>✘ Restricted</td><td>✔ Full Access</td></tr>
+      <tr><td>Monetization Strategies</td><td>✘ Restricted</td><td>✔ Full Access</td></tr>
+      <tr><td>Performance Trackers</td><td>✘ Restricted</td><td>✔ Full Access</td></tr>
+      <tr><td>Premium Downloads</td><td>✘ Restricted</td><td>✔ Unlimited</td></tr>
     </table>
   </div>
 
-  <div class="footer">
-    <p>BrainHustle™ © 2025. All rights reserved.</p>
-    <p>Disclaimer: BrainHustle™ systems offer no guarantee of success or income. Results may vary. Use at your own risk.</p>
-  </div>
+  <footer class="footer">
+    <p style="color: #fff; margin-bottom: 5px;">© 2026 BrainHustle™. All Rights Reserved.</p>
+    <p>BrainHustle™ is a wholly owned sub-brand of <strong>Murray’s Empire LLC</strong>.</p>
+    <div style="max-width: 800px; margin: 20px auto 0; padding-top: 20px;">
+      <p><strong>Disclaimer:</strong> Educational purposes only. No guarantees of financial success. This is not financial, legal, or investment advice. By using this site, you acknowledge that Murray’s Empire LLC is not responsible for your financial decisions.</p>
+      <p>Corporate Support: <a href="mailto:murraysempirellc@gmail.com" style="color:var(--primary)">murraysempirellc@gmail.com</a></p>
+    </div>
+  </footer>
 
   <script>
     function toggleMenu() {
-      const menu = document.getElementById('sideMenu');
-      menu.classList.toggle('show-menu');
+      document.getElementById('sideMenu').classList.toggle('show-menu');
     }
     function logout() {
-      alert("Logging out...");
+      window.location.href = "login.html";
     }
   </script>
 
 </body>
 </html>
+</div>
