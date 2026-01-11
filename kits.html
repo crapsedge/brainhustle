@@ -1,14 +1,23 @@
+<div id="full-kits-code">
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hustle Kits – BrainHustle™</title>
+  <title>Hustle Kits – BrainHustle™ | Murray's Empire</title>
   <style>
+    :root {
+      --primary: #00ff66;
+      --bg: #000;
+      --card: #121212;
+      --text-muted: #888;
+      --cta: #ff0000;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0a0a0a;
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--bg);
       color: white;
       text-align: center;
     }
@@ -17,28 +26,22 @@
       position: fixed;
       top: 20px;
       left: 20px;
-      background-color: #00e676;
+      background-color: var(--primary);
       color: black;
       font-size: 18px;
-      padding: 10px 14px;
+      padding: 10px 16px;
       border: none;
-      border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
       z-index: 1000;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0, 255, 102, 0.3);
     }
 
-    .logo-container {
-      margin-top: 80px;
-    }
+    .logo-container { margin-top: 80px; }
+    .logo-container img { height: 180px; width: auto; }
 
-    .logo-container img {
-      height: 192px;
-    }
-
-    h1 {
-      color: #00e676;
-      margin-top: 20px;
-    }
+    h1 { color: var(--primary); margin-top: 20px; font-size: 2.5em; }
 
     .content {
       max-width: 900px;
@@ -48,40 +51,53 @@
     }
 
     .kit-box {
-      background: #1a1a1a;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 10px #00e676;
+      background: var(--card);
+      border: 1px solid #242424;
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 25px;
+      transition: 0.3s;
     }
 
+    .kit-box:hover { border-color: var(--primary); }
+
     .kit-box h2 {
-      color: #00e676;
-      margin-bottom: 10px;
+      color: var(--primary);
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 1.6em;
     }
 
     .kit-box p {
-      margin-bottom: 15px;
-      line-height: 1.6;
+      margin-bottom: 25px;
+      line-height: 1.7;
+      color: #ccc;
     }
 
     .kit-box a {
-      background: #FF1F1F;
+      background: var(--cta);
       color: white;
-      padding: 10px 16px;
+      padding: 12px 24px;
       text-decoration: none;
-      border-radius: 4px;
+      border-radius: 8px;
+      font-weight: bold;
+      display: inline-block;
+      transition: 0.2s;
     }
 
     .kit-box a:hover {
       background: #cc0000;
+      transform: translateY(-2px);
     }
 
-    .footer {
-      margin-top: 40px;
-      font-size: 12px;
-      color: gray;
-      padding: 20px;
+    .footer { 
+      margin-top: 60px; 
+      padding: 40px 20px; 
+      background-color: #000; 
+      color: var(--text-muted); 
+      font-size: 13px; 
+      line-height: 1.6; 
+      border-top: 1px solid #222;
     }
 
     /* Sidebar */
@@ -91,30 +107,31 @@
       position: fixed;
       top: 0;
       left: 0;
-      background-color: #111;
+      background-color: #0c0c0c;
       overflow-x: hidden;
       transition: 0.3s;
       padding-top: 60px;
       z-index: 1001;
+      text-align: left;
+      border-right: 1px solid #222;
     }
 
     .sidebar a {
-      padding: 10px 20px;
+      padding: 12px 25px;
       text-decoration: none;
       font-size: 18px;
-      color: #00e676;
+      color: #fff;
       display: block;
+      transition: 0.2s;
     }
 
-    .sidebar a:hover {
-      background-color: #222;
-    }
+    .sidebar a:hover { background-color: var(--primary); color: #000; }
 
     .close-btn {
       position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 24px;
+      top: 15px;
+      right: 25px;
+      font-size: 28px;
       color: white;
       cursor: pointer;
     }
@@ -122,66 +139,62 @@
 </head>
 <body>
 
-  <!-- Side Menu -->
   <div id="sideMenu" class="sidebar">
     <span class="close-btn" onclick="closeMenu()">&times;</span>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="kits.html">Hustle Kits</a>
-    <a href="ideas.html">Money Ideas</a>
-    <a href="passive.html">Passive Income</a>
-    <a href="ai.html">AI Tools</a>
-    <a href="monetization.html">Monetization</a>
-    <a href="trackers.html">Trackers</a>
-    <a href="about.html">What is BrainHustle™?</a>
-    <a href="login.html" onclick="logout()">Logout</a>
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="kits.html">📦 Hustle Kits</a>
+    <a href="ideas.html">💡 Money Ideas</a>
+    <a href="passive.html">📈 Passive Income</a>
+    <a href="ai-tools.html">🧠 AI Tools</a>
+    <a href="monetization.html">💵 Monetization</a>
+    <a href="trackers.html">📊 Trackers</a>
+    <a href="about.html">❔ What is BrainHustle™?</a>
+    <a href="upgrade.html" style="color: #ff3e3e;">⬆️ Upgrade Access</a>
+    <a href="login.html" onclick="logout()" style="margin-top: 20px; border-top: 1px solid #333;">Logout</a>
   </div>
 
-  <!-- Menu Button -->
   <button class="menu-button" onclick="openMenu()">☰ Menu</button>
 
-  <!-- Logo -->
   <div class="logo-container">
     <img src="brainhustle-logo.png" alt="BrainHustle Logo">
   </div>
 
-  <h1>Hustle Kits</h1>
+  <h1>Operational Hustle Kits</h1>
 
   <div class="content">
     <div class="kit-box">
       <h2>📥 Digital Product Template Kit</h2>
-      <p>Quick-start templates to help you create digital products like eBooks, guides, and checklists — ready to upload and sell.</p>
-      <a href="#">Download Kit</a>
+      <p>Quick-start blueprints designed to help you architect digital assets like eBooks, professional guides, and high-conversion checklists — formatted and ready for market deployment.</p>
+      <a href="#">Download Resource Kit</a>
     </div>
 
     <div class="kit-box">
-      <h2>📥 Business Tracker Spreadsheet</h2>
-      <p>Track your hustle, revenue, and goals in one place. Stay focused, measure growth, and scale smarter with this Excel/Google Sheets tool.</p>
-      <a href="#">Download Tracker</a>
+      <h2>📥 Business Tracker Systems</h2>
+      <p>The master ledger for your empire. Monitor revenue streams, track KPIs, and optimize growth with this specialized Google Sheets/Excel command tool.</p>
+      <a href="#">Download Tracker System</a>
     </div>
 
     <div class="kit-box">
-      <h2>📥 Email Funnel Starter Pack</h2>
-      <p>Get pre-written email sequences and funnel templates to help you capture leads and generate automated sales.</p>
-      <a href="#">Download Pack</a>
+      <h2>📥 Email Funnel Architecture</h2>
+      <p>High-conversion email sequences and funnel structures designed to capture high-value leads and drive automated revenue cycles.</p>
+      <a href="#">Download Funnel Pack</a>
     </div>
   </div>
 
-  <div class="footer">
-    All Rights Reserved © BrainHustle™ 2025
-  </div>
+  <footer class="footer">
+    <p style="color: #fff; margin-bottom: 5px;">© 2026 BrainHustle™. All Rights Reserved.</p>
+    <p>BrainHustle™ is a wholly owned sub-brand of <strong>Murray’s Empire LLC</strong>.</p>
+    <div style="max-width: 800px; margin: 20px auto 0; padding-top: 20px;">
+      <p><strong>Disclaimer:</strong> Hustle Kits are provided for educational and organizational purposes only. Murray’s Empire LLC does not guarantee income or financial outcomes from the use of these tools. Individual success is based on personal effort and market execution.</p>
+      <p>Support: <a href="mailto:murraysempirellc@gmail.com" style="color:var(--primary)">murraysempirellc@gmail.com</a></p>
+    </div>
+  </footer>
 
-  <!-- Sidebar Script -->
   <script>
-    function openMenu() {
-      document.getElementById("sideMenu").style.width = "250px";
-    }
-
-    function closeMenu() {
-      document.getElementById("sideMenu").style.width = "0";
-    }
+    function openMenu() { document.getElementById("sideMenu").style.width = "280px"; }
+    function closeMenu() { document.getElementById("sideMenu").style.width = "0"; }
   </script>
 
-  <!-- Firebase Logout Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
@@ -200,17 +213,14 @@
     const auth = getAuth(app);
 
     window.logout = function() {
-      signOut(auth).then(() => {
-        window.location.href = "login.html";
-      });
+      signOut(auth).then(() => { window.location.href = "login.html"; });
     };
 
     onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = "login.html";
-      }
+      if (!user) { window.location.href = "login.html"; }
     });
   </script>
 
 </body>
 </html>
+</div>
