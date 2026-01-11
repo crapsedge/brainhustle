@@ -1,82 +1,103 @@
+<div id="full-ideas-code">
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Money Ideas – BrainHustle™</title>
+  <title>Money Ideas – BrainHustle™ | Murray's Empire</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
+    :root {
+      --primary: #00ff66;
+      --bg: #000;
+      --card: #121212;
+      --text-muted: #888;
+    }
     body {
       margin: 0;
-      background-color: #0a0a0a;
+      background-color: var(--bg);
       color: white;
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', Arial, sans-serif;
     }
     .menu-button {
       position: fixed;
       top: 20px;
       left: 20px;
-      background-color: #00cc66;
+      background-color: var(--primary);
       border: none;
       color: black;
-      font-size: 22px;
-      padding: 8px 12px;
+      font-size: 18px;
+      padding: 10px 16px;
+      border-radius: 8px;
       cursor: pointer;
       z-index: 1000;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0, 255, 102, 0.3);
     }
     .side-menu {
       position: fixed;
       top: 0;
-      left: -250px;
-      width: 250px;
+      left: -280px;
+      width: 280px;
       height: 100%;
-      background-color: #111;
+      background-color: #0c0c0c;
       overflow-y: auto;
       transition: left 0.3s;
-      padding-top: 100px;
+      padding-top: 80px;
       z-index: 999;
+      border-right: 1px solid #222;
     }
     .side-menu a {
       display: block;
       color: white;
-      padding: 12px 20px;
+      padding: 12px 25px;
       text-decoration: none;
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid #222;
+      transition: 0.2s;
     }
     .side-menu a:hover {
-      background-color: #00cc66;
+      background-color: var(--primary);
       color: black;
     }
     .show-menu { left: 0; }
     .content {
-      padding: 60px 20px;
-      max-width: 800px;
+      padding: 80px 20px;
+      max-width: 850px;
       margin: auto;
     }
-    h1 { color: #00cc66; text-align: center; }
+    h1 { color: var(--primary); text-align: center; font-size: 2.5em; margin-bottom: 30px; }
     .idea-box {
-      background-color: #111;
-      border: 1px solid #00cc66;
-      border-radius: 8px;
-      padding: 20px;
+      background-color: var(--card);
+      border: 1px solid #242424;
+      border-radius: 12px;
+      padding: 25px;
       margin: 20px 0;
+      transition: 0.3s;
     }
+    .idea-box:hover { border-color: var(--primary); }
+    .idea-box h3 { color: var(--primary); margin-top: 0; font-size: 1.4em; }
+    .idea-box p { color: #ccc; line-height: 1.6; }
     .upgrade-btn {
-      background-color: red;
+      background-color: #ff0000;
       color: white;
-      padding: 10px 16px;
-      font-size: 16px;
+      padding: 14px 24px;
+      font-size: 18px;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
       text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 20px;
     }
-    .footer {
-      font-size: 0.8em;
-      color: gray;
-      margin-top: 40px;
+    .footer { 
+      margin-top: 60px; 
+      padding: 40px 20px; 
+      background-color: #000; 
+      color: var(--text-muted); 
+      font-size: 13px; 
+      line-height: 1.6; 
+      border-top: 1px solid #222;
       text-align: center;
-      padding: 20px;
-      border-top: 1px solid #333;
     }
   </style>
 </head>
@@ -85,29 +106,32 @@
   <button class="menu-button" onclick="toggleMenu()" id="menuButton">☰ Menu</button>
 
   <div id="sideMenu" class="side-menu">
-    <a href="dashboard.html">Dashboard</a>
-    <a href="kits.html">Hustle Kits</a>
-    <a href="ideas.html">Money Ideas</a>
-    <a href="passive.html">Passive Income</a>
-    <a href="ai-tools.html">AI Tools</a>
-    <a href="monetize.html">Monetization</a>
-    <a href="trackers.html">Trackers</a>
-    <a href="about.html">What is BrainHustle™?</a>
-    <a href="upgrade.html">Upgrade Access</a>
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="kits.html">📦 Hustle Kits</a>
+    <a href="ideas.html">💡 Money Ideas</a>
+    <a href="passive.html">📈 Passive Income</a>
+    <a href="ai-tools.html">🧠 AI Tools</a>
+    <a href="monetize.html">💵 Monetization</a>
+    <a href="trackers.html">📊 Trackers</a>
+    <a href="about.html">❔ What is BrainHustle™?</a>
+    <a href="upgrade.html" style="color: #ff3e3e;">⬆️ Upgrade Access</a>
     <a href="#" onclick="logout()">Logout</a>
   </div>
 
   <div class="content" id="contentArea">
     <h1>💸 Money Ideas</h1>
-    <p id="status">Loading your access level...</p>
+    <p id="status" style="text-align:center; color: var(--text-muted);">Authenticating secure access...</p>
   </div>
 
-  <div class="footer">
-    <p>BrainHustle™ © 2025. All rights reserved.</p>
-    <p>Disclaimer: These ideas require action. No guaranteed income. Use at your own risk.</p>
-  </div>
+  <footer class="footer">
+    <p style="color: #fff; margin-bottom: 5px;">© 2026 BrainHustle™. All Rights Reserved.</p>
+    <p>BrainHustle™ is a wholly owned sub-brand of <strong>Murray’s Empire LLC</strong>.</p>
+    <div style="max-width: 800px; margin: 20px auto 0; padding-top: 20px;">
+      <p><strong>Disclaimer:</strong> Educational purposes only. No guarantees of financial success. This is not financial advice. By using this site, you acknowledge that Murray’s Empire LLC is not responsible for your financial decisions.</p>
+      <p>Support: <a href="mailto:murraysempirellc@gmail.com" style="color:var(--primary)">murraysempirellc@gmail.com</a></p>
+    </div>
+  </footer>
 
-  <!-- Firebase Auth + Firestore Membership Check -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
@@ -127,132 +151,76 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    // Expose a working logout to the global scope (fixes onclick="logout()")
     window.logout = () => {
       signOut(auth).then(() => {
         window.location.href = "login.html";
-      }).catch(() => {
-        // stay silent; nothing to hang
       });
     };
 
     const contentArea = document.getElementById('contentArea');
     const statusEl = document.getElementById('status');
 
-    // -------- Anti-stuck fallback --------
     let resolved = false;
     const fallback = setTimeout(() => {
       if (resolved) return;
       resolved = true;
-      // Show a small preview instead of hanging forever
-      statusEl.textContent = 'Preview mode — log in to unlock more.';
+      statusEl.textContent = 'Preview mode enabled.';
+      renderStarter();
+    }, 1500);
+
+    function renderStarter(){
       contentArea.innerHTML = `
         <h1>💸 Money Ideas (Preview)</h1>
         <div class="idea-box">
-          <h3>1. Sell Digital Products on Gumroad</h3>
-          <p>Create eBooks, guides, or tools and sell them online. No inventory needed.</p>
+          <h3>1. Digital Asset Sales</h3>
+          <p>Launch specialized eBooks, guides, or tools on global platforms. Requires zero physical inventory and offers 100% scalable margins.</p>
         </div>
-        <p style="text-align:center;">🔒 Upgrade to unlock all ideas and future updates.</p>
-        <div style="text-align:center;">
-          <a href="upgrade.html" class="upgrade-btn">Upgrade Now</a>
+        <div style="text-align:center; margin-top:40px;">
+          <p>🔒 <strong>Upgrade Required:</strong> Access the full vault of verified profit systems.</p>
+          <a href="upgrade.html" class="upgrade-btn">Upgrade to Founder Access</a>
         </div>
       `;
-    }, 1500);
-    // -------------------------------------
+    }
+
+    function renderUpgraded(){
+      contentArea.innerHTML = `
+        <h1>💸 Master Profit Systems</h1>
+        <div class="idea-box"><h3>1. Digital Asset Sales</h3><p>Create high-value eBooks or guides once; sell them forever. No shipping, no inventory.</p></div>
+        <div class="idea-box"><h3>2. Arbitrage Flipping</h3><p>Source underpriced local assets and flip for premium margins on global marketplaces.</p></div>
+        <div class="idea-box"><h3>3. Specialized Skilling</h3><p>Leverage design, writing, or AI automation skills for high-ticket corporate clients.</p></div>
+        <div class="idea-box"><h3>4. Affiliate Networks</h3><p>Generate passive revenue by promoting established brands with high-converting funnels.</p></div>
+        <div class="idea-box"><h3>5. AI Content Engines</h3><p>Use generative AI to build massive content properties monetized through ads and sponsorships.</p></div>
+      `;
+    }
 
     onAuthStateChanged(auth, async (user) => {
       if (resolved) return;
       clearTimeout(fallback);
 
-      if (!user) {
-        resolved = true;
-        // Keep your login gate: redirect when Auth actually fires
-        window.location.href = "login.html";
-        return;
-      }
+      if (!user) { window.location.href = "login.html"; return; }
 
-      statusEl.textContent = 'Checking membership…';
       try {
         const userRef = doc(db, "users", user.uid);
         const snap = await getDoc(userRef);
-
-        let membership = "starter";
-        if (!snap.exists()) {
-          await setDoc(userRef, {
-            membership: "starter",
-            email: user.email || "",
-            createdAt: new Date()
-          }, { merge: true });
-        } else {
-          const data = snap.data();
-          membership = (data.membership || "starter").toLowerCase();
-        }
-
+        let membership = snap.exists() ? (snap.data().membership || "starter").toLowerCase() : "starter";
+        
         resolved = true;
-
-        if (membership === "upgraded") {
-          contentArea.innerHTML = `
-            <h1>💸 Money Ideas</h1>
-            <div class="idea-box">
-              <h3>1. Sell Digital Products on Gumroad</h3>
-              <p>Create simple eBooks, guides, or tools and sell them on Gumroad. No inventory needed. Just value and marketing.</p>
-            </div>
-            <div class="idea-box">
-              <h3>2. Flip Items on eBay or Facebook Marketplace</h3>
-              <p>Start with free or low-cost local items. Resell for profit. Learn the system, scale up with better products.</p>
-            </div>
-            <div class="idea-box">
-              <h3>3. Offer Services on Fiverr or Upwork</h3>
-              <p>Write, design, edit, or use AI tools for clients. Get paid for skills you already have — or can learn fast.</p>
-            </div>
-            <div class="idea-box">
-              <h3>4. Run Affiliate Offers</h3>
-              <p>Promote other people’s products and get paid for every sale. No product, no shipping — just commissions.</p>
-            </div>
-            <div class="idea-box">
-              <h3>5. Create Content with ChatGPT</h3>
-              <p>Use AI to write blog posts, social content, or YouTube scripts — monetize with ads or affiliate links.</p>
-            </div>
-          `;
-        } else {
-          contentArea.innerHTML = `
-            <h1>💸 Money Ideas (Starter)</h1>
-            <div class="idea-box">
-              <h3>1. Sell Digital Products on Gumroad</h3>
-              <p>Create eBooks, guides, or tools and sell them online. No inventory needed.</p>
-            </div>
-            <p style="text-align:center;">🔒 Upgrade to unlock all 5 ideas and future updates.</p>
-            <div style="text-align:center;">
-              <a href="upgrade.html" class="upgrade-btn">Upgrade Now</a>
-            </div>
-          `;
-        }
+        statusEl.style.display = 'none';
+        if (membership === "upgraded") { renderUpgraded(); } 
+        else { renderStarter(); }
       } catch (err) {
-        // Never hang on Firestore errors
-        console.error('[ideas] membership read failed:', err);
         resolved = true;
-        statusEl.textContent = 'Couldn’t verify membership — showing preview.';
-        contentArea.innerHTML = `
-          <h1>💸 Money Ideas (Preview)</h1>
-          <div class="idea-box">
-            <h3>1. Sell Digital Products on Gumroad</h3>
-            <p>Create eBooks, guides, or tools and sell them online. No inventory needed.</p>
-          </div>
-          <p style="text-align:center;">🔒 Upgrade to unlock all ideas and future updates.</p>
-          <div style="text-align:center;">
-            <a href="upgrade.html" class="upgrade-btn">Upgrade Now</a>
-          </div>
-        `;
+        renderStarter();
       }
     });
   </script>
 
   <script>
     function toggleMenu() {
-      const menu = document.getElementById('sideMenu');
-      menu.classList.toggle('show-menu');
+      document.getElementById('sideMenu').classList.toggle('show-menu');
     }
   </script>
 
 </body>
 </html>
+</div>
