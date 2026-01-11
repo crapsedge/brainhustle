@@ -1,3 +1,4 @@
+<div id="ai-tools-code">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,25 +7,26 @@
   <title>AI Tools – BrainHustle™</title>
 
   <style>
-    body { margin:0; background:#0a0a0a; color:#fff; font-family:Arial, sans-serif; }
-    a { color:#00cc66; text-decoration:none; }
-    .menu-button { position:fixed; top:20px; left:20px; background:#00cc66; border:none; color:#000; font-size:22px; padding:8px 12px; cursor:pointer; z-index:1000; }
-    .side-menu { position:fixed; top:0; left:-250px; width:250px; height:100%; background:#111; overflow-y:auto; transition:left .3s; padding-top:100px; z-index:999; }
-    .side-menu a { display:block; color:#fff; padding:12px 20px; border-bottom:1px solid #333; }
-    .side-menu a:hover { background:#00cc66; color:#000; }
+    body { margin:0; background:#000; color:#fff; font-family:Arial, sans-serif; }
+    a { color:#00ff66; text-decoration:none; }
+    .menu-button { position:fixed; top:20px; left:20px; background:#00ff66; border:none; color:#000; font-size:22px; padding:8px 12px; cursor:pointer; z-index:1000; border-radius: 5px; font-weight: bold; }
+    .side-menu { position:fixed; top:0; left:-250px; width:250px; height:100%; background:#111; overflow-y:auto; transition:left .3s; padding-top:100px; z-index:999; border-right: 1px solid #222; }
+    .side-menu a { display:block; color:#fff; padding:12px 20px; border-bottom:1px solid #222; }
+    .side-menu a:hover { background:#00ff66; color:#000; }
     .show-menu { left:0; }
 
-    .content { padding:60px 20px; max-width:900px; margin:auto; }
-    h1 { color:#00cc66; text-align:center; margin:0 0 10px; }
+    .content { padding:80px 20px; max-width:900px; margin:auto; }
+    h1 { color:#00ff66; text-align:center; margin:0 0 10px; }
     p.lead { color:#cfcfcf; text-align:center; max-width:720px; margin:8px auto 24px; }
 
-    .tool-card { background:#111; border:1px solid #1f1f1f; border-radius:10px; padding:18px; margin:14px 0; }
-    .tool-card h2 { margin:0 0 6px; color:#00cc66; font-size:20px; }
-    .tool-card p { margin:0 0 10px; color:#ddd; }
-    .tool-card .btn { display:inline-block; padding:10px 14px; border-radius:8px; background:#00cc66; color:#000; font-weight:700; text-decoration:none; }
+    .tool-card { background:#111; border:1px solid #242424; border-radius:12px; padding:22px; margin:18px 0; }
+    .tool-card h2 { margin:0 0 8px; color:#00ff66; font-size:22px; }
+    .tool-card p { margin:0 0 15px; color:#ddd; line-height: 1.5; }
+    .tool-card .btn { display:inline-block; padding:12px 18px; border-radius:8px; background:#00ff66; color:#000; font-weight:700; text-decoration:none; transition: 0.3s; }
+    .tool-card .btn:hover { background: #00cc55; }
 
-    .upgrade-btn { background:red; color:#fff; padding:10px 16px; font-size:16px; border:none; border-radius:6px; cursor:pointer; text-decoration:none; }
-    .footer { font-size:.8em; color:gray; margin-top:40px; text-align:center; padding:20px; border-top:1px solid #333; }
+    .upgrade-btn { background:red; color:#fff; padding:12px 20px; font-size:18px; border:none; border-radius:8px; cursor:pointer; text-decoration:none; font-weight: bold; display: inline-block; }
+    .footer { margin-top:50px; padding:40px 20px; background-color: #000; color: #888; font-size: 13px; line-height: 1.6; border-top: 1px solid #222; text-align: center; }
   </style>
 </head>
 <body>
@@ -46,16 +48,17 @@
 
   <div class="content" id="contentArea">
     <h1>🧠 Recommended AI Tools</h1>
-    <p id="status" class="lead">Loading your access level...</p>
+    <p id="status" class="lead">Loading secure access...</p>
+    </div>
 
-    <!-- Content will be injected by JS based on membership -->
-  </div>
+  <footer class="footer">
+    <p style="color: #fff; margin-bottom: 5px;">© 2026 BrainHustle™. All Rights Reserved.</p>
+    <p>BrainHustle™ is a wholly owned sub-brand of <strong>Murray’s Empire LLC</strong>.</p>
+    <div style="max-width: 800px; margin: 20px auto 0; padding-top: 20px;">
+      <p><strong>Disclaimer:</strong> BrainHustle™ recommends AI tools for educational and productivity purposes. Murray’s Empire LLC is not affiliated with, nor responsible for, the performance or financial outcomes of using these third-party platforms. Use AI responsibly and at your own risk.</p>
+    </div>
+  </footer>
 
-  <div class="footer">
-    © 2025 BrainHustle™. All rights reserved.
-  </div>
-
-  <!-- Firebase + membership gate with anti-stuck fallback -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
@@ -80,30 +83,25 @@
     const content = document.getElementById('contentArea');
     const statusEl = document.getElementById('status');
 
-    // Anti-stuck fallback (1.5s)
     let resolved = false;
     const fallback = setTimeout(() => {
       if (resolved) return;
       resolved = true;
       statusEl.textContent = 'Preview mode — log in to unlock more.';
-      renderStarter(); // at least show a preview
+      renderStarter();
     }, 1500);
 
     function renderStarter(){
       content.innerHTML = `
         <h1>🧠 Recommended AI Tools (Preview)</h1>
-        <p class="lead">These tools save time, create content, automate tasks, and help you build a digital business.</p>
-
+        <p class="lead">Harness the power of AI to automate your business and scale your income.</p>
         <div class="tool-card">
           <h2>ChatGPT (OpenAI)</h2>
-          <p>Create blog posts, business ideas, emails, guides, and even code. Our favorite for general use and business automation.</p>
-          <a class="btn" href="https://chat.openai.com/" target="_blank" rel="noopener">Try ChatGPT</a>
+          <p>The gold standard for content creation, business strategy, and automation logic.</p>
+          <a class="btn" href="https://chat.openai.com/" target="_blank">Try ChatGPT</a>
         </div>
-
-        <p style="text-align:center;margin-top:14px;">
-          🔒 Upgrade to view the full AI toolkit and recommendations.
-        </p>
-        <div style="text-align:center;">
+        <div style="text-align:center; margin-top:30px;">
+          <p>🔒 <strong>Upgrade Required:</strong> Access 5+ professional AI builders, design tools, and logo generators.</p>
           <a href="upgrade.html" class="upgrade-btn">Upgrade Now</a>
         </div>
       `;
@@ -111,81 +109,34 @@
 
     function renderUpgraded(){
       content.innerHTML = `
-        <h1>🧠 Recommended AI Tools</h1>
-        <p class="lead">These tools have been tested by the BrainHustle™ team. Use them to save time, create content, automate tasks, or build a digital business — fast and with less stress.</p>
-
-        <div class="tool-card">
-          <h2>ChatGPT (OpenAI)</h2>
-          <p>Create blog posts, business ideas, emails, guides, and even code using ChatGPT. Our favorite for general use and business automation.</p>
-          <a class="btn" href="https://chat.openai.com/" target="_blank" rel="noopener">Try ChatGPT</a>
-        </div>
-
-        <div class="tool-card">
-          <h2>Canva AI</h2>
-          <p>Design graphics, eBooks, social posts, and quick websites with Canva’s AI. Great if you don’t have design skills.</p>
-          <a class="btn" href="https://www.canva.com/" target="_blank" rel="noopener">Use Canva AI</a>
-        </div>
-
-        <div class="tool-card">
-          <h2>Notion AI</h2>
-          <p>Write, plan, and ship products faster inside Notion. Excellent for building templates or courses.</p>
-          <a class="btn" href="https://www.notion.so/product/ai" target="_blank" rel="noopener">Explore Notion AI</a>
-        </div>
-
-        <div class="tool-card">
-          <h2>Looka (Logo Maker)</h2>
-          <p>Create a professional logo using AI. Make your brand look polished in minutes.</p>
-          <a class="btn" href="https://looka.com/" target="_blank" rel="noopener">Generate a Logo</a>
-        </div>
-
-        <div class="tool-card">
-          <h2>Durable AI Website Builder</h2>
-          <p>Spin up a one-page business website in ~30 seconds using AI. Great for quick launches or MVPs.</p>
-          <a class="btn" href="https://durable.co/" target="_blank" rel="noopener">Try Durable AI</a>
-        </div>
+        <h1>🧠 Professional AI Suite</h1>
+        <p class="lead">Exclusive toolkit curated for Murray’s Empire LLC members. Build faster, work smarter.</p>
+        <div class="tool-card"><h2>ChatGPT (OpenAI)</h2><p>General automation and expert content generation.</p><a class="btn" href="https://chat.openai.com/" target="_blank">Launch ChatGPT</a></div>
+        <div class="tool-card"><h2>Canva AI</h2><p>Design eBooks and marketing assets without a designer.</p><a class="btn" href="https://www.canva.com/" target="_blank">Launch Canva AI</a></div>
+        <div class="tool-card"><h2>Notion AI</h2><p>Organize your business systems and ship products faster.</p><a class="btn" href="https://www.notion.so/product/ai" target="_blank">Launch Notion AI</a></div>
+        <div class="tool-card"><h2>Looka</h2><p>Generate high-end brand logos in seconds.</p><a class="btn" href="https://looka.com/" target="_blank">Launch Looka</a></div>
+        <div class="tool-card"><h2>Durable</h2><p>Build professional business landing pages in 30 seconds.</p><a class="btn" href="https://durable.co/" target="_blank">Launch Durable</a></div>
       `;
     }
 
     onAuthStateChanged(auth, async (user) => {
       if (resolved) return;
       clearTimeout(fallback);
-
-      if (!user) {
-        resolved = true;
-        window.location.href = "login.html";
-        return;
-      }
-
-      statusEl.textContent = 'Checking membership…';
+      if (!user) { window.location.href = "login.html"; return; }
       try {
         const ref = doc(db, "users", user.uid);
         const snap = await getDoc(ref);
-
         let membership = "starter";
-        if (!snap.exists()) {
-          await setDoc(ref, { membership: "starter", email: user.email || "", createdAt: new Date() }, { merge: true });
-        } else {
-          membership = (snap.data().membership || "starter").toLowerCase();
-        }
-
+        if (!snap.exists()) { await setDoc(ref, { membership: "starter", email: user.email || "" }, { merge: true }); }
+        else { membership = (snap.data().membership || "starter").toLowerCase(); }
         resolved = true;
-        if (membership === "upgraded") {
-          statusEl.textContent = 'Upgraded member ✅';
-          renderUpgraded();
-        } else {
-          statusEl.textContent = 'Starter access — upgrade to unlock everything.';
-          renderStarter();
-        }
-      } catch (e) {
-        console.error('[ai-tools] membership read failed:', e);
-        resolved = true;
-        statusEl.textContent = 'Couldn’t verify membership — showing preview.';
-        renderStarter();
-      }
+        if (membership === "upgraded") { statusEl.textContent = 'Founder Tier Access ✅'; renderUpgraded(); }
+        else { statusEl.textContent = 'Starter Access'; renderStarter(); }
+      } catch (e) { statusEl.textContent = 'Connection Error — Showing Preview.'; renderStarter(); }
     });
 
-    function toggleMenu(){ document.getElementById('sideMenu').classList.toggle('show-menu'); }
-    window.toggleMenu = toggleMenu;
+    window.toggleMenu = function(){ document.getElementById('sideMenu').classList.toggle('show-menu'); };
   </script>
 </body>
 </html>
+</div>
