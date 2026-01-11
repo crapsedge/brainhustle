@@ -1,69 +1,77 @@
+<div id="admin-code">
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>BrainHustle Admin</title>
+<title>BrainHustle™ Admin — Murray's Empire</title>
 <style>
   body{font-family:Arial,Helvetica,sans-serif;background:#0a0a0a;color:#fff;margin:0}
   .wrap{max-width:720px;margin:0 auto;padding:28px 18px}
-  h1{margin:0 0 12px;color:#00ff66}
-  .card{background:#121212;border:1px solid #242424;border-radius:12px;padding:16px;margin:14px 0}
-  label{display:block;margin:8px 0 4px}
-  input,select{width:100%;padding:10px;border-radius:8px;border:1px solid #2a2a2a;background:#0f0f0f;color:#fff}
+  header { display: flex; justify-content: center; margin-bottom: 20px; }
+  header img { width: 180px; height: auto; }
+  h1{margin:0 0 12px;color:#00ff66;text-align:center}
+  .card{background:#121212;border:1px solid #242424;border-radius:12px;padding:20px;margin:14px 0}
+  label{display:block;margin:8px 0 4px;font-size:14px;color:#8a8a8a}
+  input,select{width:100%;padding:12px;border-radius:8px;border:1px solid #2a2a2a;background:#0f0f0f;color:#fff;box-sizing:border-box}
   .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  button{background:#00ff66;color:#000;border:none;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer}
+  button{background:#00ff66;color:#000;border:none;padding:12px 20px;border-radius:10px;font-weight:700;cursor:pointer;width:100%}
   .muted{color:#b7b7b7}
-  .ok{color:#93ff93} .bad{color:#ff8a8a}
-  .foot{margin-top:18px;color:#8a8a8a;font-size:12px}
+  .ok{color:#93ff93;font-weight:bold} .bad{color:#ff8a8a;font-weight:bold}
+  footer { margin-top:50px; padding:40px 20px; color: #888; font-size: 13px; text-align:center; border-top: 1px solid #222; }
   .small{font-size:12px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>BrainHustle™ Admin</h1>
+  <header>
+    <img src="brainhustle-logo.png" alt="BrainHustle Logo">
+  </header>
+  <h1>Admin Dashboard</h1>
+  
   <div class="card">
-    <div id="me" class="muted">Checking login…</div>
-    <div id="gate" class="bad" style="display:none">Access denied. You must be the owner to use this page.</div>
+    <div id="me" class="muted">Checking authorization...</div>
+    <div id="gate" class="bad" style="display:none">Access Denied: Owner-Only Access Point.</div>
   </div>
 
   <div id="tool" class="card" style="display:none">
-    <h3>Set Member Level</h3>
-    <p class="muted small">Use <b>UID</b> when possible. If you only have an email, that works too. If both are provided, UID wins.</p>
+    <h3>Set Member Access Level</h3>
     <div class="row">
       <div>
-        <label>Firebase UID (optional)</label>
-        <input id="uid" placeholder="e.g. abc123UID"/>
+        <label>Firebase UID</label>
+        <input id="uid" placeholder="User Unique ID"/>
       </div>
       <div>
-        <label>User Email (optional)</label>
-        <input id="email" placeholder="e.g. user@example.com"/>
+        <label>User Email</label>
+        <input id="email" placeholder="user@example.com"/>
       </div>
     </div>
-    <div class="row" style="margin-top:10px">
+    <div class="row" style="margin-top:15px">
       <div>
-        <label>Level</label>
+        <label>Access Tier</label>
         <select id="level">
-          <option value="upgraded">upgraded</option>
-          <option value="starter">starter</option>
+          <option value="starter">Starter</option>
+          <option value="upgraded">Upgraded (VIP)</option>
         </select>
       </div>
-      <div style="display:flex;align-items:end"><button id="saveBtn">Save</button></div>
+      <div style="display:flex;align-items:end"><button id="saveBtn">Save Permissions</button></div>
     </div>
-    <div id="out" class="muted" style="margin-top:10px"></div>
+    <div id="out" class="muted" style="margin-top:15px; text-align:center;"></div>
   </div>
-
-  <div class="foot">© BrainHustle™ — Owner-only page. Actions are logged.</div>
 </div>
 
-<!-- Firebase (Compat) -->
+<footer>
+  <p>© 2026 BrainHustle™. All Rights Reserved.</p>
+  <p>BrainHustle™ is a wholly owned sub-brand of <strong>Murray’s Empire LLC</strong>.</p>
+</footer>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
-  // >>> OWNER SETTINGS
+  // >>> UPDATED OWNER SETTINGS
   const OWNER_UID   = "bMPlkmhEV8a05M0uwsgxVORsFk72";
-  const OWNER_EMAIL = "shawn.murrayjr@gmail.com"; // optional fallback
+  const OWNER_EMAIL = "murraysempirellc@gmail.com"; 
 
   const firebaseConfig = {
     apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
@@ -73,7 +81,6 @@
     messagingSenderId: "547592914180",
     appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
     measurementId: "G-3M5PKR5S27",
-    // ⬇️ confirm this matches your RTDB URL (Realtime Database → Data tab)
     databaseURL: "https://brainhustle-92a40-default-rtdb.firebaseio.com"
   };
   firebase.initializeApp(firebaseConfig);
@@ -81,65 +88,54 @@
   const auth = firebase.auth();
   const db   = firebase.database();
 
-  const meEl = document.getElementById('me');
-  const gateEl = document.getElementById('gate');
-  const toolEl = document.getElementById('tool');
-  const outEl = document.getElementById('out');
-  const saveBtn = document.getElementById('saveBtn');
-
-  const emailKey = (e)=> e.toLowerCase().replace(/\./g, ','); // RTDB keys can't contain '.'
-
   auth.onAuthStateChanged((user)=>{
+    const meEl = document.getElementById('me');
+    const gateEl = document.getElementById('gate');
+    const toolEl = document.getElementById('tool');
+    
     if(!user){
-      meEl.innerHTML = 'Not logged in. <a href="login.html" style="color:#00ff66">Login</a>';
+      meEl.innerHTML = 'Login required. <a href="login.html" style="color:#00ff66">Login</a>';
       gateEl.style.display = 'block';
       return;
     }
-    meEl.innerHTML = `Signed in as <b>${user.email || user.uid}</b> <span class="small">(UID: ${user.uid})</span>`;
-    const isOwnerUid = user.uid === OWNER_UID;
-    const isOwnerEmail = user.email && user.email.toLowerCase() === OWNER_EMAIL.toLowerCase();
-    if(!isOwnerUid && !isOwnerEmail){ gateEl.style.display = 'block'; return; }
+    
+    const isOwner = user.uid === OWNER_UID || user.email.toLowerCase() === OWNER_EMAIL.toLowerCase();
+    
+    if(!isOwner){
+      meEl.innerHTML = `Signed in as ${user.email}. Unauthorized access.`;
+      gateEl.style.display = 'block';
+      return;
+    }
+    
+    meEl.innerHTML = `Welcome, Founder. Signed in as <b>${user.email}</b>`;
     toolEl.style.display = 'block';
   });
 
-  async function setMemberLevel({uid,email,level}){
-    const updates = {};
-    const stamp = firebase.database.ServerValue.TIMESTAMP;
+  const emailKey = (e)=> e.toLowerCase().replace(/\./g, ',');
 
-    if(uid){
-      updates[`/members/${uid}/level`]      = level;
-      updates[`/members/${uid}/updatedAt`]  = stamp;
-    }
-    if(email){
-      const k = emailKey(email.trim());
-      if(k){
-        updates[`/membersByEmail/${k}/level`]     = level;
-        updates[`/membersByEmail/${k}/updatedAt`] = stamp;
-      }
-    }
-    // simple audit
-    updates[`/adminLogs/${Date.now()}_${Math.random().toString(36).slice(2)}`] = {
-      at: stamp, action: 'setMemberLevel', byUid: auth.currentUser?.uid || null,
-      targetUid: uid || null, targetEmail: (email||'').toLowerCase(), level
-    };
-
-    await db.ref().update(updates); // atomic multi-path write
-  }
-
-  saveBtn.onclick = async ()=>{
-    outEl.textContent = '';
+  document.getElementById('saveBtn').onclick = async ()=>{
+    const outEl = document.getElementById('out');
+    outEl.textContent = 'Processing...';
+    
     const uid   = document.getElementById('uid').value.trim();
     const email = document.getElementById('email').value.trim();
     const level = document.getElementById('level').value;
-    if(!uid && !email){ outEl.innerHTML = '<span class="bad">Enter a UID or an Email.</span>'; return; }
+    
+    if(!uid && !email){ outEl.innerHTML = '<span class="bad">Please provide a UID or Email.</span>'; return; }
+    
     try{
-      await setMemberLevel({uid, email, level});
-      outEl.innerHTML = `<span class="ok">Saved: ${level.toUpperCase()} ${uid?('UID '+uid):''} ${email?('Email '+email.toLowerCase()):''}</span>`;
-    }catch(e){
-      console.error(e);
+      const updates = {};
+      const stamp = firebase.database.ServerValue.TIMESTAMP;
+      if(uid) { updates[`/members/${uid}/level`] = level; updates[`/members/${uid}/updatedAt`] = stamp; }
+      if(email) { const k = emailKey(email); updates[`/membersByEmail/${k}/level`] = level; updates[`/membersByEmail/${k}/updatedAt`] = stamp; }
+      
+      await db.ref().update(updates);
+      outEl.innerHTML = `<span class="ok">Successfully updated ${email || uid} to ${level.toUpperCase()}</span>`;
+    } catch(e) {
       outEl.innerHTML = `<span class="bad">Error: ${e.message}</span>`;
     }
   };
 </script>
 </body>
 </html>
+</div>
