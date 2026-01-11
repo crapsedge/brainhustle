@@ -1,3 +1,4 @@
+<div id="full-about-code">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
     .content p, .content li { line-height:1.65; }
     .card { background:#121212; border:1px solid #232323; border-radius:12px; padding:16px 18px; margin:16px 0; }
     .muted { color:#b7b7b7; }
-    .footer { margin-top:40px; font-size:12px; color:gray; padding:20px; }
+    .footer { margin-top:50px; padding:40px 20px; background-color: #000; color: #888; font-size: 13px; line-height: 1.6; border-top: 1px solid #222; }
     /* Sidebar */
     .sidebar { height:100%; width:0; position:fixed; top:0; left:0; background:#111; overflow-x:hidden; transition:0.3s; padding-top:60px; z-index:1001; text-align:left; }
     .sidebar a { padding:10px 20px; text-decoration:none; font-size:18px; color:#00e676; display:block; }
@@ -24,7 +25,6 @@
     .close-btn { position:absolute; top:10px; right:20px; font-size:24px; color:#fff; cursor:pointer; }
   </style>
 
-  <!-- Organization markup for trust/SEO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -32,20 +32,18 @@
     "name": "BrainHustle",
     "url": "https://brainhustle.store",
     "logo": "https://brainhustle.store/brainhustle-logo.png",
-    "sameAs": [],
     "brand": { "@type": "Brand", "name": "BrainHustle" },
-    "parentOrganization": { "@type": "Organization", "name": "Murray's Empire" },
+    "parentOrganization": { "@type": "Organization", "name": "Murray's Empire LLC" },
     "contactPoint": [{
       "@type": "ContactPoint",
       "contactType": "customer support",
-      "email": "crapsedge@gmail.com"
+      "email": "murraysempirellc@gmail.com"
     }]
   }
   </script>
 </head>
 <body>
 
-  <!-- Side Menu -->
   <div id="sideMenu" class="sidebar">
     <span class="close-btn" onclick="closeMenu()">&times;</span>
     <a href="dashboard.html">Dashboard</a>
@@ -55,16 +53,13 @@
     <a href="ai.html">AI Tools</a>
     <a href="monetization.html">Monetization</a>
     <a href="trackers.html">Trackers</a>
-    <a href="sports-systems.html">🏈 Sports Systems</a> <!-- added -->
     <a href="about.html">What is BrainHustle™?</a>
     <a href="upgrade.html">Upgrade Access</a>
     <a href="login.html" onclick="logout()">Logout</a>
   </div>
 
-  <!-- Menu Button -->
   <button class="menu-button" onclick="openMenu()">☰ Menu</button>
 
-  <!-- Logo -->
   <div class="logo-container">
     <img src="brainhustle-logo.png" alt="BrainHustle Logo">
   </div>
@@ -73,92 +68,52 @@
 
   <div class="content">
 
-    <!-- Your original sections (kept) -->
     <div class="card">
       <h2>The Name</h2>
-      <p>BrainHustle™ is all about using your mind — not scams, hype, or fake promises — to create real income. We believe that smart ideas, legal strategies, and real effort beat hype every time. Hustle with brainpower.</p>
+      <p>BrainHustle™ is all about using your mind — not scams, hype, or fake promises — to create real income. Smart ideas and legal strategies beat hype every time.</p>
     </div>
 
     <div class="card">
       <h2>Our Purpose</h2>
-      <p>To give you everything you need to launch real side hustles, create passive income streams, and build your own path to financial independence — legally, safely, and with tools that actually work.</p>
+      <p>To provide the tools and systems needed to launch real side hustles and create passive income streams — legally, safely, and professionally.</p>
     </div>
 
-    <div class="card">
-      <h2>The Mission</h2>
-      <p>BrainHustle™ exists to help you take action. We offer real systems, clear guidance, and useful resources that help you earn more, work smarter, and avoid scams. Whether you're just starting or scaling up — BrainHustle™ is your edge.</p>
-    </div>
-
-    <div class="card">
-      <h2>Your Advantage</h2>
-      <p>With BrainHustle™, you're not wasting time — you're investing in real growth. Every tool, kit, and system here is made to help you move fast, stay legal, and get real results.</p>
-    </div>
-
-    <!-- Upgraded trust + legal sections -->
     <div class="card">
       <h2>Trust & Transparency</h2>
       <ul>
-        <li>✅ <b>Education-first:</b> BrainHustle™ provides informational tools, logs, and systems. We don’t sell get-rich-quick promises.</li>
-        <li>✅ <b>Clear labeling:</b> When something is opinion, we say so. When something is a tool, we document how to use it responsibly.</li>
-        <li>✅ <b>No hidden catches:</b> Pricing and features are straightforward. Upgraded access is optional and clearly described.</li>
-        <li>✅ <b>Contact:</b> Questions or support? Email <a href="mailto:crapsedge@gmail.com">crapsedge@gmail.com</a>.</li>
+        <li>✅ <b>Education-first:</b> We provide informational tools and logs. We do not sell get-rich-quick promises.</li>
+        <li>✅ <b>Ownership:</b> BrainHustle™ is a wholly owned sub-brand of <strong>Murray’s Empire LLC</strong>.</li>
+        <li>✅ <b>Support:</b> Questions? Email <a href="mailto:murraysempirellc@gmail.com">murraysempirellc@gmail.com</a>.</li>
       </ul>
-      <p class="muted">Tip: If you see BrainHustle™ mentioned on third-party sites with “scam” labels, it’s usually automated reputation filters for new domains with limited public content. Publishing clear About/Legal pages like this helps correct that over time.</p>
     </div>
 
     <div class="card">
       <h2>Legal Disclaimers</h2>
-      <p><b>Education Only:</b> All content on BrainHustle™ is for informational and educational purposes. Nothing here is financial, legal, investment, tax, or professional advice. You are responsible for your own decisions.</p>
-      <p><b>No Earnings Guarantee:</b> We do not and cannot guarantee results, revenue, profits, or outcomes. Past performance (including examples or case studies) does not guarantee future results.</p>
-      <p><b>Assumption of Risk:</b> Any business, side hustle, or sports-related activity involves risk. You agree to use our tools and content at your own risk and to comply with all applicable laws in your jurisdiction.</p>
-      <p><b>Limitation of Liability:</b> To the fullest extent permitted by law, BrainHustle™, its creators, and Murray’s Empire™ are not liable for any loss or damages arising from your use or reliance on our site, tools, or materials.</p>
-      <p><b>No Client Relationship:</b> Your use of this site does not create any client, advisory, fiduciary, or professional relationship with us.</p>
-    </div>
-
-    <div class="card">
-      <h2>Responsible Use (Sports Content)</h2>
-      <p><b>Educational Only:</b> Sports betting content, if any, is strictly educational. We do not provide picks or advice. If you choose to wager, do so responsibly and never more than you can afford to lose.</p>
-      <p><b>Age & Legality:</b> You must be of legal age and comply with your local laws. Availability varies by state/country.</p>
-      <p><b>Help Resources:</b> If gambling may be a problem, seek help (e.g., 1-800-GAMBLER in the U.S.).</p>
+      <p><b>Education Only:</b> All content is for informational purposes. Nothing here is financial, legal, or investment advice.</p>
+      <p><b>No Earnings Guarantee:</b> We do not guarantee results or profits. Individual results vary based on effort.</p>
+      <p><b>Limitation of Liability:</b> Murray’s Empire LLC is not liable for any loss or damages arising from your use of this site or its tools.</p>
     </div>
 
     <div class="card">
       <h2>Intellectual Property</h2>
-      <p>BrainHustle™, the BrainHustle logo, and Murray’s Empire™ are trademarks/service marks. All site content and tools are © BrainHustle™ / Murray’s Empire™. Do not copy, redistribute, or resell without permission.</p>
+      <p>BrainHustle™ and Murray’s Empire™ are trademarks. All site content and tools are © 2026 Murray’s Empire LLC. Do not copy or redistribute without permission.</p>
     </div>
 
-    <div class="card">
-      <h2>Contact & Support</h2>
-      <p>Email: <a href="mailto:crapsedge@gmail.com">crapsedge@gmail.com</a></p>
-      <p>We aim to respond within 2–3 business days.</p>
-    </div>
-
-    <div class="card">
-      <h2>Report Misuse or Abuse</h2>
-      <p>If you see third-party pages misrepresenting BrainHustle™ or impersonation attempts, please report them to us at <a href="mailto:crapsedge@gmail.com">crapsedge@gmail.com</a> and we’ll investigate.</p>
-    </div>
-
-    <div class="card">
-      <h2>Links</h2>
-      <ul>
-        <li><a href="terms.html">Terms</a></li>
-        <li><a href="support.html">Support</a></li>
-        <li><a href="sports-systems.html">Sports Systems (Upgraded)</a></li>
-      </ul>
-    </div>
   </div>
 
-  <div class="footer">
-    © 2025 BrainHustle™ — Part of Murray’s Empire™. Education only. No guarantees. Use at your own risk.
-  </div>
+  <footer class="footer">
+    <p style="color: #fff; margin-bottom: 5px;">© 2026 BrainHustle™. All Rights Reserved.</p>
+    <p>BrainHustle™ is a wholly owned sub-brand of <strong>Murray’s Empire LLC</strong>.</p>
+    <div style="max-width: 800px; margin: 20px auto 0; padding-top: 20px;">
+      <p><strong>Disclaimer:</strong> Educational purposes only. No guarantees of financial success. This is not financial advice. By using this site, you acknowledge that Murray’s Empire LLC is not responsible for your financial decisions.</p>
+    </div>
+  </footer>
 
-  <!-- Sidebar Script -->
   <script>
     function openMenu(){ document.getElementById("sideMenu").style.width = "250px"; }
     function closeMenu(){ document.getElementById("sideMenu").style.width = "0"; }
   </script>
 
-  <!-- Firebase Logout Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
@@ -178,3 +133,4 @@
   </script>
 </body>
 </html>
+</div>
