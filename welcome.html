@@ -1,49 +1,133 @@
+<div id="full-welcome-code">
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Welcome to BrainHustle™</title>
+  <title>Welcome to BrainHustle™ – Murray's Empire</title>
   <style>
+    :root {
+      --primary: #00ff66;
+      --bg: #000;
+      --card: #121212;
+      --text-muted: #888;
+      --cta: #ff0000;
+    }
+
     body {
-      background: #0a0a0a;
+      margin: 0;
+      background: var(--bg);
       color: white;
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', Arial, sans-serif;
       text-align: center;
-      padding: 40px 20px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
-    h1 {
-      color: #00cc66;
-      font-size: 28px;
+
+    .container {
+      flex: 1;
+      max-width: 700px;
+      margin: 80px auto;
+      padding: 20px;
     }
-    p {
-      font-size: 18px;
-      margin: 20px 0;
+
+    header img { 
+      height: 180px; 
+      width: auto; 
+      margin-bottom: 20px; 
     }
-    .button {
-      background: red;
-      color: white;
-      padding: 14px 28px;
-      font-size: 18px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
+
+    h1 { 
+      color: var(--primary); 
+      font-size: 2.8em; 
+      margin-bottom: 15px;
       font-weight: bold;
-      margin-top: 20px;
     }
+
+    p {
+      font-size: 1.2em;
+      line-height: 1.7;
+      color: #ccc;
+      margin-bottom: 30px;
+    }
+
+    .welcome-card {
+      background: var(--card);
+      border: 1px solid #242424;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0, 255, 102, 0.05);
+    }
+
+    .button {
+      display: inline-block;
+      background: var(--cta);
+      color: white;
+      padding: 16px 32px;
+      font-size: 20px;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: 0.3s;
+      margin-top: 10px;
+      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
+    }
+
     .button:hover {
-      background: darkred;
+      background: #cc0000;
+      transform: translateY(-2px);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    footer { 
+      margin-top: auto;
+      padding: 40px 20px; 
+      background-color: #000; 
+      color: var(--text-muted); 
+      font-size: 13px; 
+      line-height: 1.6; 
+      border-top: 1px solid #222; 
     }
   </style>
 </head>
 <body>
 
-  <h1>Welcome to BrainHustle™</h1>
-  <p>You’ve unlocked exclusive access to launch-ready systems, tools, and strategies built to help you earn online — fast.</p>
+  <div class="container">
+    <header>
+      <img src="brainhustle-logo.png" alt="BrainHustle Logo">
+    </header>
 
-  <p>Click below to create your member account and start your journey.</p>
+    <div class="welcome-card">
+      <h1>Systems Initialized.</h1>
+      <p>You’ve unlocked exclusive access to the BrainHustle™ ecosystem. Our launch-ready systems, automated tools, and scalable strategies are now ready for deployment.</p>
 
-  <a href="signup.html" class="button">Create Your Account</a>
+      <p>Click below to finalize your corporate member account and begin your journey.</p>
+
+      <a href="signup.html" class="button">Create Your Account</a>
+    </div>
+
+    <a href="index.html" class="back-link">← Return to Homepage</a>
+  </div>
+
+  <footer>
+    <p style="color: #fff; margin-bottom: 5px;">© 2026 BrainHustle™. All Rights Reserved.</p>
+    <p>BrainHustle™ is a wholly owned sub-brand of <strong>Murray’s Empire LLC</strong>.</p>
+    <div style="max-width: 800px; margin: 20px auto 0; padding-top: 20px;">
+      <p><strong>Legal Disclaimer:</strong> BrainHustle™ provides educational systems and tools. Murray’s Empire LLC does not guarantee financial success or specific income results. Use of this site constitutes agreement that Murray's Empire LLC is not liable for individual financial outcomes.</p>
+      <p>Corporate Inquiries: <a href="mailto:murraysempirellc@gmail.com" style="color:var(--primary)">murraysempirellc@gmail.com</a></p>
+    </div>
+  </footer>
 
 </body>
 </html>
+</div>
