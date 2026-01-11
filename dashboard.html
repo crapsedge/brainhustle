@@ -1,11 +1,11 @@
+<div id="full-dashboard-code">
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BrainHustle™ Dashboard</title>
+  <title>BrainHustle™ Dashboard – Murray's Empire</title>
 
-  <!-- Google Analytics (pageview tracking) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3M5PKR5S27"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -15,10 +15,17 @@
   </script>
 
   <style>
+    :root {
+      --primary: #00ff66;
+      --bg: #000;
+      --card: #111;
+      --text-muted: #888;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0a0a0a;
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--bg);
       color: white;
       text-align: center;
     }
@@ -27,32 +34,50 @@
       position: fixed;
       top: 20px;
       left: 20px;
-      background-color: #00e676;
+      background-color: var(--primary);
       color: black;
       font-size: 18px;
-      padding: 10px 14px;
+      padding: 10px 16px;
       border: none;
-      border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
       z-index: 1000;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0, 255, 102, 0.3);
     }
 
     .logo-container { margin-top: 80px; }
-    .logo-container img { height: 192px; }
+    .logo-container img { height: 180px; width: auto; }
 
-    h1 { color: #00e676; margin-top: 20px; }
+    h1 { color: var(--primary); margin-top: 20px; font-size: 2.5em; }
 
     .content {
-      max-width: 800px;
+      max-width: 850px;
       margin: 30px auto;
       padding: 0 20px;
       text-align: left;
     }
 
-    .content h2 { color: #00e676; margin-bottom: 10px; }
-    .content p { margin-bottom: 20px; line-height: 1.6; }
+    .card {
+      background: var(--card);
+      border: 1px solid #222;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 25px;
+    }
 
-    .footer { margin-top: 40px; font-size: 12px; color: gray; padding: 20px; }
+    h2 { color: var(--primary); margin-bottom: 15px; font-size: 1.5em; border-bottom: 1px solid #222; padding-bottom: 10px; }
+    p { margin-bottom: 20px; line-height: 1.7; color: #ccc; }
+
+    .footer { 
+      margin-top: 60px; 
+      padding: 40px 20px; 
+      background-color: #000; 
+      color: var(--text-muted); 
+      font-size: 13px; 
+      line-height: 1.6; 
+      border-top: 1px solid #222; 
+    }
 
     /* Sidebar */
     .sidebar {
@@ -61,115 +86,113 @@
       position: fixed;
       top: 0;
       left: 0;
-      background-color: #111;
+      background-color: #0c0c0c;
       overflow-x: hidden;
       transition: 0.3s;
       padding-top: 60px;
       z-index: 1001;
-      text-align: left; /* keeps badge aligned nicely */
+      text-align: left;
+      border-right: 1px solid #222;
     }
     .sidebar a {
-      padding: 10px 20px;
+      padding: 12px 25px;
       text-decoration: none;
       font-size: 18px;
-      color: #00e676;
+      color: #fff;
       display: block;
+      transition: 0.2s;
     }
-    .sidebar a:hover { background-color: #222; }
-    .close-btn { position: absolute; top: 10px; right: 20px; font-size: 24px; color: white; cursor: pointer; }
+    .sidebar a:hover { background-color: var(--primary); color: #000; }
+    .close-btn { position: absolute; top: 15px; right: 25px; font-size: 28px; color: white; cursor: pointer; }
 
-    /* Top status banner (transparent + does not block taps) */
+    /* Premium Status Badge */
+    #memberStatus {
+      margin: 20px;
+      padding: 15px;
+      background: rgba(0, 255, 102, 0.1);
+      border: 1px solid var(--primary);
+      border-radius: 10px;
+      color: var(--primary);
+      font-weight: bold;
+      text-align: center;
+    }
+
     .statusbar {
       position: fixed;
       top: 0; left: 0; right: 0;
-      background: rgba(0, 230, 118, 0.35); /* transparent green */
+      background: rgba(0, 255, 102, 0.9);
       color: #000;
-      padding: 10px 14px;
+      padding: 8px 14px;
       font-weight: 700;
-      display: none; /* shown by JS */
+      display: none;
       z-index: 1100;
-      pointer-events: none;          /* ✅ lets clicks pass through */
-      /* Optional: keep text readable over busy backgrounds */
-      /* backdrop-filter: blur(2px); */
-    }
-    .statusbar.error { background: rgba(255, 82, 82, 0.6); color:#fff; }
-    .status-actions { margin-left:8px; display:inline-block; }
-    .status-actions button {
-      background:#000; color:#00e676; border:1px solid #000;
-      padding:6px 10px; border-radius:6px; cursor:pointer;
-      pointer-events: auto;          /* allow clicking the retry button */
+      font-size: 12px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top status banner -->
   <div id="statusbar" class="statusbar"></div>
 
-  <!-- Side Menu -->
   <div id="sideMenu" class="sidebar">
     <span class="close-btn" onclick="closeMenu()">&times;</span>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="kits.html">Hustle Kits</a>
-    <a href="ideas.html">Money Ideas</a>
-    <a href="passive.html">Passive Income</a>
-    <a href="ai-tools.html">AI Tools</a>
-    <a href="monetization.html">Monetization</a>
-    <a href="trackers.html">Trackers</a>
-    <a href="about.html">What is BrainHustle™?</a>
-    <a href="sports-systems.html">🏈 Sports Systems</a>
-
-    <!-- green badge (hidden by default) -->
-    <div id="memberStatus" style="padding:10px 20px;color:#00e676;font-size:14px;display:none">
-      Status: Upgraded ✅
-    </div>
-
-    <!-- upgrade link (hidden if upgraded) -->
-    <a id="upgradeLink" href="upgrade.html">⬆️ Upgrade Access</a>
-
-    <a href="login.html" onclick="logout()">Logout</a>
+    <div id="memberStatus" style="display:none">UPGRADED FOUNDER ACCESS ✅</div>
+    
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="kits.html">📦 Hustle Kits</a>
+    <a href="ideas.html">💡 Money Ideas</a>
+    <a href="passive.html">📈 Passive Income</a>
+    <a href="ai-tools.html">🧠 AI Tools</a>
+    <a href="monetization.html">💵 Monetization</a>
+    <a href="trackers.html">📊 Trackers</a>
+    <a href="about.html">❔ What is BrainHustle™?</a>
+    <a id="upgradeLink" href="upgrade.html" style="color: #ff3e3e;">⬆️ Upgrade Access</a>
+    <a href="login.html" onclick="logout()" style="margin-top: 20px; border-top: 1px solid #333;">Logout</a>
   </div>
 
-  <!-- Menu Button -->
   <button class="menu-button" onclick="openMenu()">☰ Menu</button>
 
-  <!-- Logo -->
   <div class="logo-container">
-    <img src="brainhustle-logo.PNG" alt="BrainHustle Logo">
+    <img src="brainhustle-logo.png" alt="BrainHustle Logo">
   </div>
 
-  <h1>Welcome to BrainHustle™</h1>
+  <h1>BrainHustle™ Command Center</h1>
 
   <div class="content">
-    <h2>Thank You for Joining</h2>
-    <p>You’re officially part of BrainHustle™ — where smart systems, real tools, and proven strategies meet. You didn’t just join — you invested in yourself, your future, and your ability to take action. No fluff. No hype. Just real results waiting for you.</p>
+    <div class="card">
+      <h2>Systems Initialized</h2>
+      <p>You have successfully entered the BrainHustle™ ecosystem. This is the master holding company's primary portal for wealth-building systems. Use the tools below to execute your strategy.</p>
+    </div>
 
-    <h2>Your Next Move</h2>
-    <p>✔️ Start with Hustle Kits — fast tools to get moving  
-       ✔️ Explore Money Ideas — real ways to earn  
-       ✔️ Use AI Tools — save time, boost results  
-       ✔️ Track everything — stay focused, grow faster</p>
+    <div class="card">
+      <h2>Operational Checklist</h2>
+      <p>
+        ✅ <b>Hustle Kits:</b> Rapid deployment business models.<br>
+        ✅ <b>AI Tools:</b> Leverage automation for 10x output.<br>
+        ✅ <b>Monetization:</b> Convert your systems into active cash flow.<br>
+        ✅ <b>Trackers:</b> Monitor your growth with data-driven precision.
+      </p>
+    </div>
 
-    <h2>You’re in Control Now</h2>
-    <p>This dashboard is your launchpad. Use the menu to access everything. Build income your way — and make BrainHustle™ your personal profit system.</p>
-
-    <p>Let’s get to work. Your hustle starts now.</p>
-
-    <h2>Disclaimer</h2>
-    <p>BrainHustle™ is for educational purposes only. We do not guarantee earnings or results. All tools, ideas, and systems provided are for informational use and should be used at your own discretion. BrainHustle™ is not financial, legal, or investment advice. Individual success depends on effort, experience, and execution.</p>
+    <div class="card">
+      <h2>Corporate Disclaimer</h2>
+      <p>BrainHustle™ provides educational systems and informational tools. Murray’s Empire LLC does not guarantee financial success or specific earnings. All results depend on individual execution and market conditions. This is not legal, financial, or investment advice.</p>
+    </div>
   </div>
 
-  <div class="footer">
-    All Rights Reserved © BrainHustle™ 2025
-  </div>
+  <footer class="footer">
+    <p style="color: #fff; margin-bottom: 5px;">© 2026 BrainHustle™. All Rights Reserved.</p>
+    <p>BrainHustle™ is a wholly owned sub-brand of <strong>Murray’s Empire LLC</strong>.</p>
+    <div style="max-width: 800px; margin: 20px auto 0; padding-top: 20px;">
+      <p><strong>Support:</strong> <a href="mailto:murraysempirellc@gmail.com" style="color:var(--primary)">murraysempirellc@gmail.com</a></p>
+    </div>
+  </footer>
 
-  <!-- Sidebar Script -->
   <script>
-    function openMenu() { document.getElementById("sideMenu").style.width = "250px"; }
+    function openMenu() { document.getElementById("sideMenu").style.width = "280px"; }
     function closeMenu() { document.getElementById("sideMenu").style.width = "0"; }
   </script>
 
-  <!-- Firebase Logout + Auto-Admin with visible status + retry -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
@@ -193,96 +216,43 @@
     const rtdb = getDatabase(app);
 
     const STATUS = document.getElementById('statusbar');
-    function showStatus(msg, isError=false, withRetry=false, user=null){
-      STATUS.className = 'statusbar' + (isError ? ' error' : '');
-      STATUS.innerHTML = msg + (withRetry ? `<span class="status-actions"><button id="forceBtn">Force Upgrade</button></span>` : '');
+    function showStatus(msg){
+      STATUS.innerHTML = msg;
       STATUS.style.display = 'block';
-      if (withRetry && user) {
-        const btn = document.getElementById('forceBtn');
-        if (btn) btn.onclick = () => ensureAdmin(user, true);
-      }
+      setTimeout(() => { STATUS.style.display = 'none'; }, 5000);
     }
 
     window.logout = function() {
       signOut(auth).then(() => { window.location.href = "login.html"; });
     };
 
-    async function ensureAdmin(user, showResult=false){
-      const ADMIN_EMAILS = ["shawn.murrayjr@gmail.com"];
-      if (!ADMIN_EMAILS.includes((user.email || '').toLowerCase())) {
-        if (showResult) showStatus(`Logged in as ${user.email}. (Not in ADMIN_EMAILS)`, true);
-        return;
-      }
-      try {
-        await setDoc(doc(db, "users", user.uid), {
-          email: user.email,
-          membership: "upgraded",
-          role: "admin",
-          updatedAt: new Date()
-        }, { merge: true });
-
-        const snap = await getDoc(doc(db, "users", user.uid));
-        const data = snap.exists() ? snap.data() : {};
-        const level = (data.membership || 'starter').toLowerCase();
-        showStatus(`✅ ${user.email} is set to ${level.toUpperCase()} (role: ${data.role || 'n/a'}). You’re good to go.`, false);
-      } catch (e) {
-        console.error('Auto-admin error:', e);
-        showStatus(`⚠️ Could not update Firestore (permissions?).`, true, true, user);
-      }
-    }
-
-    const memberStatus = document.getElementById("memberStatus");
-    const upgradeLink  = document.getElementById("upgradeLink");
-    const OWNER_UID    = "bMPlkmhEV8a05M0uwsgxVORsFk72";
-    const emailKey     = (e)=> e.toLowerCase().replace(/\./g, ',');
-
-    async function setMenuByLevel(level){
-      if (String(level).toLowerCase() === "upgraded") {
-        if (memberStatus) memberStatus.style.display = "block";
-        if (upgradeLink)  upgradeLink.style.display  = "none";
-      } else {
-        if (memberStatus) memberStatus.style.display = "none";
-        if (upgradeLink)  upgradeLink.style.display  = "block";
-      }
-    }
-
-    async function fetchMembershipFromRTDB(user){
-      try{
-        if (user.uid === OWNER_UID) return "upgraded"; // owner override
-        const uidSnap = await get(child(ref(rtdb), `/members/${user.uid}/level`));
-        if (uidSnap.exists()) return uidSnap.val();
-        if (user.email) {
-          const eKey = emailKey(user.email);
-          const mailSnap = await get(child(ref(rtdb), `/membersByEmail/${eKey}/level`));
-          if (mailSnap.exists()) return mailSnap.val();
-        }
-      }catch(err){
-        console.error('RTDB read error:', err);
-      }
-      return "starter";
-    }
-
     onAuthStateChanged(auth, async (user) => {
       if (!user) { window.location.href = "login.html"; return; }
 
-      await ensureAdmin(user);
+      const memberStatus = document.getElementById("memberStatus");
+      const upgradeLink  = document.getElementById("upgradeLink");
 
-      const level = await fetchMembershipFromRTDB(user);
-      await setMenuByLevel(level);
-
-      try {
-        const snap = await getDoc(doc(db, "users", user.uid));
-        if (snap.exists()) {
-          const d = snap.data();
-          showStatus(`Logged in: ${user.email} — membership: ${(d.membership || 'starter').toUpperCase()}${d.role ? ' • role: '+d.role : ''}`);
-        } else {
-          showStatus(`Logged in: ${user.email} — no user doc found (will be created on first write).`);
-        }
-      } catch (e) {
-        console.error('Read user doc error:', e);
+      // Auto-Admin Check
+      const ADMIN_EMAILS = ["murraysempirellc@gmail.com", "shawn.murrayjr@gmail.com"];
+      if (ADMIN_EMAILS.includes(user.email.toLowerCase())) {
+        await setDoc(doc(db, "users", user.uid), { membership: "upgraded", role: "admin" }, { merge: true });
       }
+
+      // Check Membership Level
+      const snap = await getDoc(doc(db, "users", user.uid));
+      const level = snap.exists() ? (snap.data().membership || 'starter') : 'starter';
+
+      if (level === "upgraded") {
+        memberStatus.style.display = "block";
+        upgradeLink.style.display = "none";
+      } else {
+        memberStatus.style.display = "none";
+        upgradeLink.style.display = "block";
+      }
+      
+      showStatus(`SESSION ACTIVE: ${user.email.toUpperCase()}`);
     });
   </script>
-
 </body>
 </html>
+</div>
