@@ -1,21 +1,120 @@
+<div id="full-trackers-code">
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Trackers – BrainHustle™</title>
+  <title>Trackers – BrainHustle™ | Murray's Empire</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
-    body { margin:0; background:#0a0a0a; color:#fff; font-family:Arial, sans-serif; }
-    .menu-button { position:fixed; top:20px; left:20px; background:#00cc66; border:none; color:#000; font-size:22px; padding:8px 12px; cursor:pointer; z-index:1000; }
-    .side-menu { position:fixed; top:0; left:-250px; width:250px; height:100%; background:#111; overflow-y:auto; transition:left .3s; padding-top:100px; z-index:999; }
-    .side-menu a { display:block; color:#fff; padding:12px 20px; text-decoration:none; border-bottom:1px solid #333; }
-    .side-menu a:hover { background:#00cc66; color:#000; }
-    .show-menu { left:0; }
-    .content { padding:60px 20px; max-width:800px; margin:auto; }
-    h1 { color:#00cc66; text-align:center; }
-    .card { background:#111; border:1px solid #00cc66; border-radius:8px; padding:20px; margin:20px 0; }
-    .upgrade-btn { background:red; color:#fff; padding:10px 16px; border:none; border-radius:5px; cursor:pointer; text-decoration:none; }
-    .footer { font-size:.8em; color:gray; margin-top:40px; text-align:center; padding:20px; border-top:1px solid #333; }
+    :root {
+      --primary: #00ff66;
+      --bg: #000;
+      --card: #121212;
+      --text-muted: #888;
+      --cta: #ff0000;
+      --border: #242424;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: white;
+      font-family: 'Inter', Arial, sans-serif;
+    }
+
+    .menu-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: var(--primary);
+      border: none;
+      color: black;
+      font-size: 18px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 1000;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0, 255, 102, 0.3);
+    }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100%;
+      background-color: #0c0c0c;
+      overflow-y: auto;
+      transition: left 0.3s;
+      padding-top: 80px;
+      z-index: 999;
+      border-right: 1px solid var(--border);
+    }
+
+    .side-menu a {
+      display: block;
+      color: white;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: 0.2s;
+    }
+
+    .side-menu a:hover {
+      background-color: var(--primary);
+      color: black;
+    }
+
+    .show-menu { left: 0; }
+
+    .content {
+      padding: 80px 20px 40px;
+      max-width: 850px;
+      margin: auto;
+    }
+
+    h1 { color: var(--primary); text-align: center; font-size: 2.5em; margin-bottom: 10px; }
+    p.subtitle { text-align: center; color: var(--text-muted); margin-bottom: 40px; }
+
+    .card { 
+      background: var(--card); 
+      border: 1px solid var(--border); 
+      border-radius: 12px; 
+      padding: 25px; 
+      margin: 20px 0; 
+      transition: 0.3s;
+    }
+
+    .card:hover { border-color: var(--primary); }
+
+    .card h3 { color: var(--primary); margin-top: 0; font-size: 1.4em; }
+    .card p { color: #ccc; line-height: 1.6; }
+
+    .upgrade-btn { 
+      background: var(--cta); 
+      color: #fff; 
+      padding: 14px 28px; 
+      font-size: 18px; 
+      border: none; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      text-decoration: none; 
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    .footer { 
+      margin-top: 60px; 
+      padding: 40px 20px; 
+      background-color: #000; 
+      color: var(--text-muted); 
+      font-size: 13px; 
+      line-height: 1.6; 
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -23,29 +122,32 @@
   <button class="menu-button" onclick="toggleMenu()">☰ Menu</button>
 
   <div id="sideMenu" class="side-menu">
-    <a href="dashboard.html">Dashboard</a>
-    <a href="kits.html">Hustle Kits</a>
-    <a href="ideas.html">Money Ideas</a>
-    <a href="passive.html">Passive Income</a>
-    <a href="ai-tools.html">AI Tools</a>
-    <a href="monetization.html">Monetization</a>
-    <a href="trackers.html">Trackers</a>
-    <a href="about.html">What is BrainHustle™?</a>
-    <a href="upgrade.html">Upgrade Access</a>
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="kits.html">📦 Hustle Kits</a>
+    <a href="ideas.html">💡 Money Ideas</a>
+    <a href="passive.html">📈 Passive Income</a>
+    <a href="ai-tools.html">🧠 AI Tools</a>
+    <a href="monetization.html">💵 Monetization</a>
+    <a href="trackers.html">📊 Trackers</a>
+    <a href="about.html">❔ What is BrainHustle™?</a>
+    <a href="upgrade.html" style="color: #ff3e3e;">⬆️ Upgrade Access</a>
     <a href="#" onclick="logout()">Logout</a>
   </div>
 
   <div class="content" id="contentArea">
-    <h1>📊 Trackers</h1>
-    <p id="status">Loading your access level...</p>
+    <h1>📊 Performance Trackers</h1>
+    <p id="status" class="subtitle">Verifying secure data access...</p>
   </div>
 
-  <div class="footer">
-    <p>BrainHustle™ © 2025. All rights reserved.</p>
-    <p>Disclaimer: These tools are for educational purposes only. No guaranteed income.</p>
-  </div>
+  <footer class="footer">
+    <p style="color: #fff; margin-bottom: 5px;">© 2026 BrainHustle™. All Rights Reserved.</p>
+    <p>BrainHustle™ is a wholly owned sub-brand of <strong>Murray’s Empire LLC</strong>.</p>
+    <div style="max-width: 800px; margin: 20px auto 0; padding-top: 20px;">
+      <p><strong>Disclaimer:</strong> Educational and organizational purposes only. No guarantees of financial success or specific income results. Murray’s Empire LLC is not responsible for your financial tracking or business outcomes. Use tools at your own discretion.</p>
+      <p>Corporate Support: <a href="mailto:murraysempirellc@gmail.com" style="color:var(--primary)">murraysempirellc@gmail.com</a></p>
+    </div>
+  </footer>
 
-  <!-- Firebase Auth + Firestore with anti-stuck -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
@@ -74,64 +176,64 @@
     const fallback = setTimeout(() => {
       if (resolved) return;
       resolved = true;
-      statusEl.textContent = 'Preview mode — log in to unlock more.';
+      statusEl.textContent = 'Preview mode active.';
+      renderStarter();
+    }, 1500);
+
+    function renderStarter(){
       contentArea.innerHTML = `
         <h1>📊 Trackers (Preview)</h1>
-        <div class="card"><h3>Starter Preview</h3><p>Basic download link for a free sample tracker.</p></div>
-        <div style="text-align:center;"><a href="upgrade.html" class="upgrade-btn">Upgrade Now</a></div>
+        <div class="card">
+          <h3>Sample Resource Deployment</h3>
+          <p>Access basic data-logging templates to start monitoring your primary hustle architecture.</p>
+        </div>
+        <div style="text-align:center; margin-top:40px;">
+          <p>🔒 <strong>Founder Tier Required:</strong> Unlock full Excel/Sheets systems for bankroll, cashflow, and growth tracking.</p>
+          <a href="upgrade.html" class="upgrade-btn">Upgrade to Founder Tier</a>
+        </div>
       `;
-    }, 1500);
+    }
+
+    function renderUpgraded(){
+      contentArea.innerHTML = `
+        <h1>📊 Master Operational Trackers</h1>
+        <div class="card">
+          <h3>1. Bankroll & Capital Ledger</h3>
+          <p>Download the professional bankroll architecture (Excel/Google Sheets) to manage your empire's liquid assets and deployment.</p>
+        </div>
+        <div class="card">
+          <h3>2. Master Income/Expense System</h3>
+          <p>Audit your cash flow, manage active subscriptions, and set automated savings targets for expansion.</p>
+        </div>
+        <div class="card">
+          <h3>3. Growth KPI Progress Monitor</h3>
+          <p>Monitor side-hustle revenue performance with automated charting to visualize month-over-month growth patterns.</p>
+        </div>
+      `;
+    }
 
     onAuthStateChanged(auth, async (user) => {
       if (resolved) return;
       clearTimeout(fallback);
+      if (!user) { window.location.href = "login.html"; return; }
 
-      if (!user) { resolved = true; window.location.href = "login.html"; return; }
-
-      statusEl.textContent = 'Checking membership…';
       try {
         const ref = doc(db, "users", user.uid);
         const snap = await getDoc(ref);
-
-        let membership = "starter";
-        if (!snap.exists()) {
-          await setDoc(ref, { membership: "starter", email: user.email || "", createdAt: new Date() }, { merge: true });
-        } else {
-          membership = (snap.data().membership || "starter").toLowerCase();
-        }
-
+        let membership = snap.exists() ? (snap.data().membership || "starter").toLowerCase() : "starter";
+        
         resolved = true;
-
-        if (membership === "upgraded") {
-          contentArea.innerHTML = `
-            <h1>📊 Trackers</h1>
-            <div class="card"><h3>Bankroll Tracker</h3><p>Download our full bankroll tracker (Excel/Google Sheets).</p></div>
-            <div class="card"><h3>Income/Expense Tracker</h3><p>Log cash flow, subscriptions, and savings goals.</p></div>
-            <div class="card"><h3>Growth Progress Tracker</h3><p>Track side-hustle revenue month by month with auto-charts.</p></div>
-          `;
-        } else {
-          contentArea.innerHTML = `
-            <h1>📊 Trackers (Preview)</h1>
-            <div class="card"><h3>Starter Preview</h3><p>Basic download link for a free sample tracker.</p></div>
-            <div style="text-align:center;"><a href="upgrade.html" class="upgrade-btn">Upgrade Now</a></div>
-          `;
-        }
+        statusEl.style.display = 'none';
+        if (membership === "upgraded") { renderUpgraded(); } 
+        else { renderStarter(); }
       } catch (err) {
-        console.error('[trackers] membership read failed:', err);
         resolved = true;
-        statusEl.textContent = 'Couldn’t verify membership — showing preview.';
-        contentArea.innerHTML = `
-          <h1>📊 Trackers (Preview)</h1>
-          <div class="card"><h3>Starter Preview</h3><p>Basic download link for a free sample tracker.</p></div>
-          <div style="text-align:center;"><a href="upgrade.html" class="upgrade-btn">Upgrade Now</a></div>
-        `;
+        renderStarter();
       }
     });
-  </script>
 
-  <script>
-    function toggleMenu(){ document.getElementById('sideMenu').classList.toggle('show-menu'); }
+    window.toggleMenu = function(){ document.getElementById('sideMenu').classList.toggle('show-menu'); }
   </script>
-
 </body>
 </html>
+</div>
