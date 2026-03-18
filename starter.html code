@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Free Starter System | BrainHustle™</title>
+  <meta name="description" content="Free BrainHustle™ starter system. Learn a simple online income method before upgrading to full access." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://brainhustle.store/starter.html" />
+
+  <style>
+    :root{
+      --bg:#000;
+      --panel:#0b0b0b;
+      --text:#fff;
+      --muted:rgba(255,255,255,0.72);
+      --border:rgba(255,255,255,0.10);
+      --red:#ff2d2d;
+      --red2:#ff5a5a;
+    }
+
+    *{box-sizing:border-box;}
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Inter",Arial,sans-serif;
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      text-align:center;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:16px 20px;
+      background:rgba(0,0,0,0.75);
+      border-bottom:1px solid var(--border);
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(10px);
+    }
+
+    header img{
+      width:250px;
+      height:auto;
+    }
+
+    .nav-btn{
+      background:transparent;
+      color:#fff;
+      border:1px solid var(--border);
+      padding:10px 16px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+      font-size:15px;
+    }
+
+    .wrap{
+      max-width:900px;
+      margin:0 auto;
+      padding:30px 18px 50px;
+    }
+
+    .hero{
+      max-width:760px;
+      margin:0 auto 30px;
+    }
+
+    .tag{
+      display:inline-block;
+      padding:8px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      color:var(--muted);
+      font-weight:800;
+      background:rgba(255,255,255,0.03);
+      margin-bottom:16px;
+    }
+
+    h1{
+      font-size:36px;
+      line-height:1.15;
+      margin:0 0 14px;
+    }
+
+    .sub{
+      color:var(--muted);
+      font-size:17px;
+      max-width:700px;
+      margin:0 auto;
+    }
+
+    .steps{
+      display:grid;
+      gap:14px;
+      margin:34px auto 24px;
+      max-width:760px;
+    }
+
+    .step{
+      background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:18px;
+      text-align:left;
+    }
+
+    .step-number{
+      display:inline-block;
+      font-size:13px;
+      font-weight:900;
+      color:var(--red2);
+      margin-bottom:6px;
+      letter-spacing:.3px;
+      text-transform:uppercase;
+    }
+
+    .step h2{
+      margin:0 0 8px;
+      font-size:20px;
+    }
+
+    .step p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .offer-box{
+      max-width:760px;
+      margin:30px auto 0;
+      padding:20px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:rgba(255,255,255,0.03);
+      text-align:left;
+    }
+
+    .offer-box h3{
+      margin:0 0 10px;
+      font-size:22px;
+    }
+
+    .offer-box ul{
+      margin:0;
+      padding-left:20px;
+      color:var(--muted);
+    }
+
+    .offer-box li{
+      margin:8px 0;
+    }
+
+    .cta{
+      margin-top:28px;
+    }
+
+    .cta-btn{
+      background:var(--red);
+      color:#fff;
+      padding:14px 24px;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:900;
+      display:inline-block;
+      box-shadow:0 10px 25px rgba(255,45,45,0.18);
+    }
+
+    .small{
+      margin-top:14px;
+      color:rgba(255,255,255,0.56);
+      font-size:13px;
+      max-width:720px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    footer{
+      margin-top:50px;
+      padding:30px 18px;
+      border-top:1px solid #222;
+      color:#888;
+      font-size:13px;
+    }
+
+    @media (min-width: 720px){
+      h1{font-size:44px;}
+      header img{width:280px;}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" aria-label="BrainHustle Home">
+    <img src="brainhustle-logo.png" alt="BrainHustle Logo">
+  </a>
+  <a href="index.html" class="nav-btn">Back Home</a>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="tag">Free BrainHustle™ Preview</div>
+    <h1>Free Starter System</h1>
+    <p class="sub">
+      This page gives you a basic look at the kind of practical online income systems inside BrainHustle™.
+      The goal is simple: help you understand the process before paying for full access.
+    </p>
+  </section>
+
+  <section class="steps">
+    <div class="step">
+      <div class="step-number">Step 1</div>
+      <h2>Pick a simple service or offer</h2>
+      <p>
+        Start with something clear and useful. People respond better when the offer is easy to understand.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">Step 2</div>
+      <h2>Put the offer in front of people</h2>
+      <p>
+        Use platforms where people already spend time looking for help, ideas, or opportunities.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">Step 3</div>
+      <h2>Use a clear message</h2>
+      <p>
+        Keep the message simple. Say what it is, who it helps, and why someone should care.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">Step 4</div>
+      <h2>Track what works and repeat it</h2>
+      <p>
+        Pay attention to what gets clicks, replies, or interest. Improve the winners and cut the weak parts.
+      </p>
+    </div>
+  </section>
+
+  <section class="offer-box">
+    <h3>Want the full BrainHustle™ system?</h3>
+    <ul>
+      <li>More step-by-step systems</li>
+      <li>Copy-and-paste templates</li>
+      <li>Scripts and checklists</li>
+      <li>Organized members-only tools</li>
+      <li>More ways to build and repeat income systems</li>
+    </ul>
+
+    <div class="cta">
+      <a href="https://crapsedge.gumroad.com/l/fppvj" class="cta-btn">Unlock Full BrainHustle Access</a>
+    </div>
+
+    <p class="small">
+      BrainHustle™ provides educational tools and information only. Results vary based on effort, execution, and market conditions.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 BrainHustle™. All Rights Reserved.</p>
+  <p>BrainHustle™ is a sub-brand of Murrays Empire LLC.</p>
+</footer>
+
+</body>
+</html>
