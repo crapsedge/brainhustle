@@ -1,199 +1,82 @@
-<div id="full-kits-code">
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hustle Kits – BrainHustle™ | Murray's Empire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Hustle Kits | BrainHustle™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --primary: #00ff66;
-      --bg: #000;
-      --card: #121212;
-      --text-muted: #888;
-      --cta: #ff0000;
+      --primary: #00e676;
+      --bg: #050505;
+      --card: #0f0f0f;
+      --border: #1e1e1e;
+      --text-dim: #888;
     }
 
-    body {
-      margin: 0;
-      font-family: 'Inter', Arial, sans-serif;
-      background: var(--bg);
-      color: white;
-      text-align: center;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    
+    body { background: var(--bg); font-family: 'Inter', sans-serif; color: white; display: flex; min-height: 100vh; }
 
-    .menu-button {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background-color: var(--primary);
-      color: black;
-      font-size: 18px;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      z-index: 1000;
-      font-weight: bold;
-      box-shadow: 0 4px 15px rgba(0, 255, 102, 0.3);
-    }
+    /* NAVIGATION */
+    .sidebar { width: 260px; background: #000; border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 1000; }
+    .brand-box { padding: 30px 25px; font-weight: 800; font-size: 18px; border-bottom: 1px solid var(--border); }
+    .brand-box span { color: var(--primary); }
+    .nav-group { padding: 20px 0; flex-grow: 1; }
+    .nav-group a { display: block; padding: 12px 25px; color: var(--text-dim); text-decoration: none; font-size: 14px; font-weight: 600; transition: 0.2s; }
+    .nav-group a:hover { color: #fff; background: #0f0f0f; }
 
-    .logo-container { margin-top: 80px; }
-    .logo-container img { height: 180px; width: auto; }
+    /* CONTENT AREA */
+    main { flex-grow: 1; margin-left: 260px; padding: 40px 60px; max-width: 900px; }
+    h1 { font-size: 26px; font-weight: 800; margin-bottom: 40px; letter-spacing: -1px; }
 
-    h1 { color: var(--primary); margin-top: 20px; font-size: 2.5em; }
+    /* KIT CARDS */
+    .kit-card { background: var(--card); border: 1px solid var(--border); padding: 30px; border-radius: 12px; margin-bottom: 25px; }
+    .kit-card h3 { font-size: 18px; color: var(--primary); margin-bottom: 10px; font-weight: 800; }
+    .kit-card p { font-size: 14px; color: #ccc; line-height: 1.6; margin-bottom: 20px; }
+    
+    .kit-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; background: #000; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+    .meta-item { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+    .meta-item span { display: block; color: #fff; font-size: 14px; font-weight: 700; margin-top: 4px; }
 
-    .content {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 0 20px;
-      text-align: left;
-    }
+    .btn-action { display: block; width: 100%; padding: 12px; background: #222; color: #fff; border: none; border-radius: 6px; font-weight: 800; font-size: 12px; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
+    .btn-action:hover { background: var(--primary); color: #000; }
 
-    .kit-box {
-      background: var(--card);
-      border: 1px solid #242424;
-      border-radius: 12px;
-      padding: 30px;
-      margin-bottom: 25px;
-      transition: 0.3s;
-    }
+    /* MODAL TERMINAL */
+    #kitModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; padding: 20px; overflow-y: auto; }
+    .terminal-box { max-width: 600px; margin: 40px auto; background: var(--card); border: 1px solid var(--primary); border-radius: 12px; padding: 40px; }
+    .terminal-box h2 { color: var(--primary); margin-bottom: 15px; }
+    .terminal-box p { line-height: 1.6; color: #ccc; margin-bottom: 15px; font-size: 14px; }
 
-    .kit-box:hover { border-color: var(--primary); }
-
-    .kit-box h2 {
-      color: var(--primary);
-      margin-top: 0;
-      margin-bottom: 15px;
-      font-size: 1.6em;
-    }
-
-    .kit-box p {
-      margin-bottom: 25px;
-      line-height: 1.7;
-      color: #ccc;
-    }
-
-    .kit-box a {
-      background: var(--cta);
-      color: white;
-      padding: 12px 24px;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      display: inline-block;
-      transition: 0.2s;
-    }
-
-    .kit-box a:hover {
-      background: #cc0000;
-      transform: translateY(-2px);
-    }
-
-    .footer { 
-      margin-top: 60px; 
-      padding: 40px 20px; 
-      background-color: #000; 
-      color: var(--text-muted); 
-      font-size: 13px; 
-      line-height: 1.6; 
-      border-top: 1px solid #222;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      height: 100%;
-      width: 0;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background-color: #0c0c0c;
-      overflow-x: hidden;
-      transition: 0.3s;
-      padding-top: 60px;
-      z-index: 1001;
-      text-align: left;
-      border-right: 1px solid #222;
-    }
-
-    .sidebar a {
-      padding: 12px 25px;
-      text-decoration: none;
-      font-size: 18px;
-      color: #fff;
-      display: block;
-      transition: 0.2s;
-    }
-
-    .sidebar a:hover { background-color: var(--primary); color: #000; }
-
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 25px;
-      font-size: 28px;
-      color: white;
-      cursor: pointer;
-    }
+    @media (max-width: 900px) { .sidebar { display: none; } main { margin-left: 0; padding: 40px 20px; } }
   </style>
 </head>
 <body>
 
-  <div id="sideMenu" class="sidebar">
-    <span class="close-btn" onclick="closeMenu()">&times;</span>
-    <a href="dashboard.html">🏠 Dashboard</a>
-    <a href="kits.html">📦 Hustle Kits</a>
-    <a href="ideas.html">💡 Money Ideas</a>
-    <a href="passive.html">📈 Passive Income</a>
-    <a href="ai-tools.html">🧠 AI Tools</a>
-    <a href="monetization.html">💵 Monetization</a>
-    <a href="trackers.html">📊 Trackers</a>
-    <a href="about.html">❔ What is BrainHustle™?</a>
-    <a href="upgrade.html" style="color: #ff3e3e;">⬆️ Upgrade Access</a>
-    <a href="login.html" onclick="logout()" style="margin-top: 20px; border-top: 1px solid #333;">Logout</a>
-  </div>
-
-  <button class="menu-button" onclick="openMenu()">☰ Menu</button>
-
-  <div class="logo-container">
-    <img src="brainhustle-logo.png" alt="BrainHustle Logo">
-  </div>
-
-  <h1>Operational Hustle Kits</h1>
-
-  <div class="content">
-    <div class="kit-box">
-      <h2>📥 Digital Product Template Kit</h2>
-      <p>Quick-start blueprints designed to help you architect digital assets like eBooks, professional guides, and high-conversion checklists — formatted and ready for market deployment.</p>
-      <a href="#">Download Resource Kit</a>
+  <nav class="sidebar">
+    <div class="brand-box">Brain<span>Hustle</span>™</div>
+    <div class="nav-group">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="kits.html" style="color:#fff; background:#0f0f0f;">Hustle Kits</a>
+      <a href="ideas.html">Money Ideas</a>
+      <a href="ai-tools.html">AI Tools</a>
+      <a href="#" onclick="logout()">Logout</a>
     </div>
+  </nav>
 
-    <div class="kit-box">
-      <h2>📥 Business Tracker Systems</h2>
-      <p>The master ledger for your empire. Monitor revenue streams, track KPIs, and optimize growth with this specialized Google Sheets/Excel command tool.</p>
-      <a href="#">Download Tracker System</a>
-    </div>
+  <main>
+    <h1>Deployment Kits</h1>
+    <div id="kitArea">Loading Secure Assets...</div>
+  </main>
 
-    <div class="kit-box">
-      <h2>📥 Email Funnel Architecture</h2>
-      <p>High-conversion email sequences and funnel structures designed to capture high-value leads and drive automated revenue cycles.</p>
-      <a href="#">Download Funnel Pack</a>
+  <div id="kitModal">
+    <div class="terminal-box">
+      <div id="terminalContent"></div>
+      <button onclick="closeKit()" style="margin-top:30px; background:none; border:1px solid #444; color:#888; padding:10px; cursor:pointer; width:100%;">[ CLOSE ASSET ]</button>
     </div>
   </div>
-
-  <footer class="footer">
-    <p style="color: #fff; margin-bottom: 5px;">© 2026 BrainHustle™. All Rights Reserved.</p>
-    <p>BrainHustle™ is a wholly owned sub-brand of <strong>Murray’s Empire LLC</strong>.</p>
-    <div style="max-width: 800px; margin: 20px auto 0; padding-top: 20px;">
-      <p><strong>Disclaimer:</strong> Hustle Kits are provided for educational and organizational purposes only. Murray’s Empire LLC does not guarantee income or financial outcomes from the use of these tools. Individual success is based on personal effort and market execution.</p>
-      <p>Support: <a href="mailto:murraysempirellc@gmail.com" style="color:var(--primary)">murraysempirellc@gmail.com</a></p>
-    </div>
-  </footer>
-
-  <script>
-    function openMenu() { document.getElementById("sideMenu").style.width = "280px"; }
-    function closeMenu() { document.getElementById("sideMenu").style.width = "0"; }
-  </script>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
@@ -212,15 +95,54 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    window.logout = function() {
-      signOut(auth).then(() => { window.location.href = "login.html"; });
+    window.logout = () => signOut(auth).then(() => window.location.href="login.html");
+    window.closeKit = () => document.getElementById('kitModal').style.display = 'none';
+
+    const ASSETS = {
+      k1: `<h2>Digital Product Kit</h2><p><strong>Deployment:</strong> Use the Canva AI tool to build your 10-page guide. Export as PDF. Upload to Gumroad. Connect to your BrainHustle™ dashboard.</p>`,
+      k2: `<h2>Business Tracker</h2><p><strong>Deployment:</strong> Access the Master Ledger. Log your daily ad spend, clicks, and revenue. Track your ROI with 100% precision.</p>`,
+      k3: `<h2>Email Architecture</h2><p><strong>Deployment:</strong> 3-Day Sequence. Day 1: The Hook. Day 2: The Proof. Day 3: The Scarcity. Plug these into your automation tool.</p>`
+    };
+
+    window.openKit = (key) => {
+      document.getElementById('terminalContent').innerHTML = ASSETS[key];
+      document.getElementById('kitModal').style.display = 'block';
     };
 
     onAuthStateChanged(auth, (user) => {
-      if (!user) { window.location.href = "login.html"; }
+      if (!user) { window.location.href = "login.html"; return; }
+      document.getElementById('kitArea').innerHTML = `
+        <div class="kit-card">
+          <h3>📥 Digital Product Template</h3>
+          <p>Blueprints for eBooks, guides, and checklists. Ready for immediate deployment.</p>
+          <div class="kit-meta">
+            <div class="meta-item">TYPE<span>ASSET KIT</span></div>
+            <div class="meta-item">FORMAT<span>PDF / DIGITAL</span></div>
+          </div>
+          <button class="btn-action" onclick="openKit('k1')">Deploy Resource</button>
+        </div>
+
+        <div class="kit-card">
+          <h3>📥 Business Tracker System</h3>
+          <p>The master ledger. Monitor revenue, track KPIs, and manage growth.</p>
+          <div class="kit-meta">
+            <div class="meta-item">TYPE<span>SYSTEM TOOL</span></div>
+            <div class="meta-item">ACCESS<span>GOOGLE SHEETS</span></div>
+          </div>
+          <button class="btn-action" onclick="openKit('k2')">Open Tracker</button>
+        </div>
+
+        <div class="kit-card">
+          <h3>📥 Email Funnel Architecture</h3>
+          <p>High-conversion sequences designed to automate your revenue cycles.</p>
+          <div class="kit-meta">
+            <div class="meta-item">TYPE<span>FUNNEL PACK</span></div>
+            <div class="meta-item">STATUS<span>CONVERSION READY</span></div>
+          </div>
+          <button class="btn-action" onclick="openKit('k3')">View Architecture</button>
+        </div>
+      `;
     });
   </script>
-
 </body>
 </html>
-</div>
