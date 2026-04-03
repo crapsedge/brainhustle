@@ -98,6 +98,7 @@
       <a href="ideas.html">Money Ideas</a>
       <a href="ai-tools.html">AI Tools</a>
       <a href="trackers.html">Trackers</a>
+      <a id="upgradeLink" href="upgrade.html" style="display:block; color: #ff3e3e; padding: 12px 25px; font-size: 14px; text-decoration: none; font-weight: 600;">Upgrade Account</a>
     </div>
     <div style="padding: 20px; border-top: 1px solid var(--border);">
       <div id="user-email" style="font-size: 11px; color: #444; margin-bottom: 10px; overflow: hidden; text-overflow: ellipsis;">Syncing...</div>
@@ -177,6 +178,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
@@ -190,12 +192,38 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getFirestore(app);
 
     window.logout = () => signOut(auth).then(() => window.location.href="login.html");
 
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       if (!user) { window.location.href = "login.html"; return; }
-      document.getElementById('user-email').textContent = user.email;
+
+      const userEmail = user.email.toLowerCase();
+      const ADMIN_EMAILS = ["murraysempirellc@gmail.com", "shawn.murrayjr@gmail.com"];
+
+      if (ADMIN_EMAILS.includes(userEmail)) {
+        // Force Admin View Immediately
+        document.getElementById("upgradeLink").style.display = "none";
+        document.getElementById("license-level").textContent = "Upgraded Founder Access ✅";
+        
+        // Sync Database in background
+        await setDoc(doc(db, "users", user.uid), { 
+          membership: "upgraded", 
+          role: "admin",
+          email: userEmail 
+        }, { merge: true });
+      } else {
+        // Standard Membership Check
+        const snap = await getDoc(doc(db, "users", user.uid));
+        const level = snap.exists() ? (snap.data().membership || 'starter') : 'starter';
+        if (level === "upgraded") {
+          document.getElementById("upgradeLink").style.display = "none";
+          document.getElementById("license-level").textContent = "Upgraded Access";
+        }
+      }
+
+      document.getElementById('user-email').textContent = userEmail;
       document.getElementById('display-name').textContent = user.displayName || "Member";
       document.getElementById('last-auth-date').textContent = new Date(user.metadata.lastSignInTime).toLocaleDateString();
     });
