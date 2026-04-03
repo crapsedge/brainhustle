@@ -1,318 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BrainHustle™ – Real Profit Systems</title>
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3M5PKR5S27"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1Q02WKMG75"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-3M5PKR5S27');
+    gtag('config', 'G-1Q02WKMG75');
   </script>
 
-  <!-- Google Search Console Verification -->
-  <meta name="google-site-verification" content="Z3aOcoAI7VmclxmREcpDULpVfO2_ntGgGH6hlerb7u8" />
-
-  <!-- SEO -->
-  <meta name="description" content="BrainHustle™ – Access real profit systems, step-by-step guides, and tools to make money online legally and safely. No scams, no hype. Just legitimate systems." />
-  <meta name="robots" content="index, follow">
-  <meta name="googlebot" content="index, follow">
-  <link rel="canonical" href="https://brainhustle.store/">
-  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://brainhustle.store/sitemap.xml">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CrapsEdge™ | Professional Strategy & Dice Control</title>
+  <meta name="description" content="The elite framework for tactical craps strategy, dice mechanics, and high-stakes bankroll management. Designed by Murrays Empire LLC.">
 
   <style>
-    :root{
-      --bg:#000;
-      --panel:#0b0b0b;
-      --text:#fff;
-      --muted:rgba(255,255,255,0.70);
-      --border:rgba(255,255,255,0.10);
-      --red:#ff2d2d;
-      --red2:#ff5a5a;
-      --green:#00ff66; /* kept for small highlights if needed */
+    :root {
+      --primary: #D4AF37; /* Gold */
+      --secondary: #064e3b; /* Casino Green */
+      --black: #050505;
+      --off-white: #fcfcfc;
+      --text: #1a1a1a;
+      --muted: #6b7280;
+      --border: rgba(0,0,0,0.08);
+      --card-shadow: 0 30px 70px rgba(0,0,0,0.18);
     }
 
-    *{ box-sizing:border-box; }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; }
 
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family:-apple-system,BlinkMacSystemFont,"Inter",Arial,sans-serif;
-      text-align:center;
-      line-height:1.5;
-      -webkit-font-smoothing:antialiased;
-    }
-
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:16px 20px;
-      background:rgba(0,0,0,0.75);
-      border-bottom:1px solid var(--border);
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter: blur(10px);
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      background: var(--off-white);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    header img{
-      width:260px;
-      height:auto;
+    /* TOP ANNOUNCEMENT */
+    .top-bar {
+      background: var(--black);
+      color: var(--primary);
+      padding: 10px;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
+      border-bottom: 2px solid var(--primary);
     }
 
-    .login-btn{
-      background:transparent;
-      color:var(--text);
-      border:1px solid var(--border);
-      padding:10px 16px;
-      font-size:15px;
-      border-radius:10px;
-      cursor:pointer;
-      text-decoration:none;
-      font-weight:700;
-      transition: transform .12s ease, border-color .12s ease;
-    }
-    .login-btn:active{ transform:scale(0.98); }
-
-    .wrap{
-      max-width:980px;
-      margin:0 auto;
-      padding:28px 18px 0;
+    header {
+      background: #fff;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
     }
 
-    .hero{
-      margin-top:14px;
-      padding:26px 18px 10px;
+    .logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: var(--black);
+      text-transform: uppercase;
+    }
+    .logo span { color: var(--primary); }
+
+    /* HERO SECTION - Casino Vibe */
+    .hero {
+      background: linear-gradient(180deg, #064e3b 0%, #022c22 100%);
+      color: #fff;
+      padding: 60px 24px 140px;
+      text-align: center;
     }
 
-    .kicker{
-      display:inline-block;
-      padding:8px 12px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      font-weight:800;
-      letter-spacing:.4px;
-      color:var(--muted);
-      background:rgba(255,255,255,0.03);
-    }
-    .kicker b{ color:var(--red2); }
-
-    h1{
-      margin:18px auto 10px;
-      font-size:34px;
-      line-height:1.15;
-      max-width:820px;
+    .hero h1 {
+      font-size: clamp(42px, 11vw, 82px);
+      margin: 0 0 16px;
+      font-weight: 900;
+      letter-spacing: -3px;
+      line-height: 0.88;
     }
 
-    .accent{
-      color:var(--red);
-      font-weight:900;
+    .hero p {
+      font-size: 19px;
+      max-width: 600px;
+      margin: 0 auto 20px;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.4;
     }
 
-    .sub{
-      max-width:820px;
-      margin:0 auto;
-      color:var(--muted);
-      font-size:17px;
+    /* THE COMMAND CARD - Sells the System */
+    .command-card {
+      background: #fff;
+      max-width: 550px;
+      margin: -100px auto 40px;
+      padding: 40px 28px;
+      border-radius: 24px;
+      box-shadow: var(--card-shadow);
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      border: 1px solid var(--border);
     }
 
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(1,minmax(0,1fr));
-      gap:12px;
-      margin:22px auto 0;
-      max-width:900px;
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: #fdfae7;
+      color: #854d0e;
+      font-size: 12px;
+      font-weight: 900;
+      border-radius: 999px;
+      margin-bottom: 24px;
+      border: 1px solid #fef9c3;
     }
 
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:16px 14px;
-      text-align:left;
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: #eab308;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #eab308;
+      animation: pulse 2s infinite;
     }
 
-    .card h3{
-      margin:0 0 6px;
-      font-size:16px;
-      letter-spacing:.2px;
-    }
-    .card p{
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.5; }
     }
 
-    .bullets{
-      margin:18px auto 0;
-      max-width:820px;
-      text-align:left;
-      padding:0;
-      list-style:none;
-    }
-    .bullets li{
-      margin:10px 0;
-      padding-left:28px;
-      position:relative;
-      color:rgba(255,255,255,0.86);
-      font-size:16px;
-    }
-    .bullets li:before{
-      content:"✔";
-      position:absolute;
-      left:0;
-      top:0;
-      color:var(--red2);
-      font-weight:900;
+    .card-title {
+      font-size: 34px;
+      font-weight: 900;
+      margin: 0 0 12px;
+      letter-spacing: -1.5px;
+      line-height: 1;
     }
 
-    .cta-row{
-      margin:26px auto 0;
-      display:flex;
-      gap:10px;
-      justify-content:center;
-      flex-wrap:wrap;
+    .price-badge {
+      font-size: 24px;
+      color: var(--primary);
+      font-weight: 900;
+      margin-bottom: 20px;
     }
 
-    .cta-btn{
-      background:var(--red);
-      color:white;
-      padding:14px 22px;
-      font-size:16px;
-      border:none;
-      border-radius:12px;
-      cursor:pointer;
-      text-decoration:none;
-      display:inline-block;
-      font-weight:900;
-      letter-spacing:.2px;
-      box-shadow: 0 10px 25px rgba(255,45,45,0.18);
-      transition: transform .12s ease;
-    }
-    .cta-btn:active{ transform:scale(0.98); }
-
-    .secondary-btn{
-      background:transparent;
-      color:var(--text);
-      padding:14px 22px;
-      font-size:16px;
-      border:1px solid var(--border);
-      border-radius:12px;
-      cursor:pointer;
-      text-decoration:none;
-      display:inline-block;
-      font-weight:800;
-      transition: transform .12s ease;
-    }
-    .secondary-btn:active{ transform:scale(0.98); }
-
-    .trust{
-      margin:18px auto 0;
-      color:rgba(255,255,255,0.55);
-      font-size:13px;
-      max-width:820px;
-    }
-    .trust b{ color:rgba(255,255,255,0.78); }
-
-    footer{
-      margin-top:46px;
-      padding:40px 18px;
-      background:#000;
-      color:#888;
-      font-size:13px;
-      line-height:1.6;
-      border-top:1px solid #222;
+    /* TRUST GRID */
+    .trust-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 24px 0;
     }
 
-    .foot-inner{
-      max-width:900px;
-      margin:0 auto;
+    .trust-item {
+      background: #f8f9fa;
+      border: 1px solid #eee;
+      border-radius: 14px;
+      padding: 15px;
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .trust-item span { color: var(--primary); font-size: 11px; text-transform: uppercase; }
+
+    /* ACTION BUTTON */
+    .btn-action {
+      display: block;
+      background: #e5e7eb;
+      color: #9ca3af;
+      padding: 24px 20px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 20px;
+      border-radius: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      pointer-events: none;
+      transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .foot-title{
-      color:#fff;
-      margin:0 0 6px;
-      font-weight:900;
+    .btn-action.active {
+      background: var(--black);
+      color: var(--primary);
+      pointer-events: auto;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      transform: translateY(-2px);
     }
 
-    @media (min-width: 720px){
-      .cards{ grid-template-columns:repeat(3,minmax(0,1fr)); }
-      h1{ font-size:42px; }
-      header img{ width:288px; }
-    }
+    /* CONTENT PANELS */
+    .section { max-width: 1100px; margin: 0 auto; padding: 20px; }
+    .panel { background: #fff; border-radius: 24px; padding: 32px; margin-bottom: 24px; border: 1px solid var(--border); }
+    .panel h2 { font-size: 28px; font-weight: 900; margin: 0 0 16px; letter-spacing: -1px; }
+
+    .benefit-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+    .benefit-box { padding: 20px; background: #fcfcfc; border: 1px solid #f0f0f0; border-radius: 18px; }
+    .benefit-box strong { display: block; color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+
+    footer { background: var(--black); color: #666; padding: 60px 20px; text-align: center; }
+    .footer-links a { color: #fff; text-decoration: none; margin: 0 10px; font-size: 13px; font-weight: 700; }
+    .disclosure-box { max-width: 800px; margin: 30px auto; font-size: 12px; line-height: 1.6; border-top: 1px solid #222; padding-top: 20px; }
+
   </style>
 </head>
 <body>
 
-<header>
-  <a href="index.html" aria-label="BrainHustle Home">
-    <img src="brainhustle-logo.png" alt="BrainHustle Logo">
-  </a>
-  <a href="login.html" class="login-btn">Log In</a>
-</header>
+  <div class="top-bar">CrapsEdge™ Strategy Hub • Advanced Dice Mechanics</div>
 
-<main class="wrap">
+  <header>
+    <div class="logo">Craps<span>Edge</span>™</div>
+  </header>
+
   <section class="hero">
-    <div class="kicker">No hype. No scams. <b>Real systems.</b></div>
-
-    <h1>
-      Build income with <span class="accent">legit</span> online systems — the kind you can actually repeat.
-    </h1>
-
-    <p class="sub">
-      BrainHustle™ is a members-only vault of tools, step-by-step playbooks, and proven workflows designed to help you earn online
-      <span class="accent">legally</span>, without falling for fake “quit your job in 30 days” nonsense.
-    </p>
-
-    <ul class="bullets">
-      <li>Clear steps you can follow, even if you’re starting from scratch</li>
-      <li>Templates, scripts, and checklists built for real-world use</li>
-      <li>Systems focused on repeatable income, not lottery dreams</li>
-    </ul>
-
-    <div class="cta-row">
-      <a href="https://crapsedge.gumroad.com/l/fppvj" class="cta-btn">Become a Member</a>
-      <a href="about.html" class="secondary-btn">What is BrainHustle™?</a>
-    </div>
-
-    <p class="trust">
-      <b>Reality check:</b> This is education + tools. Your results depend on effort, consistency, and market demand.
-      If anyone promises guaranteed income, run.
-    </p>
+    <h1>Master The Table. <br>Take The Edge.</h1>
+    <p>Professional-grade craps strategy and bankroll management. The official framework for disciplined table control.</p>
   </section>
 
-  <section class="cards" aria-label="What you get">
-    <div class="card">
-      <h3>Profit Systems</h3>
-      <p>Step-by-step, repeatable workflows you can run weekly — without guesswork.</p>
+  <div class="command-card">
+    <div class="status-pill"><span class="dot"></span> System Status: Verified 2026</div>
+    
+    <h2 class="card-title">Access The Master System</h2>
+    <div class="price-badge">$9.99</div>
+    
+    <div class="trust-grid">
+      <div class="trust-item"><span>Format</span>Digital PDF</div>
+      <div class="trust-item"><span>Tool</span>Bankroll Tracker</div>
+      <div class="trust-item"><span>Method</span>Dice Mechanics</div>
+      <div class="trust-item"><span>Support</span>Email Access</div>
     </div>
-    <div class="card">
-      <h3>Tools & Templates</h3>
-      <p>Copy/paste scripts, checklists, calculators, and pages built for speed.</p>
-    </div>
-    <div class="card">
-      <h3>Member Access</h3>
-      <p>Locked content, organized pages, and a clean dashboard experience.</p>
-    </div>
-  </section>
-</main>
 
-<footer>
-  <div class="foot-inner">
-    <p class="foot-title">© 2026 BrainHustle™. All Rights Reserved.</p>
-    <p>BrainHustle™ is a wholly owned sub-brand of <strong>Murrays Empire LLC</strong>.</p>
-
-    <div style="max-width: 880px; margin: 18px auto 0; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.08);">
-      <p><strong>Disclaimer:</strong> BrainHustle™ provides educational and informational content only. We do not guarantee financial success, specific income levels, or individual results. All business ventures involve risk; results vary based on personal effort and market conditions. This content does not constitute legal, financial, or investment advice. By using this site, you agree to our terms and acknowledge that <strong>Murrays Empire LLC</strong> is not responsible for your financial decisions or outcomes.</p>
+    <div style="background:#fffcf5; padding:20px; border-radius:16px; margin-bottom:24px; text-align:left; border:1px solid #fef3c7;">
+      <div style="display:flex; gap:12px; align-items:flex-start;">
+        <input type="checkbox" id="legal-check" style="width:24px; height:24px; accent-color:var(--primary); cursor:pointer;">
+        <label for="legal-check" style="font-size:14px; font-weight:700; line-height:1.4; cursor:pointer;">
+          I acknowledge that CrapsEdge™ is an educational resource. I agree to the <a href="terms.html" style="color:var(--text);">terms</a> and wish to download the system guide.
+        </label>
+      </div>
     </div>
+
+    <a id="referralBtn" class="btn-action" href="https://crapsedge.gumroad.com/l/xvnyi">Unlock Instant Access</a>
+    <p style="font-size:12px; color:#999; margin-top:15px; font-weight:600;">Secure Processing Protected by Murrays Empire LLC</p>
+    
+    <a href="bankroll-tracker.xlsx" style="display:inline-block; margin-top:20px; color:var(--muted); font-size:12px; text-decoration:none;" download>📥 Download Free Tracker</a>
   </div>
-</footer>
+
+  <section class="section">
+    <div class="panel">
+      <h2>Professional Pillars</h2>
+      <div class="benefit-row">
+        <div class="benefit-box">
+          <strong>Tactical Betting</strong>
+          <p>Proven betting sequences designed to optimize house edge reduction and capitalize on table momentum.</p>
+        </div>
+        <div class="benefit-box">
+          <strong>Dice Mechanics</strong>
+          <p>The physics of the toss. Learn how grip and release zones impact probability outcomes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="text-align:center; background: linear-gradient(to bottom right, #fff, #fdfae7);">
+      <h2>Responsible Play</h2>
+      <p>We provide educational material for smarter gambling. Always play with discipline and never exceed your limits.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="disclosures.html">Disclosures</a> | 
+      <a href="terms.html">Terms</a> | 
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+    <div class="disclosure-box">
+      <strong>OFFICIAL NOTICE:</strong> CrapsEdge™ is an educational platform owned and operated by <strong>Murrays Empire LLC</strong>. We provide insights based on personal experience. We are not a licensed gambling operator, financial advisor, or counseling service.
+    </div>
+    <div style="font-size:10px; letter-spacing:2px; font-weight:900; color:#444;">© <span id="yr"></span> MURRAYS EMPIRE LLC</div>
+  </footer>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    const check = document.getElementById('legal-check');
+    const btn = document.getElementById('referralBtn');
+    check.addEventListener('change', () => {
+      if (check.checked) { btn.classList.add('active'); } 
+      else { btn.classList.remove('active'); }
+    });
+  </script>
 
 </body>
 </html>
