@@ -1,30 +1,123 @@
-<main>
-    <div class="header-area">
-      <h1>Profit Vault</h1>
-      <p id="authStatus">Authenticating Secure Access...</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Profit Vault | BrainHustle™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #00e676;
+      --bg: #050505;
+      --card: #0f0f0f;
+      --border: #1e1e1e;
+      --text-dim: #888;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    
+    body {
+      background: var(--bg);
+      font-family: 'Inter', sans-serif;
+      color: white;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* NAVIGATION */
+    .sidebar {
+      width: 260px; background: #000; border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 1000;
+    }
+
+    .brand-box { padding: 30px 25px; font-weight: 800; font-size: 18px; border-bottom: 1px solid var(--border); }
+    .brand-box span { color: var(--primary); }
+
+    .nav-group { padding: 20px 0; flex-grow: 1; }
+    .nav-group a {
+      display: block; padding: 12px 25px; color: var(--text-dim); text-decoration: none;
+      font-size: 14px; font-weight: 600; transition: 0.2s;
+    }
+    .nav-group a:hover { color: #fff; background: #0f0f0f; }
+
+    /* CONTENT AREA */
+    main { flex-grow: 1; margin-left: 260px; padding: 40px 60px; max-width: 900px; }
+    h1 { font-size: 26px; font-weight: 800; margin-bottom: 40px; letter-spacing: -1px; }
+
+    /* IDEA CARDS */
+    .idea-card {
+      background: var(--card); border: 1px solid var(--border);
+      padding: 30px; border-radius: 12px; margin-bottom: 25px;
+    }
+
+    .idea-card h3 { font-size: 18px; color: var(--primary); margin-bottom: 10px; font-weight: 800; }
+    .idea-card p { font-size: 14px; color: #ccc; line-height: 1.6; margin-bottom: 20px; }
+
+    .formula-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
+      background: #000; padding: 15px; border-radius: 8px; margin-bottom: 20px;
+    }
+
+    .formula-item { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+    .formula-item span { display: block; color: #fff; font-size: 14px; font-weight: 700; margin-top: 4px; }
+
+    .btn-action {
+      display: block; width: 100%; padding: 12px; background: #222; color: #fff;
+      border: none; border-radius: 6px; font-weight: 800; font-size: 12px;
+      cursor: pointer; text-transform: uppercase; transition: 0.2s;
+    }
+    .btn-action:hover { background: var(--primary); color: #000; }
+
+    /* MODAL TERMINAL */
+    #executionModal {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+      z-index: 2000; padding: 20px; overflow-y: auto;
+    }
+
+    .terminal-box {
+      max-width: 600px; margin: 40px auto; background: var(--card);
+      border: 1px solid var(--primary); border-radius: 12px; padding: 40px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      main { margin-left: 0; padding: 40px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="sidebar">
+    <div class="brand-box">Brain<span>Hustle</span>™</div>
+    <div class="nav-group">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="kits.html">Hustle Kits</a>
+      <a href="ideas.html" style="color:#fff; background:#0f0f0f;">Money Ideas</a>
+      <a href="ai-tools.html">AI Tools</a>
+      <a href="#" onclick="logout()">Logout</a>
     </div>
+  </nav>
 
-    <div id="contentArea">
-        </div>
+  <main>
+    <h1>Profit Vault</h1>
+    <div id="contentArea">Authenticating Secure Access...</div>
+  </main>
 
-    <div id="executionModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:2000; padding:20px; overflow-y:auto;">
-      <div style="max-width:700px; margin:40px auto; background:var(--panel-bg); border:1px solid var(--primary-green); border-radius:12px; padding:40px; position:relative;">
-        <span onclick="closeTerminal()" style="position:absolute; top:20px; right:20px; color:var(--primary-green); cursor:pointer; font-weight:800;">[ CLOSE ]</span>
-        <div id="terminalContent"></div>
-      </div>
+  <div id="executionModal">
+    <div class="terminal-box">
+      <div id="terminalContent"></div>
+      <button onclick="closeTerminal()" style="margin-top:30px; background:none; border:1px solid #444; color:#888; padding:10px; cursor:pointer; width:100%;">[ CLOSE TERMINAL ]</button>
     </div>
+  </div>
 
-    <footer>
-      © 2026 MURRAYS EMPIRE LLC. Systems for educational use only.
-    </footer>
-</main>
-
-<script type="module">
+  <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-    // ... (Your Firebase Config - Keep exactly as you had it) ...
     const firebaseConfig = {
       apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
       authDomain: "brainhustle-92a40.firebaseapp.com",
@@ -39,82 +132,51 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    const contentArea = document.getElementById('contentArea');
-    const modal = document.getElementById('executionModal');
-    const termContent = document.getElementById('terminalContent');
+    window.logout = () => signOut(auth).then(() => window.location.href="login.html");
+    window.closeTerminal = () => document.getElementById('executionModal').style.display = 'none';
 
-    window.logout = function(){ signOut(auth).then(()=>{ window.location.href="login.html"; }); };
-    window.closeTerminal = function(){ modal.style.display = 'none'; };
-
-    // THE DATA: THE ACTUAL WORK INSTRUCTIONS
     const STRATEGIES = {
-      arbitrage: `
-        <h2 style="color:var(--primary-green); margin-bottom:20px;">Digital Service Arbitrage: Execution</h2>
-        <p style="margin-bottom:20px;"><strong>Step 1:</strong> Identify 3 high-payout services (e.g., SEO Audits, AI Bot setup, or 4K Video Editing).</p>
-        <p style="margin-bottom:20px;"><strong>Step 2:</strong> Find vetted white-label providers on platforms like Fiverr Pro or Upwork. Verify their delivery times.</p>
-        <p style="margin-bottom:20px;"><strong>Step 3:</strong> Build a clean, high-end "Agency" landing page using the AI Tools in your dashboard.</p>
-        <p style="margin-bottom:20px;"><strong>Step 4:</strong> Launch LinkedIn outreach or Google Ads targeting small-to-medium businesses. You sell the service for $2,000, buy it for $500, and keep the difference.</p>
-      `,
-      content: `
-        <h2 style="color:var(--primary-green); margin-bottom:20px;">AI Content Properties: Execution</h2>
-        <p style="margin-bottom:20px;"><strong>Step 1:</strong> Select a niche with high affiliate payouts (e.g., Enterprise Software, Home Solar, or Cyber Security).</p>
-        <p style="margin-bottom:20px;"><strong>Step 2:</strong> Use AI tools to generate 50 deep-dive research articles based on high-volume keywords.</p>
-        <p style="margin-bottom:20px;"><strong>Step 3:</strong> Deploy the site. Focus on "Problem/Solution" articles where the solution is an affiliate link.</p>
-        <p style="margin-bottom:20px;"><strong>Step 4:</strong> Track your clicks. Once an article starts ranking, add custom tracking codes and scale the content volume.</p>
-      `,
-      routing: `
-        <h2 style="color:var(--primary-green); margin-bottom:20px;">Lead Routing: Execution</h2>
-        <p style="margin-bottom:20px;"><strong>Step 1:</strong> Pick a high-urgency service (Restoration, HVAC, Towing, Locksmith).</p>
-        <p style="margin-bottom:20px;"><strong>Step 2:</strong> Build a local landing page targeting 1 specific city. Include a 24/7 emergency headline.</p>
-        <p style="margin-bottom:20px;"><strong>Step 3:</strong> Cold-call 3 local contractors. Offer them free leads for 48 hours to prove value. Agree on a $150 flat fee per job start.</p>
-        <p style="margin-bottom:20px;"><strong>Step 4:</strong> Set up a basic CRM or spreadsheet to log the time, name, and contractor for every lead sent.</p>
-      `
+      arbitrage: `<h2>Service Arbitrage</h2><p>1. Find high-ticket skill on Upwork.<br>2. Sell it to local businesses for 2x price.<br>3. Outsource work and manage client.</p>`,
+      routing: `<h2>Lead Routing</h2><p>1. Build high-urgency landing page.<br>2. Send calls to local pros.<br>3. Charge flat fee per job started.</p>`,
+      content: `<h2>AI Content</h2><p>1. Use AI to generate 50 niche articles.<br>2. Monetize with high-payout affiliates.<br>3. Scale once traffic hits.</p>`
     };
 
-    window.openStrategy = function(key) {
-      termContent.innerHTML = STRATEGIES[key] || "Coming Soon...";
-      modal.style.display = 'block';
+    window.openStrategy = (key) => {
+      document.getElementById('terminalContent').innerHTML = STRATEGIES[key] || "Strategy data loading...";
+      document.getElementById('executionModal').style.display = 'block';
     };
 
-    function renderUpgraded() {
-      contentArea.innerHTML = `
-        <div class="idea-box">
-          <h3>1. Digital Service Arbitrage</h3>
-          <p>Package technical services for corporate clients. You manage the sale; experts handle the work.</p>
-          <div class="formula-grid">
-            <div class="formula-item">CONTRACT VALUE<span>$2,500+</span></div>
-            <div class="formula-item">YOUR MARGIN<span>40% - 60%</span></div>
-          </div>
-          <button class="btn-action" onclick="openStrategy('arbitrage')" style="border:none; width:100%; cursor:pointer;">DEPLOY ARBITRAGE GUIDE</button>
-        </div>
-
-        <div class="idea-box">
-          <h3>2. AI Content Properties</h3>
-          <p>Build authority sites using AI-driven data. Monetize via high-ticket affiliate networks.</p>
-          <div class="formula-grid">
-            <div class="formula-item">INCOME TYPE<span>PASSIVE</span></div>
-            <div class="formula-item">POTENTIAL<span>$2K - $10K/mo</span></div>
-          </div>
-          <button class="btn-action" onclick="openStrategy('content')" style="border:none; width:100%; cursor:pointer;">OPEN BLUEPRINT</button>
-        </div>
-
-        <div class="idea-box">
-          <h3>3. Anonymous Lead Routing</h3>
-          <p>Generate high-intent leads and route them to hungry service providers. No physical labor involved.</p>
-          <div class="formula-grid">
-            <div class="formula-item">FEE PER LEAD<span>$50 - $300</span></div>
-            <div class="formula-item">OVERHEAD<span>MINIMAL</span></div>
-          </div>
-          <button class="btn-action" onclick="openStrategy('routing')" style="border:none; width:100%; cursor:pointer;">OPEN ROUTING STRATEGY</button>
-        </div>
-      `;
-    }
-
-    // ... (Keep the rest of your Firebase onAuthStateChanged logic) ...
     onAuthStateChanged(auth, async (user) => {
       if (!user) { window.location.href = "login.html"; return; }
       const snap = await getDoc(doc(db, "users", user.uid));
       const level = snap.exists() ? (snap.data().membership || "starter") : "starter";
-      if (level === "upgraded") { renderUpgraded(); } else { /* call renderStarter */ }
+      
+      const content = document.getElementById('contentArea');
+      if (level === "upgraded") {
+        content.innerHTML = `
+          <div class="idea-card">
+            <h3>1. Digital Service Arbitrage</h3>
+            <p>Scale technical services for corporate clients without doing the labor.</p>
+            <div class="formula-grid">
+              <div class="formula-item">CONTRACT VALUE<span>$2,500+</span></div>
+              <div class="formula-item">YOUR MARGIN<span>40%-60%</span></div>
+            </div>
+            <button class="btn-action" onclick="openStrategy('arbitrage')">Deploy Guide</button>
+          </div>
+          <div class="idea-card">
+            <h3>2. Anonymous Lead Routing</h3>
+            <p>Generate high-intent calls and sell them to local businesses.</p>
+            <div class="formula-grid">
+              <div class="formula-item">FEE PER LEAD<span>$50-$300</span></div>
+              <div class="formula-item">LABOR<span>NONE</span></div>
+            </div>
+            <button class="btn-action" onclick="openStrategy('routing')">Open Strategy</button>
+          </div>
+        `;
+      } else {
+        content.innerHTML = `<div class="idea-card"><h3>Upgrade to Founder Access</h3><p>Unlock the full vault of verified profit systems.</p></div>`;
+      }
     });
-</script>
+  </script>
+</body>
+</html>
