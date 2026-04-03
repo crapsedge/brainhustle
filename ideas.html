@@ -1,141 +1,174 @@
-<div id="full-ideas-code">
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Money Ideas – BrainHustle™ | Murray's Empire</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Profit Vault | BrainHustle™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --primary: #00ff66;
-      --bg: #000;
-      --card: #121212;
-      --text-muted: #888;
+      --primary-green: #00e676;
+      --bg-black: #050505;
+      --panel-bg: #0f0f0f;
+      --border-color: #1e1e1e;
+      --text-dim: #888;
     }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    
     body {
       margin: 0;
-      background-color: var(--bg);
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-black);
       color: white;
-      font-family: 'Inter', Arial, sans-serif;
+      display: flex;
+      min-height: 100vh;
     }
-    .menu-button {
+
+    /* NAVIGATION */
+    .mobile-header {
+      display: none;
       position: fixed;
-      top: 20px;
-      left: 20px;
-      background-color: var(--primary);
-      border: none;
-      color: black;
-      font-size: 18px;
-      padding: 10px 16px;
+      top: 0; width: 100%; height: 60px;
+      background: #000; border-bottom: 1px solid var(--border-color);
+      z-index: 1001; padding: 0 20px; align-items: center; justify-content: space-between;
+    }
+
+    .sidebar {
+      width: 260px; background: #000; border-right: 1px solid var(--border-color);
+      display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 1000;
+      transition: transform 0.3s ease;
+    }
+
+    .brand-box { padding: 30px 25px; font-weight: 800; font-size: 18px; border-bottom: 1px solid var(--border-color); }
+    .brand-box span { color: var(--primary-green); }
+
+    .nav-group { padding: 20px 0; flex-grow: 1; }
+    .nav-group a {
+      display: flex; align-items: center; padding: 12px 25px;
+      color: var(--text-dim); text-decoration: none; font-size: 14px; font-weight: 600; transition: 0.2s;
+    }
+    .nav-group a:hover, .nav-group a.active { color: #fff; background: #0f0f0f; }
+    .nav-group a.active { border-right: 3px solid var(--primary-green); color: #fff; }
+
+    /* CONTENT AREA */
+    main {
+      flex-grow: 1;
+      margin-left: 260px;
+      padding: 40px 60px;
+      max-width: 1200px;
+    }
+
+    .header-area { margin-bottom: 40px; }
+    .header-area h1 { font-size: 26px; font-weight: 800; margin: 0; }
+    .header-area p { color: var(--text-dim); margin-top: 4px; font-size: 14px; }
+
+    /* IDEA CARDS */
+    .vault-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    
+    .idea-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      padding: 30px;
+      border-radius: 12px;
+    }
+
+    .idea-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #1a1a1a; padding-bottom: 15px; }
+    .idea-header h2 { font-size: 20px; color: var(--primary-green); margin: 0; }
+    .difficulty { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); }
+
+    .formula-box {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 20px 0;
+      background: #000;
+      padding: 15px;
       border-radius: 8px;
-      cursor: pointer;
-      z-index: 1000;
-      font-weight: bold;
-      box-shadow: 0 4px 15px rgba(0, 255, 102, 0.3);
     }
-    .side-menu {
-      position: fixed;
-      top: 0;
-      left: -280px;
-      width: 280px;
-      height: 100%;
-      background-color: #0c0c0c;
-      overflow-y: auto;
-      transition: left 0.3s;
-      padding-top: 80px;
-      z-index: 999;
-      border-right: 1px solid #222;
-    }
-    .side-menu a {
-      display: block;
-      color: white;
+
+    .formula-item span { display: block; font-size: 10px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 5px; }
+    .formula-item div { font-size: 14px; font-weight: 700; color: #eee; }
+
+    .btn-action {
+      display: inline-block;
       padding: 12px 25px;
+      background: #222;
+      color: #fff;
       text-decoration: none;
-      border-bottom: 1px solid #222;
+      font-size: 13px;
+      font-weight: 800;
+      border-radius: 6px;
+      text-transform: uppercase;
       transition: 0.2s;
     }
-    .side-menu a:hover {
-      background-color: var(--primary);
-      color: black;
-    }
-    .show-menu { left: 0; }
-    .content {
-      padding: 80px 20px;
-      max-width: 850px;
-      margin: auto;
-    }
-    h1 { color: var(--primary); text-align: center; font-size: 2.5em; margin-bottom: 30px; }
-    .idea-box {
-      background-color: var(--card);
-      border: 1px solid #242424;
+    .btn-action:hover { background: var(--primary-green); color: #000; }
+
+    .upgrade-lock {
+      background: rgba(255, 62, 62, 0.05);
+      border: 1px solid #ff3e3e;
+      padding: 40px;
       border-radius: 12px;
-      padding: 25px;
-      margin: 20px 0;
-      transition: 0.3s;
-    }
-    .idea-box:hover { border-color: var(--primary); }
-    .idea-box h3 { color: var(--primary); margin-top: 0; font-size: 1.4em; }
-    .idea-box p { color: #ccc; line-height: 1.6; }
-    .upgrade-btn {
-      background-color: #ff0000;
-      color: white;
-      padding: 14px 24px;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: bold;
-      display: inline-block;
-      margin-top: 20px;
-    }
-    .footer { 
-      margin-top: 60px; 
-      padding: 40px 20px; 
-      background-color: #000; 
-      color: var(--text-muted); 
-      font-size: 13px; 
-      line-height: 1.6; 
-      border-top: 1px solid #222;
       text-align: center;
+      margin-top: 30px;
+    }
+
+    footer { margin-top: 60px; padding: 30px 0; border-top: 1px solid var(--border-color); font-size: 11px; color: #444; text-align: center; }
+
+    @media (max-width: 900px) {
+      .mobile-header { display: flex; }
+      .sidebar { transform: translateX(-100%); width: 280px; }
+      .sidebar.open { transform: translateX(0); }
+      main { margin-left: 0; padding: 80px 20px 40px; }
+      .formula-box { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <button class="menu-button" onclick="toggleMenu()" id="menuButton">☰ Menu</button>
-
-  <div id="sideMenu" class="side-menu">
-    <a href="dashboard.html">🏠 Dashboard</a>
-    <a href="kits.html">📦 Hustle Kits</a>
-    <a href="ideas.html">💡 Money Ideas</a>
-    <a href="passive.html">📈 Passive Income</a>
-    <a href="ai-tools.html">🧠 AI Tools</a>
-    <a href="monetize.html">💵 Monetization</a>
-    <a href="trackers.html">📊 Trackers</a>
-    <a href="about.html">❔ What is BrainHustle™?</a>
-    <a href="upgrade.html" style="color: #ff3e3e;">⬆️ Upgrade Access</a>
-    <a href="#" onclick="logout()">Logout</a>
+  <div class="mobile-header">
+    <div style="font-weight:800;">Brain<span>Hustle</span></div>
+    <button onclick="toggleSidebar()" style="background:none; border:none; color:white; font-size:24px;">☰</button>
   </div>
 
-  <div class="content" id="contentArea">
-    <h1>💸 Money Ideas</h1>
-    <p id="status" style="text-align:center; color: var(--text-muted);">Authenticating secure access...</p>
-  </div>
-
-  <footer class="footer">
-    <p style="color: #fff; margin-bottom: 5px;">© 2026 BrainHustle™. All Rights Reserved.</p>
-    <p>BrainHustle™ is a wholly owned sub-brand of <strong>Murray’s Empire LLC</strong>.</p>
-    <div style="max-width: 800px; margin: 20px auto 0; padding-top: 20px;">
-      <p><strong>Disclaimer:</strong> Educational purposes only. No guarantees of financial success. This is not financial advice. By using this site, you acknowledge that Murray’s Empire LLC is not responsible for your financial decisions.</p>
-      <p>Support: <a href="mailto:murraysempirellc@gmail.com" style="color:var(--primary)">murraysempirellc@gmail.com</a></p>
+  <nav class="sidebar" id="sidebar">
+    <div class="brand-box">Brain<span>Hustle</span>™</div>
+    <div class="nav-group">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="kits.html">Hustle Kits</a>
+      <a href="ideas.html" class="active">Money Ideas</a>
+      <a href="ai-tools.html">AI Tools</a>
+      <a href="trackers.html">Trackers</a>
     </div>
-  </footer>
+    <div style="padding: 20px; border-top: 1px solid var(--border-color);">
+      <a href="#" onclick="logout()" style="color: #ff4444; font-size: 11px; font-weight:700; text-decoration:none;">LOGOUT</a>
+    </div>
+  </nav>
+
+  <main id="mainContent">
+    <div class="header-area">
+      <h1>Profit Vault</h1>
+      <p id="authStatus">Authenticating Secure Access...</p>
+    </div>
+
+    <div id="vaultContainer">
+        </div>
+
+    <footer>
+      © 2026 MURRAYS EMPIRE LLC. Systems are for educational use. No income guarantees.
+    </footer>
+  </main>
+
+  <script>
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+  </script>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
@@ -151,76 +184,90 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    window.logout = () => {
-      signOut(auth).then(() => {
-        window.location.href = "login.html";
-      });
-    };
+    const container = document.getElementById('vaultContainer');
+    const authStatus = document.getElementById('authStatus');
 
-    const contentArea = document.getElementById('contentArea');
-    const statusEl = document.getElementById('status');
+    window.logout = function(){ signOut(auth).then(()=>{ window.location.href="login.html"; }); };
 
-    let resolved = false;
-    const fallback = setTimeout(() => {
-      if (resolved) return;
-      resolved = true;
-      statusEl.textContent = 'Preview mode enabled.';
-      renderStarter();
-    }, 1500);
-
-    function renderStarter(){
-      contentArea.innerHTML = `
-        <h1>💸 Money Ideas (Preview)</h1>
-        <div class="idea-box">
-          <h3>1. Digital Asset Sales</h3>
-          <p>Launch specialized eBooks, guides, or tools on global platforms. Requires zero physical inventory and offers 100% scalable margins.</p>
+    function renderStarter() {
+      container.innerHTML = `
+        <div class="vault-grid">
+          <div class="idea-card">
+            <div class="idea-header">
+              <h2>1. Local Referral Networks</h2>
+              <span class="difficulty">Low Effort • Fast Results</span>
+            </div>
+            <p>Connect local homeowners in urgent need (Water Damage/HVAC) with vetted independent contractors. You act as the bridge.</p>
+            <div class="formula-box">
+              <div class="formula-item"><span>Average Fee</span><div>$150 - $500</div></div>
+              <div class="formula-item"><span>Up-Front Cost</span><div>$10 / Day</div></div>
+              <div class="formula-item"><span>Time to Start</span><div>< 48 Hours</div></div>
+            </div>
+            <a class="btn-action" href="kits.html">Review Referral Kit</a>
+          </div>
         </div>
-        <div style="text-align:center; margin-top:40px;">
-          <p>🔒 <strong>Upgrade Required:</strong> Access the full vault of verified profit systems.</p>
-          <a href="upgrade.html" class="upgrade-btn">Upgrade to Founder Access</a>
+        <div class="upgrade-lock">
+          <h3 style="color:#ff3e3e; font-size:16px;">UPGRADE TO FOUNDER TIER</h3>
+          <p style="font-size:13px; color:#888;">Unlock the full 2026 Profit Vault including Digital Arbitrage, AI SaaS building, and Private Lead Funnels.</p>
+          <a href="upgrade.html" style="color:#fff; font-weight:800; text-decoration:none; display:inline-block; margin-top:15px; border-bottom:1px solid #ff3e3e;">Upgrade Now →</a>
         </div>
       `;
     }
 
-    function renderUpgraded(){
-      contentArea.innerHTML = `
-        <h1>💸 Master Profit Systems</h1>
-        <div class="idea-box"><h3>1. Digital Asset Sales</h3><p>Create high-value eBooks or guides once; sell them forever. No shipping, no inventory.</p></div>
-        <div class="idea-box"><h3>2. Arbitrage Flipping</h3><p>Source underpriced local assets and flip for premium margins on global marketplaces.</p></div>
-        <div class="idea-box"><h3>3. Specialized Skilling</h3><p>Leverage design, writing, or AI automation skills for high-ticket corporate clients.</p></div>
-        <div class="idea-box"><h3>4. Affiliate Networks</h3><p>Generate passive revenue by promoting established brands with high-converting funnels.</p></div>
-        <div class="idea-box"><h3>5. AI Content Engines</h3><p>Use generative AI to build massive content properties monetized through ads and sponsorships.</p></div>
+    function renderUpgraded() {
+      container.innerHTML = `
+        <div class="vault-grid">
+          <div class="idea-card">
+            <div class="idea-header"><h2>1. Local Referral Networks</h2><span class="difficulty">Direct Response</span></div>
+            <p>Route urgent leads to high-ticket contractors. The "Omaha Restoration" model.</p>
+            <div class="formula-box">
+              <div class="formula-item"><span>Fee Structure</span><div>$150 + 10%</div></div>
+              <div class="formula-item"><span>Scalability</span><div>Unlimited</div></div>
+              <div class="formula-item"><span>Tech Needs</span><div>Minimal</div></div>
+            </div>
+            <a class="btn-action" href="kits.html">Deploy Kit</a>
+          </div>
+
+          <div class="idea-card">
+            <div class="idea-header"><h2>2. Digital Arbitrage</h2><span class="difficulty">Medium Effort</span></div>
+            <p>Buy underpriced digital services and resell them to corporate clients as high-end packages.</p>
+            <div class="formula-box">
+              <div class="formula-item"><span>Profit Margin</span><div>60% - 80%</div></div>
+              <div class="formula-item"><span>Client Value</span><div>$1,500+</div></div>
+              <div class="formula-item"><span>Risk Level</span><div>Low</div></div>
+            </div>
+            <a class="btn-action" href="#">Unlock Strategy</a>
+          </div>
+
+          <div class="idea-card">
+            <div class="idea-header"><h2>3. AI Content Engines</h2><span class="difficulty">High Automation</span></div>
+            <p>Build content properties that run on 100% AI generation, monetized via affiliate networks.</p>
+            <div class="formula-box">
+              <div class="formula-item"><span>Income Type</span><div>Passive</div></div>
+              <div class="formula-item"><span>Time to First $</span><div>30-60 Days</div></div>
+              <div class="formula-item"><span>Manual Labor</span><div>< 1hr / Day</div></div>
+            </div>
+            <a class="btn-action" href="#">Review Blueprints</a>
+          </div>
+        </div>
       `;
     }
 
     onAuthStateChanged(auth, async (user) => {
-      if (resolved) return;
-      clearTimeout(fallback);
-
       if (!user) { window.location.href = "login.html"; return; }
+      
+      const snap = await getDoc(doc(db, "users", user.uid));
+      const level = snap.exists() ? (snap.data().membership || "starter") : "starter";
 
-      try {
-        const userRef = doc(db, "users", user.uid);
-        const snap = await getDoc(userRef);
-        let membership = snap.exists() ? (snap.data().membership || "starter").toLowerCase() : "starter";
-        
-        resolved = true;
-        statusEl.style.display = 'none';
-        if (membership === "upgraded") { renderUpgraded(); } 
-        else { renderStarter(); }
-      } catch (err) {
-        resolved = true;
+      if (level === "upgraded") {
+        authStatus.textContent = "Founder Tier Access Verified ✅";
+        authStatus.style.color = "var(--primary-green)";
+        renderUpgraded();
+      } else {
+        authStatus.textContent = "Starter Access: Upgrades Available Below";
         renderStarter();
       }
     });
   </script>
-
-  <script>
-    function toggleMenu() {
-      document.getElementById('sideMenu').classList.toggle('show-menu');
-    }
-  </script>
-
 </body>
 </html>
-</div>
