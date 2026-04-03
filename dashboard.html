@@ -102,7 +102,7 @@
     </div>
     <div style="padding: 20px; border-top: 1px solid var(--border);">
       <div id="user-email" style="font-size: 11px; color: #444; margin-bottom: 10px; overflow: hidden; text-overflow: ellipsis;">Syncing...</div>
-      <a href="#" onclick="logout()" style="color: #ff4444; font-size: 11px; font-weight:700; text-decoration:none;">LOGOUT</a>
+      <a href="#" onclick="logout()" style="color: #ff4444; font-size: 11px; font-weight:700; text-decoration:none;">TERMINATE SESSION</a>
     </div>
   </nav>
 
@@ -124,7 +124,7 @@
         <div id="license-level">Starter Access</div>
       </div>
       <div class="metric-card">
-        <span>Last Auth</span>
+        <span>Last Secure Auth</span>
         <div id="last-auth-date">...</div>
       </div>
     </div>
@@ -160,7 +160,7 @@
         <h2>System Activity</h2>
         <div class="log-item"><span class="log-tag">[SYSTEM]</span> Strategy DB Updated</div>
         <div class="log-item"><span class="log-tag">[SECURE]</span> Session Initialized</div>
-        <div class="log-item"><span class="log-tag">[SYNC]</span> Firebase Stream Active</div>
+        <div class="log-item"><span class="log-tag">[SYNC]</span> Cloud Data Stream Active</div>
         
         <div style="margin-top: 25px; border-top: 1px solid #1a1a1a; padding-top: 15px;">
           <a href="mailto:murraysempirellc@gmail.com" style="color: var(--primary); font-size: 12px; font-weight: 600; text-decoration:none;">Executive Support →</a>
@@ -203,18 +203,18 @@
       const ADMIN_EMAILS = ["murraysempirellc@gmail.com", "shawn.murrayjr@gmail.com"];
 
       if (ADMIN_EMAILS.includes(userEmail)) {
-        // Force Admin View Immediately
+        // Force Founder View Immediately
         document.getElementById("upgradeLink").style.display = "none";
         document.getElementById("license-level").textContent = "Upgraded Founder Access ✅";
         
-        // Sync Database in background
+        // Sync behind the scenes
         await setDoc(doc(db, "users", user.uid), { 
           membership: "upgraded", 
           role: "admin",
           email: userEmail 
         }, { merge: true });
       } else {
-        // Standard Membership Check
+        // Standard User Check
         const snap = await getDoc(doc(db, "users", user.uid));
         const level = snap.exists() ? (snap.data().membership || 'starter') : 'starter';
         if (level === "upgraded") {
@@ -225,7 +225,12 @@
 
       document.getElementById('user-email').textContent = userEmail;
       document.getElementById('display-name').textContent = user.displayName || "Member";
-      document.getElementById('last-auth-date').textContent = new Date(user.metadata.lastSignInTime).toLocaleDateString();
+      
+      // Professional Time Formatting
+      const lastSignIn = user.metadata.lastSignInTime;
+      document.getElementById('last-auth-date').textContent = new Date(lastSignIn).toLocaleString(undefined, {
+          month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+      });
     });
   </script>
 </body>
