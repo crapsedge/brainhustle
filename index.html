@@ -2,234 +2,204 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BrainHustle™ | Executive Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>BrainHustle™ | Let's Get To Work</title>
   
   <style>
     :root {
-      --gold: #c5a059;
-      --bg: #050505;
-      --card-bg: #0f0f0f;
-      --border: #1a1a1a;
-      --text-muted: #666;
+      --neon-green: #00e676;
+      --dark-bg: #050505;
+      --card-bg: #111111;
+      --border: #222;
+      --text-gray: #888;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     body {
-      background-color: var(--bg);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: #ffffff;
-      line-height: 1.8;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--dark-bg);
+      color: white;
       overflow-x: hidden;
     }
 
-    /* NAVIGATION MAPPED TO EMPIRE STYLE */
-    .menu-trigger {
+    /* NEON MENU TRIGGER */
+    .menu-btn {
       position: fixed;
-      top: 30px;
-      left: 30px;
+      top: 20px;
+      left: 20px;
       z-index: 1000;
-      color: var(--gold);
-      font-size: 0.7rem;
-      letter-spacing: 4px;
+      background: var(--neon-green);
+      color: black;
+      border: none;
+      padding: 12px 18px;
+      font-weight: 900;
       text-transform: uppercase;
+      border-radius: 8px;
       cursor: pointer;
-      border: 1px solid var(--gold);
-      padding: 10px 15px;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 0 15px rgba(0, 230, 118, 0.4);
     }
 
+    /* SIDEBAR */
     .sidebar {
       height: 100%;
       width: 0;
       position: fixed;
       top: 0;
       left: 0;
-      background-color: #000;
-      overflow-x: hidden;
-      transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-      padding-top: 100px;
+      background: #000;
       z-index: 1001;
+      overflow-x: hidden;
+      transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      padding-top: 80px;
       border-right: 1px solid var(--border);
     }
 
     .sidebar a {
-      padding: 15px 30px;
+      padding: 15px 25px;
       text-decoration: none;
-      font-size: 0.7rem;
-      letter-spacing: 3px;
-      color: #fff;
+      font-size: 18px;
+      color: white;
       display: block;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--border);
+      font-weight: 700;
+      border-bottom: 1px solid #111;
     }
+    .sidebar a:hover { color: var(--neon-green); background: #111; }
+    .sidebar .logout { color: #ff4444; margin-top: 40px; border: none; }
 
-    .sidebar a:hover { color: var(--gold); background: #0a0a0a; }
-
-    .close-btn {
-      position: absolute;
-      top: 30px;
-      right: 30px;
-      font-size: 20px;
-      color: var(--gold);
-      cursor: pointer;
-    }
-
-    /* HEADER SECTION */
+    /* HERO SECTION */
     header {
-      padding: 80px 20px 40px;
+      padding: 100px 20px 40px;
       text-align: center;
+      background: radial-gradient(circle at top, #00331a 0%, #050505 70%);
     }
 
-    .emblem {
-      width: 50px;
-      height: 50px;
-      border: 0.5px solid var(--gold);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto 30px;
+    .logo-img {
+      height: 120px;
+      filter: drop-shadow(0 0 20px rgba(0, 230, 118, 0.3));
+      margin-bottom: 20px;
     }
-    .emblem span { font-size: 0.7rem; color: var(--gold); letter-spacing: 3px; }
 
     h1 {
-      font-size: clamp(1.5rem, 5vw, 2.5rem);
-      font-weight: 200;
-      letter-spacing: 12px;
+      font-size: clamp(32px, 8vw, 60px);
+      font-weight: 900;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      letter-spacing: -2px;
+      line-height: 0.9;
     }
+    h1 span { color: var(--neon-green); }
 
-    .tagline {
-      font-size: 0.6rem;
-      letter-spacing: 6px;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 60px;
-    }
-
-    /* CONTENT GRID */
-    .dashboard-container {
-      max-width: 900px;
+    /* DASHBOARD GRID */
+    .grid {
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 0 20px 100px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
     }
 
-    .status-card {
+    .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      padding: 40px;
-      margin-bottom: 30px;
-      text-align: left;
+      border-radius: 20px;
+      padding: 30px;
+      transition: 0.3s;
     }
+    .card:hover { border-color: var(--neon-green); transform: translateY(-5px); }
 
-    .status-card h2 {
-      font-size: 0.75rem;
-      letter-spacing: 4px;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 10px;
-    }
-
-    .status-card p {
-      font-size: 0.9rem;
-      color: #ccc;
-      margin-bottom: 20px;
-    }
-
-    .move-list {
-      list-style: none;
-    }
-
-    .move-list li {
-      font-size: 0.8rem;
-      letter-spacing: 1px;
-      margin-bottom: 15px;
-      padding-left: 25px;
-      position: relative;
+    .card h2 {
+      color: var(--neon-green);
+      font-size: 24px;
+      margin-top: 0;
       text-transform: uppercase;
     }
 
-    .move-list li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--gold);
-    }
+    .card p { color: #ccc; line-height: 1.5; font-size: 15px; }
 
-    .footer {
+    /* ACTION STEPS */
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 12px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .step span { color: var(--neon-green); }
+
+    /* SUE-PROOF FOOTER */
+    footer {
+      margin-top: 80px;
       padding: 60px 20px;
+      background: #000;
       border-top: 1px solid var(--border);
       text-align: center;
-      font-size: 0.6rem;
-      letter-spacing: 3px;
-      color: var(--text-muted);
-      text-transform: uppercase;
     }
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .dashboard-container > * { animation: fadeIn 1s ease forwards; }
+    .disclaimer-box {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 12px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .footer-links { margin-bottom: 20px; }
+    .footer-links a { color: #888; text-decoration: none; margin: 0 10px; font-weight: 700; }
+
   </style>
 </head>
 <body>
 
-  <div class="menu-trigger" onclick="openMenu()">Archive</div>
+  <button class="menu-btn" onclick="openNav()">☰ MENU</button>
 
-  <div id="sideMenu" class="sidebar">
-    <span class="close-btn" onclick="closeMenu()">&times;</span>
-    <a href="dashboard.html">System Home</a>
-    <a href="kits.html">Hustle Kits</a>
-    <a href="ideas.html">Revenue Streams</a>
-    <a href="ai.html">AI Automation</a>
-    <a href="trackers.html">Growth Trackers</a>
-    <a href="upgrade.html">Tier Upgrade</a>
-    <a href="#" onclick="logout()" style="color: #b31919;">Terminate Session</a>
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" style="font-size: 36px;" onclick="closeNav()">&times;</a>
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="kits.html">⚡ Hustle Kits</a>
+    <a href="ideas.html">💰 Money Ideas</a>
+    <a href="passive.html">📈 Passive Income</a>
+    <a href="ai.html">🤖 AI Tools</a>
+    <a href="trackers.html">📊 Trackers</a>
+    <a href="#" onclick="logout()" class="logout">✖ Terminate Session</a>
   </div>
 
   <header>
-    <div class="emblem"><span>BH</span></div>
-    <h1>BrainHustle™</h1>
-    <p class="tagline">Executive Profit Dashboard</p>
+    <img src="brainhustle-logo.png" alt="BrainHustle" class="logo-img">
+    <h1>THE <span>SYSTEM</span> IS LIVE.</h1>
+    <p style="color:var(--text-gray); margin-top: 15px; font-weight: 700; letter-spacing: 1px;">WELCOME TO BRAINHUSTLE™</p>
   </header>
 
-  <div class="dashboard-container">
-    
-    <div class="status-card">
-      <h2>Session Status</h2>
-      <p>Deployment Successful. You have initiated the BrainHustle™ profit framework. This system is designed for high-efficiency revenue generation through automated assets and strategic execution.</p>
+  <div class="grid">
+    <div class="card">
+      <h2>Your Launchpad</h2>
+      <p>This isn't a course. This is an operating system for your future. Use the menu to deploy your first asset.</p>
     </div>
 
-    <div class="status-card">
-      <h2>Strategic Next Steps</h2>
-      <ul class="move-list">
-        <li>Initialize Hustle Kits for rapid deployment</li>
-        <li>Review Money Ideas for scalable revenue</li>
-        <li>Integrate AI Tools to minimize human labor</li>
-        <li>Log all metrics in Growth Trackers</li>
-      </ul>
+    <div class="card">
+      <h2>Execution List</h2>
+      <div class="step"><span>✔</span> DEPLOY HUSTLE KITS</div>
+      <div class="step"><span>✔</span> IDENTIFY REVENUE STREAM</div>
+      <div class="step"><span>✔</span> AUTOMATE WITH AI</div>
+      <div class="step"><span>✔</span> SCALE UNTIL RICH</div>
     </div>
-
-    <div class="status-card" style="border: 1px solid #222;">
-      <h2>Official Disclosure</h2>
-      <p style="font-size: 0.65rem; color: #555; text-transform: uppercase;">BrainHustle™ is a subsidiary of Murrays Empire LLC. Educational purpose only. No guaranteed results. This system is a tool for disciplined entrepreneurs. Play your part.</p>
-    </div>
-
   </div>
 
-  <div class="footer">
-    © 2026 MURRAYS EMPIRE LLC • SECURE ASSET ACCESS
-  </div>
+  <footer>
+    <div class="footer-links">
+      <a href="terms.html">TERMS</a> | <a href="privacy.html">PRIVACY</a>
+    </div>
+    <div class="disclaimer-box">
+      <strong>OFFICIAL NOTICE:</strong> BrainHustle™ is an educational asset owned by <strong>Murrays Empire LLC</strong>. No results are guaranteed. Success requires effort and execution. We are not financial advisors. <br><br>
+      © 2026 MURRAYS EMPIRE LLC. ALL RIGHTS RESERVED.
+    </div>
+  </footer>
 
   <script>
-    function openMenu() { document.getElementById("sideMenu").style.width = "300px"; }
-    function closeMenu() { document.getElementById("sideMenu").style.width = "0"; }
-  </script>
-
-  <script type="module">
+    function openNav() { document.getElementById("mySidebar").style.width = "280px"; }
+    function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
+    
+    // Firebase Logic (Kept exactly as you had it)
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
@@ -247,15 +217,11 @@
     const auth = getAuth(app);
 
     window.logout = function() {
-      signOut(auth).then(() => {
-        window.location.href = "login.html";
-      });
+      signOut(auth).then(() => { window.location.href = "login.html"; });
     };
 
     onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = "login.html";
-      }
+      if (!user) { window.location.href = "login.html"; }
     });
   </script>
 
