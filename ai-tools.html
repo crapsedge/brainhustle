@@ -1,68 +1,176 @@
-<div id="ai-tools-code">
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Tools – BrainHustle™</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>AI Command Center | BrainHustle™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
-    body { margin:0; background:#000; color:#fff; font-family:Arial, sans-serif; }
-    a { color:#00ff66; text-decoration:none; }
-    .menu-button { position:fixed; top:20px; left:20px; background:#00ff66; border:none; color:#000; font-size:22px; padding:8px 12px; cursor:pointer; z-index:1000; border-radius: 5px; font-weight: bold; }
-    .side-menu { position:fixed; top:0; left:-250px; width:250px; height:100%; background:#111; overflow-y:auto; transition:left .3s; padding-top:100px; z-index:999; border-right: 1px solid #222; }
-    .side-menu a { display:block; color:#fff; padding:12px 20px; border-bottom:1px solid #222; }
-    .side-menu a:hover { background:#00ff66; color:#000; }
-    .show-menu { left:0; }
+    :root {
+      --primary-green: #00e676;
+      --bg-black: #050505;
+      --panel-bg: #0f0f0f;
+      --border-color: #1e1e1e;
+      --text-dim: #888;
+    }
 
-    .content { padding:80px 20px; max-width:900px; margin:auto; }
-    h1 { color:#00ff66; text-align:center; margin:0 0 10px; }
-    p.lead { color:#cfcfcf; text-align:center; max-width:720px; margin:8px auto 24px; }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-black);
+      color: white;
+      display: flex;
+      min-height: 100vh;
+    }
 
-    .tool-card { background:#111; border:1px solid #242424; border-radius:12px; padding:22px; margin:18px 0; }
-    .tool-card h2 { margin:0 0 8px; color:#00ff66; font-size:22px; }
-    .tool-card p { margin:0 0 15px; color:#ddd; line-height: 1.5; }
-    .tool-card .btn { display:inline-block; padding:12px 18px; border-radius:8px; background:#00ff66; color:#000; font-weight:700; text-decoration:none; transition: 0.3s; }
-    .tool-card .btn:hover { background: #00cc55; }
+    /* NAVIGATION */
+    .mobile-header {
+      display: none;
+      position: fixed;
+      top: 0; width: 100%; height: 60px;
+      background: #000; border-bottom: 1px solid var(--border-color);
+      z-index: 1001; padding: 0 20px; align-items: center; justify-content: space-between;
+    }
 
-    .upgrade-btn { background:red; color:#fff; padding:12px 20px; font-size:18px; border:none; border-radius:8px; cursor:pointer; text-decoration:none; font-weight: bold; display: inline-block; }
-    .footer { margin-top:50px; padding:40px 20px; background-color: #000; color: #888; font-size: 13px; line-height: 1.6; border-top: 1px solid #222; text-align: center; }
+    .sidebar {
+      width: 260px; background: #000; border-right: 1px solid var(--border-color);
+      display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 1000;
+      transition: transform 0.3s ease;
+    }
+
+    .brand-box { padding: 30px 25px; font-weight: 800; font-size: 18px; border-bottom: 1px solid var(--border-color); }
+    .brand-box span { color: var(--primary-green); }
+
+    .nav-group { padding: 20px 0; flex-grow: 1; }
+    .nav-group a {
+      display: flex; align-items: center; padding: 12px 25px;
+      color: var(--text-dim); text-decoration: none; font-size: 14px; font-weight: 600; transition: 0.2s;
+    }
+    .nav-group a:hover, .nav-group a.active { color: #fff; background: #0f0f0f; }
+    .nav-group a.active { border-right: 3px solid var(--primary-green); color: #fff; }
+
+    /* CONTENT AREA */
+    main {
+      flex-grow: 1;
+      margin-left: 260px;
+      padding: 40px 60px;
+      max-width: 1200px;
+    }
+
+    .header-area { margin-bottom: 40px; }
+    .header-area h1 { font-size: 26px; font-weight: 800; margin: 0; }
+    .header-area p { color: var(--text-dim); margin-top: 4px; font-size: 14px; }
+
+    /* AI TOOL CARDS */
+    .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    
+    .tool-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      padding: 25px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tool-card h2 { font-size: 18px; color: var(--primary-green); margin: 0 0 10px; }
+    .tool-card p { font-size: 13px; color: #ccc; margin-bottom: 20px; line-height: 1.5; }
+
+    /* THE PROMPT CONSOLE */
+    .prompt-box {
+      background: #000;
+      border: 1px solid #333;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-family: monospace;
+      font-size: 12px;
+      color: var(--primary-green);
+      position: relative;
+    }
+
+    .copy-label { position: absolute; top: 5px; right: 10px; font-size: 10px; color: #555; text-transform: uppercase; }
+
+    .btn-action {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      background: var(--primary-green);
+      color: #000;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .upgrade-lock {
+      background: rgba(255, 62, 62, 0.1);
+      border: 1px solid #ff3e3e;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    footer { margin-top: 60px; padding: 30px 0; border-top: 1px solid var(--border-color); font-size: 11px; color: #444; text-align: center; }
+
+    @media (max-width: 900px) {
+      .mobile-header { display: flex; }
+      .sidebar { transform: translateX(-100%); width: 280px; }
+      .sidebar.open { transform: translateX(0); }
+      main { margin-left: 0; padding: 80px 20px 40px; }
+    }
   </style>
 </head>
 <body>
 
-  <button class="menu-button" onclick="toggleMenu()">☰ Menu</button>
-
-  <div id="sideMenu" class="side-menu">
-    <a href="dashboard.html">Dashboard</a>
-    <a href="kits.html">Hustle Kits</a>
-    <a href="ideas.html">Money Ideas</a>
-    <a href="passive.html">Passive Income</a>
-    <a href="ai-tools.html">AI Tools</a>
-    <a href="monetization.html">Monetization</a>
-    <a href="trackers.html">Trackers</a>
-    <a href="about.html">What is BrainHustle™?</a>
-    <a href="upgrade.html">Upgrade Access</a>
-    <a href="#" onclick="logout()">Logout</a>
+  <div class="mobile-header">
+    <div style="font-weight:800;">Brain<span>Hustle</span></div>
+    <button onclick="toggleSidebar()" style="background:none; border:none; color:white; font-size:24px;">☰</button>
   </div>
 
-  <div class="content" id="contentArea">
-    <h1>🧠 Recommended AI Tools</h1>
-    <p id="status" class="lead">Loading secure access...</p>
+  <nav class="sidebar" id="sidebar">
+    <div class="brand-box">Brain<span>Hustle</span>™</div>
+    <div class="nav-group">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="kits.html">Hustle Kits</a>
+      <a href="ideas.html">Money Ideas</a>
+      <a href="ai-tools.html" class="active">AI Tools</a>
+      <a href="trackers.html">Trackers</a>
+    </div>
+    <div style="padding: 20px; border-top: 1px solid var(--border-color);">
+      <a href="#" onclick="logout()" style="color: #ff4444; font-size: 11px; font-weight:700; text-decoration:none;">LOGOUT</a>
+    </div>
+  </nav>
+
+  <main id="mainContent">
+    <div class="header-area">
+      <h1>AI Command Center</h1>
+      <p id="authStatus">Authenticating Secure Access...</p>
     </div>
 
-  <footer class="footer">
-    <p style="color: #fff; margin-bottom: 5px;">© 2026 BrainHustle™. All Rights Reserved.</p>
-    <p>BrainHustle™ is a wholly owned sub-brand of <strong>Murray’s Empire LLC</strong>.</p>
-    <div style="max-width: 800px; margin: 20px auto 0; padding-top: 20px;">
-      <p><strong>Disclaimer:</strong> BrainHustle™ recommends AI tools for educational and productivity purposes. Murray’s Empire LLC is not affiliated with, nor responsible for, the performance or financial outcomes of using these third-party platforms. Use AI responsibly and at your own risk.</p>
-    </div>
-  </footer>
+    <div id="toolContainer">
+        </div>
+
+    <footer>
+      © 2026 MURRAYS EMPIRE LLC. AI tools are third-party assets. Use responsibly.
+    </footer>
+  </main>
+
+  <script>
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+  </script>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
@@ -78,65 +186,79 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    const container = document.getElementById('toolContainer');
+    const authStatus = document.getElementById('authStatus');
+
     window.logout = function(){ signOut(auth).then(()=>{ window.location.href="login.html"; }); };
 
-    const content = document.getElementById('contentArea');
-    const statusEl = document.getElementById('status');
-
-    let resolved = false;
-    const fallback = setTimeout(() => {
-      if (resolved) return;
-      resolved = true;
-      statusEl.textContent = 'Preview mode — log in to unlock more.';
-      renderStarter();
-    }, 1500);
-
-    function renderStarter(){
-      content.innerHTML = `
-        <h1>🧠 Recommended AI Tools (Preview)</h1>
-        <p class="lead">Harness the power of AI to automate your business and scale your income.</p>
-        <div class="tool-card">
-          <h2>ChatGPT (OpenAI)</h2>
-          <p>The gold standard for content creation, business strategy, and automation logic.</p>
-          <a class="btn" href="https://chat.openai.com/" target="_blank">Try ChatGPT</a>
+    function renderStarter() {
+      container.innerHTML = `
+        <div class="tool-grid">
+          <div class="tool-card">
+            <h2>ChatGPT: Content Agent</h2>
+            <p>Use this to write your website copy, ad scripts, and lead emails in seconds.</p>
+            <div class="prompt-box">
+              <div class="copy-label">Official Prompt</div>
+              "Write a professional water damage restoration landing page for Omaha property owners..."
+            </div>
+            <a class="btn-action" href="https://chat.openai.com/" target="_blank">Open ChatGPT</a>
+          </div>
         </div>
-        <div style="text-align:center; margin-top:30px;">
-          <p>🔒 <strong>Upgrade Required:</strong> Access 5+ professional AI builders, design tools, and logo generators.</p>
-          <a href="upgrade.html" class="upgrade-btn">Upgrade Now</a>
+        <div class="upgrade-lock">
+          <h3 style="color:#ff3e3e; font-size:16px;">UPGRADE TO FOUNDER TIER</h3>
+          <p style="font-size:13px; color:#888;">Unlock 5+ Automated AI Builders (Durable, Looka, Notion AI) and the Master Prompt Library.</p>
+          <a href="upgrade.html" style="color:#fff; font-weight:800; text-decoration:none; display:inline-block; margin-top:10px; border-bottom:1px solid #ff3e3e;">Upgrade Access Now →</a>
         </div>
       `;
     }
 
-    function renderUpgraded(){
-      content.innerHTML = `
-        <h1>🧠 Professional AI Suite</h1>
-        <p class="lead">Exclusive toolkit curated for Murray’s Empire LLC members. Build faster, work smarter.</p>
-        <div class="tool-card"><h2>ChatGPT (OpenAI)</h2><p>General automation and expert content generation.</p><a class="btn" href="https://chat.openai.com/" target="_blank">Launch ChatGPT</a></div>
-        <div class="tool-card"><h2>Canva AI</h2><p>Design eBooks and marketing assets without a designer.</p><a class="btn" href="https://www.canva.com/" target="_blank">Launch Canva AI</a></div>
-        <div class="tool-card"><h2>Notion AI</h2><p>Organize your business systems and ship products faster.</p><a class="btn" href="https://www.notion.so/product/ai" target="_blank">Launch Notion AI</a></div>
-        <div class="tool-card"><h2>Looka</h2><p>Generate high-end brand logos in seconds.</p><a class="btn" href="https://looka.com/" target="_blank">Launch Looka</a></div>
-        <div class="tool-card"><h2>Durable</h2><p>Build professional business landing pages in 30 seconds.</p><a class="btn" href="https://durable.co/" target="_blank">Launch Durable</a></div>
+    function renderUpgraded() {
+      container.innerHTML = `
+        <div class="tool-grid">
+          <div class="tool-card">
+            <h2>Durable: Web Builder</h2>
+            <p>The fastest way to build a professional landing page for your local referral systems.</p>
+            <div class="prompt-box">
+              <div class="copy-label">System Instruction</div>
+              Set business type to "Home Restoration" and location to "Omaha, NE".
+            </div>
+            <a class="btn-action" href="https://durable.co/" target="_blank">Launch Builder</a>
+          </div>
+
+          <div class="tool-card">
+            <h2>Looka: Brand AI</h2>
+            <p>Generate high-end, clean logos that match the Murrays Empire LLC premium aesthetic.</p>
+            <div class="prompt-box">
+              <div class="copy-label">Design Rule</div>
+              Search keywords: "Elite", "Shield", "Empire". Style: Minimalist.
+            </div>
+            <a class="btn-action" href="https://looka.com/" target="_blank">Launch Designer</a>
+          </div>
+
+          <div class="tool-card">
+            <h2>Notion AI: Operations</h2>
+            <p>The master brain for tracking your hustle kits and documenting your revenue systems.</p>
+            <a class="btn-action" href="https://www.notion.so/product/ai" target="_blank">Open Workspace</a>
+          </div>
+        </div>
       `;
     }
 
     onAuthStateChanged(auth, async (user) => {
-      if (resolved) return;
-      clearTimeout(fallback);
       if (!user) { window.location.href = "login.html"; return; }
-      try {
-        const ref = doc(db, "users", user.uid);
-        const snap = await getDoc(ref);
-        let membership = "starter";
-        if (!snap.exists()) { await setDoc(ref, { membership: "starter", email: user.email || "" }, { merge: true }); }
-        else { membership = (snap.data().membership || "starter").toLowerCase(); }
-        resolved = true;
-        if (membership === "upgraded") { statusEl.textContent = 'Founder Tier Access ✅'; renderUpgraded(); }
-        else { statusEl.textContent = 'Starter Access'; renderStarter(); }
-      } catch (e) { statusEl.textContent = 'Connection Error — Showing Preview.'; renderStarter(); }
-    });
+      
+      const snap = await getDoc(doc(db, "users", user.uid));
+      const level = snap.exists() ? (snap.data().membership || "starter") : "starter";
 
-    window.toggleMenu = function(){ document.getElementById('sideMenu').classList.toggle('show-menu'); };
+      if (level === "upgraded") {
+        authStatus.textContent = "Founder Tier Status: Verified ✅";
+        authStatus.style.color = "var(--primary-green)";
+        renderUpgraded();
+      } else {
+        authStatus.textContent = "Starter Access: Upgrades Available Below";
+        renderStarter();
+      }
+    });
   </script>
 </body>
 </html>
-</div>
