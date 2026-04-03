@@ -1,41 +1,275 @@
-<div class="idea-card">
-  <div class="idea-header">
-    <h2>4. Digital Service Arbitrage</h2>
-    <span class="difficulty">Medium Effort • High Ticket</span>
-  </div>
-  <p>Package specialized technical services (SEO audits, AI integrations, or Branding) and sell them to corporate clients. You handle the sales; experts handle the fulfillment.</p>
-  <div class="formula-box">
-    <div class="formula-item"><span>Contract Value</span><div>$2,500 - $5,000</div></div>
-    <div class="formula-item"><span>Your Margin</span><div>40% - 60%</div></div>
-    <div class="formula-item"><span>Time to First $</span><div>14 - 21 Days</div></div>
-  </div>
-  <a class="btn-action" href="#">View Arbitrage Guide</a>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Profit Vault | BrainHustle™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-<div class="idea-card">
-  <div class="idea-header">
-    <h2>5. Automated Content Properties</h2>
-    <span class="difficulty">High Automation • Long-Term Passive</span>
-  </div>
-  <p>Build "niche authority" sites using AI-generated research and data. Monetize through high-payout affiliate networks and automated ad placements.</p>
-  <div class="formula-box">
-    <div class="formula-item"><span>Income Type</span><div>Passive / Residual</div></div>
-    <div class="formula-item"><span>Monthly Potential</span><div>$2,000 - $10,000</div></div>
-    <div class="formula-item"><span>Maintenance</span><div>2 hrs / Week</div></div>
-  </div>
-  <a class="btn-action" href="#">Open Blueprint</a>
-</div>
+  <style>
+    :root {
+      --primary-green: #00e676;
+      --bg-black: #050505;
+      --panel-bg: #0f0f0f;
+      --border-color: #1e1e1e;
+      --text-dim: #888;
+    }
 
-<div class="idea-card">
-  <div class="idea-header">
-    <h2>6. Micro-SaaS Connectors</h2>
-    <span class="difficulty">Technical • High Scalability</span>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-black);
+      color: white;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* NAVIGATION */
+    .mobile-header {
+      display: none;
+      position: fixed;
+      top: 0; width: 100%; height: 60px;
+      background: #000; border-bottom: 1px solid var(--border-color);
+      z-index: 1001; padding: 0 20px; align-items: center; justify-content: space-between;
+    }
+
+    .sidebar {
+      width: 260px; background: #000; border-right: 1px solid var(--border-color);
+      display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 1000;
+      transition: transform 0.3s ease;
+    }
+
+    .brand-box { padding: 30px 25px; font-weight: 800; font-size: 18px; border-bottom: 1px solid var(--border-color); }
+    .brand-box span { color: var(--primary-green); }
+
+    .nav-group { padding: 20px 0; flex-grow: 1; }
+    .nav-group a {
+      display: flex; align-items: center; padding: 12px 25px;
+      color: var(--text-dim); text-decoration: none; font-size: 14px; font-weight: 600; transition: 0.2s;
+    }
+    .nav-group a:hover, .nav-group a.active { color: #fff; background: #0f0f0f; }
+    .nav-group a.active { border-right: 3px solid var(--primary-green); color: #fff; }
+
+    /* MAIN CONTENT */
+    main {
+      flex-grow: 1;
+      margin-left: 260px;
+      padding: 40px 60px;
+      max-width: 900px;
+    }
+
+    .header-area { margin-bottom: 40px; }
+    .header-area h1 { font-size: 26px; font-weight: 800; margin: 0; letter-spacing: -1px; }
+    .header-area p { color: var(--text-dim); margin-top: 4px; font-size: 14px; }
+
+    /* IDEA CARDS */
+    .idea-box {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+    }
+
+    .idea-box h3 { font-size: 18px; color: var(--primary-green); margin-bottom: 10px; font-weight: 800; }
+    .idea-box p { font-size: 14px; color: #ccc; line-height: 1.6; margin-bottom: 20px; }
+
+    .formula-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      background: #000;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .formula-item { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+    .formula-item span { display: block; color: #fff; font-size: 14px; font-weight: 700; margin-top: 4px; }
+
+    .btn-link {
+      display: inline-block;
+      color: var(--primary-green);
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .upgrade-lock {
+      background: rgba(255, 62, 62, 0.05);
+      border: 1px solid #ff3e3e;
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    footer { margin-top: 60px; padding: 30px 0; border-top: 1px solid var(--border-color); font-size: 11px; color: #444; text-align: center; }
+
+    @media (max-width: 900px) {
+      .mobile-header { display: flex; }
+      .sidebar { transform: translateX(-100%); width: 280px; }
+      .sidebar.open { transform: translateX(0); }
+      main { margin-left: 0; padding: 80px 20px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mobile-header">
+    <div style="font-weight:800;">Brain<span>Hustle</span></div>
+    <button onclick="toggleSidebar()" style="background:none; border:none; color:white; font-size:24px;">☰</button>
   </div>
-  <p>Create simple "bridge" tools that connect two different softwares (e.g., a tool that sends Lead Data to a specific CRM). Charge a monthly subscription for the connection.</p>
-  <div class="formula-box">
-    <div class="formula-item"><span>Revenue Model</span><div>Monthly Subscription</div></div>
-    <div class="formula-item"><span>Average Churn</span><div>< 3%</div></div>
-    <div class="formula-item"><span>Asset Value</span><div>10x - 20x Revenue</div></div>
-  </div>
-  <a class="btn-action" href="#">Review Connector Logic</a>
-</div>
+
+  <nav class="sidebar" id="sidebar">
+    <div class="brand-box">Brain<span>Hustle</span>™</div>
+    <div class="nav-group">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="kits.html">Hustle Kits</a>
+      <a href="ideas.html" class="active">Money Ideas</a>
+      <a href="ai-tools.html">AI Tools</a>
+      <a href="trackers.html">Trackers</a>
+    </div>
+    <div style="padding: 20px; border-top: 1px solid var(--border-color);">
+      <a href="#" onclick="logout()" style="color: #ff4444; font-size: 11px; font-weight:700; text-decoration:none;">TERMINATE SESSION</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="header-area">
+      <h1>Profit Vault</h1>
+      <p id="authStatus">Authenticating Secure Access...</p>
+    </div>
+
+    <div id="contentArea">
+        </div>
+
+    <footer>
+      © 2026 MURRAYS EMPIRE LLC. Systems for educational use only.
+    </footer>
+  </main>
+
+  <script>
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+  </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
+      authDomain: "brainhustle-92a40.firebaseapp.com",
+      projectId: "brainhustle-92a40",
+      storageBucket: "brainhustle-92a40.appspot.com",
+      messagingSenderId: "547592914180",
+      appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
+      measurementId: "G-3M5PKR5S27"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const contentArea = document.getElementById('contentArea');
+    const authStatus = document.getElementById('authStatus');
+
+    window.logout = function(){ signOut(auth).then(()=>{ window.location.href="login.html"; }); };
+
+    function renderStarter() {
+      contentArea.innerHTML = `
+        <div class="idea-box">
+          <h3>1. Digital Asset Sales</h3>
+          <p>Package specialized information into guides or digital tools. Zero inventory, 100% digital margins.</p>
+          <div class="formula-grid">
+            <div class="formula-item">AVERAGE UNIT PRICE<span>$20 - $150</span></div>
+            <div class="formula-item">MARGIN<span>95%</span></div>
+          </div>
+          <a class="btn-link" href="#">Review System →</a>
+        </div>
+        <div class="upgrade-lock">
+          <h3 style="color:#ff3e3e; font-size:14px; margin-bottom:10px;">FOUNDER TIER REQUIRED</h3>
+          <p style="font-size:12px; color:#888;">Unlock 5+ verified profit systems, arbitrage guides, and automated content models.</p>
+          <a href="upgrade.html" style="color:#fff; font-weight:800; text-decoration:none; display:inline-block; margin-top:15px; border-bottom:1px solid #ff3e3e;">Upgrade Now</a>
+        </div>
+      `;
+    }
+
+    function renderUpgraded() {
+      contentArea.innerHTML = `
+        <div class="idea-box">
+          <h3>1. Digital Service Arbitrage</h3>
+          <p>Sell high-ticket technical services to businesses. You manage the client; experts handle the fulfillment.</p>
+          <div class="formula-grid">
+            <div class="formula-item">CONTRACT VALUE<span>$2,500+</span></div>
+            <div class="formula-item">YOUR MARGIN<span>40% - 60%</span></div>
+          </div>
+          <a class="btn-link" href="#">View Arbitrage Guide →</a>
+        </div>
+
+        <div class="idea-box">
+          <h3>2. Automated Content Properties</h3>
+          <p>Build authority sites using AI-driven data. Monetize via high-ticket affiliate networks.</p>
+          <div class="formula-grid">
+            <div class="formula-item">INCOME TYPE<span>PASSIVE</span></div>
+            <div class="formula-item">POTENTIAL<span>$2K - $10K/mo</span></div>
+          </div>
+          <a class="btn-link" href="#">Open Blueprint →</a>
+        </div>
+
+        <div class="idea-box">
+          <h3>3. Micro-SaaS Connectors</h3>
+          <p>Create tools that connect software (e.g., Lead Data to CRM). Charge monthly subscription fees.</p>
+          <div class="formula-grid">
+            <div class="formula-item">REVENUE MODEL<span>SUBSCRIPTION</span></div>
+            <div class="formula-item">ASSET VALUE<span>10x - 20x REV</span></div>
+          </div>
+          <a class="btn-link" href="#">Review Connector Logic →</a>
+        </div>
+
+        <div class="idea-box">
+          <h3>4. Niche Newsletters</h3>
+          <p>Curation of industry news for specific professionals. Monetize through private sponsorships.</p>
+          <div class="formula-grid">
+            <div class="formula-item">SUB VALUE<span>$1 - $5 / mo</span></div>
+            <div class="formula-item">AD REVENUE<span>$50 - $100 CPM</span></div>
+          </div>
+          <a class="btn-link" href="#">Explore Newsletter Flow →</a>
+        </div>
+
+        <div class="idea-box">
+          <h3>5. Anonymous Lead Routing</h3>
+          <p>Generate high-intent leads and route them to hungry service providers. No physical labor involved.</p>
+          <div class="formula-grid">
+            <div class="formula-item">FEE PER LEAD<span>$50 - $300</span></div>
+            <div class="formula-item">OVERHEAD<span>MINIMAL</span></div>
+          </div>
+          <a class="btn-link" href="#">Open Routing Strategy →</a>
+        </div>
+      `;
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { window.location.href = "login.html"; return; }
+      
+      const snap = await getDoc(doc(db, "users", user.uid));
+      const level = snap.exists() ? (snap.data().membership || "starter") : "starter";
+
+      if (level === "upgraded") {
+        authStatus.textContent = "Founder Tier Status: Verified ✅";
+        authStatus.style.color = "var(--primary-green)";
+        renderUpgraded();
+      } else {
+        authStatus.textContent = "Starter Access: Upgrades Available Below";
+        renderStarter();
+      }
+    });
+  </script>
+</body>
+</html>
