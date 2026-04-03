@@ -18,28 +18,14 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     
-    body {
-      background: var(--bg);
-      font-family: 'Inter', sans-serif;
-      color: white;
-      display: flex;
-      min-height: 100vh;
-    }
+    body { background: var(--bg); font-family: 'Inter', sans-serif; color: white; display: flex; min-height: 100vh; }
 
     /* NAVIGATION */
-    .sidebar {
-      width: 260px; background: #000; border-right: 1px solid var(--border);
-      display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 1000;
-    }
-
+    .sidebar { width: 260px; background: #000; border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 1000; }
     .brand-box { padding: 30px 25px; font-weight: 800; font-size: 18px; border-bottom: 1px solid var(--border); }
     .brand-box span { color: var(--primary); }
-
     .nav-group { padding: 20px 0; flex-grow: 1; }
-    .nav-group a {
-      display: block; padding: 12px 25px; color: var(--text-dim); text-decoration: none;
-      font-size: 14px; font-weight: 600; transition: 0.2s;
-    }
+    .nav-group a { display: block; padding: 12px 25px; color: var(--text-dim); text-decoration: none; font-size: 14px; font-weight: 600; transition: 0.2s; }
     .nav-group a:hover { color: #fff; background: #0f0f0f; }
 
     /* CONTENT AREA */
@@ -47,45 +33,22 @@
     h1 { font-size: 26px; font-weight: 800; margin-bottom: 40px; letter-spacing: -1px; }
 
     /* IDEA CARDS */
-    .idea-card {
-      background: var(--card); border: 1px solid var(--border);
-      padding: 30px; border-radius: 12px; margin-bottom: 25px;
-    }
-
+    .idea-card { background: var(--card); border: 1px solid var(--border); padding: 30px; border-radius: 12px; margin-bottom: 25px; }
     .idea-card h3 { font-size: 18px; color: var(--primary); margin-bottom: 10px; font-weight: 800; }
     .idea-card p { font-size: 14px; color: #ccc; line-height: 1.6; margin-bottom: 20px; }
-
-    .formula-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
-      background: #000; padding: 15px; border-radius: 8px; margin-bottom: 20px;
-    }
-
+    .formula-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; background: #000; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
     .formula-item { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
     .formula-item span { display: block; color: #fff; font-size: 14px; font-weight: 700; margin-top: 4px; }
-
-    .btn-action {
-      display: block; width: 100%; padding: 12px; background: #222; color: #fff;
-      border: none; border-radius: 6px; font-weight: 800; font-size: 12px;
-      cursor: pointer; text-transform: uppercase; transition: 0.2s;
-    }
+    .btn-action { display: block; width: 100%; padding: 12px; background: #222; color: #fff; border: none; border-radius: 6px; font-weight: 800; font-size: 12px; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
     .btn-action:hover { background: var(--primary); color: #000; }
 
     /* MODAL TERMINAL */
-    #executionModal {
-      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9);
-      z-index: 2000; padding: 20px; overflow-y: auto;
-    }
+    #executionModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; padding: 20px; overflow-y: auto; }
+    .terminal-box { max-width: 600px; margin: 40px auto; background: var(--card); border: 1px solid var(--primary); border-radius: 12px; padding: 40px; }
+    .terminal-box h2 { color: var(--primary); margin-bottom: 15px; }
+    .terminal-box p { line-height: 1.6; color: #ccc; margin-bottom: 15px; }
 
-    .terminal-box {
-      max-width: 600px; margin: 40px auto; background: var(--card);
-      border: 1px solid var(--primary); border-radius: 12px; padding: 40px;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 900px) {
-      .sidebar { display: none; }
-      main { margin-left: 0; padding: 40px 20px; }
-    }
+    @media (max-width: 900px) { .sidebar { display: none; } main { margin-left: 0; padding: 40px 20px; } }
   </style>
 </head>
 <body>
@@ -136,9 +99,16 @@
     window.closeTerminal = () => document.getElementById('executionModal').style.display = 'none';
 
     const STRATEGIES = {
-      arbitrage: `<h2>Service Arbitrage</h2><p>1. Find high-ticket skill on Upwork.<br>2. Sell it to local businesses for 2x price.<br>3. Outsource work and manage client.</p>`,
-      routing: `<h2>Lead Routing</h2><p>1. Build high-urgency landing page.<br>2. Send calls to local pros.<br>3. Charge flat fee per job started.</p>`,
-      content: `<h2>AI Content</h2><p>1. Use AI to generate 50 niche articles.<br>2. Monetize with high-payout affiliates.<br>3. Scale once traffic hits.</p>`
+      s1: `<h2>Digital Service Arbitrage</h2><p>Find high-ticket tasks on freelance boards. Sell them to local business owners for a premium. Manage the project; let experts do the labor.</p>`,
+      s2: `<h2>Anonymous Lead Routing</h2><p>Build simple landing pages for urgent services (Restoration, Towing). Send calls to local pros for a flat $100-$300 fee per job start.</p>`,
+      s3: `<h2>AI Content Engines</h2><p>Use AI to generate 50 niche research articles. Monetize via high-payout affiliate networks (SaaS, Solar, Finance).</p>`,
+      s4: `<h2>Micro-SaaS Connectors</h2><p>Create tools that link two softwares (e.g., Stripe to a custom dashboard). Charge monthly recurring fees for the connection.</p>`,
+      s5: `<h2>Niche Newsletters</h2><p>Curation of industry news for professionals. Monetize through private sponsorships and high-CPM ad networks.</p>`,
+      s6: `<h2>Domain Flipping (AI-Aided)</h2><p>Identify underpriced domain names using AI trend tools. Sell them to startups on Afternic or GoDaddy Auctions.</p>`,
+      s7: `<h2>E-Book Vaults</h2><p>Package specific business solutions into digital PDFs. Sell globally on Gumroad or Amazon KDP with zero shipping costs.</p>`,
+      s8: `<h2>Automated YouTube Faceless</h2><p>Use AI scripts and stock footage to build niche authority channels. Monetize via AdSense and affiliate links.</p>`,
+      s9: `<h2>Subscription Template Packs</h2><p>Design business templates (Notion, Canva, Excel) once. Charge a monthly fee for updated access to new templates.</p>`,
+      s10: `<h2>White-Label Software</h2><p>License existing software, rebrand it as your own, and sell it to specific local niches (e.g., CRM for Dentists).</p>`
     };
 
     window.openStrategy = (key) => {
@@ -150,33 +120,37 @@
       if (!user) { window.location.href = "login.html"; return; }
       const snap = await getDoc(doc(db, "users", user.uid));
       const level = snap.exists() ? (snap.data().membership || "starter") : "starter";
-      
       const content = document.getElementById('contentArea');
+      
       if (level === "upgraded") {
         content.innerHTML = `
-          <div class="idea-card">
-            <h3>1. Digital Service Arbitrage</h3>
-            <p>Scale technical services for corporate clients without doing the labor.</p>
-            <div class="formula-grid">
-              <div class="formula-item">CONTRACT VALUE<span>$2,500+</span></div>
-              <div class="formula-item">YOUR MARGIN<span>40%-60%</span></div>
-            </div>
-            <button class="btn-action" onclick="openStrategy('arbitrage')">Deploy Guide</button>
-          </div>
-          <div class="idea-card">
-            <h3>2. Anonymous Lead Routing</h3>
-            <p>Generate high-intent calls and sell them to local businesses.</p>
-            <div class="formula-grid">
-              <div class="formula-item">FEE PER LEAD<span>$50-$300</span></div>
-              <div class="formula-item">LABOR<span>NONE</span></div>
-            </div>
-            <button class="btn-action" onclick="openStrategy('routing')">Open Strategy</button>
-          </div>
+          ${renderCard(1, "s1", "Service Arbitrage", "$2,500+", "40%-60%")}
+          ${renderCard(2, "s2", "Lead Routing", "$100-$300", "Faceless")}
+          ${renderCard(3, "s3", "AI Content Engine", "$2k-$10k", "Passive")}
+          ${renderCard(4, "s4", "Micro-SaaS Connector", "Monthly Recur.", "High Val.")}
+          ${renderCard(5, "s5", "Niche Newsletter", "$50-$100 CPM", "Low Effort")}
+          ${renderCard(6, "s6", "Domain Flipping", "$500-$5,000", "Speculative")}
+          ${renderCard(7, "s7", "Digital Asset Sales", "$20-$150", "95% Margin")}
+          ${renderCard(8, "s8", "YouTube Faceless", "Ad Revenue", "Automated")}
+          ${renderCard(9, "s9", "Template Packs", "Subscription", "High Retention")}
+          ${renderCard(10, "s10", "White-Label Software", "$99-$299/mo", "Scalable")}
         `;
       } else {
-        content.innerHTML = `<div class="idea-card"><h3>Upgrade to Founder Access</h3><p>Unlock the full vault of verified profit systems.</p></div>`;
+        content.innerHTML = `<div class="idea-card"><h3>Upgrade to Founder Access</h3><p>Unlock all 10 verified profit systems.</p></div>`;
       }
     });
+
+    function renderCard(num, key, title, val, stat) {
+      return `
+        <div class="idea-card">
+          <h3>${num}. ${title}</h3>
+          <div class="formula-grid">
+            <div class="formula-item">VALUE<span>${val}</span></div>
+            <div class="formula-item">STATUS<span>${stat}</span></div>
+          </div>
+          <button class="btn-action" onclick="openStrategy('${key}')">Open Instructions</button>
+        </div>`;
+    }
   </script>
 </body>
 </html>
