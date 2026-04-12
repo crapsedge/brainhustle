@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Lab | BrainHustle™</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3M5PKR5S27"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3M5PKR5S27');
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #000000;
+            --panel-bg: #0f0f0f;
+            --accent-color: #00e676;
+            --border-color: #1e1e1e;
+            --text-main: #ffffff;
+            --text-dim: #888888;
+            --error-red: #ff5252;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Inter', sans-serif; padding-bottom: 50px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        header { padding: 40px 0; text-align: center; border-bottom: 1px solid var(--border-color); margin-bottom: 40px; }
+        .logo { font-weight: 700; font-size: 1.5rem; text-transform: uppercase; }
+        .logo span { color: var(--accent-color); }
+        .panel { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; margin-bottom: 25px; }
+        .panel-title { font-size: 0.9rem; font-weight: 700; color: var(--accent-color); text-transform: uppercase; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
+        .status-item { background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); }
+        .status-label { display: block; font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 5px; }
+        .status-value { font-weight: 600; font-size: 0.9rem; }
+        .btn-group { display: flex; flex-wrap: wrap; gap: 10px; }
+        button { background: transparent; color: var(--text-main); border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 600; }
+        button:hover { border-color: var(--accent-color); background: rgba(0, 230, 118, 0.05); }
+        button.primary { background: var(--accent-color); color: #000; border: none; }
+        .content-box { padding: 20px; border-radius: 8px; border: 1px dotted var(--border-color); min-height: 120px; position: relative; }
+        .locked { filter: grayscale(1); opacity: 0.4; }
+        .lock-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 700; color: var(--accent-color); }
+        #debug-console { background: #000; border: 1px solid var(--border-color); border-radius: 8px; height: 180px; overflow-y: auto; padding: 15px; font-family: monospace; font-size: 0.8rem; color: #00ff00; }
+        footer { margin-top: 60px; text-align: center; color: var(--text-dim); font-size: 0.75rem; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="logo">BRAIN<span>HUSTLE</span>™</div>
+        <p style="color:var(--text-dim)">Internal Lab v1.0</p>
+    </header>
+
+    <section class="panel">
+        <div class="panel-title">System Status</div>
+        <div class="status-grid">
+            <div class="status-item"><span class="status-label">Auth</span><span id="stat-auth">OFFLINE</span></div>
+            <div class="status-item"><span class="status-label">Tier</span><span id="stat-tier">GUEST</span></div>
+            <div class="status-item"><span class="status-label">Verified</span><span id="stat-verified">NO</span></div>
+            <div class="status-item"><span class="status-label">Firebase</span><span id="stat-db">WAITING</span></div>
+        </div>
+        <p id="stat-email" style="margin-top:15px; font-size:0.8rem; color:var(--text-dim)">No user detected.</p>
+    </section>
+
+    <section class="panel">
+        <div class="panel-title">Auth & Membership Testing</div>
+        <div class="btn-group">
+            <button class="primary" id="btn-signup">Test Sign Up</button>
+            <button id="btn-login">Test Login</button>
+            <button id="btn-logout">Logout</button>
+            <button onclick="simulateUpgrade()">Simulate Upgrade</button>
+        </div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-title">Content Lock Preview</div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+            <div class="content-box">
+                <h4 style="color:var(--accent-color)">Starter Area</h4>
+                <p style="font-size:0.8rem">Free hustle modules.</p>
+            </div>
+            <div id="premium-box" class="content-box locked">
+                <div class="lock-overlay">LOCKED</div>
+                <h4>Premium Alpha</h4>
+                <p style="font-size:0.8rem">Scaling strategies.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-title">Debug Console</div>
+        <div id="debug-console"></div>
+    </section>
+
+    <footer>
+        <p>© 2026 MURRAYS EMPIRE LLC. ALL RIGHTS RESERVED.</p>
+        <p>BRAINHUSTLE™ IS AN EDUCATIONAL PLATFORM.</p>
+    </footer>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    // Your specific config from image
+    const firebaseConfig = {
+        apiKey: "AIzaSyA1cS4bIOxNAquDF...", // (Shortened for display)
+        authDomain: "brainhustle-92a40.firebaseapp.com",
+        databaseURL: "https://brainhustle-92a40-default-rtdb.firebaseio.com",
+        projectId: "brainhustle-92a40",
+        storageBucket: "brainhustle-92a40.appspot.com",
+        messagingSenderId: "547592914180",
+        appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
+        measurementId: "G-3M5PKR5S27"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const log = (msg) => {
+        const d = document.getElementById('debug-console');
+        d.innerHTML += `<div>> ${msg}</div>`;
+        d.scrollTop = d.scrollHeight;
+    };
+
+    // UI Updates
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            document.getElementById('stat-auth').innerText = "ONLINE";
+            document.getElementById('stat-db').innerText = "CONNECTED";
+            document.getElementById('stat-email').innerText = user.email;
+            document.getElementById('stat-verified').innerText = user.emailVerified ? "YES" : "NO";
+            log(`User authenticated: ${user.email}`);
+        } else {
+            document.getElementById('stat-auth').innerText = "OFFLINE";
+            document.getElementById('stat-email').innerText = "No user detected.";
+            log("No active user session.");
+        }
+    });
+
+    // Dummy Signup for testing
+    document.getElementById('btn-signup').onclick = () => {
+        const testEmail = "test" + Math.floor(Math.random()*1000) + "@brainhustle.com";
+        log(`Attempting signup with ${testEmail}...`);
+        createUserWithEmailAndPassword(auth, testEmail, "password123")
+            .then(() => log("Success! User created."))
+            .catch(err => log("Error: " + err.message));
+    };
+
+    document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => log("Logged out."));
+
+    window.simulateUpgrade = () => {
+        log("Simulating Premium Access...");
+        document.getElementById('stat-tier').innerText = "PREMIUM";
+        document.getElementById('premium-box').classList.remove('locked');
+        document.querySelector('.lock-overlay').style.display = 'none';
+    };
+
+    log("Firebase Initialized.");
+</script>
+</body>
+</html>
