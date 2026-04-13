@@ -1,242 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Understanding Advantage Play | BrainHustle™</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #0a0a0a;
-            --card-bg: #1a1a1a;
-            --accent-color: #d4af37;
-            --text-color: #ffffff;
-            --text-dim: #b0b0b0;
-        }
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3M5PKR5S27"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3M5PKR5S27');
+  </script>
 
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Advantage Play Guide | BrainHustle™</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-        /* Modal Overlay */
-        #gate-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
+  <style>
+    :root {
+      --primary-green: #00e676;
+      --bg-black: #050505;
+      --panel-bg: #0f0f0f;
+      --border-color: #1e1e1e;
+      --text-dim: #888;
+    }
 
-        .modal {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 8px;
-            max-width: 500px;
-            text-align: center;
-            border: 1px solid var(--accent-color);
-        }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-black);
+      color: white;
+      line-height: 1.6;
+    }
 
-        .modal h2 {
-            margin-top: 0;
-            color: var(--accent-color);
-        }
+    /* POPUP GATE */
+    #gate-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.98);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+    }
 
-        .modal button {
-            background: var(--accent-color);
-            color: #000;
-            border: none;
-            padding: 12px 30px;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 4px;
-            margin-top: 20px;
-        }
+    .modal {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      padding: 40px;
+      border-radius: 16px;
+      max-width: 500px;
+      text-align: center;
+    }
 
-        /* Layout */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
+    .modal h2 { color: var(--primary-green); margin-bottom: 20px; font-size: 20px; text-transform: uppercase; letter-spacing: 1px; }
+    .modal p { color: #ccc; margin-bottom: 30px; font-size: 14px; }
 
-        header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
+    .btn-agree {
+      display: inline-block;
+      padding: 18px 45px;
+      background: var(--primary-green);
+      color: black;
+      font-weight: 800;
+      text-decoration: none;
+      border-radius: 8px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      letter-spacing: 1px;
+    }
 
-        h1 {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-        }
+    /* HEADER */
+    nav {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
 
-        .brand {
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-dim);
-        }
+    .logo { font-weight: 800; font-size: 20px; letter-spacing: 1px; text-transform: uppercase; }
+    .logo span { color: var(--primary-green); }
 
-        section {
-            margin-bottom: 50px;
-        }
+    /* LAYOUT */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
 
-        h2 {
-            border-left: 4px solid var(--accent-color);
-            padding-left: 15px;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
+    h1 {
+      font-size: clamp(28px, 6vw, 48px);
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 50px;
+      letter-spacing: -1px;
+    }
 
-        p {
-            color: var(--text-dim);
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
+    .section-panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      padding: 40px;
+      border-radius: 16px;
+      margin-bottom: 30px;
+    }
 
-        ul {
-            list-style: none;
-            padding: 0;
-        }
+    .section-panel h2 {
+      font-size: 14px;
+      color: var(--primary-green);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      margin-top: 0;
+    }
 
-        li {
-            background: var(--card-bg);
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-        }
+    .section-panel p {
+      font-size: 16px;
+      color: #ccc;
+      margin-bottom: 0;
+    }
 
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            border: 1px solid #333;
-        }
+    /* LIST STYLE */
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+    .feature-list li {
+      background: #161616;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border-left: 4px solid var(--primary-green);
+    }
 
-        footer {
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 1px solid #333;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #666;
-        }
+    .feature-list li strong {
+      display: block;
+      color: white;
+      margin-bottom: 5px;
+      font-size: 17px;
+    }
 
-        /* Utility */
-        .copy-btn {
-            background: #333;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            font-size: 12px;
-            cursor: pointer;
-            border-radius: 3px;
-            float: right;
-        }
-    </style>
+    .feature-list li span {
+      color: var(--text-dim);
+      font-size: 15px;
+    }
+
+    /* VIDEO SECTION */
+    .video-grid {
+      margin: 40px 0;
+    }
+
+    .video-box {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-color);
+    }
+
+    .video-box iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 60px 20px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .legal-box {
+      max-width: 650px;
+      margin: 0 auto;
+      font-size: 11px;
+      color: #444;
+      line-height: 2;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 600px) {
+      .section-panel { padding: 30px 20px; }
+      .container { padding-top: 30px; }
+    }
+  </style>
 </head>
 <body>
 
-    <div id="gate-overlay">
-        <div class="modal">
-            <h2>Educational Notice</h2>
-            <p>The information on this page is for educational purposes only. It is not gambling advice and does not guarantee any financial outcomes.</p>
-            <button onclick="closeGate()">I Understand</button>
-        </div>
+  <div id="gate-overlay">
+    <div class="modal">
+      <h2>I Understand</h2>
+      <p>This content is for educational purposes only. It is not gambling advice. There are no guarantees of winning or making money.</p>
+      <button class="btn-agree" onclick="closeGate()">Enter Guide</button>
+    </div>
+  </div>
+
+  <nav>
+    <div class="logo">Brain<span>Hustle</span>™</div>
+  </nav>
+
+  <div class="container">
+    <h1>Advantage Play in Slot Machines</h1>
+
+    <div class="section-panel">
+      <h2>How Slots Work</h2>
+      <p>Most slot machines use a computer chip to pick random numbers. This ensures every spin is independent. Usually, the math is designed to keep a small percentage of every dollar played, which is why the house typically wins over time.</p>
     </div>
 
-    <div class="container">
-        <header>
-            <div class="brand">BrainHustle™</div>
-            <h1>Understanding Advantage Play in Slot Machines</h1>
-        </header>
-
-        <section>
-            <h2>How Slots Work</h2>
-            <p>Most slot machines use a computer chip to pick random numbers. This ensures that every spin is independent of the last one.</p>
-            <p>In a standard game, the math is designed to keep a small percentage of every dollar played. This is why the house usually wins over time.</p>
-        </section>
-
-        <section>
-            <h2>What is Advantage Play?</h2>
-            <p>Advantage play is when a person looks for specific machines that are in a "temporary" state where the math might be different.</p>
-            <p>This is not about cheating or hacking. It is about understanding the rules of the game and recognizing when a certain feature has been partially filled by a previous player.</p>
-        </section>
-
-        <section>
-            <h2>Types of Situations</h2>
-            <ul>
-                <li><strong>Progressive Jackpots:</strong> Some players look for jackpots that have grown so large that they exceed the mathematical odds of the game.</li>
-                <li><strong>Must-Hit-By Totals:</strong> Some machines have a counter that says a prize must be given before it hits a certain number. If the number is close, the situation changes.</li>
-                <li><strong>Stored Features:</strong> Certain games collect symbols or tokens. Some people look for machines where a previous player left the game with these features nearly finished.</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>Why This is Rare</h2>
-            <p>Casinos are smart. They design games to prevent these situations from happening often. Most of the time, you will not find a machine in an "advantage" state.</p>
-            <p>Professional analysts often spend hours walking through casinos and find nothing. It requires a lot of patience and specialized knowledge.</p>
-        </section>
-
-        <section>
-            <h2>Video Analysis</h2>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/SOfZ-o7RkO0" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/5-9C0v3ZlT4" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </section>
-
-        <section>
-            <h2>The Reality Check</h2>
-            <p>Even if a machine looks like it is in a good spot, there is still a risk. The machine can still take your money before it pays out a feature.</p>
-            <p>Slots are built for entertainment. Most people should expect to lose what they play. Understanding the math does not change the fact that gambling involves risk.</p>
-        </section>
-
-        <section>
-            <h2>Key Takeaways</h2>
-            <ul>
-                <li>Slots use random number generators.</li>
-                <li>"Advantage" spots are based on game rules, not luck.</li>
-                <li>These situations are very hard to find.</li>
-                <li>The casino still holds the overall edge.</li>
-            </ul>
-        </section>
-
-        <footer>
-            <p>&copy; 2026 Murrays Empire LLC. All Rights Reserved.</p>
-            <p><strong>Disclaimer:</strong> This content is strictly educational. We do not provide gambling advice. We are not responsible for any financial losses. All decisions made by the user are their own responsibility.</p>
-        </footer>
+    <div class="section-panel">
+      <h2>What is Advantage Play?</h2>
+      <p>Advantage play is when a person looks for specific machines in a "temporary" state where the math might be different. This is not about cheating. It is about recognizing when a feature has been partially filled by a previous player.</p>
     </div>
 
-    <script>
-        function closeGate() {
-            document.getElementById('gate-overlay').style.display = 'none';
-            window.scrollTo(0, 0);
-        }
-    </script>
+    <div class="section-panel">
+      <h2>Common Situations</h2>
+      <ul class="feature-list">
+        <li>
+          <strong>Progressive Jackpots</strong>
+          <span>Looking for jackpots that have grown so large they exceed the mathematical odds of the game.</span>
+        </li>
+        <li>
+          <strong>Must-Hit-By Totals</strong>
+          <span>Finding machines with a counter that must pay out a prize before hitting a specific dollar amount.</span>
+        </li>
+        <li>
+          <strong>Stored Features</strong>
+          <span>Recognizing games where a previous player left symbols or tokens nearly finished.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="video-grid">
+      <div class="video-box">
+        <iframe src="https://www.youtube.com/embed/SOfZ-o7RkO0" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="video-box">
+        <iframe src="https://www.youtube.com/embed/A0hWbe33U1k" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="section-panel">
+      <h2>The Reality Check</h2>
+      <p>Even in a good spot, there is still risk. A machine can take your money before it pays out. These situations are rare and casinos design games to prevent them. Slots are for entertainment; always expect to lose what you play.</p>
+    </div>
+
+    <div class="section-panel">
+      <h2>Key Takeaways</h2>
+      <p>• Slots use random number generators.<br>
+         • Advantage spots are based on rules, not luck.<br>
+         • These situations are very hard to find.<br>
+         • The casino still holds the overall edge.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="legal-box">
+      © 2026 MURRAYS EMPIRE LLC. ALL RIGHTS RESERVED.<br>
+      EDUCATIONAL CONTENT ONLY. NO RESPONSIBILITY FOR LOSSES.<br>
+      BRAINHUSTLE™ DOES NOT PROVIDE FINANCIAL OR GAMBLING ADVICE.
+    </div>
+  </footer>
+
+  <script>
+    function closeGate() {
+      document.getElementById('gate-overlay').style.display = 'none';
+      window.scrollTo(0, 0);
+    }
+  </script>
+
 </body>
 </html>
