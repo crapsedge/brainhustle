@@ -3,144 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Member Dashboard | BrainHustle™</title>
+    <title>Money Systems Hub | BrainHustle™</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         body { background-color: #000000; color: #ffffff; font-family: 'Inter', sans-serif; }
         .gold-text { color: #D4AF37; }
         .gold-bg { background-color: #D4AF37; }
-        .btn-hover:hover { transform: translateY(-2px); transition: all 0.3s ease; filter: brightness(1.1); }
+        .card-bg { background: linear-gradient(145deg, #111111, #080808); border: 1px solid #1a1a1a; }
+        .btn-hover:hover { transform: translateY(-2px); filter: brightness(1.2); transition: 0.3s; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen pb-20">
 
-    <!-- LOADING OVERLAY -->
-    <div id="loader" class="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center">
-        <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-yellow-600 mb-4"></div>
-        <p class="gold-text font-bold uppercase tracking-widest text-xs italic">Loading Secure Dashboard...</p>
-    </div>
-
-    <!-- NAVIGATION -->
+    <!-- NAV -->
     <nav class="p-6 border-b border-gray-900 flex justify-between items-center bg-black sticky top-0 z-50">
         <div class="text-2xl font-black tracking-tighter gold-text italic">BRAINHUSTLE™</div>
-        <button onclick="logout()" class="text-gray-500 font-bold text-xs uppercase hover:text-white transition">Log Out</button>
+        <button onclick="logout()" class="text-gray-500 font-bold text-xs uppercase">Log Out</button>
     </nav>
 
-    <main class="max-w-xl mx-auto p-6 flex-grow">
+    <main class="max-w-4xl mx-auto p-6">
         
         <!-- HEADER -->
-        <header class="mb-12 text-center">
-            <h1 class="text-4xl font-black mb-3 uppercase italic tracking-tight">Command Center</h1>
-            <p class="text-gray-400 text-lg">Follow these steps to start building and learning practical money systems.</p>
+        <header class="mb-12">
+            <h1 class="text-4xl font-black mb-2 uppercase italic tracking-tight">Money Systems Hub</h1>
+            <p class="text-gray-400">Find a way to build income that fits your life.</p>
         </header>
 
-        <!-- THE 3-STEP SYSTEM -->
-        <div class="space-y-6">
-            
-            <!-- STEP 1 -->
-            <div class="bg-gray-900/40 p-8 rounded-3xl border border-gray-800">
-                <div class="flex items-center gap-4 mb-4">
-                    <span class="gold-bg text-black h-8 w-8 rounded-full flex items-center justify-center font-black">1</span>
-                    <h2 class="text-xl font-bold uppercase tracking-tight">Select a System</h2>
+        <!-- SECTION: PICK YOUR SITUATION -->
+        <section class="mb-12">
+            <h2 class="text-sm font-black text-gray-500 uppercase tracking-widest mb-4">Pick Your Situation</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                <a href="kits.html?filter=zero" class="bg-gray-900 p-4 rounded-xl text-sm font-bold border border-gray-800 text-center btn-hover">I have $0 to start</a>
+                <a href="kits.html?filter=phone" class="bg-gray-900 p-4 rounded-xl text-sm font-bold border border-gray-800 text-center btn-hover">I only have my phone</a>
+                <a href="kits.html?filter=local" class="bg-gray-900 p-4 rounded-xl text-sm font-bold border border-gray-800 text-center btn-hover">I want something local</a>
+                <a href="kits.html?filter=online" class="bg-gray-900 p-4 rounded-xl text-sm font-bold border border-gray-800 text-center btn-hover">I want something online</a>
+                <a href="kits.html?filter=introvert" class="bg-gray-900 p-4 rounded-xl text-sm font-bold border border-gray-800 text-center btn-hover">Avoid talking to people</a>
+                <a href="kits.html?filter=slow" class="bg-gray-900 p-4 rounded-xl text-sm font-bold border border-gray-800 text-center btn-hover">Build it slowly</a>
+            </div>
+        </section>
+
+        <!-- SECTION: TODAY'S ACTION PLAN -->
+        <section class="mb-12 card-bg p-6 rounded-3xl border-gold-text border-opacity-20">
+            <h2 class="text-xl font-black mb-4 uppercase italic gold-text"><i class="fas fa-bolt mr-2"></i>Today's Action Plan</h2>
+            <div class="space-y-4">
+                <div class="flex items-start gap-3">
+                    <div class="h-6 w-6 rounded-full bg-white text-black flex items-center justify-center text-xs font-black shrink-0 mt-1">1</div>
+                    <p class="text-gray-300">Pick one idea from the list below.</p>
                 </div>
-                <p class="text-gray-400 mb-6">Choose a practical business model and study the blueprints to understand how it operates.</p>
-                <a href="kits.html" class="block w-full gold-bg text-black text-center py-4 rounded-2xl font-black text-lg btn-hover uppercase">View Hustle Kits</a>
-            </div>
-
-            <!-- STEP 2 -->
-            <div class="bg-gray-900/40 p-8 rounded-3xl border border-gray-800">
-                <div class="flex items-center gap-4 mb-4">
-                    <span class="gold-bg text-black h-8 w-8 rounded-full flex items-center justify-center font-black">2</span>
-                    <h2 class="text-xl font-bold uppercase tracking-tight">Utilize AI Tools</h2>
+                <div class="flex items-start gap-3">
+                    <div class="h-6 w-6 rounded-full bg-white text-black flex items-center justify-center text-xs font-black shrink-0 mt-1">2</div>
+                    <p class="text-gray-300">Read the simple setup steps.</p>
                 </div>
-                <p class="text-gray-400 mb-6">Use AI tools to write, plan, organize, and significantly speed up your daily workflows.</p>
-                <a href="ai-tools.html" class="block w-full bg-white text-black text-center py-4 rounded-2xl font-black text-lg btn-hover uppercase">Open AI Tools</a>
-            </div>
-
-            <!-- STEP 3 -->
-            <div class="bg-gray-900/40 p-8 rounded-3xl border border-gray-800">
-                <div class="flex items-center gap-4 mb-4">
-                    <span class="gold-bg text-black h-8 w-8 rounded-full flex items-center justify-center font-black">3</span>
-                    <h2 class="text-xl font-bold uppercase tracking-tight">Track Your Progress</h2>
+                <div class="flex items-start gap-3">
+                    <div class="h-6 w-6 rounded-full bg-white text-black flex items-center justify-center text-xs font-black shrink-0 mt-1">3</div>
+                    <p class="text-gray-300">Copy a post or outreach template.</p>
                 </div>
-                <p class="text-gray-400 mb-6">Log your daily actions and system milestones to maintain consistency and focus.</p>
-                <a href="trackers.html" class="block w-full border-2 border-gray-700 text-white text-center py-4 rounded-2xl font-black text-lg btn-hover uppercase">Access Trackers</a>
+                <div class="flex items-start gap-3">
+                    <div class="h-6 w-6 rounded-full bg-white text-black flex items-center justify-center text-xs font-black shrink-0 mt-1">4</div>
+                    <p class="text-gray-300">Publish or test it live.</p>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="h-6 w-6 rounded-full bg-white text-black flex items-center justify-center text-xs font-black shrink-0 mt-1">5</div>
+                    <p class="text-gray-300">Open your <a href="trackers.html" class="underline gold-text">tracker</a> and log what happened.</p>
+                </div>
             </div>
+        </section>
 
-        </div>
-
-        <!-- UPGRADE SECTION -->
-        <div id="upgrade-section" class="mt-12 hidden">
-            <div class="bg-gradient-to-b from-yellow-900/20 to-black p-10 rounded-3xl border border-yellow-600/50 text-center">
-                <i class="fas fa-crown text-4xl gold-text mb-4"></i>
-                <h3 class="text-2xl font-black mb-3 uppercase italic">Premium Access</h3>
-                <p class="text-gray-400 mb-8 text-sm">Unlock advanced referral systems, premium automation blueprints, and specialized training modules.</p>
-                <!-- REPLACE 'YOUR_STRIPE_LINK' WITH YOUR ACTUAL STRIPE URL -->
-                <a href="https://buy.stripe.com/YOUR_STRIPE_LINK" target="_blank" class="block w-full gold-bg text-black py-4 rounded-2xl font-black text-xl shadow-lg btn-hover">UPGRADE NOW</a>
+        <!-- SECTION: CHOOSE A MONEY PATH -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-black mb-6 uppercase italic">Choose a Money Path</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <!-- CATEGORY CARDS -->
+                <a href="kits.html#referral" class="card-bg p-6 rounded-2xl btn-hover">
+                    <h3 class="font-bold text-lg mb-1 gold-text uppercase">Start a local referral business</h3>
+                    <p class="text-xs text-gray-400">Connect customers with contractors for a fee (Like Omaha Restoration).</p>
+                </a>
+                <a href="kits.html#digital" class="card-bg p-6 rounded-2xl btn-hover">
+                    <h3 class="font-bold text-lg mb-1 gold-text uppercase">Sell Digital Guides</h3>
+                    <p class="text-xs text-gray-400">Package your knowledge into a PDF and sell it online.</p>
+                </a>
+                <a href="ai-tools.html" class="card-bg p-6 rounded-2xl btn-hover">
+                    <h3 class="font-bold text-lg mb-1 gold-text uppercase">Offer AI Writing Services</h3>
+                    <p class="text-xs text-gray-400">Use AI to write posts, ads, and flyers for businesses.</p>
+                </a>
+                <a href="kits.html#flipping" class="card-bg p-6 rounded-2xl btn-hover">
+                    <h3 class="font-bold text-lg mb-1 gold-text uppercase">Flip Items Locally</h3>
+                    <p class="text-xs text-gray-400">Find undervalued items and resell them for a profit.</p>
+                </a>
+                <a href="kits.html#leads" class="card-bg p-6 rounded-2xl btn-hover">
+                    <h3 class="font-bold text-lg mb-1 gold-text uppercase">Find Service Leads</h3>
+                    <p class="text-xs text-gray-400">Find people who need help and route them to workers.</p>
+                </a>
+                <a href="kits.html#content" class="card-bg p-6 rounded-2xl btn-hover">
+                    <h3 class="font-bold text-lg mb-1 gold-text uppercase">Create Content Pages</h3>
+                    <p class="text-xs text-gray-400">Build simple pages that attract views and ad money.</p>
+                </a>
             </div>
-        </div>
+        </section>
 
-        <!-- SUPPORT -->
-        <div class="mt-16 text-center">
-            <p class="text-xs text-gray-500 uppercase tracking-widest mb-2 font-bold">Need Assistance?</p>
-            <a href="mailto:murraysempirellc@gmail.com" class="text-gray-400 hover:text-white transition text-sm underline">murraysempirellc@gmail.com</a>
-        </div>
+        <!-- SECTION: BUSINESS IDEAS YOU CAN START WITH -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-black mb-6 uppercase italic">Business Ideas You Can Start With</h2>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-zinc-900 p-5 rounded-2xl border border-zinc-800">
+                    <i class="fas fa-calendar-alt gold-text mb-3"></i>
+                    <h4 class="font-bold text-sm uppercase">Weekend Cash Ideas</h4>
+                </div>
+                <div class="bg-zinc-900 p-5 rounded-2xl border border-zinc-800">
+                    <i class="fas fa-box-open gold-text mb-3"></i>
+                    <h4 class="font-bold text-sm uppercase">No-Inventory Items</h4>
+                </div>
+                <div class="bg-zinc-900 p-5 rounded-2xl border border-zinc-800">
+                    <i class="fas fa-mobile-alt gold-text mb-3"></i>
+                    <h4 class="font-bold text-sm uppercase">Phone-Only Side Hustles</h4>
+                </div>
+                <div class="bg-zinc-900 p-5 rounded-2xl border border-zinc-800">
+                    <i class="fas fa-map-marker-alt gold-text mb-3"></i>
+                    <h4 class="font-bold text-sm uppercase">Local Lead-Gen</h4>
+                </div>
+                <div class="bg-zinc-900 p-5 rounded-2xl border border-zinc-800">
+                    <i class="fas fa-robot gold-text mb-3"></i>
+                    <h4 class="font-bold text-sm uppercase">AI Service Ideas</h4>
+                </div>
+                <div class="bg-zinc-900 p-5 rounded-2xl border border-zinc-800">
+                    <i class="fas fa-file-pdf gold-text mb-3"></i>
+                    <h4 class="font-bold text-sm uppercase">Digital Product Ideas</h4>
+                </div>
+                <div class="bg-zinc-900 p-5 rounded-2xl border border-zinc-800">
+                    <i class="fas fa-user-plus gold-text mb-3"></i>
+                    <h4 class="font-bold text-sm uppercase">Beginner Setups</h4>
+                </div>
+                <div class="bg-zinc-900 p-5 rounded-2xl border border-zinc-800">
+                    <i class="fas fa-tag gold-text mb-3"></i>
+                    <h4 class="font-bold text-sm uppercase">Low-Cost Startups</h4>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: REAL EXAMPLES -->
+        <section class="mb-12 p-8 bg-gray-900/30 rounded-3xl border border-gray-800">
+            <h2 class="text-sm font-black text-gray-500 uppercase tracking-widest mb-6">Real Examples to Copy</h2>
+            <ul class="grid md:grid-cols-2 gap-4 text-sm text-gray-400">
+                <li class="flex items-center gap-2"><i class="fas fa-check-circle gold-text"></i> Post a simple service on Facebook</li>
+                <li class="flex items-center gap-2"><i class="fas fa-check-circle gold-text"></i> Create a Craigslist referral ad</li>
+                <li class="flex items-center gap-2"><i class="fas fa-check-circle gold-text"></i> Build a one-page service site</li>
+                <li class="flex items-center gap-2"><i class="fas fa-check-circle gold-text"></i> Contact local contractors for deals</li>
+                <li class="flex items-center gap-2"><i class="fas fa-check-circle gold-text"></i> Use AI to write outreach flyers</li>
+                <li class="flex items-center gap-2"><i class="fas fa-check-circle gold-text"></i> Sell a 5-page digital PDF guide</li>
+            </ul>
+        </section>
 
     </main>
 
-    <!-- FOOTER DISCLAIMER -->
-    <footer class="max-w-xl mx-auto p-8 text-center border-t border-gray-900">
-        <p class="text-[10px] text-gray-600 leading-relaxed uppercase tracking-tight">
-            © 2026 Murrays Empire LLC. BrainHustle™ provides educational business resources and tools. 
-            <strong>No Income Guarantee:</strong> We do not guarantee financial success or specific earnings. 
-            Results depend on individual effort and market conditions. All systems are for educational purposes.
+    <!-- FOOTER -->
+    <footer class="max-w-2xl mx-auto p-8 text-center">
+        <p class="text-xs text-gray-500 mb-4 uppercase tracking-tighter">
+            Support: <a href="mailto:murraysempirellc@gmail.com" class="underline">murraysempirellc@gmail.com</a>
+        </p>
+        <p class="text-[10px] text-gray-700 leading-relaxed uppercase">
+            © 2026 Murrays Empire LLC. BrainHustle™ is for educational use only. No income guarantee. We do not provide financial advice. Your success depends on your own efforts.
         </p>
     </footer>
 
-    <!-- FIREBASE LOGIC -->
+    <!-- LOGIC -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
 
         const firebaseConfig = {
-          apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
-          authDomain: "brainhustle-92a40.firebaseapp.com",
-          projectId: "brainhustle-92a40",
-          storageBucket: "brainhustle-92a40.firebasestorage.app",
-          messagingSenderId: "547592914180",
-          appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
-          measurementId: "G-3M5PKR5S27"
+            apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
+            authDomain: "brainhustle-92a40.firebaseapp.com",
+            projectId: "brainhustle-92a40",
+            storageBucket: "brainhustle-92a40.firebasestorage.app",
+            messagingSenderId: "547592914180",
+            appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
+            measurementId: "G-3M5PKR5S27"
         };
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        const db = getFirestore(app);
 
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                try {
-                    const docRef = doc(db, "users", user.uid);
-                    const docSnap = await getDoc(docRef);
-                    
-                    const ADMINS = ["murraysempirellc@gmail.com", "shawn.murrayjr@gmail.com"];
-                    let isUpgraded = ADMINS.includes(user.email.toLowerCase());
-                    
-                    if (docSnap.exists() && docSnap.data().membership === "upgraded") {
-                        isUpgraded = true;
-                    }
-
-                    if (!isUpgraded) {
-                        document.getElementById('upgrade-section').classList.remove('hidden');
-                    }
-                } catch (e) { 
-                    console.log("Database connection active."); 
-                }
-                document.getElementById('loader').classList.add('hidden');
-            } else {
-                window.location.href = "login.html";
-            }
+        onAuthStateChanged(auth, (user) => {
+            if (!user) window.location.href = "login.html";
         });
 
         window.logout = () => signOut(auth).then(() => window.location.href = "login.html");
