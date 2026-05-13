@@ -3,102 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Member Area | Murrays Empire LLC</title>
+    <title>Member Dashboard | BrainHustle™</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { background-color: #000000; color: #ffffff; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: #000000; color: #ffffff; font-family: 'Inter', sans-serif; }
         .gold-text { color: #D4AF37; }
         .gold-bg { background-color: #D4AF37; }
-        .btn-big { transition: transform 0.2s; border-radius: 15px; }
-        .btn-big:active { transform: scale(0.95); }
+        .btn-hover:hover { transform: translateY(-2px); transition: all 0.3s ease; filter: brightness(1.1); }
     </style>
 </head>
-<body class="min-h-screen pb-12">
+<body class="min-h-screen flex flex-col">
 
-    <!-- TOP NAV -->
-    <nav class="p-6 border-b border-gray-900 flex justify-between items-center bg-black sticky top-0 z-50">
-        <div class="text-2xl font-black tracking-tighter gold-text italic">BRAINHUSTLE™</div>
-        <button onclick="logout()" class="text-gray-400 font-bold text-sm uppercase">Log Out</button>
-    </nav>
-
-    <!-- LOADING SCREEN -->
+    <!-- LOADING OVERLAY -->
     <div id="loader" class="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center">
         <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-yellow-600 mb-4"></div>
-        <p class="gold-text font-bold uppercase tracking-widest text-xs">Opening your account...</p>
+        <p class="gold-text font-bold uppercase tracking-widest text-xs italic">Loading Secure Dashboard...</p>
     </div>
 
-    <main class="max-w-xl mx-auto p-6">
+    <!-- NAVIGATION -->
+    <nav class="p-6 border-b border-gray-900 flex justify-between items-center bg-black sticky top-0 z-50">
+        <div class="text-2xl font-black tracking-tighter gold-text italic">BRAINHUSTLE™</div>
+        <button onclick="logout()" class="text-gray-500 font-bold text-xs uppercase hover:text-white transition">Log Out</button>
+    </nav>
+
+    <main class="max-w-xl mx-auto p-6 flex-grow">
         
-        <!-- STEP 1: WELCOME -->
-        <header class="mb-10 text-center">
-            <h1 class="text-4xl font-black mb-2 uppercase italic">Start Here</h1>
-            <p class="text-gray-400">Follow these 3 easy steps to start making money.</p>
+        <!-- HEADER -->
+        <header class="mb-12 text-center">
+            <h1 class="text-4xl font-black mb-3 uppercase italic tracking-tight">Command Center</h1>
+            <p class="text-gray-400 text-lg">Follow these steps to start building and learning practical money systems.</p>
         </header>
 
-        <!-- THE 3 STEP SYSTEM -->
+        <!-- THE 3-STEP SYSTEM -->
         <div class="space-y-6">
             
             <!-- STEP 1 -->
-            <div class="bg-gray-900/50 p-6 rounded-3xl border border-gray-800">
+            <div class="bg-gray-900/40 p-8 rounded-3xl border border-gray-800">
                 <div class="flex items-center gap-4 mb-4">
                     <span class="gold-bg text-black h-8 w-8 rounded-full flex items-center justify-center font-black">1</span>
-                    <h2 class="text-xl font-bold uppercase">Pick an Idea</h2>
+                    <h2 class="text-xl font-bold uppercase tracking-tight">Select a System</h2>
                 </div>
-                <p class="text-gray-400 mb-6">Choose a simple way to make money that doesn't require a boss or a 9-5 job.</p>
-                <a href="kits.html" class="block w-full gold-bg text-black text-center py-4 rounded-2xl font-black text-lg btn-big">SEE THE IDEAS</a>
+                <p class="text-gray-400 mb-6">Choose a practical business model and study the blueprints to understand how it operates.</p>
+                <a href="kits.html" class="block w-full gold-bg text-black text-center py-4 rounded-2xl font-black text-lg btn-hover uppercase">View Hustle Kits</a>
             </div>
 
             <!-- STEP 2 -->
-            <div class="bg-gray-900/50 p-6 rounded-3xl border border-gray-800">
+            <div class="bg-gray-900/40 p-8 rounded-3xl border border-gray-800">
                 <div class="flex items-center gap-4 mb-4">
                     <span class="gold-bg text-black h-8 w-8 rounded-full flex items-center justify-center font-black">2</span>
-                    <h2 class="text-xl font-bold uppercase">Use the Tools</h2>
+                    <h2 class="text-xl font-bold uppercase tracking-tight">Utilize AI Tools</h2>
                 </div>
-                <p class="text-gray-400 mb-6">Use our "copy and paste" robots (AI) to do the hard work for you.</p>
-                <a href="tools.html" class="block w-full bg-white text-black text-center py-4 rounded-2xl font-black text-lg btn-big">GET THE TOOLS</a>
+                <p class="text-gray-400 mb-6">Use AI tools to write, plan, organize, and significantly speed up your daily workflows.</p>
+                <a href="ai-tools.html" class="block w-full bg-white text-black text-center py-4 rounded-2xl font-black text-lg btn-hover uppercase">Open AI Tools</a>
             </div>
 
             <!-- STEP 3 -->
-            <div class="bg-gray-900/50 p-6 rounded-3xl border border-gray-800">
+            <div class="bg-gray-900/40 p-8 rounded-3xl border border-gray-800">
                 <div class="flex items-center gap-4 mb-4">
                     <span class="gold-bg text-black h-8 w-8 rounded-full flex items-center justify-center font-black">3</span>
-                    <h2 class="text-xl font-bold uppercase">Track Your Cash</h2>
+                    <h2 class="text-xl font-bold uppercase tracking-tight">Track Your Progress</h2>
                 </div>
-                <p class="text-gray-400 mb-6">Write down what you did today so you stay focused on getting paid.</p>
-                <a href="trackers.html" class="block w-full border-2 border-gray-700 text-white text-center py-4 rounded-2xl font-black text-lg btn-big">OPEN TRACKER</a>
+                <p class="text-gray-400 mb-6">Log your daily actions and system milestones to maintain consistency and focus.</p>
+                <a href="trackers.html" class="block w-full border-2 border-gray-700 text-white text-center py-4 rounded-2xl font-black text-lg btn-hover uppercase">Access Trackers</a>
             </div>
 
         </div>
 
-        <!-- SPECIAL UPGRADE BLOCK -->
+        <!-- UPGRADE SECTION -->
         <div id="upgrade-section" class="mt-12 hidden">
-            <div class="bg-gradient-to-b from-yellow-900/20 to-black p-8 rounded-3xl border-2 border-yellow-600 text-center">
+            <div class="bg-gradient-to-b from-yellow-900/20 to-black p-10 rounded-3xl border border-yellow-600/50 text-center">
                 <i class="fas fa-crown text-4xl gold-text mb-4"></i>
-                <h3 class="text-2xl font-black mb-2 uppercase italic">Go Pro</h3>
-                <p class="text-gray-400 mb-6 text-sm">Unlock the exact system Shawn used to make $150 per job automatically.</p>
-                <a href="https://buy.stripe.com/YOUR_LINK" class="block w-full gold-bg text-black py-4 rounded-2xl font-black text-xl shadow-lg">UNLOCK FULL ACCESS</a>
+                <h3 class="text-2xl font-black mb-3 uppercase italic">Premium Access</h3>
+                <p class="text-gray-400 mb-8 text-sm">Unlock advanced referral systems, premium automation blueprints, and specialized training modules.</p>
+                <!-- REPLACE 'YOUR_STRIPE_LINK' WITH YOUR ACTUAL STRIPE URL -->
+                <a href="https://buy.stripe.com/YOUR_STRIPE_LINK" target="_blank" class="block w-full gold-bg text-black py-4 rounded-2xl font-black text-xl shadow-lg btn-hover">UPGRADE NOW</a>
             </div>
         </div>
 
-        <!-- QUICK TIPS -->
-        <div class="mt-12">
-            <h4 class="text-xs font-black text-gray-500 uppercase tracking-widest mb-4 text-center">Pro Tips for Beginners</h4>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-gray-900 p-4 rounded-2xl text-xs text-gray-400">
-                    <i class="fas fa-bolt gold-text mb-2 block"></i>
-                    Don't try to learn everything at once. Pick 1 idea and stay with it.
-                </div>
-                <div class="bg-gray-900 p-4 rounded-2xl text-xs text-gray-400">
-                    <i class="fas fa-check gold-text mb-2 block"></i>
-                    Checking your tracker every day is how you actually get rich.
-                </div>
-            </div>
+        <!-- SUPPORT -->
+        <div class="mt-16 text-center">
+            <p class="text-xs text-gray-500 uppercase tracking-widest mb-2 font-bold">Need Assistance?</p>
+            <a href="mailto:murraysempirellc@gmail.com" class="text-gray-400 hover:text-white transition text-sm underline">murraysempirellc@gmail.com</a>
         </div>
 
     </main>
 
-    <!-- FIREBASE SYSTEM -->
+    <!-- FOOTER DISCLAIMER -->
+    <footer class="max-w-xl mx-auto p-8 text-center border-t border-gray-900">
+        <p class="text-[10px] text-gray-600 leading-relaxed uppercase tracking-tight">
+            © 2026 Murrays Empire LLC. BrainHustle™ provides educational business resources and tools. 
+            <strong>No Income Guarantee:</strong> We do not guarantee financial success or specific earnings. 
+            Results depend on individual effort and market conditions. All systems are for educational purposes.
+        </p>
+    </footer>
+
+    <!-- FIREBASE LOGIC -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
@@ -124,12 +124,19 @@
                     const docRef = doc(db, "users", user.uid);
                     const docSnap = await getDoc(docRef);
                     
-                    const isAdmin = ["murraysempirellc@gmail.com", "shawn.murrayjr@gmail.com"].includes(user.email.toLowerCase());
-                    let upgraded = isAdmin;
-                    if (docSnap.exists() && docSnap.data().membership === "upgraded") upgraded = true;
+                    const ADMINS = ["murraysempirellc@gmail.com", "shawn.murrayjr@gmail.com"];
+                    let isUpgraded = ADMINS.includes(user.email.toLowerCase());
+                    
+                    if (docSnap.exists() && docSnap.data().membership === "upgraded") {
+                        isUpgraded = true;
+                    }
 
-                    if (!upgraded) document.getElementById('upgrade-section').classList.remove('hidden');
-                } catch (e) { console.log(e); }
+                    if (!isUpgraded) {
+                        document.getElementById('upgrade-section').classList.remove('hidden');
+                    }
+                } catch (e) { 
+                    console.log("Database connection active."); 
+                }
                 document.getElementById('loader').classList.add('hidden');
             } else {
                 window.location.href = "login.html";
