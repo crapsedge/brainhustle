@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrainHustle™ Member Dashboard | Murrays Empire LLC</title>
+    <title>BrainHustle™ Dashboard | Murrays Empire LLC</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -13,6 +13,8 @@
         .bg-accent-green { background-color: #00ff41; }
         .card-hover:hover { border-color: #00ff41; transform: translateY(-2px); transition: all 0.3s ease; }
         #mobile-menu { transition: transform 0.3s ease-in-out; }
+        .loading-shimmer { background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -21,187 +23,119 @@
     <div id="loader" class="fixed inset-0 z-50 bg-black flex items-center justify-center">
         <div class="text-center">
             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto"></div>
-            <p class="mt-4 text-gray-400">Verifying Membership...</p>
+            <p class="mt-4 text-gray-400 font-bold uppercase tracking-widest">Securing Connection...</p>
         </div>
     </div>
 
     <!-- MOBILE HEADER -->
     <header class="lg:hidden flex items-center justify-between p-4 bg-black border-b border-gray-800">
-        <div class="font-bold text-xl accent-green">BrainHustle™</div>
+        <div class="font-bold text-xl accent-green tracking-tighter italic">BRAINHUSTLE™</div>
         <button id="menu-toggle" class="text-2xl p-2"><i class="fas fa-bars"></i></button>
     </header>
 
     <div class="flex flex-1 overflow-hidden">
         <!-- SIDEBAR NAVIGATION -->
         <aside id="mobile-menu" class="fixed inset-y-0 left-0 z-40 w-64 bg-black border-r border-gray-800 transform lg:translate-x-0 -translate-x-full lg:relative transition-transform duration-300 ease-in-out">
-            <div class="p-6">
-                <div class="hidden lg:block font-bold text-2xl mb-8 accent-green">BrainHustle™</div>
-                <nav class="space-y-4">
-                    <a href="dashboard.html" class="flex items-center p-3 rounded bg-gray-900 text-white"><i class="fas fa-home w-8"></i> Dashboard</a>
-                    <a href="#" class="flex items-center p-3 rounded hover:bg-gray-900"><i class="fas fa-briefcase w-8"></i> Hustle Kits</a>
-                    <a href="#" class="flex items-center p-3 rounded hover:bg-gray-900"><i class="fas fa-lightbulb w-8"></i> Money Ideas</a>
-                    <a href="#" class="flex items-center p-3 rounded hover:bg-gray-900"><i class="fas fa-robot w-8"></i> AI Tools</a>
-                    <a href="#" class="flex items-center p-3 rounded hover:bg-gray-900"><i class="fas fa-chart-line w-8"></i> Trackers</a>
-                    <div id="upgrade-nav-item" class="hidden">
-                        <a href="#" class="flex items-center p-3 rounded bg-green-900/20 border border-green-500/50 text-green-400"><i class="fas fa-arrow-up w-8"></i> Upgrade</a>
+            <div class="p-6 flex flex-col h-full">
+                <div class="hidden lg:block font-bold text-2xl mb-8 accent-green tracking-tighter italic">BRAINHUSTLE™</div>
+                <nav class="space-y-2 flex-1">
+                    <a href="dashboard.html" class="flex items-center p-3 rounded bg-green-500/10 text-green-400 border border-green-500/20"><i class="fas fa-home w-8"></i> Dashboard</a>
+                    <a href="kits.html" class="flex items-center p-3 rounded hover:bg-gray-900 transition"><i class="fas fa-briefcase w-8"></i> Hustle Kits</a>
+                    <a href="tools.html" class="flex items-center p-3 rounded hover:bg-gray-900 transition"><i class="fas fa-robot w-8"></i> AI Tools</a>
+                    <a href="trackers.html" class="flex items-center p-3 rounded hover:bg-gray-900 transition"><i class="fas fa-chart-line w-8"></i> Trackers</a>
+                    
+                    <!-- UPGRADE BUTTON (Visible if not upgraded) -->
+                    <div id="upgrade-nav-item" class="hidden mt-6">
+                        <a href="https://buy.stripe.com/YOUR_STRIPE_LINK" target="_blank" class="flex items-center p-3 rounded bg-green-500 text-black font-bold hover:bg-green-400 transition transform hover:scale-105">
+                            <i class="fas fa-rocket w-8"></i> GET FULL ACCESS
+                        </a>
                     </div>
-                    <hr class="border-gray-800 my-4">
-                    <button onclick="logout()" class="flex items-center p-3 w-full text-left rounded hover:bg-red-900/20 text-red-400"><i class="fas fa-sign-out-alt w-8"></i> Log Out</button>
                 </nav>
+                
+                <div class="pt-6 border-t border-gray-800">
+                    <button onclick="logout()" class="flex items-center p-3 w-full text-left rounded hover:bg-red-900/20 text-red-400 transition"><i class="fas fa-sign-out-alt w-8"></i> Log Out</button>
+                </div>
             </div>
         </aside>
 
         <!-- MAIN CONTENT AREA -->
         <main class="flex-1 overflow-y-auto p-4 lg:p-8">
             
-            <!-- WELCOME HEADER -->
+            <!-- HEADER -->
             <section class="max-w-5xl mx-auto mb-10">
-                <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
                     <div>
-                        <h1 class="text-3xl md:text-4xl font-bold mb-2">Welcome to BrainHustle™</h1>
-                        <p class="text-gray-400 max-w-2xl">Thanks for joining BrainHustle™. This member area was built to help you find practical money-making ideas, useful AI tools, simple trackers, and starter systems you can actually use.</p>
+                        <h1 class="text-4xl font-black mb-2 uppercase tracking-tight">Command Center</h1>
+                        <p class="text-gray-400 text-lg">Pick a system. Follow the steps. Build wealth.</p>
                     </div>
-                    <div class="mt-6 md:mt-0 p-4 bg-gray-900 border border-gray-800 rounded-lg min-w-[200px]">
-                        <p class="text-xs text-gray-500 uppercase font-bold mb-1">Current Plan</p>
-                        <div id="plan-display" class="text-lg font-bold">Verifying...</div>
-                        <p id="plan-description" class="text-xs text-gray-400 mt-1"></p>
+                    <div class="p-4 bg-gray-900 border border-gray-800 rounded-xl min-w-[240px]">
+                        <p class="text-xs text-gray-500 uppercase font-black mb-1">Access Level</p>
+                        <div id="plan-display" class="text-xl font-bold flex items-center gap-2">Checking...</div>
                     </div>
                 </div>
 
-                <!-- MAIN CALL TO ACTION -->
-                <div class="bh-gradient border border-gray-800 p-6 md:p-10 rounded-2xl flex flex-col md:flex-row items-center justify-between">
-                    <div class="mb-6 md:mb-0">
-                        <h2 class="text-2xl font-bold mb-2">Ready to take action?</h2>
-                        <p class="text-gray-400">Pick a business model and start organizing your progress today.</p>
-                    </div>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button class="bg-accent-green text-black px-8 py-3 rounded-lg font-bold text-lg hover:scale-105 transition-transform">Start Building</button>
-                        <button class="border border-gray-600 px-8 py-3 rounded-lg font-bold text-lg hover:bg-gray-800">View Hustle Kits</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- RECOMMENDED PATH & UPDATES -->
-            <section class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-                <div class="lg:col-span-2">
-                    <h3 class="text-xl font-bold mb-4">Start Here: Your Recommended Path</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-start gap-4 p-4 bg-gray-900/50 rounded-lg border border-gray-800">
-                            <span class="bg-accent-green text-black font-bold h-6 w-6 rounded-full flex items-center justify-center shrink-0">1</span>
-                            <div>
-                                <p class="font-bold">Choose a money idea</p>
-                                <p class="text-sm text-gray-400">Browse our curated list of business models and pick one that fits your skills.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4 p-4 bg-gray-900/50 rounded-lg border border-gray-800">
-                            <span class="bg-accent-green text-black font-bold h-6 w-6 rounded-full flex items-center justify-center shrink-0">2</span>
-                            <div>
-                                <p class="font-bold">Open a hustle kit</p>
-                                <p class="text-sm text-gray-400">Get the specific steps, templates, and guides for your chosen model.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4 p-4 bg-gray-900/50 rounded-lg border border-gray-800">
-                            <span class="bg-accent-green text-black font-bold h-6 w-6 rounded-full flex items-center justify-center shrink-0">3</span>
-                            <div>
-                                <p class="font-bold">Use a tracker</p>
-                                <p class="text-sm text-gray-400">Keep yourself accountable by logging your daily progress and milestones.</p>
+                <!-- FEATURED MONEY MAKER -->
+                <div class="bh-gradient border border-green-500/30 p-8 md:p-12 rounded-3xl relative overflow-hidden group border-l-8 border-l-green-500">
+                    <div class="relative z-10">
+                        <span class="bg-green-500 text-black text-xs font-black px-3 py-1 rounded-full uppercase">Top Rated System</span>
+                        <h2 class="text-4xl font-black mt-4 mb-4 leading-tight">THE AUTOMATED <br>REFERRAL MACHINE</h2>
+                        <p class="text-gray-400 mb-8 text-xl max-w-xl">Learn how to build a 100% automated property damage referral network. No physical work, no phone calls, high-ticket payments.</p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="kits.html" class="bg-accent-green text-black px-10 py-4 rounded-xl font-black text-xl hover:bg-white transition transform hover:scale-105 shadow-xl">OPEN KIT</a>
+                            <div class="flex items-center gap-2 text-green-400 font-bold px-4 py-2 bg-green-500/10 rounded-lg">
+                                <i class="fas fa-bolt"></i> Ready to Launch
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="bg-gray-900/30 border border-gray-800 p-6 rounded-xl">
-                    <h3 class="text-lg font-bold mb-4">Member Updates</h3>
-                    <ul class="space-y-4 text-sm">
-                        <li class="flex gap-3"><i class="fas fa-check-circle text-green-500 mt-1"></i> New ideas added regularly</li>
-                        <li class="flex gap-3"><i class="fas fa-check-circle text-green-500 mt-1"></i> Trackers help organize your progress</li>
-                        <li class="flex gap-3"><i class="fas fa-check-circle text-green-500 mt-1"></i> Upgrade access unlocks more tools</li>
-                    </ul>
-                    <hr class="my-6 border-gray-800">
-                    <div id="user-info" class="text-xs text-gray-500">
-                        <p>User ID: <span id="user-id-display" class="font-mono">...</span></p>
-                        <p>Last login: <span id="last-login">...</span></p>
-                    </div>
+                    <i class="fas fa-network-wired absolute -right-10 -bottom-10 text-[200px] text-white/5 rotate-12 group-hover:scale-110 transition duration-700"></i>
                 </div>
             </section>
 
-            <!-- MEMBER RESOURCES GRID -->
-            <section class="max-w-5xl mx-auto mb-16">
-                <h3 class="text-2xl font-bold mb-6">Member Resources</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="p-6 bg-gray-900 border border-gray-800 rounded-xl card-hover">
-                        <i class="fas fa-box-open text-2xl accent-green mb-4"></i>
-                        <h4 class="text-xl font-bold mb-2">Hustle Kits</h4>
-                        <p class="text-sm text-gray-400 mb-4">Complete starter packages for specific business models.</p>
-                        <button class="w-full bg-gray-800 py-2 rounded font-bold hover:bg-gray-700">Open Kits</button>
+            <!-- TOOLS GRID -->
+            <section class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                <a href="kits.html" class="p-8 bg-gray-900 border border-gray-800 rounded-2xl card-hover group">
+                    <div class="h-14 w-14 bg-green-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-500 transition">
+                        <i class="fas fa-briefcase text-2xl accent-green group-hover:text-black"></i>
                     </div>
-                    <div class="p-6 bg-gray-900 border border-gray-800 rounded-xl card-hover">
-                        <i class="fas fa-lightbulb text-2xl accent-green mb-4"></i>
-                        <h4 class="text-xl font-bold mb-2">Money Ideas</h4>
-                        <p class="text-sm text-gray-400 mb-4">Browse simple models for making extra income online.</p>
-                        <button class="w-full bg-gray-800 py-2 rounded font-bold hover:bg-gray-700">View Ideas</button>
+                    <h4 class="text-2xl font-black mb-3">Hustle Kits</h4>
+                    <p class="text-gray-400">Complete digital blueprints for business models.</p>
+                </a>
+                
+                <a href="tools.html" class="p-8 bg-gray-900 border border-gray-800 rounded-2xl card-hover group">
+                    <div class="h-14 w-14 bg-green-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-500 transition">
+                        <i class="fas fa-robot text-2xl accent-green group-hover:text-black"></i>
                     </div>
-                    <div class="p-6 bg-gray-900 border border-gray-800 rounded-xl card-hover">
-                        <i class="fas fa-robot text-2xl accent-green mb-4"></i>
-                        <h4 class="text-xl font-bold mb-2">AI Tools</h4>
-                        <p class="text-sm text-gray-400 mb-4">Simple tools to help you write, plan, and automate tasks.</p>
-                        <button class="w-full bg-gray-800 py-2 rounded font-bold hover:bg-gray-700">Open Tools</button>
-                    </div>
-                    <div class="p-6 bg-gray-900 border border-gray-800 rounded-xl card-hover">
-                        <i class="fas fa-list-check text-2xl accent-green mb-4"></i>
-                        <h4 class="text-xl font-bold mb-2">Trackers</h4>
-                        <p class="text-sm text-gray-400 mb-4">Organize your work and track your progress daily.</p>
-                        <button class="w-full bg-gray-800 py-2 rounded font-bold hover:bg-gray-700">View Trackers</button>
-                    </div>
-                    <div class="p-6 bg-gray-900 border border-gray-800 rounded-xl relative overflow-hidden group">
-                        <div class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10">
-                            <p class="text-sm font-bold text-green-400">Upgrade Required</p>
-                        </div>
-                        <i class="fas fa-university text-2xl text-gray-600 mb-4"></i>
-                        <h4 class="text-xl font-bold mb-2">Business Basics</h4>
-                        <p class="text-sm text-gray-400 mb-4">Advanced guides on taxes, LLCs, and scaling systems.</p>
-                        <button class="w-full bg-gray-800 py-2 rounded font-bold cursor-not-allowed">Locked</button>
-                    </div>
-                    <div class="p-6 bg-gray-900 border border-gray-800 rounded-xl card-hover">
-                        <i class="fas fa-headset text-2xl accent-green mb-4"></i>
-                        <h4 class="text-xl font-bold mb-2">Contact Support</h4>
-                        <p class="text-sm text-gray-400 mb-4">Need help? Questions about your access? Contact us.</p>
-                        <a href="mailto:murraysempirellc@gmail.com" class="block w-full bg-gray-800 py-2 rounded font-bold text-center hover:bg-gray-700">Email Support</a>
-                    </div>
-                </div>
-            </section>
+                    <h4 class="text-2xl font-black mb-3">AI Tools</h4>
+                    <p class="text-gray-400">Copy-paste prompts and automation scripts.</p>
+                </a>
 
-            <!-- UPGRADE PREVIEW -->
-            <section id="upgrade-section" class="max-w-5xl mx-auto mb-16 hidden">
-                <div class="bg-green-900/10 border border-green-500/30 p-8 rounded-2xl text-center">
-                    <h3 class="text-2xl font-bold mb-4">Want the full BrainHustle™ system?</h3>
-                    <p class="text-gray-400 mb-6 max-w-xl mx-auto">Upgrade to unlock premium ideas, templates, tools, and advanced money systems. Get everything you need to build at a higher level.</p>
-                    <button class="bg-accent-green text-black px-10 py-4 rounded-lg font-bold text-xl">Unlock Full Access</button>
-                    <p class="text-xs text-gray-500 mt-4 italic">Results are not guaranteed. BrainHustle™ provides educational tools and ideas only.</p>
-                </div>
+                <a href="trackers.html" class="p-8 bg-gray-900 border border-gray-800 rounded-2xl card-hover group">
+                    <div class="h-14 w-14 bg-green-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-500 transition">
+                        <i class="fas fa-chart-line text-2xl accent-green group-hover:text-black"></i>
+                    </div>
+                    <h4 class="text-2xl font-black mb-3">Daily Tracker</h4>
+                    <p class="text-gray-400">Log your progress and track every dollar.</p>
+                </a>
             </section>
 
             <!-- FOOTER -->
-            <footer class="max-w-5xl mx-auto border-t border-gray-800 pt-8 pb-12 text-center text-sm text-gray-500">
-                <p class="mb-4">© 2026 Murrays Empire LLC. All rights reserved.</p>
-                <p class="max-w-3xl mx-auto mb-6">
-                    BrainHustle™ provides educational content, tools, ideas, and business resources. We do not guarantee income, business results, employment, financing, or financial outcomes. Nothing on this site is financial, legal, tax, or professional advice. BrainHustle™ is operated by Murrays Empire LLC.
-                </p>
-                <div class="flex justify-center gap-6">
-                    <a href="privacy.html" class="hover:text-white underline">Privacy Policy</a>
-                    <a href="terms.html" class="hover:text-white underline">Terms of Service</a>
+            <footer class="max-w-5xl mx-auto border-t border-gray-800 pt-12 pb-20 text-center">
+                <p class="text-gray-500 text-sm mb-4">© 2026 Murrays Empire LLC. All rights reserved.</p>
+                <div class="flex justify-center gap-8 text-xs font-bold uppercase tracking-widest text-gray-600">
+                    <a href="privacy.html" class="hover:text-green-500 transition">Privacy</a>
+                    <a href="terms.html" class="hover:text-green-500 transition">Terms</a>
+                    <a href="legal.html" class="hover:text-green-500 transition">Legal</a>
                 </div>
             </footer>
         </main>
     </div>
 
-    <!-- FIREBASE & LOGIC -->
+    <!-- FIREBASE LOGIC -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
         import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-firestore.js";
 
-        // 1. REAL BRAINHUSTLE CONFIG
         const firebaseConfig = {
           apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
           authDomain: "brainhustle-92a40.firebaseapp.com",
@@ -216,44 +150,29 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        const ADMIN_EMAILS = [
-          "murraysempirellc@gmail.com",
-          "shawn.murrayjr@gmail.com"
-        ];
+        const ADMINS = ["murraysempirellc@gmail.com", "shawn.murrayjr@gmail.com"];
 
-        // Mobile Menu
+        // UI Controls
         const menuBtn = document.getElementById('menu-toggle');
         const sidebar = document.getElementById('mobile-menu');
-        if(menuBtn) {
-            menuBtn.addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full');
-            });
-        }
+        menuBtn?.addEventListener('click', () => sidebar.classList.toggle('-translate-x-full'));
 
-        // AUTH & MEMBERSHIP CHECK
+        // Security Check
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                document.getElementById('user-id-display').textContent = user.uid;
-                document.getElementById('last-login').textContent = new Date(user.metadata.lastSignInTime).toLocaleString();
-                
                 try {
-                    // COLLECTION: users | DOC: user.uid
                     const docRef = doc(db, "users", user.uid);
                     const docSnap = await getDoc(docRef);
                     
-                    const isAdmin = ADMIN_EMAILS.includes(user.email.toLowerCase());
-                    let isUpgraded = isAdmin;
-
-                    if (docSnap.exists()) {
-                        const data = docSnap.data();
-                        // FIELD: membership
-                        if (data.membership === "upgraded") isUpgraded = true;
+                    let isUpgraded = ADMINS.includes(user.email.toLowerCase());
+                    if (docSnap.exists() && docSnap.data().membership === "upgraded") {
+                        isUpgraded = true;
                     }
 
-                    updateUIVisuals(isUpgraded);
+                    updateUI(isUpgraded);
                 } catch (e) {
-                    console.error("Firestore Error:", e);
-                    updateUIVisuals(false);
+                    console.error(e);
+                    updateUI(false);
                 }
                 document.getElementById('loader').classList.add('hidden');
             } else {
@@ -261,29 +180,20 @@
             }
         });
 
-        function updateUIVisuals(isUpgraded) {
+        function updateUI(isUpgraded) {
             const planText = document.getElementById('plan-display');
-            const planDesc = document.getElementById('plan-description');
-            const upgradeSec = document.getElementById('upgrade-section');
             const upgradeNav = document.getElementById('upgrade-nav-item');
 
             if (isUpgraded) {
-                planText.textContent = "Upgraded Access";
-                planText.classList.add('text-green-400');
-                planDesc.textContent = "Full tools, premium systems, and advanced resources.";
-                if(upgradeSec) upgradeSec.classList.add('hidden');
-                if(upgradeNav) upgradeNav.classList.add('hidden');
+                planText.innerHTML = '<span class="text-green-400"><i class="fas fa-crown"></i> UPGRADED</span>';
+                upgradeNav.classList.add('hidden');
             } else {
-                planText.textContent = "Starter Access";
-                planDesc.textContent = "Basic tools, previews, and beginner resources.";
-                if(upgradeSec) upgradeSec.classList.remove('hidden');
-                if(upgradeNav) upgradeNav.classList.remove('hidden');
+                planText.innerHTML = '<span class="text-gray-400"><i class="fas fa-user"></i> STARTER</span>';
+                upgradeNav.classList.remove('hidden');
             }
         }
 
-        window.logout = function() {
-            signOut(auth).then(() => { window.location.href = "login.html"; });
-        }
+        window.logout = () => signOut(auth).then(() => window.location.href = "login.html");
     </script>
 </body>
 </html>
