@@ -104,7 +104,10 @@
     async function notifyOwner(email, status) {
       const formData = new FormData();
 
-      formData.append("_subject", "New BrainHustle Signup Activity");
+      formData.append("access_key", "cbd2d323-5aae-4acd-befe-929a51034d58");
+      formData.append("subject", "New BrainHustle Signup Activity");
+      formData.append("from_name", "BrainHustle Signup Form");
+
       formData.append("Business", "BrainHustle");
       formData.append("Submitted_Email", email);
       formData.append("Status", status);
@@ -112,10 +115,19 @@
       formData.append("Page", "signup.html");
 
       try {
-        await fetch("https://formsubmit.co/murraysempirellc@gmail.com", {
+        const response = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
           body: formData
         });
+
+        const result = await response.json();
+
+        if (result.success) {
+          console.log("Owner notification sent.");
+        } else {
+          console.log("Web3Forms error:", result);
+        }
+
       } catch (error) {
         console.log("Owner notification failed:", error);
       }
