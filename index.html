@@ -11,60 +11,339 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>BrainHustle™ | High-Execution Systems Terminal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <title>BrainHustle™ | Online Business Systems & AI Tools</title>
+  <meta name="description" content="BrainHustle™ gives beginners, side hustlers, and solo business owners simple templates, AI prompts, trackers, and business systems to help organize and launch online income ideas.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --primary-green: #00e676;
       --bg-black: #050505;
       --panel-bg: #0f0f0f;
-      --border-color: #1e1e1e;
-      --text-dim: #888;
+      --panel-light: #151515;
+      --border-color: #1f1f1f;
+      --text-main: #ffffff;
+      --text-dim: #9b9b9b;
+      --text-soft: #cccccc;
     }
 
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg-black); color: white; line-height: 1.6; }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-    nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 40px; border-bottom: 1px solid var(--border-color); }
-    .logo { font-weight: 800; font-size: 18px; letter-spacing: 1px; text-transform: uppercase; }
-    .logo span { color: var(--primary-green); }
-    .nav-login { color: var(--text-dim); text-decoration: none; font-size: 13px; font-weight: 600; text-transform: uppercase; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-black);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
 
-    .hero { padding: 80px 20px 40px; text-align: center; max-width: 900px; margin: 0 auto; }
-    h1 { font-size: clamp(38px, 9vw, 68px); font-weight: 800; letter-spacing: -3px; line-height: 0.9; margin-bottom: 25px; }
-    .sub-headline { font-size: 20px; color: var(--text-dim); margin-bottom: 40px; max-width: 650px; margin-left: auto; margin-right: auto; }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 40px;
+      border-bottom: 1px solid var(--border-color);
+      background: #050505;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
 
-    .cta-box { margin-bottom: 80px; }
+    .logo {
+      font-weight: 900;
+      font-size: 18px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .logo span {
+      color: var(--primary-green);
+    }
+
+    .nav-login {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .nav-login:hover {
+      color: var(--primary-green);
+    }
+
+    .hero {
+      padding: 80px 20px 50px;
+      text-align: center;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      color: var(--primary-green);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(36px, 8vw, 66px);
+      font-weight: 900;
+      letter-spacing: -3px;
+      line-height: 0.95;
+      margin: 0 0 24px;
+    }
+
+    .sub-headline {
+      font-size: 20px;
+      color: var(--text-soft);
+      margin: 0 auto 36px;
+      max-width: 720px;
+    }
+
+    .cta-box {
+      margin-bottom: 38px;
+    }
+
     .btn-main {
-      display: inline-block; padding: 25px 60px; background: var(--primary-green); color: black;
-      font-weight: 900; font-size: 18px; text-decoration: none; border-radius: 12px;
-      text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
-      box-shadow: 0 20px 50px rgba(0, 230, 118, 0.3);
+      display: inline-block;
+      padding: 22px 44px;
+      background: var(--primary-green);
+      color: black;
+      font-weight: 900;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.25s;
+      box-shadow: 0 20px 50px rgba(0, 230, 118, 0.25);
     }
-    .btn-main:hover { transform: translateY(-3px); filter: brightness(1.1); }
-    .price-tag { display: block; margin-top: 15px; font-size: 14px; color: var(--primary-green); font-weight: 800; letter-spacing: 1px; }
 
-    /* PREVIEW PANEL */
+    .btn-main:hover {
+      transform: translateY(-3px);
+      filter: brightness(1.08);
+    }
+
+    .price-tag {
+      display: block;
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--primary-green);
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .mini-trust {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 auto 70px;
+      max-width: 760px;
+    }
+
+    .mini-trust span {
+      border: 1px solid var(--border-color);
+      background: #0b0b0b;
+      color: var(--text-dim);
+      padding: 9px 13px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .section {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 35px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--text-dim);
+      max-width: 680px;
+      margin: 0 auto 35px;
+      font-size: 16px;
+    }
+
     .preview-window {
-      background: #000; border: 1px solid var(--border-color);
-      max-width: 750px; margin: 0 auto 80px; border-radius: 12px;
-      overflow: hidden; box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+      background: #000;
+      border: 1px solid var(--border-color);
+      max-width: 850px;
+      margin: 0 auto 45px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 50px 100px rgba(0,0,0,0.45);
     }
-    .window-header { background: #1a1a1a; padding: 12px; display: flex; gap: 6px; padding-left: 15px; }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: #333; }
-    .window-body { padding: 40px; text-align: left; }
 
-    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-    .feature-item h3 { font-size: 14px; color: var(--primary-green); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
-    .feature-item p { font-size: 15px; color: #ccc; margin: 0; }
+    .window-header {
+      background: #1a1a1a;
+      padding: 12px;
+      display: flex;
+      gap: 7px;
+      padding-left: 15px;
+    }
 
-    .guarantee { font-size: 13px; color: #555; font-weight: 700; text-transform: uppercase; margin-top: 60px; letter-spacing: 1px; }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #333;
+    }
 
-    footer { padding: 80px 20px; border-top: 1px solid var(--border-color); text-align: center; }
-    .legal-box { max-width: 800px; margin: 0 auto; font-size: 10px; color: #222; line-height: 2.2; letter-spacing: 1px; text-transform: uppercase; }
+    .window-body {
+      padding: 38px;
+      text-align: left;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+    }
+
+    .feature-item {
+      border: 1px solid var(--border-color);
+      background: var(--panel-bg);
+      border-radius: 12px;
+      padding: 22px;
+    }
+
+    .feature-item h3 {
+      font-size: 14px;
+      color: var(--primary-green);
+      text-transform: uppercase;
+      margin: 0 0 10px;
+      letter-spacing: 1px;
+    }
+
+    .feature-item p {
+      font-size: 15px;
+      color: #cfcfcf;
+      margin: 0;
+    }
+
+    .inside-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .inside-list div {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px;
+      color: #d6d6d6;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .inside-list div::before {
+      content: "✓ ";
+      color: var(--primary-green);
+      font-weight: 900;
+    }
+
+    .for-box {
+      max-width: 850px;
+      margin: 0 auto;
+      background: var(--panel-light);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 34px;
+      text-align: center;
+    }
+
+    .for-box p {
+      color: #d0d0d0;
+      font-size: 17px;
+      margin: 0;
+    }
+
+    .bottom-cta {
+      text-align: center;
+      padding: 65px 20px 80px;
+    }
+
+    .bottom-cta h2 {
+      font-size: 34px;
+      margin: 0 0 15px;
+      letter-spacing: -1px;
+    }
+
+    .bottom-cta p {
+      color: var(--text-dim);
+      max-width: 620px;
+      margin: 0 auto 28px;
+    }
+
+    footer {
+      padding: 70px 20px;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .legal-box {
+      max-width: 850px;
+      margin: 0 auto;
+      font-size: 10px;
+      color: #555;
+      line-height: 2.1;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 650px) {
+      nav {
+        padding: 22px 18px;
+      }
+
+      .nav-login {
+        font-size: 11px;
+      }
+
+      .hero {
+        padding-top: 60px;
+      }
+
+      .btn-main {
+        width: 100%;
+        max-width: 360px;
+        padding: 20px 22px;
+      }
+
+      .window-body {
+        padding: 24px;
+      }
+
+      .for-box {
+        padding: 25px;
+      }
+    }
   </style>
 </head>
+
 <body>
 
   <nav>
@@ -73,49 +352,113 @@
   </nav>
 
   <section class="hero">
-    <h1>STOP LEARNING. <br>START EXECUTING.</h1>
-    <p class="sub-headline">The private terminal for digital arbitrage, AI automation, and revenue systems. No fluff. No 10-hour videos. Just the tools to win.</p>
-    
+    <div class="eyebrow">Online Business Systems • AI Tools • Simple Execution</div>
+
+    <h1>BUILD SMARTER ONLINE SYSTEMS WITHOUT STARTING FROM SCRATCH.</h1>
+
+    <p class="sub-headline">
+      BrainHustle™ gives you templates, business systems, AI prompts, trackers, and step-by-step guides built to help you organize, launch, and improve online income ideas.
+    </p>
+
     <div class="cta-box">
-      <a href="signup.html" class="btn-main">Get Instant Access</a>
-      <span class="price-tag">FULL TERMINAL UNLOCKED FOR $5</span>
+      <a href="signup.html" class="btn-main">Start With the $5 Toolkit</a>
+      <span class="price-tag">STARTER ACCESS — $5</span>
     </div>
 
+    <div class="mini-trust">
+      <span>Operated by Murrays Empire LLC</span>
+      <span>Educational Tools Only</span>
+      <span>No Income Guarantees</span>
+      <span>Built for Execution</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">What You Get Inside</h2>
+    <p class="section-sub">
+      Not random advice. Not recycled motivation. BrainHustle™ is built around practical tools you can actually open, use, edit, and apply.
+    </p>
+
     <div class="preview-window">
-      <div class="window-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      <div class="window-header">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+
       <div class="window-body">
         <div class="feature-grid">
           <div class="feature-item">
-            <h3>Revenue Blueprints</h3>
-            <p>Step-by-step "Empire" workflows including Digital Arbitrage and Lead Routing models.</p>
+            <h3>Business Idea Kits</h3>
+            <p>Simple starter systems for organizing online income ideas, service concepts, referral models, and digital products.</p>
           </div>
+
           <div class="feature-item">
-            <h3>The AI Architect</h3>
-            <p>Proprietary prompt libraries that automate 90% of your daily business operations.</p>
+            <h3>AI Prompt Templates</h3>
+            <p>Prompt sets designed to help with planning, writing, organizing, customer replies, content ideas, and daily business tasks.</p>
           </div>
+
           <div class="feature-item">
-            <h3>Velocity Trackers</h3>
-            <p>Custom Google-integrated tools to log every job, every lead, and every dollar in real-time.</p>
+            <h3>Tracking Tools</h3>
+            <p>Basic lead, income, task, and business activity trackers to help you stay organized instead of guessing.</p>
           </div>
+
           <div class="feature-item">
-            <h3>Instant Onboarding</h3>
-            <p>Deploy your first digital asset in the first 15 minutes of access. No experience required.</p>
+            <h3>Launch Checklists</h3>
+            <p>Clear checklists for setting up pages, offers, posts, simple systems, and next steps without overcomplicating the process.</p>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="guarantee">ZERO FLUFF GUARANTEE • SYSTEM OPERATIONAL 24/7/365</div>
+  <section class="section">
+    <h2 class="section-title">Inside BrainHustle™</h2>
+    <p class="section-sub">
+      Starter access is made for people who want structure, direction, and useful tools without paying for expensive courses.
+    </p>
+
+    <div class="inside-list">
+      <div>Business idea starter kits</div>
+      <div>AI prompt templates</div>
+      <div>Lead tracking sheets</div>
+      <div>Content posting systems</div>
+      <div>Simple launch checklists</div>
+      <div>Upgrade paths for advanced tools</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Who This Is For</h2>
+
+    <div class="for-box">
+      <p>
+        BrainHustle™ is built for beginners, side hustlers, solo business owners, and people who want organized systems instead of random advice. It is for people who want to move faster, stay focused, and build with a clearer plan.
+      </p>
+    </div>
+  </section>
+
+  <section class="bottom-cta">
+    <h2>Start Small. Build Smarter.</h2>
+    <p>
+      Get access to the starter toolkit and begin organizing your first system today.
+    </p>
+
+    <a href="signup.html" class="btn-main">Start With the $5 Toolkit</a>
+    <span class="price-tag">BRAINHUSTLE™ STARTER ACCESS</span>
   </section>
 
   <footer>
     <div class="legal-box">
       © <span id="yr"></span> MURRAYS EMPIRE LLC. ALL RIGHTS RESERVED.<br>
-      BRAINHUSTLE™ IS AN EDUCATIONAL AND SYSTEMS PLATFORM. WE DO NOT PROVIDE FINANCIAL, TAX, OR LEGAL ADVICE.<br>
-      RESULTS ARE BASED ON INDIVIDUAL EXECUTION. NO GUARANTEES OF INCOME.
+      BRAINHUSTLE™ IS AN EDUCATIONAL AND BUSINESS SYSTEMS PLATFORM. WE DO NOT PROVIDE FINANCIAL, TAX, LEGAL, INVESTMENT, OR PROFESSIONAL BUSINESS ADVICE.<br>
+      RESULTS ARE BASED ON INDIVIDUAL EXECUTION, MARKET CONDITIONS, CONSISTENCY, SKILL, AND MANY OTHER FACTORS. NO GUARANTEES OF INCOME, PROFIT, BUSINESS SUCCESS, OR SPECIFIC RESULTS ARE MADE OR IMPLIED.
     </div>
   </footer>
 
-  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+
 </body>
 </html>
