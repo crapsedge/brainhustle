@@ -4,85 +4,234 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Reset Password – BrainHustle™</title>
+
   <style>
     body {
-      background: #0a0a0a;
+      background: #000;
       color: white;
       font-family: Arial, sans-serif;
       text-align: center;
+      margin: 0;
       padding: 40px 20px;
+    }
+
+    .page-wrap {
+      max-width: 650px;
+      margin: 0 auto;
     }
 
     h1 {
       color: #00e676;
-      margin-bottom: 20px;
+      font-size: 44px;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    .note {
+      color: #bdbdbd;
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 30px;
+    }
+
+    .reset-card {
+      background: #0d0d0d;
+      border: 1px solid #1f1f1f;
+      border-radius: 18px;
+      padding: 32px 20px;
+      max-width: 540px;
+      margin: 0 auto 26px;
     }
 
     input {
-      padding: 10px;
-      margin: 10px;
-      width: 80%;
-      max-width: 300px;
+      padding: 16px;
+      margin: 12px 0;
+      width: 88%;
+      max-width: 460px;
       border: none;
-      border-radius: 4px;
+      border-radius: 8px;
+      font-size: 18px;
+      background: #eef2b8;
+      color: black;
     }
 
     button {
-      padding: 12px 20px;
-      background: red;
-      color: white;
+      padding: 16px 34px;
+      background: #00e676;
+      color: black;
       border: none;
-      border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
+      font-weight: bold;
+      font-size: 19px;
+      margin-top: 18px;
+      width: 88%;
+      max-width: 320px;
     }
 
     button:hover {
-      background: #cc0000;
+      background: #00ff84;
     }
 
-    p {
-      margin-top: 20px;
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #message {
+      margin-top: 24px;
       color: #00e676;
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .help-box {
+      background: #0b0b0b;
+      border: 1px solid #1f1f1f;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: left;
+      max-width: 540px;
+      margin: 24px auto;
+    }
+
+    .help-box h2 {
+      color: #00e676;
+      font-size: 20px;
+      margin-top: 0;
+    }
+
+    .help-box p {
+      color: #bdbdbd;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    a {
+      color: #00e676;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
+
 <body>
-  <h1>Reset Your Password</h1>
-  <input type="email" id="email" placeholder="Enter your email" required />
-  <br>
-  <button onclick="resetPassword()">Send Reset Link</button>
-  <p id="message"></p>
+
+  <div class="page-wrap">
+
+    <h1>Reset Password</h1>
+
+    <p class="note">
+      Enter the email connected to your BrainHustle™ account. If the account exists, Firebase will attempt to send a password reset email.
+    </p>
+
+    <div class="reset-card">
+
+      <input type="email" id="email" placeholder="Enter your email" autocomplete="email" required />
+
+      <br>
+
+      <button id="resetBtn" onclick="resetPassword()">
+        Send Reset Email
+      </button>
+
+      <p id="message"></p>
+
+    </div>
+
+    <div class="help-box">
+
+      <h2>If You Do Not Receive the Email</h2>
+
+      <p>
+        Check your inbox, spam folder, junk folder, and promotions tab. Some email providers may delay or filter Firebase password reset emails.
+      </p>
+
+      <p>
+        If nothing arrives after a few minutes, try again once. If it still does not arrive, contact support and include the email you used for your BrainHustle™ account.
+      </p>
+
+      <p>
+        Support Contact:<br>
+        <a href="mailto:murraysempirellc@gmail.com">murraysempirellc@gmail.com</a>
+      </p>
+
+    </div>
+
+    <p>
+      <a href="login.html">Back to Login</a>
+    </p>
+
+    <p>
+      <a href="index.html">Return Home</a>
+    </p>
+
+  </div>
 
   <!-- Firebase -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-    import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 
+  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
       authDomain: "brainhustle-92a40.firebaseapp.com",
       projectId: "brainhustle-92a40",
-      storageBucket: "brainhustle-92a40.appspot.com",
+      storageBucket: "brainhustle-92a40.firebasestorage.app",
       messagingSenderId: "547592914180",
       appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
       measurementId: "G-3M5PKR5S27"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    firebase.initializeApp(firebaseConfig);
 
-    window.resetPassword = function() {
-      const email = document.getElementById("email").value;
+    const auth = firebase.auth();
+
+    function resetPassword() {
+      const email = document.getElementById("email").value.trim();
       const message = document.getElementById("message");
+      const resetBtn = document.getElementById("resetBtn");
 
-      sendPasswordResetEmail(auth, email)
+      if (!email) {
+        message.style.color = "#ff5555";
+        message.textContent = "Please enter your email address first.";
+        return;
+      }
+
+      resetBtn.disabled = true;
+      resetBtn.textContent = "Sending...";
+
+      auth.sendPasswordResetEmail(email)
         .then(() => {
-          message.textContent = "Password reset link sent. Check your email.";
+          message.style.color = "#00e676";
+          message.textContent = "If a BrainHustle™ account exists for this email, a password reset link will be sent. Check your inbox, spam, junk, and promotions folders.";
+          resetBtn.disabled = false;
+          resetBtn.textContent = "Send Reset Email";
         })
         .catch((error) => {
-          message.textContent = "Error: " + error.message;
+          message.style.color = "#ff5555";
+
+          if (error.code === "auth/invalid-email") {
+            message.textContent = "Please enter a valid email address.";
+          } else if (error.code === "auth/too-many-requests") {
+            message.textContent = "Too many attempts. Please wait a little while before trying again.";
+          } else {
+            message.textContent = "Reset request could not be completed. Please try again or contact support.";
+          }
+
+          resetBtn.disabled = false;
+          resetBtn.textContent = "Send Reset Email";
         });
     }
   </script>
+
 </body>
 </html>
