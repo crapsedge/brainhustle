@@ -6,19 +6,19 @@
   <title>Member Login – BrainHustle™</title>
 
   <style>
+
     body {
       background: #000;
       color: white;
       font-family: Arial, sans-serif;
-      text-align: center;
       margin: 0;
-      padding: 0;
+      text-align: center;
     }
 
     .page-wrap {
       max-width: 760px;
       margin: 0 auto;
-      padding: 38px 20px 60px;
+      padding: 40px 20px 70px;
     }
 
     .brand {
@@ -32,27 +32,27 @@
 
     h1 {
       color: #00e676;
-      font-size: 42px;
-      margin: 0 0 18px;
+      font-size: 44px;
       line-height: 1.1;
+      margin-bottom: 18px;
     }
 
     .subtext {
       color: #cfcfcf;
       font-size: 17px;
-      max-width: 560px;
-      margin: 0 auto 32px;
       line-height: 1.7;
+      max-width: 580px;
+      margin: 0 auto 34px;
     }
 
     .login-card {
       background: #0d0d0d;
       border: 1px solid #1f1f1f;
       border-radius: 18px;
-      padding: 32px 20px;
-      max-width: 540px;
+      padding: 34px 20px;
+      max-width: 560px;
       margin: 0 auto 28px;
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 25px 70px rgba(0,0,0,0.45);
     }
 
     input {
@@ -100,27 +100,33 @@
       text-decoration: underline;
     }
 
+    .forgot-link {
+      margin-top: 18px;
+      font-size: 15px;
+    }
+
     .info-section {
-      max-width: 560px;
+      max-width: 580px;
       margin: 24px auto;
       text-align: left;
       background: #0b0b0b;
       border: 1px solid #1f1f1f;
       border-radius: 16px;
-      padding: 24px;
+      padding: 26px;
     }
 
     .info-section h2 {
       color: #00e676;
-      font-size: 20px;
-      margin: 0 0 12px;
+      font-size: 21px;
+      margin-top: 0;
+      margin-bottom: 14px;
     }
 
     .info-section p {
       color: #bdbdbd;
       font-size: 15px;
-      line-height: 1.7;
-      margin: 0 0 14px;
+      line-height: 1.8;
+      margin-bottom: 16px;
     }
 
     .info-section p:last-child {
@@ -128,18 +134,19 @@
     }
 
     .links {
-      margin-top: 26px;
+      margin-top: 34px;
+      line-height: 2.2;
       font-size: 17px;
-      line-height: 2;
     }
 
     .small-note {
       color: #777;
       font-size: 12px;
-      max-width: 560px;
-      margin: 34px auto 0;
-      line-height: 1.8;
+      line-height: 1.9;
+      max-width: 580px;
+      margin: 42px auto 0;
     }
+
   </style>
 </head>
 
@@ -147,12 +154,16 @@
 
   <div class="page-wrap">
 
-    <div class="brand">BrainHustle™ Member Access</div>
+    <div class="brand">
+      BrainHustle™ Member Access
+    </div>
 
-    <h1>Member Login</h1>
+    <h1>
+      Member Login
+    </h1>
 
     <p class="subtext">
-      Log in with the email and password you used when creating your BrainHustle™ account.
+      Log in using the email and password connected to your BrainHustle™ account.
     </p>
 
     <div class="login-card">
@@ -161,62 +172,111 @@
 
       <input type="password" id="password" placeholder="Password" autocomplete="current-password" /><br>
 
-      <button id="loginBtn">Login</button>
+      <button id="loginBtn">
+        Login
+      </button>
+
+      <div class="forgot-link">
+        <a href="reset.html">Forgot Password?</a>
+      </div>
 
     </div>
 
     <div class="info-section">
-      <h2>Before You Log In</h2>
+
+      <h2>
+        Email Verification Important
+      </h2>
 
       <p>
-        Your email must be verified before the member dashboard will open.
+        Some email providers may delay, filter, or block verification emails temporarily.
       </p>
 
       <p>
-        If you just created your account, check your inbox, spam, junk, or promotions folder for the verification email.
+        If you signed up and did not receive a verification email, wait a few minutes and then try logging in again. BrainHustle™ will automatically attempt to resend the verification email.
       </p>
+
+      <p>
+        Be sure to check:
+      </p>
+
+      <p>
+        • Inbox<br>
+        • Spam Folder<br>
+        • Junk Folder<br>
+        • Promotions Tab
+      </p>
+
+      <p>
+        Until your email is verified, dashboard access will remain locked.
+      </p>
+
     </div>
 
     <div class="info-section">
-      <h2>Need Access?</h2>
+
+      <h2>
+        Having Problems?
+      </h2>
 
       <p>
-        If you have not joined yet, purchase starter access first, then create your BrainHustle™ account.
+        If you are still having trouble logging in, receiving emails, verifying your account, or accessing BrainHustle™, contact support and include the email connected to your account.
       </p>
 
       <p>
-        After payment and signup, you can return here to enter the member area.
+        Support Contact:<br>
+        murraysempirellc@gmail.com
       </p>
+
+      <p>
+        When contacting support, explain the issue clearly and include screenshots if possible to speed up assistance.
+      </p>
+
+    </div>
+
+    <div class="info-section">
+
+      <h2>
+        Need Access?
+      </h2>
+
+      <p>
+        If you have not joined BrainHustle™ yet, create your account first through the signup page.
+      </p>
+
+      <p>
+        After signup and verification, return here to access the member dashboard.
+      </p>
+
     </div>
 
     <div class="links">
+
       <p>
-        Need to join?
+        Need an account?
         <a href="signup.html">Sign Up</a>
       </p>
 
       <p>
-        Forgot your password?
-        <a href="reset.html">Reset Password</a>
+        Return to homepage?
+        <a href="index.html">Home</a>
       </p>
 
-      <p>
-        Back to homepage?
-        <a href="index.html">Return Home</a>
-      </p>
     </div>
 
     <p class="small-note">
-      BrainHustle™ is operated by Murrays Empire LLC. Access is for educational business systems, templates, tools, and member resources only. No income or business results are guaranteed.
+      BrainHustle™ is operated by Murrays Empire LLC. BrainHustle™ provides educational systems, templates, tools, and organizational resources only. No income, financial, or business success guarantees are made or implied.
     </p>
 
   </div>
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 
   <script>
+
     const firebaseConfig = {
       apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
       authDomain: "brainhustle-92a40.firebaseapp.com",
@@ -228,61 +288,99 @@
     };
 
     firebase.initializeApp(firebaseConfig);
+
     const auth = firebase.auth();
 
     document.getElementById("loginBtn").addEventListener("click", async function() {
+
       const loginBtn = document.getElementById("loginBtn");
+
       const email = document.getElementById("email").value.trim();
+
       const password = document.getElementById("password").value;
 
       if (!email || !password) {
+
         alert("Please enter your email and password.");
+
         return;
+
       }
 
       loginBtn.disabled = true;
+
       loginBtn.textContent = "Checking...";
 
       try {
+
         const userCredential = await auth.signInWithEmailAndPassword(email, password);
+
         const user = userCredential.user;
 
         await user.reload();
 
         if (!user.emailVerified) {
-          await user.sendEmailVerification();
+
+          try {
+
+            await user.sendEmailVerification();
+
+          } catch (verificationError) {
+
+            console.log("Verification resend failed:", verificationError);
+
+          }
+
           await auth.signOut();
 
-          alert("Your account exists, but your email is not verified yet. A new verification email has been sent. Please check your inbox, spam, junk, or promotions folder.");
+          alert("Your email is not verified yet. BrainHustle™ attempted to resend the verification email. Please check your inbox, spam, junk, and promotions folders.");
 
           loginBtn.disabled = false;
+
           loginBtn.textContent = "Login";
+
           return;
+
         }
 
         window.location.href = "dashboard.html";
 
       } catch (error) {
+
         let message = "Login failed. Please try again.";
 
         if (error.code === "auth/user-not-found") {
+
           message = "No account was found with this email. Please sign up first.";
+
         } else if (error.code === "auth/wrong-password") {
-          message = "Incorrect password. Use Reset Password if you do not remember it.";
+
+          message = "Incorrect password. Use Reset Password if needed.";
+
         } else if (error.code === "auth/invalid-email") {
+
           message = "Please enter a valid email address.";
+
         } else if (error.code === "auth/too-many-requests") {
-          message = "Too many login attempts. Wait a little while, then try again or reset your password.";
+
+          message = "Too many login attempts. Wait a little while, then try again.";
+
         } else if (error.code === "auth/invalid-credential") {
-          message = "The email or password is incorrect. Use Reset Password if needed.";
+
+          message = "The email or password is incorrect.";
+
         }
 
         alert(message);
 
         loginBtn.disabled = false;
+
         loginBtn.textContent = "Login";
+
       }
+
     });
+
   </script>
 
 </body>
