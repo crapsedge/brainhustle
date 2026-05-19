@@ -6,6 +6,7 @@
   <title>Reset Password – BrainHustle™</title>
 
   <style>
+
     body {
       background: #000;
       color: white;
@@ -120,6 +121,7 @@
     a:hover {
       text-decoration: underline;
     }
+
   </style>
 </head>
 
@@ -127,15 +129,23 @@
 
   <div class="page-wrap">
 
-    <h1>Reset Password</h1>
+    <h1>
+      Reset Password
+    </h1>
 
     <p class="note">
-      Enter the email connected to your BrainHustle™ account. If the account exists, Firebase will attempt to send a password reset email.
+      Enter the email connected to your BrainHustle™ account to request a password reset.
     </p>
 
     <div class="reset-card">
 
-      <input type="email" id="email" placeholder="Enter your email" autocomplete="email" required />
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter your email"
+        autocomplete="email"
+        required
+      />
 
       <br>
 
@@ -149,19 +159,23 @@
 
     <div class="help-box">
 
-      <h2>If You Do Not Receive the Email</h2>
+      <h2>
+        If You Do Not Receive the Email
+      </h2>
 
       <p>
-        Check your inbox, spam folder, junk folder, and promotions tab. Some email providers may delay or filter Firebase password reset emails.
+        Check your inbox, spam folder, junk folder, and promotions tab. Some email providers may delay or filter Firebase emails temporarily.
       </p>
 
       <p>
-        If nothing arrives after a few minutes, try again once. If it still does not arrive, contact support and include the email you used for your BrainHustle™ account.
+        If nothing arrives after a few minutes, try again once. If it still does not arrive, contact support and include the email connected to your BrainHustle™ account.
       </p>
 
       <p>
         Support Contact:<br>
-        <a href="mailto:murraysempirellc@gmail.com">murraysempirellc@gmail.com</a>
+        <a href="mailto:murraysempirellc@gmail.com">
+          murraysempirellc@gmail.com
+        </a>
       </p>
 
     </div>
@@ -178,9 +192,11 @@
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 
   <script>
+
     const firebaseConfig = {
       apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
       authDomain: "brainhustle-92a40.firebaseapp.com",
@@ -196,41 +212,67 @@
     const auth = firebase.auth();
 
     function resetPassword() {
+
       const email = document.getElementById("email").value.trim();
+
       const message = document.getElementById("message");
+
       const resetBtn = document.getElementById("resetBtn");
 
       if (!email) {
+
         message.style.color = "#ff5555";
+
         message.textContent = "Please enter your email address first.";
+
         return;
+
       }
 
       resetBtn.disabled = true;
+
       resetBtn.textContent = "Sending...";
 
       auth.sendPasswordResetEmail(email)
+
         .then(() => {
+
           message.style.color = "#00e676";
-          message.textContent = "If a BrainHustle™ account exists for this email, a password reset link will be sent. Check your inbox, spam, junk, and promotions folders.";
+
+          message.textContent = "Reset request received. If this email is connected to a BrainHustle™ account, a reset email will be sent. Check your inbox, spam, junk, and promotions folders.";
+
           resetBtn.disabled = false;
+
           resetBtn.textContent = "Send Reset Email";
+
         })
+
         .catch((error) => {
+
           message.style.color = "#ff5555";
 
           if (error.code === "auth/invalid-email") {
+
             message.textContent = "Please enter a valid email address.";
+
           } else if (error.code === "auth/too-many-requests") {
+
             message.textContent = "Too many attempts. Please wait a little while before trying again.";
+
           } else {
+
             message.textContent = "Reset request could not be completed. Please try again or contact support.";
+
           }
 
           resetBtn.disabled = false;
+
           resetBtn.textContent = "Send Reset Email";
+
         });
+
     }
+
   </script>
 
 </body>
