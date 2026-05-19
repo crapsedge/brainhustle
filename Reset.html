@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset Password – BrainHustle™</title>
+
+  <style>
+    body{
+      background:#050505;
+      color:white;
+      font-family:Arial,sans-serif;
+      text-align:center;
+      padding:50px 20px;
+    }
+
+    h1{
+      color:#00e676;
+    }
+
+    input{
+      width:85%;
+      max-width:320px;
+      padding:14px;
+      margin:12px;
+      border:none;
+      border-radius:6px;
+    }
+
+    button{
+      padding:14px 22px;
+      background:#00e676;
+      color:black;
+      border:none;
+      border-radius:6px;
+      font-weight:bold;
+      cursor:pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Reset Password</h1>
+
+<input type="email" id="email" placeholder="Enter your email"><br>
+
+<button onclick="resetPassword()">Send Reset Email</button>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+  import { getAuth, sendPasswordResetEmail }
+  from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
+    authDomain: "brainhustle-92a40.firebaseapp.com",
+    projectId: "brainhustle-92a40",
+    storageBucket: "brainhustle-92a40.appspot.com",
+    messagingSenderId: "547592914180",
+    appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
+    measurementId: "G-3M5PKR5S27"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  window.resetPassword = function() {
+    const email = document.getElementById("email").value.trim();
+
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("Password reset email sent. Check your inbox and spam folder.");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  }
+</script>
+
+</body>
+</html>
