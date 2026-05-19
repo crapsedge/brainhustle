@@ -3,78 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login – BrainHustle™</title>
+  <title>Sign Up – BrainHustle™</title>
 
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0a0a0a;
+      background: #000;
       color: white;
+      font-family: Arial, sans-serif;
       text-align: center;
-    }
-
-    .navbar {
-      background-color: #111;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 20px;
-    }
-
-    .navbar img {
-      height: 80px;
-      width: auto;
-    }
-
-    .nav-links a {
-      color: #00e676;
-      text-decoration: none;
-      padding: 10px 16px;
-      display: block;
-      font-weight: bold;
-    }
-
-    .main {
       padding: 40px 20px;
     }
 
     h1 {
       color: #00e676;
+      font-size: 44px;
+      margin-bottom: 30px;
+      line-height: 1.1;
     }
 
     input {
-      padding: 12px;
-      margin: 10px;
-      width: 80%;
-      max-width: 320px;
+      padding: 16px;
+      margin: 12px 0;
+      width: 85%;
+      max-width: 500px;
       border: none;
-      border-radius: 4px;
-      font-size: 16px;
+      border-radius: 6px;
+      font-size: 18px;
+      background: #eef2b8;
+      color: black;
     }
 
     button {
-      padding: 12px 24px;
+      padding: 16px 40px;
       background: #00e676;
-      color: black;
       border: none;
-      border-radius: 4px;
-      cursor: pointer;
+      color: black;
       font-weight: bold;
-      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-size: 22px;
     }
 
     button:hover {
-      filter: brightness(1.1);
+      background: #00ff84;
     }
 
     button:disabled {
       opacity: 0.6;
       cursor: not-allowed;
-    }
-
-    p {
-      margin-top: 20px;
     }
 
     a {
@@ -88,49 +65,39 @@
 
     .note {
       color: #aaa;
-      font-size: 14px;
-      max-width: 420px;
-      margin: 20px auto;
-      line-height: 1.5;
+      font-size: 15px;
+      max-width: 520px;
+      margin: 25px auto;
+      line-height: 1.7;
+    }
+
+    .login-text {
+      margin-top: 30px;
+      font-size: 18px;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="navbar">
-    <a href="index.html">
-      <img src="brainhustle-logo.png" alt="BrainHustle Logo">
-    </a>
+  <h1>Create Your<br>BrainHustle™ Account</h1>
 
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-    </div>
-  </div>
+  <input type="email" id="email" placeholder="Email" autocomplete="email" /><br>
+  <input type="password" id="password" placeholder="Password" autocomplete="new-password" /><br>
 
-  <div class="main">
-    <h1>Member Login</h1>
+  <button id="signupBtn">Sign Up</button>
 
-    <input type="email" id="email" placeholder="Email" autocomplete="email" required /><br>
-    <input type="password" id="password" placeholder="Password" autocomplete="current-password" required /><br>
+  <p class="note">
+    After signing up, check your email and click the verification link before logging in.
+    If your account already exists, the next step is completing payment to unlock access.
+  </p>
 
-    <button id="loginBtn">Login</button>
+  <p class="login-text">
+    Already have an account?
+    <a href="login.html">Login</a>
+  </p>
 
-    <p class="note">
-      If your account was just created, check your email and click the verification link before entering the dashboard.
-    </p>
-
-    <p>
-      Don't have an account?
-      <a href="https://crapsedge.gumroad.com/l/fppvj" target="_blank">Join Now</a>
-    </p>
-
-    <p>
-      <a href="reset.html">Forgot Password?</a>
-    </p>
-  </div>
-
-  <!-- Firebase SDKs -->
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 
@@ -148,8 +115,42 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
-    document.getElementById("loginBtn").addEventListener("click", async function() {
-      const loginBtn = document.getElementById("loginBtn");
+    const gumroadPaymentLink = "https://crapsedge.gumroad.com/l/fppvj";
+
+    async function notifyOwner(email, status) {
+      const formData = new FormData();
+
+      formData.append("access_key", "cbd2d323-5aae-4acd-befe-929a51034d58");
+      formData.append("subject", "New BrainHustle Signup Activity");
+      formData.append("from_name", "BrainHustle Signup Form");
+
+      formData.append("Business", "BrainHustle");
+      formData.append("Submitted_Email", email);
+      formData.append("Status", status);
+      formData.append("Time", new Date().toLocaleString());
+      formData.append("Page", "signup.html");
+
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          console.log("Owner notification sent.");
+        } else {
+          console.log("Web3Forms error:", result);
+        }
+
+      } catch (error) {
+        console.log("Owner notification failed:", error);
+      }
+    }
+
+    document.getElementById("signupBtn").addEventListener("click", async function() {
+      const signupBtn = document.getElementById("signupBtn");
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
 
@@ -158,46 +159,37 @@
         return;
       }
 
-      loginBtn.disabled = true;
-      loginBtn.textContent = "Checking...";
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters.");
+        return;
+      }
+
+      signupBtn.disabled = true;
+      signupBtn.textContent = "Creating Account...";
 
       try {
-        const userCredential = await auth.signInWithEmailAndPassword(email, password);
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
         const user = userCredential.user;
 
-        await user.reload();
+        await user.sendEmailVerification();
 
-        if (!user.emailVerified) {
-          await user.sendEmailVerification();
-          await auth.signOut();
+        await notifyOwner(email, "SUCCESS: Account created and verification email sent.");
 
-          alert("Your account exists, but your email is not verified. A new verification email was sent. Check your inbox, spam, junk, and promotions folder.");
-          loginBtn.disabled = false;
-          loginBtn.textContent = "Login";
-          return;
-        }
+        alert("Account created. Please check your email and verify your account. After verification, complete payment to unlock BrainHustle™ access.");
 
-        window.location.href = "dashboard.html";
+        window.location.href = gumroadPaymentLink;
 
       } catch (error) {
-        let message = "Login failed. Please try again.";
+        await notifyOwner(email, "FAILED SIGNUP ATTEMPT: " + error.message);
 
-        if (error.code === "auth/user-not-found") {
-          message = "No account found with this email. Please sign up first.";
-        } else if (error.code === "auth/wrong-password") {
-          message = "Incorrect password. Use Forgot Password if you do not remember it.";
-        } else if (error.code === "auth/invalid-email") {
-          message = "Please enter a valid email address.";
-        } else if (error.code === "auth/too-many-requests") {
-          message = "Too many attempts. Wait a little while, then try again or reset your password.";
-        } else if (error.code === "auth/invalid-credential") {
-          message = "The email or password is incorrect. Use Forgot Password if needed.";
+        if (error.code === "auth/email-already-in-use") {
+          alert("Your account setup is almost complete. The next step is payment to unlock BrainHustle™ access.");
+          window.location.href = gumroadPaymentLink;
+        } else {
+          alert("Signup failed: " + error.message);
+          signupBtn.disabled = false;
+          signupBtn.textContent = "Sign Up";
         }
-
-        alert(message);
-
-        loginBtn.disabled = false;
-        loginBtn.textContent = "Login";
       }
     });
   </script>
