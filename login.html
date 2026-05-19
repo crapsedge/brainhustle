@@ -1,49 +1,206 @@
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login – BrainHustle™</title>
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
-    authDomain: "brainhustle-92a40.firebaseapp.com",
-    projectId: "brainhustle-92a40",
-    storageBucket: "brainhustle-92a40.appspot.com",
-    messagingSenderId: "547592914180",
-    appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
-    measurementId: "G-3M5PKR5S27"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  window.login = function() {
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
-
-    if (!email || !password) {
-      alert("Please enter your email and password.");
-      return;
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: white;
+      text-align: center;
     }
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+    .navbar {
+      background-color: #111;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+    }
+
+    .navbar img {
+      height: 80px;
+      width: auto;
+    }
+
+    .nav-links a {
+      color: #00e676;
+      text-decoration: none;
+      padding: 10px 16px;
+      display: block;
+      font-weight: bold;
+    }
+
+    .main {
+      padding: 40px 20px;
+    }
+
+    h1 {
+      color: #00e676;
+    }
+
+    input {
+      padding: 12px;
+      margin: 10px;
+      width: 80%;
+      max-width: 320px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px 24px;
+      background: #00e676;
+      color: black;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    button:hover {
+      filter: brightness(1.1);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    p {
+      margin-top: 20px;
+    }
+
+    a {
+      color: #00e676;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .note {
+      color: #aaa;
+      font-size: 14px;
+      max-width: 420px;
+      margin: 20px auto;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="navbar">
+    <a href="index.html">
+      <img src="brainhustle-logo.png" alt="BrainHustle Logo">
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+    </div>
+  </div>
+
+  <div class="main">
+    <h1>Member Login</h1>
+
+    <input type="email" id="email" placeholder="Email" autocomplete="email" required /><br>
+    <input type="password" id="password" placeholder="Password" autocomplete="current-password" required /><br>
+
+    <button id="loginBtn">Login</button>
+
+    <p class="note">
+      If your account was just created, check your email and click the verification link before entering the dashboard.
+    </p>
+
+    <p>
+      Don't have an account?
+      <a href="https://crapsedge.gumroad.com/l/fppvj" target="_blank">Join Now</a>
+    </p>
+
+    <p>
+      <a href="reset.html">Forgot Password?</a>
+    </p>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyA1cS4bIOxNAQuDFsyRq6mGzz9xeKqKFiY",
+      authDomain: "brainhustle-92a40.firebaseapp.com",
+      projectId: "brainhustle-92a40",
+      storageBucket: "brainhustle-92a40.firebasestorage.app",
+      messagingSenderId: "547592914180",
+      appId: "1:547592914180:web:be4969f6a657c2b6c9bc51",
+      measurementId: "G-3M5PKR5S27"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    document.getElementById("loginBtn").addEventListener("click", async function() {
+      const loginBtn = document.getElementById("loginBtn");
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      if (!email || !password) {
+        alert("Please enter your email and password.");
+        return;
+      }
+
+      loginBtn.disabled = true;
+      loginBtn.textContent = "Checking...";
+
+      try {
+        const userCredential = await auth.signInWithEmailAndPassword(email, password);
         const user = userCredential.user;
 
-        if (!user.emailVerified) {
-          sendEmailVerification(user)
-            .then(() => {
-              alert("Your account exists, but your email is not verified. A new verification email has been sent. Check your inbox and spam folder.");
-            })
-            .catch(() => {
-              alert("Your account exists, but your email is not verified. Please check your inbox or spam folder for the verification email.");
-            });
+        await user.reload();
 
+        if (!user.emailVerified) {
+          await user.sendEmailVerification();
+          await auth.signOut();
+
+          alert("Your account exists, but your email is not verified. A new verification email was sent. Check your inbox, spam, junk, and promotions folder.");
+          loginBtn.disabled = false;
+          loginBtn.textContent = "Login";
           return;
         }
 
         window.location.href = "dashboard.html";
-      })
-      .catch((error) => {
-        alert("Login failed: " + error.message);
-      });
-  };
-</script>
+
+      } catch (error) {
+        let message = "Login failed. Please try again.";
+
+        if (error.code === "auth/user-not-found") {
+          message = "No account found with this email. Please sign up first.";
+        } else if (error.code === "auth/wrong-password") {
+          message = "Incorrect password. Use Forgot Password if you do not remember it.";
+        } else if (error.code === "auth/invalid-email") {
+          message = "Please enter a valid email address.";
+        } else if (error.code === "auth/too-many-requests") {
+          message = "Too many attempts. Wait a little while, then try again or reset your password.";
+        } else if (error.code === "auth/invalid-credential") {
+          message = "The email or password is incorrect. Use Forgot Password if needed.";
+        }
+
+        alert(message);
+
+        loginBtn.disabled = false;
+        loginBtn.textContent = "Login";
+      }
+    });
+  </script>
+
+</body>
+</html>
