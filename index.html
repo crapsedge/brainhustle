@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3M5PKR5S27"></script>
+
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag(){
+      dataLayer.push(arguments);
+    }
+
     gtag('js', new Date());
+
     gtag('config', 'G-3M5PKR5S27');
   </script>
 
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   <title>BrainHustle™ | Online Business Systems & AI Tools</title>
@@ -67,7 +75,13 @@
       color: var(--primary-green);
     }
 
-    .nav-login {
+    .nav-buttons {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .nav-link {
       color: var(--text-dim);
       text-decoration: none;
       font-size: 13px;
@@ -75,7 +89,7 @@
       text-transform: uppercase;
     }
 
-    .nav-login:hover {
+    .nav-link:hover {
       color: var(--primary-green);
     }
 
@@ -322,10 +336,6 @@
         padding: 22px 18px;
       }
 
-      .nav-login {
-        font-size: 11px;
-      }
-
       .hero {
         padding-top: 60px;
       }
@@ -347,16 +357,29 @@
     }
 
   </style>
+
 </head>
 
 <body>
 
   <nav>
-    <div class="logo">Brain<span>Hustle</span>™</div>
 
-    <a href="login.html" class="nav-login">
-      Member Login →
-    </a>
+    <div class="logo">
+      Brain<span>Hustle</span>™
+    </div>
+
+    <div class="nav-buttons">
+
+      <a href="signup.html" class="nav-link">
+        Sign Up
+      </a>
+
+      <a href="login.html" class="nav-link">
+        Member Login
+      </a>
+
+    </div>
+
   </nav>
 
   <section class="hero">
@@ -375,7 +398,7 @@
 
     <div class="cta-box">
 
-      <a href="https://crapsedge.gumroad.com/l/fppvj" class="btn-main">
+      <a href="signup.html" class="btn-main">
         Start With the $5 Toolkit
       </a>
 
@@ -474,7 +497,7 @@
     <div class="for-box">
 
       <p>
-        BrainHustle™ is built for beginners, side hustlers, solo business owners, and people who want organized systems instead of random advice. It is for people who want to move faster, stay focused, and build with a clearer plan.
+        BrainHustle™ is built for beginners, side hustlers, solo business owners, and people who want organized systems instead of random advice.
       </p>
 
     </div>
@@ -491,7 +514,7 @@
       Get access to the starter toolkit and begin organizing your first system today.
     </p>
 
-    <a href="https://crapsedge.gumroad.com/l/fppvj" class="btn-main">
+    <a href="signup.html" class="btn-main">
       Start With the $5 Toolkit
     </a>
 
